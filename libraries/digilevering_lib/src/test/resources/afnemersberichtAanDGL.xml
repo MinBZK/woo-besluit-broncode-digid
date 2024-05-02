@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:AfnemersberichtAanDGL xmlns:ns2="http://www.digilevering.nl/digilevering.xsd">
+    <ns2:BerichtHeader>
+        <ns2:OntvangerId>55555555555555555555</ns2:OntvangerId>
+        <ns2:VerstrekkerId>77777777777777777777</ns2:VerstrekkerId>
+        <ns2:DatumtijdstempelVerstrekker>2020-08-16T11:12:42.566+02:00</ns2:DatumtijdstempelVerstrekker>
+        <ns2:KenmerkVerstrekker>kenmerk.verstrekker.1</ns2:KenmerkVerstrekker>
+        <ns2:Berichtversie>1.0</ns2:Berichtversie>
+    </ns2:BerichtHeader>
+    <ns2:Stuurgegevens>
+        <ns2:VersieBerichttype>3.10</ns2:VersieBerichttype>
+        <ns2:Berichtsoort>
+            <ns2:Naam>Ap01</ns2:Naam>
+            <ns2:Versie>1.0</ns2:Versie>
+        </ns2:Berichtsoort>
+    </ns2:Stuurgegevens>
+    <ns2:Inhoud>
+        <ap01 herhaling="0" randomKey="00000000">
+            <categorie nummer="01">
+                <element nummer="0120">PPPPPPPPP</element>
+            </categorie>
+        </ap01>
+    </ns2:Inhoud>
+</ns2:AfnemersberichtAanDGL>

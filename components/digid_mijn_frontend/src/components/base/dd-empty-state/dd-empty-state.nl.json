@@ -1,0 +1,19 @@
+{
+	"empty-state": {
+		"app-header": "U heeft nog geen actieve DigiD app.",
+		"app-body": "De DigiD app is de makkelijkste manier om veilig in te loggen. U hoeft geen wachtwoord te onthouden. Alleen een pincode die u zelf kiest.",
+		"app-footer": "Meer informatie over de DigiD app",
+		"app-footer-mobile": "DigiD app downloaden",
+		"apps-disabled": "Het inloggen met de DigiD app is tijdelijk niet mogelijk. U kunt uw DigiD app niet activeren.",
+		"id-header": "U heeft nog geen geschikt document waarmee u kunt inloggen met DigiD.",
+		"id-body-1": "Met ",
+		"id-body-2-id": "een identiteitskaart (afgegeven vanaf 13 maart 2021)",
+		"id-body-2-licence": "een rijbewijs (afgegeven vanaf 4 juni 2018)",
+		"id-body-2-id-licence": "een rijbewijs (afgegeven vanaf 4 juni 2018) of identiteitskaart (afgegeven vanaf 13 maart 2021) ",
+		"id-body-3": " kunt u inloggen op websites van de overheid, het onderwijs, de zorg of uw pensioenfonds.",
+		"id-footer": "Meer informatie over inloggen met het identiteitsbewijs",
+		"no-connection-RVIG": "De status van uw identiteitskaart kon niet worden opgehaald.",
+		"no-connection-RDW": "De status van uw rijbewijs kon niet worden opgehaald.",
+		"try-again": " Probeer het later nogmaals."
+	}
+}

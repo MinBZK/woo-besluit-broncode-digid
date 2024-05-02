@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+  targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+  <xs:simpleType name="BerichtMinorversieType">
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="[0-9]{1,4}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BerichtMajorversieType">
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="[0-9]{1,4}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GeslachtsnaamType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="256" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="VoorvoegselType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="VoornaamType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="256" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GeslachtsaanduidingType">
+    <xs:annotation>
+      <xs:documentation>
+        Geslacht = Man, Vrouw of Onbekend
+    </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(M|V|O)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AdresregelType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="64" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LandcodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{4}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SectorcodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{8}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SectoraalNummerType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,15}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GebruikersnaamType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z0-9_\-]{4,32}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="WachtwoordType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8" />
+      <xs:maxLength value="32" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MobielNummerType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{0,32}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ActiveringstermijnType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{0,64}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ActiveringstermijnIndagenType">
+    <xs:annotation>
+      <xs:documentation>
+        Een ActiveringstermijnIndagen geeft de activeringstermijn in dagen aan:
+        minimaal 1, maximaal 45
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:long">
+      <xs:minInclusive value="1" />
+      <xs:maxInclusive value="45" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TaalvoorkeurType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EmailadresType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z0-9._\-@~&amp;+]{0,128}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="URLType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z0-9.\-/&amp;=#:+?~_]{0,1024}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AanvraagnummerType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9A-Z]{32}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TransactiecodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9]{4})?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TransactiebeschrijvingType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@%`'\\&lt;&gt;&quot;&amp;]{0,1024}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="BerichtVersieType">
+    <xs:sequence>
+      <xs:element name="BerichtMajorversie" type="digid:BerichtMajorversieType" minOccurs="1" />
+      <xs:element name="BerichtMinorversie" type="digid:BerichtMinorversieType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="InstantieNaamType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@%`'\\&lt;&gt;&quot;&amp;]{0,256}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AppIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^&#9;&#10;&#13;&#32;]{0,64}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="SectorgegevensType">
+    <xs:sequence>
+      <xs:element name="Sectorcode" type="digid:SectorcodeType" minOccurs="1" />
+      <xs:element name="SectoraalNummer" type="digid:SectoraalNummerType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NaamgegevensType">
+    <xs:sequence>
+      <xs:element name="Voornaam" type="digid:VoornaamType" minOccurs="0" />
+      <xs:element name="Geslachtsnaam" type="digid:GeslachtsnaamType" minOccurs="1" />
+      <xs:element name="Voorvoegsel" type="digid:VoorvoegselType" minOccurs="0" />
+      <xs:element name="Geslachtsaanduiding" type="digid:GeslachtsaanduidingType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AdresgegevensType">
+    <xs:sequence>
+      <xs:element name="Woonlandcode" type="digid:LandcodeType" minOccurs="1" />
+      <xs:element name="Adresregel1" type="digid:AdresregelType" minOccurs="1" />
+      <xs:element name="Adresregel2" type="digid:AdresregelType" minOccurs="0" />
+      <xs:element name="Adresregel3" type="digid:AdresregelType" minOccurs="0" />
+      <xs:element name="Adresregel4" type="digid:AdresregelType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountgegevensType">
+    <xs:sequence>
+      <xs:element name="Gebruikersnaam" type="digid:GebruikersnaamType" minOccurs="1" />
+      <xs:element name="Wachtwoord" type="digid:WachtwoordType" minOccurs="1" />
+      <xs:element name="Emailadres" type="digid:EmailadresType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TransactiegegevensType">
+    <xs:sequence>
+      <xs:element name="Transactiecode" type="digid:TransactiecodeType" minOccurs="1" />
+      <xs:element name="Transactiebeschrijving" type="digid:TransactiebeschrijvingType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AanvraagvoorkeurenType">
+    <xs:annotation>
+      <xs:documentation>
+        Aanvraagvoorkeuren is alleen voor SVB in gebruik ivm backward compatibility
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="InstantieNaam" type="digid:InstantieNaamType" minOccurs="0" />
+      <xs:element name="Activeringstermijn" type="digid:ActiveringstermijnType" minOccurs="0" />
+      <xs:element name="Taalvoorkeur" type="digid:TaalvoorkeurType" minOccurs="0" />
+      <xs:element name="URLBI" type="digid:URLType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AanvraagvoorkeurenKortType">
+
+    <xs:sequence>
+      <xs:element name="ActiveringstermijnIndagen" type="digid:ActiveringstermijnIndagenType" minOccurs="0" />
+      <xs:element name="Taalvoorkeur" type="digid:TaalvoorkeurType" minOccurs="0" />
+      <xs:element name="URLBI" type="digid:URLType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MapType">
+    <xs:sequence>
+      <xs:element name="key">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountOnlineRequest" type="digid:AanvragenSectorAccountOnlineRequestType"></xs:element>
+  <xs:complexType name="AanvragenSectorAccountOnlineRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="Aanvraagwijze" type="xs:string" default="Online" />
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Naamgegevens" type="digid:NaamgegevensType" />
+      <xs:element name="Adresgegevens" type="digid:AdresgegevensType" />
+      <xs:element name="AanvraagvoorkeurenKort" type="digid:AanvraagvoorkeurenKortType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountOnlineResponse" type="digid:AanvragenSectorAccountOnlineResponseType"></xs:element>
+  <xs:complexType name="AanvragenSectorAccountOnlineResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Aanvraagnummer" type="digid:AanvraagnummerType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieOnlineRequest" type="digid:AanvragenSMSAuthenticatieOnlineRequestType"></xs:element>
+  <xs:complexType name="AanvragenSMSAuthenticatieOnlineRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="Aanvraagwijze" type="xs:string" default="Online" />
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Naamgegevens" type="digid:NaamgegevensType" />
+      <xs:element name="Adresgegevens" type="digid:AdresgegevensType" />
+      <xs:element name="AanvraagvoorkeurenKort" type="digid:AanvraagvoorkeurenKortType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieOnlineResponse" type="digid:AanvragenSMSAuthenticatieOnlineResponseType"></xs:element>
+  <xs:complexType name="AanvragenSMSAuthenticatieOnlineResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Aanvraagnummer" type="digid:AanvraagnummerType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountOnderwaterRequest" type="digid:AanvragenSectorAccountOnderwaterRequestType"></xs:element>
+  <xs:complexType name="AanvragenSectorAccountOnderwaterRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="Aanvraagwijze" type="xs:string" default="Onderwater" />
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Accountgegevens" type="digid:AccountgegevensType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountOnderwaterResponse" type="digid:AanvragenSectorAccountOnderwaterResponseType"></xs:element>
+  <xs:complexType name="AanvragenSectorAccountOnderwaterResponseType">
+    <xs:sequence>
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieOnderwaterRequest" type="digid:AanvragenSMSAuthenticatieOnderwaterRequestType"></xs:element>
+  <xs:complexType name="AanvragenSMSAuthenticatieOnderwaterRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="Aanvraagwijze" type="xs:string" default="Onderwater" />
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Mobielnummer" type="digid:MobielNummerType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieOnderwaterResponse" type="digid:AanvragenSMSAuthenticatieOnderwaterResponseType"></xs:element>
+  <xs:complexType name="AanvragenSMSAuthenticatieOnderwaterResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensWijzigenRequest" type="digid:SectorgegevensWijzigenRequestType"></xs:element>
+  <xs:complexType name="SectorgegevensWijzigenRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="BestaandeSectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="NieuweSectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="RedenSectorgegevensWijzigenCode" type="digid:TransactiecodeType" minOccurs="0" />
+      <xs:element name="RedenSectorgegevensWijzigenBeschrijving" type="digid:TransactiebeschrijvingType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensWijzigenResponse" type="digid:SectorgegevensWijzigenResponseType"></xs:element>
+  <xs:complexType name="SectorgegevensWijzigenResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensToevoegenRequest" type="digid:SectorgegevensToevoegenRequestType"></xs:element>
+  <xs:complexType name="SectorgegevensToevoegenRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="BestaandeSectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="ToetevoegenSectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="RedenSectorgegevensToevoegenCode" type="digid:TransactiecodeType" minOccurs="0" />
+      <xs:element name="RedenSectorgegevensToevoegenBeschrijving" type="digid:TransactiebeschrijvingType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensToevoegenResponse" type="digid:SectorgegevensToevoegenResponseType"></xs:element>
+  <xs:complexType name="SectorgegevensToevoegenResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensVerwijderenRequest" type="digid:SectorgegevensVerwijderenRequestType"></xs:element>
+  <xs:complexType name="SectorgegevensVerwijderenRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="TeVerwijderenSectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="RedenSectorgegevensVerwijderenCode" type="digid:TransactiecodeType" minOccurs="0" />
+      <xs:element name="RedenSectorgegevensVerwijderenBeschrijving" type="digid:TransactiebeschrijvingType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="SectorgegevensVerwijderenResponse" type="digid:SectorgegevensVerwijderenResponseType"></xs:element>
+  <xs:complexType name="SectorgegevensVerwijderenResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="RevocerenAccountRequest" type="digid:RevocerenAccountRequestType"></xs:element>
+  <xs:complexType name="RevocerenAccountRequestType">
+    <xs:sequence>
+      <xs:element name="AppId" type="digid:AppIdType" minOccurs="1"/>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="RedenRevocerenAccountCode" type="digid:TransactiecodeType" minOccurs="0" />
+      <xs:element name="RedenRevocerenAccountBeschrijving" type="digid:TransactiebeschrijvingType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="RevocerenAccountResponse" type="digid:RevocerenAccountResponseType"></xs:element>
+  <xs:complexType name="RevocerenAccountResponseType">
+    <xs:sequence>
+      <xs:element name="BerichtVersie" type="digid:BerichtVersieType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountRequest" type="digid:AanvragenSectorAccountRequestType"></xs:element>
+  <xs:annotation>
+    <xs:documentation>
+      AanvragenAuthenticatieRequest is alleen voor SVB in
+      gebruik ivm backward compatibility
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AanvragenSectorAccountRequestType">
+    <xs:sequence>
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Naamgegevens" type="digid:NaamgegevensType" />
+      <xs:element name="Adresgegevens" type="digid:AdresgegevensType" />
+      <xs:element name="Aanvraagvoorkeuren" type="digid:AanvraagvoorkeurenType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSectorAccountResponse" type="digid:AanvragenSectorAccountResponseType"></xs:element>
+  <xs:annotation>
+    <xs:documentation>
+      AanvragenAuthenticatieResponse is alleen voor SVB in
+      gebruik ivm backward compatibility
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AanvragenSectorAccountResponseType">
+    <xs:sequence>
+      <xs:element name="Aanvraagnummer" type="digid:AanvraagnummerType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieRequest" type="digid:AanvragenSMSAuthenticatieRequestType"></xs:element>
+  <xs:annotation>
+    <xs:documentation>
+      AanvragenSMSAuthenticatieRequest is alleen voor SVB
+      in gebruik ivm backward compatibility
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AanvragenSMSAuthenticatieRequestType">
+    <xs:sequence>
+      <xs:element name="Sectorgegevens" type="digid:SectorgegevensType" />
+      <xs:element name="Naamgegevens" type="digid:NaamgegevensType" />
+      <xs:element name="Adresgegevens" type="digid:AdresgegevensType" />
+      <xs:element name="Aanvraagvoorkeuren" type="digid:AanvraagvoorkeurenType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="AanvragenSMSAuthenticatieResponse" type="digid:AanvragenSMSAuthenticatieResponseType"></xs:element>
+  <xs:annotation>
+    <xs:documentation>
+      AanvragenSMSAuthenticatieResponse is alleen voor SVB
+      in gebruik ivm backward compatibility
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AanvragenSMSAuthenticatieResponseType">
+    <xs:sequence>
+      <xs:element name="Aanvraagnummer" type="digid:AanvraagnummerType" />
+      <xs:element name="Transactiegegevens" type="digid:TransactiegegevensType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StatusRequest">
+    <xs:annotation>
+      <xs:documentation>Status aanvraag.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="StatusResponse"><xs:annotation>
+    <xs:documentation>Status antwoord.</xs:documentation>
+  </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="map">
+          <xs:annotation>
+            <xs:documentation>key-value pairs met status attributen </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" minOccurs="1" maxOccurs="unbounded" type="digid:MapType">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

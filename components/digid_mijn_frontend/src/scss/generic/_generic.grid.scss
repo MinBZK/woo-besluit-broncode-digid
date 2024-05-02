@@ -1,0 +1,29 @@
+.main-grid {
+  display: grid;
+  margin: 0 -8px;
+}
+
+//noinspection ALL
+@media screen and (max-width: $tiny) {
+  .main-grid {
+    grid-template-columns: 0 1fr 0 !important;
+  }
+}
+
+@media screen and (max-width: $mobile) and (min-width: $tiny) {
+  .main-grid {
+    grid-template-columns: $margin-mobile 1fr $margin-mobile;
+  }
+}
+
+@media screen and (max-width: $desktop) and (min-width: $mobile) {
+  .main-grid {
+    grid-template-columns: $margin-large 1fr $margin-large;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .main-grid {
+    grid-template-columns: 1fr 820px 1fr;
+  }
+}

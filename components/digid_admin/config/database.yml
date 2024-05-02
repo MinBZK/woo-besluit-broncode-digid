@@ -1,0 +1,84 @@
+default: &default
+  adapter: mysql2
+  username:SSSSS
+  pool: 5
+  timeout: 5000
+  collation: utf8_unicode_ci
+
+default_account: &default_account
+  <<: *default
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+# -------- DEVELOPMENT CONNECTIONS --------
+development:
+  <<: *default
+  database: digid_x_development_log
+
+development_account:
+  <<: *default_account
+  database: digid_x_development
+
+# -------- TEST CONNECTIONS --------
+test:
+  <<: *default
+  database: digid_x_test_log<%= ENV['TEST_ENV_NUMBER'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+
+test_account:
+  <<: *default_account
+  database: digid_x_test<%= ENV['TEST_ENV_NUMBER'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+
+# -------- PRODUCTION CONNECTIONS --------
+production_default: &production_default
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  reconnect: true
+  timeout: 5000
+  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  password: "<%= APP_CONFIG.dig("db", "password") %>"
+  ssl_mode:  <%= APP_CONFIG.dig("db", "use_ssl").to_s == "true" ? "required" : "preferred"  %>
+
+production:
+  <<: *production_default
+  encoding: utf8
+  collation: utf8_unicode_ci
+  database: <%= APP_CONFIG.dig("db", "log", "name") %>
+  host: <%= APP_CONFIG.dig("db", "log", "host") %>
+  username: <%= APP_CONFIG.dig("db", "log", "username") %>
+  port: <%= APP_CONFIG.dig("db", "log", "port") || "3306" %>
+  <% if ENV["PUMA"] == 1 || ENV["UNICORN"] == 1 %>
+  read_timeout: <%= APP_CONFIG["db"]["query_timeout"] %>
+  variables:
+    max_execution_time: <%= (APP_CONFIG["db"]["query_timeout"] + 10) * 1000 %>
+  <% end %>
+
+production_account:
+  <<: *production_default
+  database: <%= APP_CONFIG.dig("db", "x", "name") %>
+  host: <%= APP_CONFIG.dig("db", "x", "host") %>
+  username: <%= APP_CONFIG.dig("db", "x", "username") %>
+  port: <%= APP_CONFIG.dig("db", "x", "port") || "3306" %>
+  <% if ENV["PUMA"] == 1 || ENV["UNICORN"] == 1 %>
+  read_timeout: <%= APP_CONFIG["db"]["query_timeout"] %>
+  variables:
+    max_execution_time: <%= (APP_CONFIG["db"]["query_timeout"] + 10) * 1000 %>
+  <% end %>
+
+production_read:
+  <<: *production_default
+  encoding: utf8
+  collation: utf8_unicode_ci
+  database: <%= APP_CONFIG.dig("db", "rep", "name") %>
+  host: <%= APP_CONFIG.dig("db", "rep", "host") %>
+  username: <%= APP_CONFIG.dig("db", "rep", "username") %>
+  port: <%= APP_CONFIG.dig("db", "rep", "port") || "3306" %>
+  <% if ENV["PUMA"] == 1 || ENV["UNICORN"] == 1 %>
+  read_timeout: <%= APP_CONFIG["db"]["query_timeout"] %>
+  variables:
+    max_execution_time: <%= (APP_CONFIG["db"]["query_timeout"] + 10) * 1000 %>
+  <% end %>

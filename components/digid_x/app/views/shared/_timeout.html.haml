@@ -1,0 +1,44 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if wrapped_session.show_popup_after_seconds > 0
+  .timeout-dialog{ 'data-show-after' => wrapped_session.show_popup_after_seconds, 'data-expire-warning-delay' => wrapped_session.expire_warning_delay, 'data-expire-warning-content' => session_expired_message.html_safe, hidden: true }
+    - if wrapped_session.timeout_warning_is_extendible?
+      = block_with_icon(t('session_almost_expires'))
+    - if wrapped_session.timeout_warning_is_absolute?
+      = block_with_icon(t('session_maximum_time'))
+
+    = actions do
+      - if wrapped_session.timeout_warning_is_extendible?
+        = action_button(:yeah, sessions_path, { method: :put, remote: true, class: 'extend-session' })
+        = action_button(:nope, '#', { method: :get })
+      - if wrapped_session.timeout_warning_is_absolute?
+        = action_link_with_role_button(:annie_are_you_okay, '#')

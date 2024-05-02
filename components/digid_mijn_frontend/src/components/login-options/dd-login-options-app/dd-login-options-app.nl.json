@@ -1,0 +1,32 @@
+{
+  "app": {
+    "page-title": "Mijn DigiD | DigiD app details",
+    "aria-title": "Uw DigiD app",
+    "title": "Met de DigiD app",
+    "details-aria": "DigiD app op {{ name }}, meer informatie",
+    "close-accordion": "Verberg meer informatie over DigiD app op {{ name }}",
+    "name": "Naam van apparaat",
+    "code": "Appcode",
+    "code-tooltip": "Deze code hoort bij uw DigiD app. Daarmee herkent DigiD uw app.",
+    "log-card": "Voor het laatst ingelogd op:",
+    "log": "Voor het laatst ingelogd op",
+    "status": "Status app",
+    "status-tooltip": "Wij hebben een brief met activeringscode naar uw huisadres gestuurd. Als u deze heeft ontvangen, open dan de DigiD app en kies \"Start\".",
+    "deactivate": "Deze DigiD app deactiveren",
+    "remove": "Deze DigiD app verwijderen",
+    "activated": "Geactiveerd op",
+    "type": "Type identiteitsbewijs",
+    "type-tooltip": "Dit is het identiteitsbewijs waarmee u de ID-check heeft toegevoegd aan uw DigiD app.",
+    "doc-num": "Documentnummer",
+    "doc-num-tooltip": "Dit is het documentnummer van het identiteitsbewijs waarmee u de ID-check heeft toegevoegd aan uw DigiD app.",
+    "other": "Uw andere DigiD apps",
+    "details-id-active": "U heeft de ID-check toegevoegd aan uw DigiD app. U kunt uw DigiD app nu ook gebruiken om toegang te krijgen tot gegevens die extra privacygevoelig zijn, zoals uw medisch dossier.",
+    "details-id-inactive": "U kunt een ID-check aan uw DigiD app toevoegen. Zo kunt u nog meer doen met uw DigiD. Bijvoorbeeld het bekijken en wijzigen van gegevens die extra privacygevoelig zijn, zoals uw medisch dossier.",
+    "details-id-link": "Meer informatie over de ID-check",
+    "id_card": "Nederlandse identiteitskaart",
+    "driving_licence": "Nederlands rijbewijs",
+    "driving_license": "Nederlands rijbewijs",
+    "passport": "Nederlands paspoort",
+		"null" : "Onbekend"
+  }
+}

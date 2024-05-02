@@ -1,0 +1,76 @@
+@use 'src/scss/tools/tools.login-method.mixins' as mixins;
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-login-options-id {
+  &__card {
+    @include mixins.card;
+    min-width: 300px;
+
+    &__docs {
+      display: flex;
+      flex-direction: column;
+     
+      &--docnum {
+        display: flex;
+        margin-top: 0.25rem;
+
+        & > div {
+          margin-right: 1rem;
+        }
+      }
+    }
+
+    &--activation-status {
+      display: flex;
+      margin-bottom: 1.5rem;
+
+      & > div {
+        margin-right: 1rem;
+      }
+
+      & p {
+        font-family: core.$bold;
+        margin-bottom: 0;
+      }
+    }
+  }
+  &__accordion {
+    @include mixins.accordion;
+
+    &__revoked-cards {
+      border-top: 1px solid var(--base3);
+      background-color: var(--solid0);
+
+      &__title {
+        margin-bottom: 0.5rem !important;
+      }
+
+      &__item {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+        margin-bottom: 0.5rem !important;
+      }
+    }
+
+    &--revoked {
+      .status-inactive {
+        color: var(--base0) !important;
+      }
+    }
+  }
+
+  &--revoked {
+    border: 1px solid var(--solid0);
+    box-shadow: none;
+    &:hover {
+      border: 1px solid var(--solid0);
+      box-shadow: none;
+      transform: none;
+      cursor: default;
+    }
+    .status-inactive {
+      color: var(--base0) !important;
+    }
+  }
+}

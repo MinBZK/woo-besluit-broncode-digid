@@ -1,0 +1,19 @@
+{
+  // Run the app in a production environment. The default value is "development".
+  "environment": "production",
+  // Run Passenger on the given port. In this example, we use port 80,
+  // the standard HTTP port.
+  "port": 8095,
+  // Tell Passenger to daemonize into the background.
+  "daemonize": false,
+  // Tell Passenger to run the app as the given user. Only has effect
+  // if Passenger was started with root privileges.
+  "user": "SSSSSSSSSSSSS",
+
+  "max_pool_size": 12,
+  "min_instances": 12,
+  "max_request_queue_size": 0,
+  "max_preloader_idle_time": 0,
+  "disable_security_update_check": "on",
+  "disable_anonymous_telemetry": "on"
+}

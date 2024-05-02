@@ -1,0 +1,17 @@
+- id: 1
+  name: 'Koppeling met DigiD app'
+  description: 'Deze switch is standaard actief voor alle accounts en zorgt ervoor dat burgers met de DigiD app kunnen inloggen bij webdiensten en vanuit Mijn DigiD de DigiD app kunnen activeren, het inlogniveau kunnen verhogen naar Substantieel, hun wachtwoord opnieuw kunnen instellen of hun telefoonnummer kunnen wijzigen. Bij calamiteiten met de DigiD app kan de koppeling afgesloten worden door deze switch op inactief te zetten. De eindgebruiker krijgt dan op het inlogscherm of in Mijn DigiD een melding te zien dat het gebruik van de DigiD app tijdelijk niet mogelijk is. (Deactiveren is nog wel mogelijk.)'
+  status: 1
+  pilot_group_id: 0
+
+- id: 2
+  name: 'Koppeling met DigiD RDA server'
+  description: 'Met deze switch kan het verhogen van het inlogniveau (van de DigiD app) naar Substantieel aan- of uitgezet worden. Bij calamiteiten met de DigiD RDA server kan de koppeling afgesloten worden door deze switch op inactief te zetten. De eindgebruiker krijgt dan in de DigiD app een melding te zien dat het verhogen van het inlogniveau tijdelijk niet mogelijk is.'
+  status: 1
+  pilot_group_id: 0
+
+- id: 3
+  name: 'Koppeling met ID-checker'
+  description: 'Met deze switch wordt de koppeling met de ID-checker voor het verhogen naar niveau Substantieel beheerd. Indien uitgeschakeld, is het niet mogelijk het betrouwbaarheidsniveau van een DigiD app met behulp van een ID-checker te verhogen naar niveau Substantieel.'
+  status: 1
+  pilot_group_id: 0

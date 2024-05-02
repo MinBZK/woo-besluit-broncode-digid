@@ -1,0 +1,9 @@
+{
+  "name": "Mijn DigiD - Frontend",
+  "short_name": "digid_mijn_frontend",
+  "start_url": "/home",
+  "display": "standalone",
+  "icons": [],
+  "background_color": "#16161d",
+  "theme_color": "#16161d"
+}

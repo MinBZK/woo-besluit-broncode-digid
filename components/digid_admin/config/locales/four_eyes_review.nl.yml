@@ -1,0 +1,6 @@
+nl:
+  shared:
+    four_eyes_reviews:
+      create: "Nieuw"
+      update: "Wijziging"
+      destroy: "Verwijdering"

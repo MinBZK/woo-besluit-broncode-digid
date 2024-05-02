@@ -1,0 +1,82 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= f.hidden_field(:connection_id, value: @service.connection_id)
+
+= field t("services.services.identity") do
+  = field t("services.id"), @service.id
+  = field t("services.services.connection.name"), @service.connection_name
+
+  - if @service.new_record?
+    = field t("services.services.service_uuid"), f.text_field(:service_uuid)
+  - else
+    = field t("services.service.legacy_id"), @service.legacy_service_id
+    = field t("services.services.service_uuid"), @service.service_uuid
+
+  = field t("services.services.entity_id"), f.text_field(:entity_id)
+
+%hr
+= field t("services.services.standard") do
+  = field t("services.services.standard_name"), f.text_field(:name)
+  = field t("services.services.standard_website_url"), f.text_field(:website_url)
+  = field f.label(:minimum_reliability_level, t("services.services.standard_min_reliability_level")), f.select(:minimum_reliability_level, [["Basis", "10"], ["Midden", "20"], ["Substantieel", "25"], ["Hoog", "30"]])
+  = field f.label(:encryption_id_type, t("services.services.standard_encryption_type_id")), f.select(:encryption_id_type, [["LEGACY_BSN", "LEGACY_BSN"]])
+
+%hr
+= field t("services.services.new_reliability_level") do
+  = field f.label(:new_reliability_level, t("services.services.level")), f.select(:new_reliability_level, [[], ["Midden", "20"], ["Substantieel", "25"], ["Hoog", "30"]])
+  = field f.label(:date_from, t("services.date_from")) do
+    %span.datepicker= f.date_select :new_reliability_level_starting_date, include_blank: true, selected: @service&.new_reliability_level_starting_date&.to_date
+  = field t("services.services.new_reliability_level_change_msg"), f.text_field(:new_reliability_level_change_message)
+
+%hr
+= field t("services.digid") do
+  = field t("services.services.standard_permission_question"), f.text_field(:permission_question)
+
+- if @service.machtigen
+  %hr
+  = field t("services.machtigen.title") do
+    = field t("services.machtigen.position"), @service.position
+    = field t("services.machtigen.authorization_type"), @service.authorization_type
+    = field t("services.machtigen.duration_authorization"), @service.duration_authorization
+    = field t("services.machtigen.description"), @service.description
+    = field t("services.machtigen.explanation"), @service.explanation
+    = render 'dc/services/service_organization_roles', service: @service
+    = render 'dc/services/child_services', service: @service
+    = render 'dc/services/parent_services', service: @service
+    = render 'dc/services/keywords', service: @service
+  = field f.label(:legacy_machtigen_id, "Legacy Machtigen ID"), f.text_field(:legacy_machtigen_id, required: false)
+
+%hr
+= render 'dc/shared/status', f: f, status: @service.status
+
+= render 'shared/form_actions', model: @service
+.clear

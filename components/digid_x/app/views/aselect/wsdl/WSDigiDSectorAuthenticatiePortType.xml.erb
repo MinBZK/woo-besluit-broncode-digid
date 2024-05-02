@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="WSDigiDAuthenticatie" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <wsdl:types>
+    <xs:schema targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+      <xs:import namespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" schemaLocation="WSDigiDAuthenticatie_v1.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticatieInitiatieRequest">
+    <wsdl:part element="digid:AuthenticatieInitiatieRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AuthenticatieInitiatieResponse">
+    <wsdl:part element="digid:AuthenticatieInitiatieResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AuthenticatieVerificatieRequest">
+    <wsdl:part element="digid:AuthenticatieVerificatieRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AuthenticatieVerificatieResponse">
+    <wsdl:part element="digid:AuthenticatieVerificatieResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="StatusRequest">
+    <wsdl:part element="digid:StatusRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="StatusResponse">
+    <wsdl:part element="digid:StatusResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="WSDigiDSectorAuthenticatiePortType">
+    <wsdl:operation name="AuthenticatieInitiatie">
+      <wsdl:documentation>
+        Methode om een authenticatie via DigiD te initieren
+      </wsdl:documentation>
+      <wsdl:input message="digid:AuthenticatieInitiatieRequest"/>
+      <wsdl:output message="digid:AuthenticatieInitiatieResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticatieVerificatie">
+      <wsdl:documentation>
+        Methode om het authenticatie resultaat bij
+        DigiD te verifieren en de sectorgegevens van de ingelogde gebruiker
+        van DigiD te ontvangen. Hierbij wordt gebruik gemaakt van de
+        referentiegegevens, RID, zoals die bij het AuthenticatieInitiatie
+        request zijn verstrekt aan de afnemer door de DigiD applicatie.
+      </wsdl:documentation>
+      <wsdl:input message="digid:AuthenticatieVerificatieRequest"/>
+      <wsdl:output message="digid:AuthenticatieVerificatieResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="Status">
+      <wsdl:documentation>
+        Haal de huidige status op van de authenticatiewebservice.
+      </wsdl:documentation>
+      <wsdl:input message="digid:StatusRequest"/>
+      <wsdl:output message="digid:StatusResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSDigiDSectorAuthenticatiePortTypeSoapBinding" type="digid:WSDigiDSectorAuthenticatiePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="AuthenticatieInitiatie">
+      <soap:operation soapAction="AuthenticatieInitiatie"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticatieVerificatie">
+      <soap:operation soapAction="AuthenticatieVerificatie"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status">
+      <soap:operation soapAction="Status"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSDigiDSectorAuthenticatie_v1">
+    <wsdl:port binding="digid:WSDigiDSectorAuthenticatiePortTypeSoapBinding" name="WSDigiDSectorAuthenticatiePortType">
+      <soap:address location="<%= @authentication_url %>"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

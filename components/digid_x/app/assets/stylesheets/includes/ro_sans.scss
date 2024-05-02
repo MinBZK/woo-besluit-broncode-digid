@@ -1,0 +1,23 @@
+@font-face {
+  font-family:"RO Sans";
+  font-style:normal;
+  font-weight:normal;
+  src: font-url("ROsanswebtextregular.woff") format("opentype");
+  font-display: block;
+}
+
+@font-face{
+  font-family:"RO Sans";
+  font-style:italic;
+  font-weight:normal;
+  src: font-url("ROsanswebtextitalic.woff") format("opentype");
+  font-display: block;
+}
+
+@font-face{
+  font-family:"RO Sans";
+  font-style: normal;
+  font-weight: bold;
+  src: font-url("ROsanswebtextbold.woff") format("opentype");
+  font-display: block;
+}

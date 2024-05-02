@@ -1,0 +1,29 @@
+class SessionCountdown
+  UNIT = 60 * 1000
+
+  constructor: (el) ->
+    @el = $(el)
+    @endtime = new Date(new Date().getTime() + (@el.data("minutes") * UNIT));
+    @handle()
+
+  handle: =>
+    timeleft = @endtime - new Date()
+    if ((timeleft / UNIT) <= 5)
+      @el.show()
+      if (timeleft <= 0)
+        @el.html(@el.data("finished"))
+        return
+
+      minutesToDisplay = Math.ceil(timeleft / UNIT)
+      newText = @el.data("progress").replace("#countdown", minutesToDisplay)
+      if (minutesToDisplay == 1)
+        newText = newText.replace("minuten", "minuut").replace("minutes", "minute")
+      @el.html(newText)
+    else
+      @el.hide()
+
+    setTimeout @handle, UNIT
+
+$ ->
+  $('#session_countdown').each (_, el) ->
+    new SessionCountdown(el)

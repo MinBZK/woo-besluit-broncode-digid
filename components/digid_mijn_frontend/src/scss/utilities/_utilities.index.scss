@@ -1,0 +1,40 @@
+//Styling used for the index.html file
+
+noscript {
+  text-align: center;
+
+  & > h1 {
+    margin: 4rem 1rem;
+    color: #282828;
+    @media (prefers-color-scheme: dark) {
+      color: #fbfbfb;
+    }
+  }
+}
+
+#app-loader {
+  animation: dd-spin 2s linear infinite;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 100px;
+
+  & > path {
+    fill: #282828;
+
+    @media (prefers-color-scheme: dark) {
+      fill: #fbfbfb;
+    }
+  }
+}
+
+@keyframes dd-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}

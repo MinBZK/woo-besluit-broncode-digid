@@ -1,0 +1,86 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if can? :gba_request, Account
+  #accounts
+    - # jQuery UI dialog sets the focus otherwise on the first focusable thing in the dialog
+    %span.ui-helper-hidden-accessible
+      %input{ autofocus: 'autofocus' }
+
+    - present @gba_data, GbaPresenter do |gba_presenter|
+      .personal_data
+        .personal_data_left
+          %h2= ''.html_safe + I18n.t('accounts.headers.general') + (@gba_data.onderzoek_algemeen? ? " <span>#{I18n.t('under_investigation')}</span>".html_safe : '')
+          %hr
+          - if can? :view_gba_status, Account
+            = field I18n.t('accounts.fields.labels.gba_status'), gba_presenter.status
+          - if can? :view_gba_data, Account
+            - %w(bsn a_nummer geboortedatum geslachtsaanduiding nationaliteit).each do |name|
+              = field name.humanize, gba_presenter.public_send(name)
+        - if can? :view_gba_data, Account
+          .personal_data_right
+            %h2= ''.html_safe + I18n.t('accounts.headers.name_data') + (@gba_data.onderzoek_algemeen? ? " <span>#{I18n.t('under_investigation')}</span>".html_safe : '')
+            %hr
+            - %w(voornamen adellijke_titel voorvoegsel_geslachtsnaam geslachtsnaam aanduiding_naamgebruik voorvoegsel_geslachtsnaam_partner geslachtsnaam_partner).each do |name|
+              = field name.humanize, gba_presenter.public_send(name)
+        .clear
+
+      - if can? :view_gba_data, Account
+        .personal_data
+          %h2= ''.html_safe + I18n.t('accounts.headers.address_data') + (@gba_data.onderzoek_adres? ? " <span>#{I18n.t('under_investigation')}</span>".html_safe : '')
+          %hr
+          .personal_data_left
+            - %w(gemeente_van_inschrijving straatnaam postcode).each do |name|
+              = field name.humanize, gba_presenter.public_send(name)
+          .personal_data_right
+            - %w(huisnummer huisletter huisnummertoevoeging aanduiding_bij_huisnummer locatieomschrijving).each do |name|
+              = field name.humanize, gba_presenter.public_send(name)
+        .clear
+
+        .personal_data
+          %h2= I18n.t('accounts.headers.travel_documents')
+          %hr
+          .form_wrapper
+            %table
+              %thead
+                %tr
+                  - %w(soort_reisdocument nummer_reisdocument datum_einde_geldigheid aanduiding_inhouding_vermissing datum_inhouding_vermissing).each do |name|
+                    %th= name.humanize.sub('inhouding vermissing', 'inhouding/vermissing')
+              %tbody
+                - gba_presenter.reisdocumenten.each do |travel_document|
+                  %tr
+                    - %w(soort_reisdocument nummer_reisdocument datum_einde_geldigheid aanduiding_inhouding_vermissing datum_inhouding_vermissing).each do |name|
+                      %td= travel_document.public_send(name)
+
+    - if @account
+      = show_specific_manager_actions_for 'uc17.gba_raadplegen_gelukt', 'Account', @account.id
+    - elsif @account_id
+      = show_specific_manager_actions_for 'uc17.gba_raadplegen_gelukt', 'Account', @account_id

@@ -1,0 +1,60 @@
+(function() {
+  this.handle_message_event = function(event, data, status, xhr) {
+    handle_message(data, status, xhr)
+  }
+
+  this.handle_message = function(data, status, xhr) {
+    if (data.redirect_url) {
+      window.location.href = data.redirect_url;
+    }
+
+    if (data.title) {
+      window.document.title  = data.title;
+    }
+
+    if (data.id && data.html) {
+      $(data.id).html(data.html);
+      window.Handlers.init();
+    }
+
+    if (data.popup) {
+      $('meta[name="viewport"]').attr('content', 'width=device-width,initial-scale=1,maximum-scale=1');
+      var aborted = false, classes = ['message-dialog'], refresh, popup = data.popup;
+
+      if ($('.message-dialog').hasClass('non-spinning')) {
+        classes.push('non-spinning');
+      }
+
+      $('.message-dialog').html(popup)
+      $('.message-dialog').dialog({
+        beforeClose: function () { aborted = true; },
+        close: function () { $('body').css('overflow', 'visible');},
+        create: function () { $('body').css('overflow', 'hidden'); },
+        modal: true,
+        width: Math.min(500, $(window.document).width() - 20)
+      });
+
+      window.setTimeout(function () {
+        $('.message-dialog').html(popup);
+        $('.message-dialog').parent().find(':focusable .primary--button').focus();
+      }, 50)
+
+      if (data.check_gba) {
+        window.setTimeout(function () {
+          if (!aborted) {
+            $.ajax({
+              type: "GET",
+              contentType: "application/json",
+              url: window.path_locale + (data.custom_gba_path || "/registrations/gba_status") + "?" + Date.now(),
+              dataType: 'json',
+              success: handle_message
+            });
+          }
+        }, <%= Rails.env.test? ? 500 : 2000 %>);
+      }
+    }
+  }
+
+  $(document).on("ajax:success", "form[data-remote=true]", handle_message_event);
+  $(document).on("ajax:success", "a[data-remote=true]", handle_message_event);
+}).call(this);

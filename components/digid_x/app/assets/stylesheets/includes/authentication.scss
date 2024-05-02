@@ -1,0 +1,235 @@
+.authentications {
+  .block-with-icon--error {
+    position: relative;
+    display: none;
+  }
+
+  a:focus + .block-with-icon--error {
+    display: block;
+  }
+
+  .block-with-icon--error:before {
+    right: auto;
+    top: -20px;
+    border-color: transparent;
+    border-bottom-color: #f9dfdd;
+    border-style: solid;
+    border-width: 10px;
+    content: '';
+    height: 0;
+    left: 10px;
+    position: absolute;
+    width: 0;
+  }
+}
+
+.qr_url {
+  height: 60px;
+  width: 350px;
+  font-size: 100%;
+  background-color: lightgray;
+  padding: 1 0px;
+  border: 2px solid;
+}
+
+.capslock_notifier span.form__item__example {
+  background: asset-url('info.svg') no-repeat;
+  padding-top: 2px;
+  padding-left: 28px;
+  background-size: 22px 22px;
+  display: none;
+}
+
+.new_smscode {
+  .form__item.code_field{
+    .form__item__example {
+      display: block;
+      text-align: right
+    }
+  }
+  .no_code_received a {
+     float: right;
+   }
+ }
+
+.app_verification {
+  .code_field {
+    width: unset;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .verification_code_image {
+    width: 195px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .verification_code_wrapper {
+    border-bottom-color: #e17000;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+
+    label {
+      width: 180px;
+    }
+  }
+}
+
+@media screen and (max-width: $my-digid-breakpoint1 - 1) {
+  .app_verification .code_field {
+    width: unset;
+  }
+}
+
+.login_tile {
+  border-radius: 6px;
+  border: 1px solid $nrs-c8c8c8;
+  box-shadow: none;
+  padding: 12px 30px 12px 16px;
+  margin-bottom: 16px;
+  height: 22px;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  overflow: hidden;
+  display: block;
+  color: $nrs-282828;
+  transition: all 0.15s;
+  &:hover {
+    transform:translateY(-2px)
+  }
+}
+
+.login_tile:hover{
+  text-decoration: none;
+  color: $nrs-282828;
+}
+
+.login_tile.highlighted {
+  background: $nrs-e17000;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.24);
+  border: none;
+}
+
+.login_tile.highlighted span, .login_tile.highlighted i.icon-3941-delta-links-24px{
+  font-weight: bold;
+  color: white;
+}
+
+.login_tile.active {
+  border: 1px solid #e17000;
+  background-color: white;
+  box-shadow: $button-shadow;
+  height: 68px;
+  padding-right: 30px;
+}
+
+.login_tile h2{
+  margin-bottom: 8px;
+  font-size: 100%;
+  line-height: 137%;
+  font-weight: normal;
+
+  @media screen and (max-width: 337px) {
+    font-size: 85%;
+    line-height: 173%
+  }
+
+}
+
+.login_tile.active h2{
+  font-weight: bold;
+  font-size: 112%;
+}
+
+.login_tile.active i[class^='icon-']{
+  color: $nrs-e17000;
+}
+
+.login_tile i[class^='icon-']{
+  color: $nrs-282828;
+  margin-right: 6px;
+}
+
+.login_tile.active.app {
+  background: white asset-url('tiles/app.svg') no-repeat;
+  background-position: bottom left;
+  background-size: auto 90px;
+}
+
+.login_tile.active i:last-child {
+  bottom: 34px;
+  color: $nrs-282828
+}
+
+.login_tile.active h2 {
+  margin-left: 68px;
+}
+
+.login_tile.active .description {
+  font-weight: normal;
+}
+
+.login_tile .description {
+  font-size: 89%;
+  line-height: 116%;
+  margin-top: 1px;
+}
+
+.login_tile i.icon-3941-delta-links-24px {
+  position: absolute; right: 12px; bottom: 11px;
+  transform: rotate(0deg);
+  margin-right: 0px;
+  transition: all 500ms;
+  font-size: 12px;
+  color: $nrs-d6d6d6;
+}
+
+.login_tile.active.small_font span {
+  font-size: 90%
+}
+
+.login_tile.active.small_font h2 {
+  font-size: 115%
+}
+
+.login_tile.active.smartphone h2{
+  color: $nrs-282828;
+}
+
+.login_tile.active.smartphone a:hover {
+  text-decoration: none;
+}
+
+.login_tile.active.usb_reader a:hover {
+  text-decoration: none;
+}
+
+.login_tile.active.smartphone {
+  background: white asset-url('tiles/app.svg') no-repeat;
+  background-position: bottom left;
+  background-size: auto 90px;
+}
+
+.login_tile.active.usb_reader {
+  background: white asset-url('tiles/nfc.svg') no-repeat;
+  background-position: bottom left;
+  background-size: auto 90px;
+}
+
+.login_tile.active.usb_reader h2 {
+  color: $nrs-282828;
+}
+
+.login_tile.smartphone h2 {
+  color: $nrs-282828;
+}
+
+.normal-login .form__item__box-label{
+  margin-left: 20px;
+  padding-top: 1px;
+}
+
+#authentication_test_zekerheidsniveau{height: auto}
+#authentication_type_account_basis h2 {white-space: nowrap}

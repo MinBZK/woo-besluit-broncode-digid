@@ -1,0 +1,1 @@
+drop index afnemersberichten_onze_referentie ON afnemersberichten;

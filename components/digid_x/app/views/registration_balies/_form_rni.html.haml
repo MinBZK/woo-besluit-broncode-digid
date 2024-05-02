@@ -1,0 +1,57 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= extended_form_for(@registration, remote: true) do |form|
+  %p= t('you_want_to_request_a_digid_no_registered_address_in_holland', registration_url: new_registration_url).html_safe
+  = block_with_icon do
+    %p= t('you_are_about_to_request_digid_additional_information_buitenland_attention_time_limit_rni', balies_link: external_link_to(t('balies_link_text'), t('balies_link_text_link'))).html_safe
+  %p= t('to_request_a_digid_abroad_you_need_this')
+  %ul.list-with-blocks
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_1')
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_2')
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_3')
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_4', registration_in_the_registration_non_resident: external_link_to(t('registration_in_the_registration_non_resident'), t('rijksoverheid_rni_link'))).html_safe
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_5')
+    %li= t('you_are_about_to_request_digid_additional_information_buitenland_requirement_6')
+  %p= t('more_information_about_requesting_digid_from_balie', digid_via_balie: external_link_to(t('digid_via_balie'), t('digid_via_balie_link'))).html_safe
+
+  - @show_fields_required = true
+  = form.header(nil, base: :leakage)
+
+  = form.citizen_service_number_field(required: true, example: t("information_boxes.bsn"))
+  = form.date_of_birth_field(required: true)
+  = form.custom_select(:nationality_id, Nationality.valid_eer_selectbox_options(I18n.locale), {selected: @registration.nationality_id || Nationality.dutch_id}, {required: true, 'data-nationality-id' => true, 'data-dutch-id' => Nationality.dutch_id.to_s, label: t("nationality")})
+  = form.text_field(:id_number, label: t('id_number'), example: t('examples.id_number'), information: t("information_boxes.id_number"), maxlength: 9, required: true, 'data-id-number' => true, 'data-capitals' => true)
+  = form.valid_until_date_field(required: true)
+
+  = form.buttons({action: :next, arrow: true}, :cancel)
+
+  = javascript_include_tag("inline/balie_form", nonce: content_security_policy_script_nonce)

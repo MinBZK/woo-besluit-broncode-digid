@@ -1,0 +1,6 @@
+:concurrency: 5
+:queues:
+  - ['bulk', 1]
+  - ['bulk-brp', 1]
+  - ['email-admin', 1]
+  - ['admin-cron', 1]

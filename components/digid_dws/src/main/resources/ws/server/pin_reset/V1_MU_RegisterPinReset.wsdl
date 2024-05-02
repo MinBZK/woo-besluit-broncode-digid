@@ -1,0 +1,73 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+  targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <wsdl:types>
+    <xs:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+      elementFormDefault="qualified">
+      <xs:import namespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" schemaLocation="V1_MU_RegisterPinReset.xsd"></xs:import>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterPinResetResponse">
+    <wsdl:part element="tns:RegisterPinResetResponse" name="RegisterPinResetResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RegisterPinResetRequest">
+    <wsdl:part element="tns:RegisterPinResetRequest" name="RegisterPinResetRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NotFoundFault">
+    <wsdl:part name="NotFoundFaultMessage" element="tns:NotFoundFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="TechnicalFault">
+    <wsdl:part name="TechnicalFaultMessage" element="tns:TechnicalFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="VersionMismatchFault">
+    <wsdl:part name="VersionMismatchFaultMessage" element="tns:VersionMismatchFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="ValidationErrorFault">
+    <wsdl:part name="ValidationErrorFaultMessage" element="tns:ValidationErrorFaultDetail" />
+  </wsdl:message>
+  <wsdl:portType name="RegisterPinResetPort">
+    <wsdl:operation name="RegisterPinReset">
+      <wsdl:input wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:RegisterPinResetRequest" name="RegisterPinResetRequest"></wsdl:input>
+      <wsdl:output wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:RegisterPinResetResponse" name="RegisterPinResetResponse"></wsdl:output>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault" />
+      <wsdl:fault message="tns:TechnicalFault" name="TechnicalFault" />
+      <wsdl:fault message="tns:VersionMismatchFault" name="VersionMismatchFault" />
+      <wsdl:fault message="tns:ValidationErrorFault" name="ValidationErrorFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="registerPRPortSoap11" type="tns:RegisterPinResetPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsaw:UsingAddressing wsdl:required="true" />
+    <wsdl:operation name="RegisterPinReset">
+      <soap:operation soapAction="" />
+      <wsdl:input name="RegisterPinResetRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterPinResetResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="TechnicalFault">
+        <soap:fault name="TechnicalFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="VersionMismatchFault">
+        <soap:fault name="VersionMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationErrorFault">
+        <soap:fault name="ValidationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="registerPRPortService">
+    <wsdl:port binding="tns:registerPRPortSoap11" name="registerPRPortSoap11">
+      <soap:address location="http://localhost:8080/dws" />
+      <wsp:Policy xmlns:wsp="http://www.w3.org/ns/ws-policy">
+             <wsam:Addressing xmlns:wsam="http://www.w3.org/2007/02/addressing/metadata">
+                 <wsp:Policy/>
+              </wsam:Addressing>
+         </wsp:Policy>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

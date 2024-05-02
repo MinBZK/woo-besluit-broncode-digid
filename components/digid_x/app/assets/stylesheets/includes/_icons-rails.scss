@@ -1,0 +1,84 @@
+//
+// Icon Font: icons
+//
+
+@font-face {
+  font-family: "icons";
+  src: font-url("icons.eot");
+  src: font-url("icons.eot?#iefix") format("embedded-opentype"),
+       font-url("icons.woff2") format("woff2"),
+       font-url("icons.woff") format("woff"),
+       font-url("icons.ttf") format("truetype"),
+       font-url("icons.svg#icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "icons";
+    src: font-url("icons.svg#icons") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.icon-1008-oog:before,
+.icon-2057-online-veiligheid:before,
+.icon-telefoon-24px:before,
+.icon-3941-delta-links-24px:before,
+.icon-3945-externe-link-24px:before,
+.icon-account:before,
+.icon-app:before,
+.icon-basis:before,
+.icon-bottom:before,
+.icon-error:before,
+.icon-hoog_driving_licence:before,
+.icon-hoog_id_card:before,
+.icon-info:before,
+.icon-info_icon:before,
+.icon-logout:before,
+.icon-midden:before,
+.icon-next:before,
+.icon-prev:before,
+.icon-session:before,
+.icon-sms_uitbreiding:before,
+.icon-test:before,
+.icon-top:before {
+  display: inline-block;
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon-1008-oog:before { content: "\f10b"; }
+.icon-2057-online-veiligheid:before { content: "\f10a"; }
+.icon-telefoon-24px:before { content: "\f109"; }
+.icon-3941-delta-links-24px:before { content: "\f105"; }
+.icon-3945-externe-link-24px:before { content: "\f104"; }
+.icon-account:before { content: "\f117"; }
+.icon-app:before { content: "\f118"; }
+.icon-basis:before { content: "\f119"; }
+.icon-bottom:before { content: "\f111"; }
+.icon-error:before { content: "\f107"; }
+.icon-hoog_driving_licence:before { content: "\f11e"; }
+.icon-hoog_id_card:before { content: "\f116"; }
+.icon-info:before { content: "\f108"; }
+.icon-info_icon:before { content: "\f112"; }
+.icon-logout:before { content: "\f10e"; }
+.icon-midden:before { content: "\f11a"; }
+.icon-next:before { content: "\f113"; }
+.icon-prev:before { content: "\f114"; }
+.icon-session:before { content: "\f110"; }
+.icon-sms_uitbreiding:before { content: "\f11b"; }
+.icon-test:before { content: "\f11c"; }
+.icon-top:before { content: "\f115"; }

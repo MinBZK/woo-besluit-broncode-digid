@@ -1,0 +1,8 @@
+@import 'includes/shared';
+
+#session_countdown {
+  @include block-with-icon($nrs-d9ebf7, image-url('info_icon.svg'));
+  margin-top: 8px;
+  margin-bottom: 20px;
+  display: none;
+}

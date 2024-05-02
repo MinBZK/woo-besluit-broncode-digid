@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="qualified">
+	<xs:include schemaLocation="RvIGDEFTypes_v0.13.xsd"/>
+	<xs:element name="PinReset-RequestMsg">
+		<xs:annotation>
+			<xs:documentation>Request for PIN (re)set.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Bron" type="BronType"/>
+				<xs:element name="BSN" type="BSNType"/>
+				<xs:element name="DocType" type="DocumentType"/>
+				<xs:element name="SequenceNr" type="SequenceNrType"/>
+				<xs:element name="ApplicationSession" type="String6CharsType">
+					<xs:annotation>
+						<xs:documentation>Application Session. For future use.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="AddressLines" type="AddressLinesType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Optional address lines for PEN mailer.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PinReset-ResponseMsg">
+		<xs:annotation>
+			<xs:documentation>Success response to the PIN (re)set request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMsg" type="PinReset-ResponseMsgType"/>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PinReset-FaultMsg">
+		<xs:annotation>
+			<xs:documentation>Fault response to the PIN (re)set request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FaultMsg" type="PinReset-FaultMsgType"/>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="PinReset-FaultMsgType">
+		<xs:annotation>
+			<xs:documentation>Possible faults.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotFound">
+				<xs:annotation>
+					<xs:documentation>Unknown BSN of incorrect SequenceNR.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TechnicalFault">
+				<xs:annotation>
+					<xs:documentation>Technical error.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoEID">
+				<xs:annotation>
+					<xs:documentation>Document has no eID.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EIDRevoked">
+				<xs:annotation>
+					<xs:documentation>The eID was revoked.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIssued">
+				<xs:annotation>
+					<xs:documentation>Document has not yet been issued.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoAddress">
+				<xs:annotation>
+					<xs:documentation>No valid address available.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PinReset-ResponseMsgType">
+		<xs:annotation>
+			<xs:documentation>Response is OK.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressLinesType">
+		<xs:sequence>
+			<xs:element name="ForeignAddress" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Whether the given address is located outside the (European part of) The Netherlands.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine1" type="StringMax200CharsType">
+				<xs:annotation>
+					<xs:documentation>Line 1 of recipient address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine2" type="StringMax200CharsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line 2 of recipient address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine3" type="StringMax200CharsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line 3 of recipient address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine4" type="StringMax200CharsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line 4 of recipient address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine5" type="StringMax200CharsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line 5 of recipient address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="StringMax200CharsType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String6CharsType">
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

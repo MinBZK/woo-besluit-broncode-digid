@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<samlp:AuthnRequest AssertionConsumerServiceIndex="0"
+                    Destination="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                    ID="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" IssueInstant="2021-02-22T12:45:16Z" Version="2.0"
+                    xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"
+                    xmlns:ext="urn:oasis:names:tc:SAML:attributes:ext"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <saml:Issuer>urn:nl-eid-gdi:1.0:LC:00000008888888888000:entities:0000</saml:Issuer>
+    <ds:Signature>
+        <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <ds:Reference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+                <ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="ds saml samlp xs"/></ds:Transform>
+                </ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <ds:DigestValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <samlp:Extensions>
+        <saml:Attribute Name="urn:nl-eid-gdi:1.0:IntendedAudience">
+            <saml:AttributeValue>urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000</saml:AttributeValue>
+        </saml:Attribute>
+        <saml:Attribute Name="urn:nl-eid-gdi:1.0:ServiceUUID">
+            <saml:AttributeValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</saml:AttributeValue>
+        </saml:Attribute>
+        <saml:Attribute Name="urn:nl-eid-gdi:1.0:IdpAssertion">
+            <saml:AttributeValue>
+                <saml:Assertion ID="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" IssueInstant="2021-02-22T12:44:44Z"
+                                Version="2.0">
+                    <saml:Issuer>urn:nl-eid-gdi:1.0:AD:0000000273813120000:entities:0000</saml:Issuer>
+                    <ds:Signature>
+                        <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+                            <ds:Reference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+                                <ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                                <ds:DigestValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:DigestValue>
+                            </ds:Reference>
+                        </ds:SignedInfo>
+                        <ds:SignatureValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:SignatureValue>
+                        <ds:KeyInfo>
+                            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+                        </ds:KeyInfo>
+                    </ds:Signature>
+                    <saml:Subject>
+                        <saml:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</saml:NameID>
+                        <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer"><saml:SubjectConfirmationData InResponseTo="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                                                                                                                               NotOnOrAfter="2021-02-22T12:46:43Z"
+                                                                                                                               Recipient="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/></saml:SubjectConfirmation>
+                    </saml:Subject>
+                    <saml:Conditions NotBefore="2021-02-22T12:42:43Z" NotOnOrAfter="2021-02-22T12:46:43Z">
+                        <saml:AudienceRestriction>
+                            <saml:Audience>urn:nl-eid-gdi:1.0:LC:00000008888888888000:entities:0000</saml:Audience>
+                            <saml:Audience>urn:nl-eid-gdi:1.0:BVD:00000004003214345001:entities:9000</saml:Audience>
+                        </saml:AudienceRestriction>
+                    </saml:Conditions>
+                    <saml:AuthnStatement AuthnInstant="2021-02-22T12:44:44Z">
+                        <saml:AuthnContext>
+                            <saml:AuthnContextClassRef>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</saml:AuthnContextClassRef>
+                        </saml:AuthnContext>
+                    </saml:AuthnStatement>
+                    <saml:AttributeStatement>
+                        <saml:Attribute Name="urn:nl-eid-gdi:1.0:ServiceUUID">
+                            <saml:AttributeValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</saml:AttributeValue>
+                        </saml:Attribute>
+                        <saml:Attribute Name="urn:nl-eid-gdi:1.0:ActingSubjectID">
+                            <saml:AttributeValue>
+                                <saml:EncryptedID>
+                                    <xenc:EncryptedData Id="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                                                        Type="http://www.w3.org/2001/04/xmlenc#Element"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+                                        <ds:KeyInfo>
+                                            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+                                        </ds:KeyInfo>
+                                        <xenc:CipherData>
+                                            <xenc:CipherValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CipherValue>
+                                        </xenc:CipherData>
+                                    </xenc:EncryptedData>
+                                    <xenc:EncryptedKey Id="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                                                       Recipient="urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000">
+                                        <xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/></xenc:EncryptionMethod>
+                                        <ds:KeyInfo>
+                                            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+                                        </ds:KeyInfo>
+                                        <xenc:CipherData>
+                                            <xenc:CipherValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CipherValue>
+                                        </xenc:CipherData>
+                                        <xenc:ReferenceList><xenc:DataReference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/></xenc:ReferenceList>
+                                        <xenc:CarriedKeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CarriedKeyName>
+                                    </xenc:EncryptedKey>
+                                    <xenc:EncryptedKey Id="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                                                       Recipient="urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000">
+                                        <xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/></xenc:EncryptionMethod>
+                                        <ds:KeyInfo>
+                                            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+                                        </ds:KeyInfo>
+                                        <xenc:CipherData>
+                                            <xenc:CipherValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CipherValue>
+                                        </xenc:CipherData>
+                                        <xenc:ReferenceList><xenc:DataReference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/></xenc:ReferenceList>
+                                        <xenc:CarriedKeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CarriedKeyName>
+                                    </xenc:EncryptedKey>
+                                    <xenc:EncryptedKey Id="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                                                       Recipient="urn:nl-eid-gdi:1.0:BVD:00000004003214345001:entities:9000">
+                                        <xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/></xenc:EncryptionMethod>
+                                        <ds:KeyInfo>
+                                            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+                                        </ds:KeyInfo>
+                                        <xenc:CipherData>
+                                            <xenc:CipherValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CipherValue>
+                                        </xenc:CipherData>
+                                        <xenc:ReferenceList><xenc:DataReference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/></xenc:ReferenceList>
+                                        <xenc:CarriedKeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</xenc:CarriedKeyName>
+                                    </xenc:EncryptedKey>
+                                </saml:EncryptedID>
+                            </saml:AttributeValue>
+                        </saml:Attribute>
+                    </saml:AttributeStatement>
+                </saml:Assertion>
+            </saml:AttributeValue>
+        </saml:Attribute>
+    </samlp:Extensions>
+</samlp:AuthnRequest>

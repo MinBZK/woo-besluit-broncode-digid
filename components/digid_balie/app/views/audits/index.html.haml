@@ -1,0 +1,61 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1= t('clearance_verification')
+
+%h2= t('total_past_seven_days')
+
+.table
+  .table-row
+    .table-cell= t('issued_verifications')
+    .table-cell= @verifications.last_7_days.count
+  .table-row
+    .table-cell= t('with_id_corrections')
+    .table-cell= @verifications.last_7_days.with_correction.count
+  .table-row
+    .table-cell= t('period')
+    .table-cell
+      = l(7.days.ago.at_midnight, format: :date_comma_time_hour)
+      = t('upto')
+      %br
+      = l(Time.zone.now, format: :date_comma_time_hour)
+
+%h2= t('unaudited_verifications')
+- if @verifications.verified.any?
+  = render(template: 'audits/verifications', locals: { verifications: @verifications.verified, audited: false })
+- else
+  = block_with_icon(t('no_unaudited_verifications'))
+
+%h2= t('audited_verifications_past_24_hours')
+- if @verifications.recent.any?
+  = render(template: 'audits/verifications', locals: { verifications: @verifications.recent, audited: true })
+- else
+  = block_with_icon(t('no_audited_verifications'))

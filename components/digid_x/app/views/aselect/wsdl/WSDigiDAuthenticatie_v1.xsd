@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+  <xs:complexType name="SectorgegevensType">
+    <xs:annotation>
+      <xs:documentation>Sectorgegevens van een gebruiker. </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="Sectorcode">
+        <xs:annotation>
+          <xs:documentation>De sectorcode geeft aan welke bij sector de gegevens horen. Een sector code is altijd een string van 8 cijfers, inclusief voorloopnullen.
+Dus bijvoorbeeld 00000001 of 00000100.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="8"/>
+            <xs:pattern value="\d{8}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="SectoraalNummer">
+        <xs:annotation>
+          <xs:documentation>Het sectorale nummer is het identificerende unieke nummer behorend bij de aangegeven sector. Dit kan bijvoorbeeld zijn een BSN, een Sofinummer, maar ook een lidmaatschapnummer.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="MapType">
+    <xs:sequence>
+      <xs:element name="key">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticatieInitiatieRequest">
+    <xs:annotation>
+      <xs:documentation>Voor een authenticatie kan plaatsvinden dient een applicatie eerst te melden dat er een authenticatie gaat plaatsvinden.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="a-select-server">
+          <xs:annotation>
+            <xs:documentation>
+                  Indicatie van de a-select server die is gebruikt bij de AuthenticatieInitiatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="app_id">
+          <xs:annotation>
+            <xs:documentation>
+                  Unieke identificatie code voor de applicatie van de afnemer zoals die in DigiD Beheer is aangemaakt.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="app_url">
+          <xs:annotation>
+            <xs:documentation>
+                  URL van de applicatie van de afnemer, waar naartoe de gebruiker na het succesvol inloggen moet
+                  worden teruggestuurd.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[A-Za-z0-9.\-/&amp;=#:+?]{0,1024}" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="AuthenticatieInitiatieResponse">
+    <xs:annotation>
+      <xs:documentation>Als reactie op het Authenticatie initiatie verzoek wordt een rid gestuurd naar de applicatie, waarmee de authenticatie via DigiD voltooid kan worden.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="a-select-server">
+          <xs:annotation>
+            <xs:documentation>
+                  Indicatie van de a-select server die is gebruikt bij de AuthenticatieInitiatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="rid">
+          <xs:annotation>
+            <xs:documentation>
+                  De request identifier die is teruggegeven door de a-select server bij de
+                  AuthenticatieInitiatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="as_url">
+          <xs:annotation>
+            <xs:documentation>Applicatie server url</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="result_code">
+          <xs:annotation>
+            <xs:documentation>Resultaat code van de transactie. Er is een standaard vertaaltabel in de applicatie aanwezig.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="4"/>
+              <xs:pattern value="\d{4}"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="AuthenticatieVerificatieRequest">
+    <xs:annotation>
+      <xs:documentation>Verzoek van een applicatie om de authenticatie via DigiD te verifieren</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="a-select-server">
+          <xs:annotation>
+            <xs:documentation>
+                  Indicatie van de a-select server die is gebruikt bij de AuthenticatieInitiatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="rid">
+          <xs:annotation>
+            <xs:documentation>
+                  De request identifier die is teruggegeven door de a-select server bij de AuthenticatieInitiatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="aselect_credentials">
+          <xs:annotation>
+            <xs:documentation>
+                  Geencrypte vorm van de credentials zoals ontvangen in de redirect URL van de A-select server
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="AuthenticatieVerificatieResponse">
+    <xs:annotation>
+      <xs:documentation>Verificatie antwoord van een authenticatie verificatie verzoek</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="uid" type="digid:SectorgegevensType">
+          <xs:annotation>
+            <xs:documentation>Sectorgegevens van de geauthenticeerder gebruiker. (Bijvoorbeeld de gebruikers BSN) </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="betrouwbaarheidsniveau">
+          <xs:annotation>
+            <xs:documentation>Het betrouwbaarheidsniveau van de authenticatie (05 = authenticatie via tijdelijk(?) wachtwoord met nog niet-geactiveerd account, 10 = Basis, authenticatie via wachtwoord, 20 = Midden, authenticatie via SMS bovenop wachtwoord)</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="\d{2}"/>
+              <xs:maxLength value="10"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="rid">
+          <xs:annotation>
+            <xs:documentation>
+                  Unieke request identifier van deze authenticatie
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="organization">
+          <xs:annotation>
+            <xs:documentation>Organisatie waarvoor de authenticatie heeft plaatsgevonden</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="app_id">
+          <xs:simpleType>
+            <xs:annotation>
+              <xs:documentation>Naam van de applicatie</xs:documentation>
+            </xs:annotation>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="64"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="result_code">
+          <xs:annotation>
+            <xs:documentation>Resultaat code van de transactie. Er is een standaard vertaaltabel in de applicatie aanwezig.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="4"/>
+              <xs:pattern value="\d{4}"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="a-select-server">
+          <xs:annotation>
+            <xs:documentation>
+                  Indicatie van de a-select server die is gebruikt bij de verificatie.
+                </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1024"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StatusRequest">
+    <xs:annotation>
+      <xs:documentation>Status aanvraag.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="StatusResponse"><xs:annotation>
+      <xs:documentation>Status antwoord.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="map">
+        <xs:annotation>
+          <xs:documentation>key-value pairs met status attributen </xs:documentation>
+        </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" minOccurs="1" maxOccurs="unbounded" type="digid:MapType">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

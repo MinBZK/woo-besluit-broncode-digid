@@ -1,0 +1,94 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1 Fraudeonderzoek
+.clear
+.form_wrapper
+  = form_tag fraud_reports_path do
+
+    = field 'Onderzoek op:'
+    = radio_button_tag(:fraud_bsn_or_ip, :ip, @report_preselect.eql?('log'))
+    = label(:fraud_bsn_or_ip, :ip, 'IP adressen')
+    .clear.margin-3-0
+    = radio_button_tag(:fraud_bsn_or_ip, :bsn, @report_preselect.eql?('gba') || @report_preselect.eql?('tx'))
+    = label(:fraud_bsn_or_ip, :bsn, 'BSN')
+    .clear.margin-3-0
+    = radio_button_tag(:fraud_bsn_or_ip, :zip, false)
+    = label(:fraud_bsn_or_ip, :zip, 'Postcode')
+
+    .clear.margin-10-0
+    = field 'Data (max. 100):'
+    = text_area_tag :content, nil, rows: 10, cols: 20, class: "inline-block", required: true
+    %div.inline-block
+      %p 1 zoeksleutel per regel, voorbeeld:
+      %p
+        0.0.0.0
+        %br
+        0.0.0.0
+        %br
+        0.0.0.0
+      %p (voor een rapport op basis van drie items)
+
+    .clear.margin-10-0
+    = field 'Rapporttype:'
+    = radio_button_tag(:report_type, :log, @report_preselect.eql?('log'), disabled: !can?(:create_log, FraudReport))
+    = label(:report_type, :log, "Loggegevens #{'(geen privileges voor dit rapport)' unless can?(:create_log, FraudReport)}")
+    .clear.margin-3-0
+    .tx
+      = radio_button_tag(:report_type, :transactie, @report_preselect.eql?('tx'), disabled: !can?(:create_tx, FraudReport))
+      = label(:report_type, :transactie, "Transactiegegevens #{'(geen privileges voor dit rapport)' unless can?(:create_tx, FraudReport)}")
+    .clear.margin-3-0
+    = radio_button_tag(:report_type, :account, @report_preselect.eql?('gba'), disabled: !can_fraud_gba_helper)
+    = label(:report_type, :account, "Accountgegevens #{'(geen privileges voor dit rapport)' unless can_fraud_gba_helper}")
+    .clear
+    - if @jobs_count && @jobs_count.zero?
+      (De BRP requests wachtrij is leeg)
+    - else
+      (Er zijn op dit moment #{@jobs_count} (#{@queue_time} seconden) BRP requests in de wachtrij)
+
+    .period
+      .clear.margin-10-0
+      = field 'Periode:'
+      = label :period_start, 'Van'
+      %span.datepicker= datetime_select(:period, :from, default: 1.day.ago)
+      = label :period_end, 'Tot'
+      %span.datepicker= datetime_select(:period, :to)
+
+    .clear.margin-10-0
+    = field 'Rapport'
+    = text_field_tag :report_name, nil, maxlength: 40
+
+    .actions
+      .clear
+      = submit_button 'Start Onderzoek'
+      = link_to('Terug naar overzicht', url_for(action: 'index')) if can?(:create, FraudReport)
+
+= javascript_include_tag("inline_fraud_report", nonce: content_security_policy_script_nonce)

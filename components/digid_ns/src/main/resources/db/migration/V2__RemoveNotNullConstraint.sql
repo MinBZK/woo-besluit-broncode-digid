@@ -1,0 +1,1 @@
+ALTER TABLE notification_registrations modify notification_id VARCHAR(255);

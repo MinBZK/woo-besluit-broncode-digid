@@ -1,0 +1,33 @@
+nl:
+  app_version:
+    overview: Overzicht DigiD app-versies
+    overview_note: "Zodra een nieuwe versie van de DigiD app voor een bepaald platform beschikbaar is, krijgen eindgebruikers met een oudere versie, waarbij de 'Forced update vanaf' en de 'Kill app vanaf' datum niet zijn ingevuld, een waarschuwingsmelding."
+    new: Nieuwe DigiD app-versie
+    no_versions: 0 versies gevonden
+    created_successfully: App versie succesvol aangemaakt
+    updated_successfully: App versie succesvol gewijzigd
+    destroy: Verwijderen
+    destroy_button: Verwijder ter accordering
+    update_warning: Er is geen nieuwere DigiD app versie voor dit platform en releasetype beschikbaar om naar te updaten. Weet u zeker dat u door wilt gaan?
+    destroy_warning: U mag de laatste geldige DigiD app-versie voor dit platform en releasetype niet verwijderen. Weet u zeker dat u door wilt gaan?
+    force_update_no_new_version: Er is m.i.v. de ‘Force update vanaf’-datum geen nieuwere DigiD app-versie voor dit platform en releasetype beschikbaar om naar te updaten. Weet u zeker dat u door wilt gaan?
+    kill_app_no_other_version: Er is m.i.v. de 'Kill app vanaf'-datum geen andere, geldige DigiD app-versie voor dit platform en releasetype beschikbaar. Weet u zeker dat u door wilt gaan?
+    headers:
+      new: Nieuwe DigiD app-versie
+      show: DigiD-app versie
+      edit: Wijzigen DigiD-app versie
+
+    operating_systems:
+      Android: Android
+      iOS: iOS
+      Windows: Windows
+      Mac OS: Mac OS
+      idCheckeriOS: ID-checker iOS
+      idCheckerAndroid: ID-checker Android
+      robotFramework: Robot Framework
+
+    status:
+      kill_app: Kill app
+      force_update: Force update
+      update_warning: Update warning
+      active: Beschikbaar

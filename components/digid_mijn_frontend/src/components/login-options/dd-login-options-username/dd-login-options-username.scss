@@ -1,0 +1,62 @@
+@use 'src/scss/tools/tools.login-method.mixins' as mixins;
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-login-options-username {
+  &__card {
+    @include mixins.card;
+    max-width: 20rem;
+
+    &-content {
+      padding-bottom: 0.675rem;
+    }
+
+    &--userpw {
+      display: flex;
+      margin-bottom: 0.675rem;
+
+      > * {
+        flex: 1;
+      }
+
+      &--label {
+        margin-right: 2rem;
+      }
+
+      &--data {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    &--sms {
+      display: flex;
+
+      p {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &--twofa {
+      display: flex;
+
+      p {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  &__accordion {
+    @include mixins.accordion;
+
+    &-warning {
+      display: flex;
+      padding: 0.5rem 1rem;
+      background-color: var(--solid-error-accordion);
+      border-radius: 0 0 5px 5px;
+
+      border-top: 1px solid var(--color-blush);
+      @media (prefers-color-scheme: dark) {
+        border-top: 1px solid var(--error);
+      }
+    }
+  }
+}

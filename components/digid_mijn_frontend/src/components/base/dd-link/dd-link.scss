@@ -1,0 +1,40 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-link {
+  a {
+    padding: 0.25rem 0;
+  }
+  &__icon {
+    margin-right: 0.5rem;
+    margin-top: 0.1rem;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: row;
+    font-family: core.$regular !important;
+    color: var(--link);
+    cursor: pointer;
+    text-decoration: underline;
+    line-height: 1.5rem;
+
+    &:link {
+      color: var(--link);
+    }
+
+    &:visited {
+      color: var(--color-whale);
+    }
+  }
+
+  &__touchscreen {
+    a {
+      padding: 0.75rem 0;
+    }
+  }
+
+  //Hide links if the user is deceased
+  &--hidden {
+    display: none;
+  }
+}

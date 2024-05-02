@@ -1,0 +1,124 @@
+nl:
+  letters:
+    download_letter_today: "Download het voorlopige brievenbestand van vandaag (nog niet verzonden)"
+    from_date: "Vanaf: "
+    to_date: "Tot: "
+
+    author: DigiD
+    creator: DigiD
+    producer: DigiD
+    postal: Postbus 96810
+    zip: 2509 JE Den Haag
+    website: www.digid.nl
+    helpdesk: Helpdesk DigiD
+    phonenumber: T 088 123 65 55
+    contact_form: Of via www.digid.nl/contact
+    reach_us_1: De helpdesk is bereikbaar op
+    reach_us_2: werkdagen van 08.00 tot
+    reach_us_3: 22.00 uur
+    reference: Kenmerk
+    return_address: "> Retouradres Postbus 96810 2509 JE Den Haag"
+    confidental: VERTROUWELIJK
+    date: Datum
+    re: Betreft
+
+    contact_1: "<b>Vragen?</b><br/>U kunt ons bereiken op werkdagen van 8.00 tot 22.00 uur via telefoonnummer"
+    contact_2: "088 - 123 65 55 of via www.digid.nl/contact."
+    greetings: Met vriendelijke groet,
+    digid_private: "<i><b>Let op!</b> Uw DigiD is privé. Deel uw inloggegevens niet met anderen. Medewerkers van DigiD vragen nooit om deze gegevens.</i>"
+    page: Pagina 1 van 1
+
+    activation_letter:
+      title: DigiD activeringscode
+      subject: DigiD activeringscode
+      keywords: DigiD activeringscode
+      letter_title: DigiD activeringscode - kopie
+      your_code: "Uw activeringscode is:"
+      use_before: <b>Let op!</b> Activeer uw DigiD vóór %{date}. Anders vervalt de aanvraag en moet u een nieuwe DigiD aanvragen.
+      reference_type: A
+
+      019:
+        request: U heeft een DigiD aangevraagd. U kunt uw DigiD pas gebruiken nadat u deze heeft geactiveerd. Hierbij ontvangt u de activeringscode. Daarmee kunt u uw DigiD activeren.
+
+        activate_digid_steps_multiple: "U kunt uw DigiD op twee verschillende manieren activeren."
+        app_header: "DigiD activeren met de DigiD app:"
+        app_step_1_1: "1. Ga naar de Apple App store of Google Play Store"
+        app_step_1_2: "en download de DigiD app."
+        app_step_2: "2. Open de DigiD App en volg de instructies."
+
+        site_header: "DigiD activeren via DigiD website:"
+        site_step_1: 1. Ga naar www.digid.nl.
+        site_step_2: "2. Klik op 'Code invullen'."
+        site_step_3: "3. Klik op 'Activeringscode invoeren'."
+        site_step_4: "4. Klik op 'Vul de activeringscode in'."
+        site_step_5_1: "5. Voer uw gekozen gebruikersnaam en"
+        site_step_5_2: "wachtwoord in."
+        site_step_6: "6. Klik op 'Inloggen'."
+        site_step_7: "7. Volg de verdere instructies."
+
+        request_digid: Als u uw gebruikersnaam en/of wachtwoord niet meer weet, kunt u uw DigiD niet activeren. Vraag dan een nieuwe DigiD aan.
+
+      018:
+        request: U heeft een DigiD aangevraagd via de DigiD app. Hierbij ontvangt u de activeringscode. U moet uw DigiD eerst activeren in de DigiD app. Daarna kunt u gebruikmaken van uw DigiD.
+        activate_digid_steps: Open de DigiD app en volg de instructies.
+
+    recover_letter:
+      title: DigiD herstelcode
+      subject: DigiD herstelcode
+      keywords: DigiD herstelcode
+      letter_title: DigiD herstelcode - kopie
+      your_code: "Uw herstelcode is:"
+      use_before: <b>Let op!</b> Herstel uw wachtwoord vóór %{date}. Anders is de code niet meer geldig en moet u opnieuw een herstelcode aanvragen.
+      reference_type: H
+
+      008:
+        request: U heeft aangegeven dat u uw DigiD-wachtwoord wilt herstellen. Hierbij ontvangt u de herstelcode. Daarmee kunt u een nieuw wachtwoord instellen.
+        recover_digid_steps: "U herstelt uw wachtwoord als volgt:"
+        recover_step_1: "1. Ga naar www.digid.nl."
+        recover_step_2: "2. Klik op 'Code invullen'."
+        recover_step_3: "3. Klik op 'Herstelcode wachtwoord invoeren'."
+        recover_step_4: "4. Klik op 'Voer de herstelcode in'."
+        recover_step_5: "5. Voer uw burgerservicenummer in."
+        recover_step_6: "6. Voer uw gebruikersnaam in."
+        recover_step_7: "7. Klik op 'Volgende'."
+        recover_step_8: "8. Voer bovenstaande herstelcode in."
+        recover_step_9: "9. Klik op 'Volgende'."
+        recover_step_10: "10. Als u de sms-controle heeft ingeschakeld, ontvangt u een sms-bericht"
+        recover_step_10_a: "a. Voer de sms-code in."
+        recover_step_10_b: "b. Klik op 'Volgende'."
+        recover_step_11: "11. Nu kunt u uw nieuwe wachtwoord instellen."
+
+    forms:
+      labels:
+        generating_letters_time: "Tijdstip voor het genereren van het brievenbestand (HH:MM)"
+        upload_letters_time: "Tijdstip voor het uploaden van het brievenbestand (HH:MM)"
+      messages:
+        success: "De instellingen zijn aangepast."
+        success_block: "Inlogfunctie %{doc_type} succesvol geblokkeerd."
+        failure_block: "Blokkeren inlogfunctie %{doc_type} mislukt."
+        failure_block_mu_not_active: "Blokkeren inlogfunctie %{doc_type} niet mogelijk. Koppeling met %{bron} niet actief."
+        failure_block_not_allowed: "Blokkeren inlogfunctie %{doc_type} niet toegestaan."
+
+        success_deblock: De deblokkeringscode per brief is succesvol aangevraagd.
+        failure_deblock_too_soon: "Het aanvragen van de deblokkeringscode per brief is mislukt. Er is al een brief met deblokkeringscode onderweg voor %{this_doc_type}."
+        failure_deblock_too_often: "Het aanvragen van de deblokkeringscode per brief is mislukt. Het aantal aangevraagde deblokkeringscodes voor %{this_doc_type} in deze maand is al bereikt. Vanaf %{date} kan een nieuwe aanvraag gedaan worden."
+
+        failure_pin_mu_not_active: "Aanvragen PIN-brief %{doc_type} niet mogelijk, switch is niet actief"
+        success_pin: "De PIN-brief is succesvol aangevraagd."
+        failure_pin: "PIN-brief versturen niet gelukt. %{reason}"
+        failure_timeout: Fout bij het aanvragen van de deblokkeringscode per brief. De gegevens voor dit account konden niet worden gecontroleerd bij de Basisregistratie Personen. Probeer het later nogmaals.
+
+    messages:
+      letters_not_found: "Er zijn geen brievenbestanden beschikbaar."
+
+  sms:
+    messages:
+      sms_messages_not_found: "Er zijn geen SMS berichten gevonden."
+      sms_message_block: "De inlogfunctie van uw %{doc_type} is zojuist geblokkeerd. Neem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan."
+      sms_message_deblock: "Er is een deblokkeringscode voor de inlogfunctie van uw %{doc_type} aangevraagd. Neem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan."
+      sms_message_pin: "Er is zojuist een brief met de pincode voor uw %{doc_type} aangevraagd. Neem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan."
+      emails_not_found: "Er zijn geen e-mails gevonden"
+
+  link_to_account_title: "Bekijk account"
+  mijn_digid: "Mijn DigiD"
+  recover_account: "Herstellen account"

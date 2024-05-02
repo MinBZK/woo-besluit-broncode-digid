@@ -1,0 +1,65 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= f.fields_for :saml_provider, @webservice.saml_provider || @webservice.build_saml_provider do |saml_fields|
+  = field(saml_fields.label(:sso_domain_id)) do
+    = saml_fields.select :sso_domain_id, sso_domain_options(saml_fields.object.sso_domain_id), include_blank: true
+    = new_link 'SSO domein toevoegen', new_sso_domain_path, remote: true
+  = field saml_fields.label(:metadata) do
+    #saml_metadata
+      - if saml_fields.object.parsed_metadata?
+        %strong Entity ID:
+        = saml_fields.object.entity_id
+        - @metadata_urls = saml_fields.object.metadata_urls
+        = show_link 'Bekijk', "#", id: "view_saml_metadata"
+        = show_link 'Download', saml_fields.object.metadata_as_data_uri, download: saml_fields.object.filename, :"data-filename" => saml_fields.object.filename, :"data-uri" => saml_fields.object.metadata_as_data_uri # Required to use data-uri attribute, href attribute seems to be limited in length in IE
+        = edit_link 'Vervang', "#", id: "replace_saml_metadata"
+        = saml_fields.check_box :clear_metadata
+        = saml_fields.label :clear_metadata, "Verwijderen"
+        %br
+        %br
+        %div#replace_saml_metadata_fields.hidden
+          = field saml_fields.label(:metadata_file, "Vervang metadata XML"), saml_fields.file_field(:metadata_file)
+          ~ saml_fields.text_area :cached_metadata, class: "hidden-absolute"
+      - else
+        %h3 Toevoegen
+        = saml_fields.hidden_field :clear_metadata # required to remember the removal of the metadata for review across a form redisplay
+        = field saml_fields.label(:metadata_file), saml_fields.file_field(:metadata_file)
+
+  = field saml_fields.label(:allow_sso), saml_fields.check_box(:allow_sso)
+
+
+= javascript_include_tag("inline_view_saml_metadata", nonce: content_security_policy_script_nonce)
+
+- if @metadata_urls
+  .hidden.dialog-wrapper
+    .body= render('saml_providers/metadata')
+    .title= "Metadata"

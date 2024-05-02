@@ -1,0 +1,85 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: SSSSSSS
+  timeout: 5000
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+default_log: &default_log
+  <<: *default
+  encoding: utf8
+  collation: utf8_unicode_ci
+
+development: &dev_account
+  <<: *default
+  database: digid_x_development
+
+development_log: &dev_log
+  <<: *default_log
+  database: digid_x_development_log
+
+development_account_slave:
+  <<: *dev_account
+
+development_account_master:
+  <<: *dev_account
+
+development_log_slave:
+  <<: *dev_log
+
+development_log_master:
+  <<: *dev_log
+
+development_reporting:
+  <<: *dev_log
+
+development_snap:
+  <<: *dev_account
+
+development_balie:
+  <<: *default
+  database: digid_balie_development
+
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test: &test_account
+  <<: *default
+  database: digid_x_test
+
+#By default all "logging" models (i.e. non-account) from digid_x connect to local log slave database
+test_log: &test_log
+  <<: *default_log
+  database: digid_x_test_log
+
+#Exclusively for checking replication slave status of accountdb
+test_account_slave:
+  <<: *test_account
+
+#Exclusively for checking replication master status of accountdb
+test_account_master:
+  <<: *test_account
+
+#Exclusively for checking replication slave status of logdb
+test_log_slave:
+  <<: *test_log
+
+#Exclusively for checking replication master status of logdb
+test_log_master:
+  <<: *test_log
+
+#reporting models are written (and read) on the logs master database
+test_reporting:
+  <<: *test_log
+
+#snapshot databases are created in the instance that runs the accounts slave
+test_snap:
+  <<: *test_account
+
+test_balie:
+  <<: *default
+  database: digid_balie_r4_test

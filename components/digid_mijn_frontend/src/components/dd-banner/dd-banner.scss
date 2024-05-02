@@ -1,0 +1,98 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.responsive' as media;
+@use 'src/scss/tools/tools.login-method.mixins' as mixins;
+
+.dd-banner {
+	display: grid;
+	grid: min-content/ 3rem 1fr 2.5rem;
+	grid-template-areas:
+    'badge title cross'
+    'button button button'
+    'text text text';
+
+	min-width: 18rem;
+	max-width: 51.25rem;
+
+	opacity: 1;
+	transition: all 0.3s;
+	transition-property: opacity, max-height, margin, padding-top;
+	padding-top: 1rem;
+	margin-bottom: 1.5rem;
+
+	border-radius: 5px;
+	background-color: var(--solid-warning);
+	transform: scaleY(1);
+
+	p {
+		margin: 0 1rem 1rem;
+	}
+
+	&--hidden {
+		visibility: hidden;
+		opacity: 0;
+		max-height: 0;
+		margin: 0;
+		padding-top: 0;
+		pointer-events: none;
+	}
+
+	&__warning {
+		grid-area: badge;
+		margin-left: 1rem;
+	}
+
+	&__cross {
+		grid-area: cross;
+		cursor: pointer;
+		height: 1.5rem;
+		width: 1.5rem;
+		background: transparent;
+		border: none;
+	}
+
+	&__title {
+		grid-area: title;
+		font-family: core.$bold;
+	}
+
+	&__btn {
+		grid-area: button;
+		grid-column: 1/4;
+		margin: 1rem;
+	}
+
+	&__text {
+		grid-area: text;
+		grid-column: 1/4;
+	}
+}
+
+@media screen and (min-width: media.$mobile) {
+	.dd-banner {
+		grid-template-areas:
+      'badge title cross'
+      'badge button cross'
+      'badge text cross';
+	}
+}
+
+@media screen and (min-width: media.$desktop) {
+	.dd-banner {
+		p {
+			margin: 1rem 0;
+		}
+
+		&__title {
+			margin-bottom: 1rem;
+		}
+
+		&__btn {
+			margin: 0;
+		}
+
+		&__btn,
+		&__text {
+			grid-column: 2/3;
+		}
+	}
+}

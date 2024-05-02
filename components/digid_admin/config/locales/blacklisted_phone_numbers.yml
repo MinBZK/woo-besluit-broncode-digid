@@ -1,0 +1,25 @@
+nl:
+  blacklisted_phone_number:
+    overview: Overzicht blacklist telefoonnummers
+    new: Nieuwe prefix
+    no_prefixes: 0 prefixes gevonden
+    created_successfully: Prefix succesvol aangemaakt
+    updated_successfully: Prefix succesvol gewijzigd
+    destroy: Verwijderen
+    destroy_button: Verwijder prefix
+    headers:
+      new: Nieuwe prefix blacklist telefoonnummers
+      show: Prefix
+      edit: Wijzigen blacklist prefix
+
+  whitelisted_phone_number:
+    overview: Overzicht whitelist telefoonnummers
+    new: Nieuw telefoonnummer
+    empty: Er konden geen telefoonnummers gevonden worden.
+    created_successfully: Telefoonnummer succesvol aangemaakt
+    updated_successfully: Telefoonnummer succesvol gewijzigd
+    destroy: Verwijderen
+    destroy_button: Verwijder telefoonnummer
+    headers:
+      new: Nieuwe whitelist telefoonnummer
+      edit: Wijzigen whitelist telefoonnummer

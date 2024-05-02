@@ -1,0 +1,68 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= f.hidden_field(:connection_id, value: @service.connection_id)
+
+= field t("services.services.identity") do
+  = field t("services.id"), @service.id
+  = field t("services.services.connection.name"), @service.connection_name
+
+  - if @service.legacy_service_id
+    = field t("services.service.legacy_id"), @service.legacy_service_id
+  - else
+    = field t("services.services.legacy_id"), f.select(:legacy_service_id, Webservice.pluck(:name, :id), selected: @service.legacy_service_id, include_blank: true)
+  - if @service.connection.protocol_type != "OIDC_APP"
+    = field t("services.services.service_uuid"), f.text_field(:service_uuid)
+    = field t("services.services.entity_id"), f.text_field(:entity_id)
+
+%hr
+= field t("services.services.standard") do
+  = field t("services.services.standard_name"), f.text_field(:name, required: true)
+  = field t("services.services.standard_website_url"), f.text_field(:website_url)
+  = field f.label(:minimum_reliability_level, t("services.services.standard_min_reliability_level")), f.select(:minimum_reliability_level, [["Midden", "20"], ["Substantieel", "25"], ["Hoog", "30"]])
+  = field f.label(:encryption_id_type, t("services.services.standard_encryption_type_id")), f.select(:encryption_id_type, [["LEGACY_BSN", "LEGACY_BSN"]])
+
+%hr
+= field t("services.digid") do
+  = field t("services.services.standard_permission_question"), f.text_field(:permission_question, required: true)
+
+%hr
+= render 'dc/shared/status', f: f, status: @service.status
+
+%hr
+- if @connection.protocol_type == "OIDC_APP"
+  = field "App" do
+    = field f.label(:app_active, "Actief"), f.check_box(:app_active, checked: @service.app_active)
+    = field f.label(:client_id, "Client ID"), f.text_field(:client_id, required: true, value: @service.client_id)
+    = field f.label(:icon_uri, "Icon Url"), f.text_field(:icon_uri, value: @service.icon_uri)
+    = field f.label(:app_return_url, "Return url"), f.text_field(:app_return_url, required: true)
+
+= render 'shared/form_actions', model: @service

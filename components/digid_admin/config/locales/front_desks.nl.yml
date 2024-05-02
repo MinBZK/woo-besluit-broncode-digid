@@ -1,0 +1,49 @@
+nl:
+  front_desks:
+    lost_connection: Er is een probleem met de connectie naar de Balie database.
+    new_succesful: Balie is succesvol aangemaakt.
+    update_succesful: Balie is succesvol gewijzigd.
+    update_failed: Balie wijzigen mislukt.
+    delete_succesful: Balie is succesvol verwijderd.
+    delete_not_found: Balie niet gevonden.
+    no_balies: 0 balies gevonden (of geen connectie met Balie database)
+    no_relations: Geen koppelingen gevonden (of geen connectie met Balie database)
+    relations_overview: "<strong>Gekoppelde baliemedewerkers</strong> (waarvan KvK/Vestiging niet uniek)"
+    delete_relation: Verwijder
+    block: Blokkeer
+    unblock: Deblokkeer
+    front_desk_blocked: Balie is succesvol geblokkeerd.
+    front_desk_blocked_fail: Balie kon niet geblokkeerd worden.
+    front_desk_blocked_fail_model_not_valid: De balie kon niet geblokkeerd worden. Niet alle vereiste gegevens zijn ingevuld. Vul deze gegevens in en sla de balie op. Hierna kunt u opnieuw de balie proberen te blokkeren.
+    front_desk_unblocked: Balie is succesvol gedeblokkeerd.
+    front_desk_unblocked_fail: Balie kon niet gedeblokkeerd worden.
+    front_desk_unblocked_fail_model_not_valid: De balie kon niet gedeblokkeerd worden. Niet alle vereiste gegevens zijn ingevuld. Vul deze gegevens in en sla de balie op. Hierna kunt u opnieuw de balie proberen te deblokkeren.
+    verifications_unaudited: Niet gecontroleerde balieregistraties
+    verifications_fraud_suspicion: Balieregistraties met fraudevermoeden
+    header_filter: "Zoek op balie code of naam:"
+    filter_button: "Filter &raquo;"
+    front_desks_overview: Overzicht balies
+    blocked: Geblokkeerd
+    show: Bekijk
+    edit: Wijzig
+    per_day: per dag
+    new_front_desk: Nieuwe balie
+    pseudonym_show: Pseudoniem
+    nl_time: Nederlandse tijd
+    local_time: Lokale tijd
+    local_time_with_offset: "Lokale tijd balie %{offset}"
+    in_local_time: in lokale tijd balie %{offset}
+
+  activemodel:
+    attributes:
+      front_desk:
+        kvk_number: KvK
+        code: Code
+        name: Naam
+        establishment_number: Vestiging
+        location: Locatie
+        time_zone: Tijdzone
+        alarm_unchecked_accounts: Alarmering niet gecontroleerde accounts
+        alarm_fraud_suspension: Alarmering fraude vermoedens
+        max_issues: Max uitgiftes
+        issues_max_executed: Uitgegeven / Quotum

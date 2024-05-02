@@ -1,0 +1,59 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- @page_name = 'C6'
+
+= heading_with_icon(t('warning_you_need_to_change_your_password'))
+
+- if @session_ends_label && wrapped_session.expires_at.present?
+  = render('shared/session_countdown', key: 'change_pwd')
+
+= flash_alert
+
+= block_with_icon do
+  %p= t('enter_your_new_password')
+  %p= t('you_will_be_send_to_url_after_this', url: @webdienst).html_safe
+
+  - if @account.skips_left > 0 && @account.weak_password_skip_count >= 1
+    %p= t('you_may_skip_this_x_times', x: @account.skips_left).html_safe
+
+= extended_form_for(@account.password_authenticator, url: passwords_url) do |form|
+  = form.header
+
+  / = form.hidden_field(:gebruikersnaam)
+  = form.password_field(:current_password, autocomplete: "current-password", toggle_text: true, label: t('current_password'), required: true, example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier", hide_required_indicator: true)
+  = form.password_field(:password, autocomplete: "new-password", toggle_text: true, accessibility_information: t('information_boxes.password'), information: render(partial: 'accounts/password_information'), password_strength: true, label: t('new_password'), required: true, example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier", hide_required_indicator: true)
+  = form.password_field(:password_confirmation, autocomplete: "new-password", toggle_text: true, label: t('repeat_password'), required: true, example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier", hide_required_indicator: true)
+
+  = block_with_icon do
+    %p
+      %strong= t('remember_your_new_password')
+  = form.buttons(:change, @account.max_weak_password_skip_count_reached? ? nil : {action: :skip, validate: false})

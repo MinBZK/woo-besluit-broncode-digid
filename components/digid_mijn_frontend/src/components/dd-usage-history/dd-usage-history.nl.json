@@ -1,0 +1,16 @@
+{
+  "history": {
+    "page-title": "Mijn DigiD | Gebruiksgeschiedenis",
+    "header": "Gebruiksgeschiedenis",
+    "btn": "Bekijk mijn gebruiksgeschiedenis",
+    "subtitle": "U kunt het gebruik van uw DigiD hier inzien. Vermoedt u dat iets niet klopt? ",
+    "dutch-time-footer": "Alle hierboven genoemde tijden zijn in Nederlandse tijd.",
+    "table-date-header": "Datum",
+    "table-time-header": "Tijd",
+    "table-date-time-header": "Datum en tijd",
+    "table-action-header": "Actie",
+    "displaying": "",
+    "results": " resultaten weergegeven",
+    "no-results": "Er zijn geen resultaten"
+  }
+}

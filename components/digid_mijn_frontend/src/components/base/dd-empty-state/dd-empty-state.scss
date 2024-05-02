@@ -1,0 +1,42 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-empty-state {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--solid3);
+  width: inherit;
+  background: var(--solid2);
+
+	&--error{
+		max-width:20rem;
+	}
+
+  &__app {
+    margin-top: 1.5rem;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+  }
+
+  &__body {
+    &__header {
+      font-family: core.$bold;
+      font-size: 1rem;
+
+      &--error {
+        color: var(--error);
+      }
+    }
+    & > p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ::slotted(h4) {
+    color: var(--error);
+  }
+}

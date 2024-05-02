@@ -1,0 +1,31 @@
+@use 'src/scss/tools/tools.login-method.mixins' as mixins;
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-login-options-app {
+  &__card {
+    @include mixins.card;
+
+    &__title {
+      word-break: break-word;
+      width: 10.125rem;
+    }
+
+    &__logged-in {
+      width: 12rem;
+    }
+
+    &-content {
+      padding-bottom: 0.5rem;
+    }
+
+    &__id-check {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  &__accordion {
+    @include mixins.accordion;
+  }
+}

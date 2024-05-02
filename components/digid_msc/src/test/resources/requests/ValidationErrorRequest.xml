@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+    <wsa:To soapenv:mustUnderstand="1">http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:Action>http://SSSSSSSSSSSS/ws/registerStatusSCRequest</wsa:Action>
+    <wsa:MessageID>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</wsa:MessageID>
+  </soapenv:Header>
+  <soapenv:Body>
+    <RegisterStatusSCRequest xmlns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" MsgVersion="3" DateTime="2019-01-06T15:34:05">
+      <Requester>SSSSSSSSSSSSSSSSSSSS</Requester>
+    </RegisterStatusSCRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

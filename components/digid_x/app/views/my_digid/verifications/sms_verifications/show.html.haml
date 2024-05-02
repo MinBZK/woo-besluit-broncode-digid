@@ -1,0 +1,56 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(t('request_digid_app_verification'))
+
+- if current_flow.process == :request_totp_verification
+  = steps(2, 4)
+
+= flash_alert
+= flash_notice
+
+- if sms_challenge
+  - if gesproken_sms?
+    %h2.orange_heading= t('sms_spoken_code_sent_to', mobile: mobile_number(mobile_number: sms_challenge.mobile_number)).html_safe
+    %p= t('sent_spoken_code_at', at: l(sms_challenge.created_at, format: :date_comma_time_text_tzone_in_brackets))
+  - else
+    %h2.orange_heading= t('sms_code_sent_to', mobile: mobile_number(mobile_number: sms_challenge.mobile_number)).html_safe
+    %p= t('sent_sms_code_at', at: l(sms_challenge.created_at, format: :date_comma_time_text_tzone_in_brackets))
+
+= extended_form_for(@smscode, url: my_digid_controleer_sms_url) do |form|
+   = form.sms_code_field(:smscode, label: icon("telefoon-24px") + t('enter_code_received_by_phone'), text: t('enter_code_received_by_phone_text'),  required: true, hide_required_indicator: true)
+
+   %div.no_code_received
+     = link_to(t('examples.no_code_received'), my_digid_controleer_sms_start_url)
+
+  = actions do
+    = action_submit(:next)
+    = cancel_button(my_digid_sms_authenticators_annuleren_url)

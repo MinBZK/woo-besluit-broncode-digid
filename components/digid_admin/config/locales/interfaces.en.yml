@@ -1,0 +1,92 @@
+en:
+  letters:
+
+    author: DigiD
+    creator: DigiD
+    producer: DigiD
+    postal: Postbus 96810
+    zip: 2509 JE Den Haag
+    website: www.digid.nl
+    helpdesk: Helpdesk DigiD
+    phonenumber: T 088 123 65 55
+    contact_form: Or via www.digid.nl/en/contact
+    reach_us_1: You can contact our helpdesk
+    reach_us_2: from Monday to Friday, 8am
+    reach_us_3: to 10pm (CET)
+    reference: Reference
+    return_address: "> Return address Postbus 96810 2509 JE Den Haag"
+    confidental: CONFIDENTIAL
+    date: Date
+    re: Subject
+
+    contact_1: "<b>Questions?</b><br/>You can contact us from Monday to Friday, 8am to 10pm, by telephone (088 - 123 65 55)"
+    contact_2: "or go to www.digid.nl/en/contact."
+    greetings: Kind regards,
+    digid_private: "<i><b>Please note!</b> Your DigiD is private. Do not share your login credentials with anyone. DigiD employees never ask for this information.</i>"
+    page: Page 1 of 1
+
+    activation_letter:
+      title: DigiD activation code
+      subject: DigiD activation code
+      keywords: DigiD activation code
+      letter_title: DigiD activation code - copy
+      your_code: "Your activation code is:"
+      use_before: <b>Please note!</b> Activate your DigiD before %{date}. Otherwise the application will expire and you will need to apply for a new DigiD.
+      reference_type: A
+
+      019:
+        request: You have applied for a DigiD. You can only use your DigiD after you have activated it. Hereby you receive the activation code. With this code you can activate your DigiD.
+
+        activate_digid_steps_multiple: "You can activate your DigiD in two different ways."
+        app_header: "Activate DigiD with the DigiD app:"
+        app_step_1_1: "1. Go to the Apple App Store or Google Play Store"
+        app_step_1_2: "and download the DigiD app."
+        app_step_2: "2. Open the DigiD app and follow the instructions."
+        site_header: "Activate DigiD through the DigiD website:"
+        site_step_1: 1. Go to www.digid.nl.
+        site_step_2: "2. Click 'Enter code'."
+        site_step_3: "3. Click 'Enter activation code'."
+        site_step_4: "4. Click 'Enter activation code'."
+        site_step_5_1: "5. Enter your chosen username"
+        site_step_5_2: "and password."
+        site_step_6: "6. Click 'Log in'."
+        site_step_7: "7. Follow further instructions."
+
+        request_digid: If you have forgotten your username and/or password, you cannot activate your DigiD. Then please apply for a new DigiD.
+
+      018:
+        request: You have applied for a DigiD with the DigiD app. Hereby you receive the activation code. First you must activate your DigiD in the DigiD app. Then you can start using your DigiD.
+        activate_digid_steps: Open the DigiD app and follow the instructions.
+
+    recover_letter:
+      title: DigiD recovery code
+      subject: DigiD recovery code
+      keywords: DigiD recovery code
+      letter_title: DigiD recovery code - copy
+      your_code: "Your recovery code is:"
+      use_before: <b>Please note!</b> Reset your password before %{date}. Otherwise the code will expire and you will have to request a recovery code again.
+      reference_type: H
+
+      008:
+        request: You have indicated that you want to reset your DigiD password. Hereby you receive the recovery code. With this code you can set a new password.
+        recover_digid_steps: "You can reset your password as follows:"
+        recover_step_1: "1. Go to www.digid.nl."
+        recover_step_2: "2. Click 'Enter code'."
+        recover_step_3: "3. Click 'Enter password recovery code'."
+        recover_step_4: "4. Click 'Enter recovery code'."
+        recover_step_5: "5. Enter your Citizen Service Number."
+        recover_step_6: "6. Enter your username."
+        recover_step_7: "7. Click 'Next'."
+        recover_step_8: "8. Enter the recovery code mentioned above."
+        recover_step_9: "9. Click 'Next'."
+        recover_step_10: "10. If you have enabled SMS verification, you will receive an SMS"
+        recover_step_10_a: "a. Enter the SMS code."
+        recover_step_10_b: "b. Click 'Next'."
+        recover_step_11: "11. Now you can set your new password."
+
+  sms:
+    messages:
+      sms_messages_not_found: "No SMS messages have been found."
+      sms_message_block: "The login function of your %{doc_type} has just been blocked. Please contact the DigiD helpdesk if you did not do this yourself."
+      sms_message_deblock: "An unblock code has been requested for the login function of your %{doc_type}. Please contact the DigiD helpdesk if you did not do this yourself."
+      sms_message_pin: "A letter with the PIN-code for your %{doc_type} has just been requested. Please contact the DigiD helpdesk if you did not do this yourself."

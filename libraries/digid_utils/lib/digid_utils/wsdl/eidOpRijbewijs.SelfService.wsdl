@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="eidOpRijbewijs" targetNamespace="http://rdw.nl/eid.wus.crb/1.0" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://rdw.nl/eid.wus.crb/1.0" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsp:Policy wsu:Id="CustomBinding_IEidOpRijbewijs_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing/>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rdw.nl/eid.wus.crb/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:annotation>
+				<xs:documentation>Content: SelfService DH Messages</xs:documentation>
+				<xs:documentation>Interface description:	v1.0</xs:documentation>
+				<xs:documentation>Includes message: Opvragen_DH_gegevens_eID_Request</xs:documentation>
+				<xs:documentation>Includes message:	Opvragen_DH_gegevens_eID_Response</xs:documentation>
+				<xs:documentation>Includes message:	Opvragen_DH_gegevens_eID_Fault</xs:documentation>
+				<xs:documentation>Includes message:	DHstatuswijzigingsverzoek_eID_Request</xs:documentation>
+				<xs:documentation>Includes message:	DHstatuswijzigingsverzoek_eID_Response</xs:documentation>
+				<xs:documentation>Includes message:	DHstatuswijzigingsverzoek_eID_Fault</xs:documentation>
+				<xs:documentation>Includes message:	HerAanvraagPin_eID_Request</xs:documentation>
+				<xs:documentation>Includes message:	HerAanvraagPin_eID_Response</xs:documentation>
+				<xs:documentation>Includes message:	HerAanvraagPin_eID_Fault</xs:documentation>
+			</xs:annotation>
+			<xs:element name="Opvragen_DH_gegevens_eID_Request">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="E-ID-STAT-INFO" type="tns:E-ID-STAT-INFO"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Opvragen_DH_gegevens_eID_Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="E-ID-STAT-INFO" type="tns:E-ID-STAT-INFO"/>
+						<xs:element minOccurs="0" name="Opvragen_DH_gegevens_eID_Fault" type="tns:Opvragen_DH_gegevens_eID_Fault"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="Opvragen_DH_gegevens_eID_Fault">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="FaultReason" type="tns:FOUT-CODE"/>
+					<xs:element minOccurs="0" name="FaultDescription" type="tns:FOUT-MELDING"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="DHstatuswijzigingsverzoek_eID_Request">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="E-ID-STAT-INFO" type="tns:E-ID-STAT-INFO"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DHstatuswijzigingsverzoek_eID_Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ResponseDescription" type="tns:RESP-CODE"/>
+						<xs:element minOccurs="0" name="DHstatuswijzigingsverzoek_eID_Fault" type="tns:DHstatuswijzigingsverzoek_eID_Fault"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="DHstatuswijzigingsverzoek_eID_Fault">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ResponseDescription" type="tns:RESP-CODE"/>
+					<xs:element minOccurs="0" name="FaultReason" type="tns:FOUT-CODE"/>
+					<xs:element minOccurs="0" name="FaultDescription" type="tns:FOUT-MELDING"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="HerAanvraagPin_eID_Request">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="E-ID-STAT-INFO" type="tns:E-ID-STAT-INFO"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HerAanvraagPin_eID_Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="ResponseDescription" type="tns:RESP-CODE"/>
+						<xs:element minOccurs="0" name="HerAanvraagPin_eID_Fault" type="tns:HerAanvraagPin_eID_Fault"/>
+					</xs:sequence>
+					<xs:attribute name="DateTime" type="xs:dateTime"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="HerAanvraagPin_eID_Fault">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ResponseDescription" type="tns:RESP-CODE"/>
+					<xs:element minOccurs="0" name="FaultReason" type="tns:FOUT-CODE"/>
+					<xs:element minOccurs="0" name="FaultDescription" type="tns:FOUT-MELDING"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="E-ID-STAT-INFO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="E-ID-STAT-A-GEG" type="tns:E-ID-STAT-A-GEG"/>
+					<xs:element minOccurs="0" name="AANT-GEVOND-GEG" type="tns:AANT-GEVOND-GEG"/>
+					<xs:element minOccurs="0" name="E-ID-STATUS-TAB" type="tns:E-ID-STATUS-TAB"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="E-ID-STAT-A-GEG">
+				<xs:all>
+					<xs:element minOccurs="0" name="BURG-SERV-NR-A" type="tns:FISC-NR-NAT-P"/>
+					<xs:element minOccurs="0" name="E-ID-DOC-TYPE" type="tns:E-ID-DOC-TYPE"/>
+					<xs:element minOccurs="0" name="E-ID-VOLG-NR-A" type="tns:E-ID-VOLG-NR"/>
+					<xs:element minOccurs="0" name="BRON-E-ID-STAT" type="tns:BRON-E-ID-STAT"/>
+					<xs:element minOccurs="0" name="STAT-E-ID-NIEUW" type="tns:STAT-E-ID"/>
+					<xs:element minOccurs="0" name="E-ID-INTRK-HASH" type="tns:E-ID-INTRK-HASH"/>
+				</xs:all>
+			</xs:complexType>
+			<xs:complexType name="AANT-GEVOND-GEG">
+				<xs:all>
+					<xs:element minOccurs="0" name="TOT-AANT-GEVOND" type="tns:TELLER-7"/>
+				</xs:all>
+			</xs:complexType>
+			<xs:complexType name="E-ID-STATUS-TAB">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="E-ID-STATUS-GEG" type="tns:E-ID-STATUS-GEG"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="E-ID-STATUS-GEG">
+				<xs:all>
+					<xs:element minOccurs="0" name="RYB-NR" type="tns:RYB-NR"/>
+					<xs:element minOccurs="0" name="E-ID-VOLG-NR" type="tns:E-ID-VOLG-NR"/>
+					<xs:element minOccurs="0" name="STAT-E-ID-BURG" type="tns:STAT-E-ID"/>
+					<xs:element minOccurs="0" name="WYZ-DAT-ST-BURG" type="tns:DATUM-EJMD"/>
+					<xs:element minOccurs="0" name="WYZ-TYD-ST-BURG" type="tns:TYD-UMSH"/>
+					<xs:element minOccurs="0" name="BRON-STAT-BURG" type="tns:BRON-E-ID-STAT"/>
+					<xs:element minOccurs="0" name="STAT-E-ID-MU" type="tns:STAT-E-ID"/>
+					<xs:element minOccurs="0" name="WYZ-DAT-ST-MU" type="tns:DATUM-EJMD"/>
+					<xs:element minOccurs="0" name="WYZ-TYD-ST-MU" type="tns:TYD-UMSH"/>
+					<xs:element minOccurs="0" name="TOEL-E-ID-STAT" type="tns:TOEL-E-ID-STAT"/>
+				</xs:all>
+			</xs:complexType>
+			<xs:simpleType name="BRON-E-ID-STAT">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="30"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DATUM-EJMD">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="8"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="E-ID-DOC-TYPE">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="9"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="E-ID-INTRK-HASH">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="32"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="STAT-E-ID">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="11"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="E-ID-VOLG-NR">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="16"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FISC-NR-NAT-P">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="9"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="RYB-NR">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FOUT-CODE">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FOUT-MELDING">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="80"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TELLER-7">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="7"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TOEL-E-ID-STAT">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="80"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TYD-UMSH">
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:totalDigits value="6"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="RESP-CODE">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+  <wsdl:message name="Opvragen_DH_gegevens_eID_Request">
+    <wsdl:part element="tns:Opvragen_DH_gegevens_eID_Request" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Opvragen_DH_gegevens_eID_Response">
+    <wsdl:part element="tns:Opvragen_DH_gegevens_eID_Response" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="DHstatuswijzigingsverzoek_eID_Request">
+    <wsdl:part element="tns:DHstatuswijzigingsverzoek_eID_Request" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="DHstatuswijzigingsverzoek_eID_Response">
+    <wsdl:part element="tns:DHstatuswijzigingsverzoek_eID_Response" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="HerAanvraagPin_eID_Request">
+    <wsdl:part element="tns:HerAanvraagPin_eID_Request" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="HerAanvraagPin_eID_Response">
+    <wsdl:part element="tns:HerAanvraagPin_eID_Response" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Opvragen_PUK_code_eID_Request">
+    <wsdl:part element="tns:Opvragen_PUK_code_eID_Request" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Opvragen_PUK_code_eID_Response">
+    <wsdl:part element="tns:Opvragen_PUK_code_eID_Response" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="PenAanvraag_eID_Request">
+    <wsdl:part element="tns:PenAanvraag_eID_Request" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="PenAanvraag_eID_Response">
+    <wsdl:part element="tns:PenAanvraag_eID_Response" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="IEidOpRijbewijs">
+    <wsdl:operation name="GetDHGegevens">
+      <wsdl:input message="tns:Opvragen_DH_gegevens_eID_Request" name="Opvragen_DH_gegevens_eID_Request" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsdl:output message="tns:Opvragen_DH_gegevens_eID_Response" name="Opvragen_DH_gegevens_eID_Response" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDHStatus">
+      <wsdl:input message="tns:DHstatuswijzigingsverzoek_eID_Request" name="DHstatuswijzigingsverzoek_eID_Request" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsdl:output message="tns:DHstatuswijzigingsverzoek_eID_Response" name="DHstatuswijzigingsverzoek_eID_Response" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetHerPin">
+      <wsdl:input message="tns:HerAanvraagPin_eID_Request" name="HerAanvraagPin_eID_Request" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsdl:output message="tns:HerAanvraagPin_eID_Response" name="HerAanvraagPin_eID_Response" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPUK">
+      <wsdl:input message="tns:Opvragen_PUK_code_eID_Request" name="Opvragen_PUK_code_eID_Request" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsdl:output message="tns:Opvragen_PUK_code_eID_Response" name="Opvragen_PUK_code_eID_Response" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPEN">
+      <wsdl:input message="tns:PenAanvraag_eID_Request" name="PenAanvraag_eID_Request" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsdl:output message="tns:PenAanvraag_eID_Response" name="PenAanvraag_eID_Response" wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IEidOpRijbewijs" type="tns:IEidOpRijbewijs">
+    <wsp:PolicyReference URI="#CustomBinding_IEidOpRijbewijs_policy"/>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetDHGegevens">
+      <soap:operation soapAction="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" style="document"/>
+      <wsdl:input name="Opvragen_DH_gegevens_eID_Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="Opvragen_DH_gegevens_eID_Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDHStatus">
+      <soap:operation soapAction="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" style="document"/>
+      <wsdl:input name="DHstatuswijzigingsverzoek_eID_Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DHstatuswijzigingsverzoek_eID_Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHerPin">
+      <soap:operation soapAction="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" style="document"/>
+      <wsdl:input name="HerAanvraagPin_eID_Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="HerAanvraagPin_eID_Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPUK">
+      <soap:operation soapAction="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" style="document"/>
+      <wsdl:input name="Opvragen_PUK_code_eID_Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="Opvragen_PUK_code_eID_Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPEN">
+      <soap:operation soapAction="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" style="document"/>
+      <wsdl:input name="PenAanvraag_eID_Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PenAanvraag_eID_Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="eidOpRijbewijs">
+    <wsdl:port binding="tns:CustomBinding_IEidOpRijbewijs" name="CustomBinding_IEidOpRijbewijs">
+      <soap:address location="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://crbself-o.ot.tld/eidOpRijbewijs.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

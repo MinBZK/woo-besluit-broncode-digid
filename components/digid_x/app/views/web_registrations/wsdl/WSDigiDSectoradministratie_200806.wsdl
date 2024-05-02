@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions name="WSDigiDSectoradministratie"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:digid="http://digid.nl/WSDigiDSectoradministratie/200806"
+                  targetNamespace="http://digid.nl/WSDigiDSectoradministratie/200806">
+
+  <wsdl:types>
+    <xs:schema targetNamespace="http://digid.nl/WSDigiDSectoradministratie/200806">
+      <xs:import namespace="http://digid.nl/WSDigiDSectoradministratie/200806"
+                 schemaLocation="WSDigiDSectoradministratie_200806.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:message name="AanvragenSectorAccountOnlineRequest">
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountOnlineRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSectorAccountOnlineResponse">
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountOnlineResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieOnlineRequest">
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieOnlineRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieOnlineResponse">
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieOnlineResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSectorAccountOnderwaterRequest">
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountOnderwaterRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSectorAccountOnderwaterResponse">
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountOnderwaterResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieOnderwaterRequest">
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieOnderwaterRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieOnderwaterResponse">
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieOnderwaterResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensWijzigenRequest">
+    <wsdl:part name="body" element="digid:SectorgegevensWijzigenRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensWijzigenResponse">
+    <wsdl:part name="body" element="digid:SectorgegevensWijzigenResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensToevoegenRequest">
+    <wsdl:part name="body" element="digid:SectorgegevensToevoegenRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensToevoegenResponse">
+    <wsdl:part name="body" element="digid:SectorgegevensToevoegenResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensVerwijderenRequest">
+    <wsdl:part name="body" element="digid:SectorgegevensVerwijderenRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="SectorgegevensVerwijderenResponse">
+    <wsdl:part name="body" element="digid:SectorgegevensVerwijderenResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="RevocerenAccountRequest">
+    <wsdl:part name="body" element="digid:RevocerenAccountRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="RevocerenAccountResponse">
+    <wsdl:part name="body" element="digid:RevocerenAccountResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSectorAccountRequest">
+    <xs:annotation>
+      <xs:documentation>
+        AanvragenSectorAccountRequest is alleen voor SVB in gebruik ivm backward compatibility
+      </xs:documentation>
+    </xs:annotation>
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSectorAccountResponse">
+    <xs:annotation>
+      <xs:documentation>
+        AanvragenSectorAccountResponse is alleen voor SVB in gebruik ivm backward compatibility
+      </xs:documentation>
+    </xs:annotation>
+    <wsdl:part name="body" element="digid:AanvragenSectorAccountResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieRequest">
+    <xs:annotation>
+      <xs:documentation>
+        AanvragenSectorSMSAuthenticatieRequest is alleen voor SVB in gebruik ivm backward compatibility
+      </xs:documentation>
+    </xs:annotation>
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="AanvragenSMSAuthenticatieResponse">
+    <xs:annotation>
+      <xs:documentation>
+        AanvragenSectorSMSAuthenticatieResponse is alleen voor SVB in gebruik ivm backward compatibility
+      </xs:documentation>
+    </xs:annotation>
+    <wsdl:part name="body" element="digid:AanvragenSMSAuthenticatieResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="StatusRequest">
+    <wsdl:part element="digid:StatusRequest"
+               name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="StatusResponse">
+    <wsdl:part element="digid:StatusResponse"
+               name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:portType name="SectoradministratiePortType">
+    <wsdl:operation name="AanvragenSectorAccountOnline">
+      <wsdl:input message="digid:AanvragenSectorAccountOnlineRequest"/>
+      <wsdl:output message="digid:AanvragenSectorAccountOnlineResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatieOnline">
+      <wsdl:input message="digid:AanvragenSMSAuthenticatieOnlineRequest"/>
+      <wsdl:output message="digid:AanvragenSMSAuthenticatieOnlineResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSectorAccountOnderwater">
+      <wsdl:input message="digid:AanvragenSectorAccountOnderwaterRequest"/>
+      <wsdl:output message="digid:AanvragenSectorAccountOnderwaterResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatieOnderwater">
+      <wsdl:input message="digid:AanvragenSMSAuthenticatieOnderwaterRequest"/>
+      <wsdl:output message="digid:AanvragenSMSAuthenticatieOnderwaterResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensWijzigen">
+      <wsdl:input message="digid:SectorgegevensWijzigenRequest"/>
+      <wsdl:output message="digid:SectorgegevensWijzigenResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensToevoegen">
+      <wsdl:input message="digid:SectorgegevensToevoegenRequest"/>
+      <wsdl:output message="digid:SectorgegevensToevoegenResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensVerwijderen">
+      <wsdl:input message="digid:SectorgegevensVerwijderenRequest"/>
+      <wsdl:output message="digid:SectorgegevensVerwijderenResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="RevocerenAccount">
+      <wsdl:input message="digid:RevocerenAccountRequest"/>
+      <wsdl:output message="digid:RevocerenAccountResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSectorAccount">
+      <xs:annotation>
+        <xs:documentation>
+          AanvragenSectorAccount is alleen voor SVB in gebruik ivm backward compatibility
+        </xs:documentation>
+      </xs:annotation>
+      <wsdl:input message="digid:AanvragenSectorAccountRequest"/>
+      <wsdl:output message="digid:AanvragenSectorAccountResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatie">
+      <xs:annotation>
+        <xs:documentation>
+          AanvragenSMSAuthenticatie is alleen voor SVB in gebruik ivm backward compatibility
+        </xs:documentation>
+      </xs:annotation>
+      <wsdl:input message="digid:AanvragenSMSAuthenticatieRequest"/>
+      <wsdl:output message="digid:AanvragenSMSAuthenticatieResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="Status">
+      <wsdl:documentation>Haal de huidige status op van de authenticatiewebservice.
+      </wsdl:documentation>
+      <wsdl:input message="digid:StatusRequest"/>
+      <wsdl:output message="digid:StatusResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="SectoradministratiePortTypeSoapBinding" type="digid:SectoradministratiePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="AanvragenSectorAccountOnline">
+      <soap:operation soapAction="AanvragenSectorAccountOnline"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatieOnline">
+      <soap:operation soapAction="AanvragenSMSAuthenticatieOnline"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSectorAccountOnderwater">
+      <soap:operation soapAction="AanvragenSectorAccountOnderwater"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatieOnderwater">
+      <soap:operation soapAction="AanvragenSMSAuthenticatieOnderwater"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensWijzigen">
+      <soap:operation soapAction="SectorgegevensWijzigen"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensToevoegen">
+      <soap:operation soapAction="SectorgegevensToevoegen"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="SectorgegevensVerwijderen">
+      <soap:operation soapAction="SectorgegevensVerwijderen"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="RevocerenAccount">
+      <soap:operation soapAction="RevocerenAccount"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSectorAccount">
+      <xs:annotation>
+        <xs:documentation>
+          AanvragenSectorAccount is alleen voor SVB in gebruik ivm backward compatibility
+        </xs:documentation>
+      </xs:annotation>
+      <soap:operation soapAction="AanvragenSectorAccount"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="AanvragenSMSAuthenticatie">
+      <xs:annotation>
+        <xs:documentation>
+          AanvragenSMSAuthenticatie is alleen voor SVB in gebruik ivm backward compatibility
+        </xs:documentation>
+      </xs:annotation>
+      <soap:operation soapAction="AanvragenSMSAuthenticatie"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="Status">
+      <soap:operation soapAction="Status"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="WSDigiDSectoradministratie">
+    <wsdl:port name="SectoradministratiePort" binding="digid:SectoradministratiePortTypeSoapBinding">
+      <soap:address location="<%= new_web_registration_url %>"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

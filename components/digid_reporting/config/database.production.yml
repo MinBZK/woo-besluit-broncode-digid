@@ -1,0 +1,67 @@
+default: &default
+  adapter: mysql2
+  reconnect: true
+  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  timeout: 5000
+  password: <%= Vault.logical.read("secret/application").data[:"db.password"] %>
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+default_log: &prod_default_log
+  <<: *default
+  encoding: utf8
+  collation: utf8_unicode_ci
+production: &prod_default
+  <<: *default
+  database: <%= APP_CONFIG["db"]["x_rep"]["name"] %>
+  host: <%= APP_CONFIG["db"]["x_rep"]["host"] %>
+  username: <%= APP_CONFIG["db"]["x_rep"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "x_rep", "port") || "3306" %>
+production_log:
+  <<: *prod_default_log
+  database: <%= APP_CONFIG["db"]["rep"]["name"] %>
+  host: <%= APP_CONFIG["db"]["rep"]["host"] %>
+  username: <%= APP_CONFIG["db"]["rep"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "rep", "port") || "3306" %>
+production_account_slave:
+  <<: *prod_default
+  database: <%= APP_CONFIG["db"]["account_slave"]["name"] %>
+  host: <%= APP_CONFIG["db"]["account_slave"]["host"] %>
+  username: <%= APP_CONFIG["db"]["account_slave"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "account_slave", "port") || "3306" %>
+production_account_master:
+  <<: *prod_default
+  database: <%= APP_CONFIG["db"]["account_master"]["name"] %>
+  host: <%= APP_CONFIG["db"]["account_master"]["host"] %>
+  username: <%= APP_CONFIG["db"]["account_master"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "account_master", "port") || "3306" %>
+production_log_slave:
+  <<: *prod_default_log
+  database: <%= APP_CONFIG["db"]["log_slave"]["name"] %>
+  host: <%= APP_CONFIG["db"]["log_slave"]["host"] %>
+  username: <%= APP_CONFIG["db"]["log_slave"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "log_slave", "port") || "3306" %>
+production_log_master:
+  <<: *prod_default_log
+  database: <%= APP_CONFIG["db"]["log_master"]["name"] %>
+  host: <%= APP_CONFIG["db"]["log_master"]["host"] %>
+  username: <%= APP_CONFIG["db"]["log_master"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "log_master", "port") || "3306" %>
+production_reporting:
+  <<: *prod_default_log
+  database: <%= APP_CONFIG["db"]["log"]["name"] %>
+  host: <%= APP_CONFIG["db"]["log"]["host"] %>
+  username: <%= APP_CONFIG["db"]["log"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "log", "port") || "3306" %>
+production_snap:
+  <<: *prod_default
+  database: <%= APP_CONFIG["db"]["snap"]["name"] %>
+  host: <%= APP_CONFIG["db"]["snap"]["host"] %>
+  username: <%= APP_CONFIG["db"]["snap"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "snap", "port") || "3306" %>
+production_balie:
+  <<: *prod_default
+  database: <%= APP_CONFIG["db"]["balie"]["name"] %>
+  host: <%= APP_CONFIG["db"]["balie"]["host"] %>
+  username: <%= APP_CONFIG["db"]["balie"]["username"] %>
+  port: <%= APP_CONFIG.dig("db", "balie", "port") || "3306" %>
+  

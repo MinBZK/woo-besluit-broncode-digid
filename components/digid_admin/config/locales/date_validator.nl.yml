@@ -1,0 +1,8 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        news_item:
+          attributes:
+            active_until:
+              after: 'moet na activatie datum liggen'

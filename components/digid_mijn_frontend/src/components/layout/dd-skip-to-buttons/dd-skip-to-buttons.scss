@@ -1,0 +1,15 @@
+.dd-skip-to-buttons {
+  &__link {
+    position: absolute;
+    background-color: var(--solid2);
+    padding: 0.25rem;
+    height: 2rem;
+    transform: translateY(-100%);
+    text-decoration: none;
+
+    &:focus {
+      margin-top: 3.5rem;
+      transform: translateY(0%);
+    }
+  }
+}

@@ -1,0 +1,77 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper#app_version
+  %h1= t('app_version.headers.edit')
+  .clear
+  %p= I18n.t('app_version.overview_note')
+  %br
+  = four_eyes_form_for @app_version do |f|
+    = hidden_field_tag(:id, f.object.id, disabled: true)
+    - unless @app_version.new_record?
+      = hidden_field_tag(:update_warning_path, app_version_update_warning_path(@app_version), disabled: true)
+
+    = field f.label(:id), f.object.id
+    = field f.label(:version), f.object.version
+    = field f.label(:operating_system), t(f.object.operating_system, scope: 'app_version.operating_systems')
+    = field f.label(:releasetype), f.object.release_type
+    -if @app_version.new_record?
+      = f.hidden_field :operating_system
+      = f.hidden_field :version
+      = f.hidden_field :release_type
+
+    - if f.object.not_valid_before && f.object.not_valid_before < Date.today && !f.object.not_valid_before_changed?
+      = field f.label(:not_valid_before), localize(f.object.not_valid_before)
+    - else
+      = field f.label(:not_valid_before), datepicker_for(f, :not_valid_before)
+
+    - if f.object.not_valid_on_or_after && f.object.not_valid_on_or_after < Date.today && !f.object.not_valid_on_or_after_changed?
+      = field f.label(:not_valid_on_or_after), localize(f.object.not_valid_on_or_after)
+    - else
+      = field f.label(:not_valid_on_or_after), datepicker_for(f, :not_valid_on_or_after)
+
+    - if f.object.kill_app_on_or_after && f.object.kill_app_on_or_after < Date.today && !f.object.kill_app_on_or_after_changed?
+      = field f.label(:kill_app_on_or_after), localize(f.object.kill_app_on_or_after)
+    - else
+      = field f.label(:kill_app_on_or_after), datepicker_for(f, :kill_app_on_or_after)
+
+    .actions
+      = link_to(t('cancel'), app_versions_path)
+      = submit_tag(t('save_for_review'), class: 'ui-button ui-widget ui-state-default ui-corner-all')
+      - if (request.referer.blank? || !request.referer.include?("app_versions/review")) && can?(:destroy, @app_version) && !@app_version.new_record?
+        = link_to(I18n.t('app_version.destroy_button'), app_version_path(@app_version), id: "delete_app_version", class: 'delete_button')
+    .clear
+
+.hidden.dialog-wrapper
+  .title= "Verwijder DigiD app-versie"
+  .notice= "#{@app_version.other_active_version_exists? ? t('are_you_sure') : t('app_version.destroy_warning')}"
+  .body= render('four_eyes_reviews/note_dialog')
+

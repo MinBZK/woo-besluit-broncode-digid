@@ -1,0 +1,98 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= form_for @news_item do |f|
+  = render 'shared/errors', model: @news_item
+  %table.border-0
+    %tr
+      %td= field f.label(:name_nl), f.text_field(:name_nl)
+      %td= field f.label(:name_en), f.text_field(:name_en)
+    %tr.transparent
+      %td
+        = field f.label(:body_nl) do
+          = f.text_area :body_nl
+          = link_to 'Hulp bij opmaak', 'http://daringfireball.net/projects/markdown/syntax', target: :blank
+      %td
+        = field f.label(:body_en) do
+          = f.text_area :body_en
+          = link_to 'Hulp bij opmaak', 'http://daringfireball.net/projects/markdown/syntax', target: :blank
+  = field(f.label(:news_locations)) do
+    = hidden_field_tag 'news_item[news_location_ids][]'
+    - NewsLocation.all.each do |news_location|
+      = check_box_tag 'news_item[news_location_ids][]', news_location.id, @news_item.news_locations.include?(news_location), id: "news_item_location_#{news_location.id}"
+      = label_tag "news_item_location_#{news_location.id}", news_location.human_name, class: 'inline_label'
+      %br
+
+  %hr
+  = field f.label(:os_versions, "Gebruiker-configuratie") do
+    = f.fields_for :os_versions do |v|
+      %table#os
+        %thead
+          %tr
+            %th= "Operating system"
+            %th= "OS versie"
+            %td
+        %tbody.rows
+          - @news_item.os_versions.each_with_index do |item, index|
+            %tr
+              %td= select_tag("news_item[os][][name]", options_for_select(NewsItem.os_list, item.first), include_blank: true)
+              %td= text_field_tag("news_item[os][][version]", item.second)
+              %td= link_to(t("services.remove"), "#", class: index == 0 ? 'delete_button hidden' : 'delete_button')
+
+    %a.add_row.icon_link.new_link{href: "#", data: {target: "os"}}
+      %span.icon
+      %span.text= "OS toevoegen"
+    %br
+    %br
+    = f.fields_for :browser_versions do |v|
+      %table#browser
+        %thead
+          %tr
+            %th= "Browser"
+            %th= "Browser versie"
+            %td
+        %tbody.rows
+          - @news_item.browser_versions.each_with_index do |item, index|
+            %tr
+              %td= select_tag("news_item[browser][][name]", options_for_select(NewsItem.browser_list, item.first), include_blank: true)
+              %td= text_field_tag("news_item[browser][][version]", item.second)
+              %td= link_to(t("services.remove"), "#", class: index == 0 ? 'delete_button hidden' : 'delete_button')
+
+    %a.add_row.icon_link.new_link{href: "#", data: {target: "browser"}}
+      %span.icon
+      %span.text= "Browser toevoegen"
+
+  = field f.label(:active_from) do
+    .datepicker= f.datetime_select :active_from
+  = field(f.label(:active_until)) do
+    .datepicker= f.datetime_select :active_until
+  = field f.label(:active), f.check_box(:active) if can? :activate, NewsItem
+  = render 'shared/form_actions', model: @news_item

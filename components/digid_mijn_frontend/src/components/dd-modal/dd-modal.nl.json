@@ -1,0 +1,22 @@
+{
+  "modal": {
+    "close-btn-aria-label": "Sluit modaal",
+    "close-btn": "Sluit",
+    "my-digid": "Mijn DigiD",
+    "timeout-header": "Helaas moet u opnieuw inloggen",
+    "timeout-p1": "Er was langer dan {{ minutes }} minuten geen activiteit in het scherm",
+    "timeout-p2-a": "Begin opnieuw met ",
+    "timeout-p2-b": " of ga naar de homepage van DigiD ",
+    "timeout-p3": "Lukt het inloggen niet?",
+    "timeout-p3-li1": "Sluit en open de browser",
+    "timeout-p3-li2": "Of verwijder de oude cookies en wis de browsergeschiedenis",
+    "timeout-p3-li3": "Of log in via een andere browser",
+    "warning-header": "Let op! De maximale inlogtijd is bijna bereikt.",
+    "warning-p": "Druk op de spatiebalk of klik op de knop om uw sessie te verlengen.",
+    "extend": "Ingelogd blijven",
+		"2fa-warning-a": "U heeft ingesteld dat u altijd wilt inloggen met minimaal 2 stappen, zoals met de DigiD app.",
+		"2fa-warning-b": "Weet u zeker dat u de DigiD app wilt deactiveren?",
+		"yes": "Ja",
+		"cancel": "Annuleren"
+  }
+}

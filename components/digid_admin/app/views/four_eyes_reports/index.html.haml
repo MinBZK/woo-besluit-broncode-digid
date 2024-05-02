@@ -1,0 +1,75 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1 Controle
+.clear
+.form_wrapper
+  = search_form_for @search, url: search_four_eyes_reports_path do |f|
+    = text_field_tag :query, params[:query]
+    = f.button 'Filter »'
+    - if can?(:export, FourEyesReport)
+      = f.button 'Exporteer »', id: "export_button", href: export_four_eyes_reports_path
+    .clear_filter
+    = f.label :changed_at_gt, 'Van'
+    %span.datepicker= f.datetime_select :changed_at_gt, include_blank: true
+    = f.label :changed_at_lt, 'Tot'
+    %span.datepicker= f.datetime_select :changed_at_lt, { include_blank: true }, class: ('initially_empty' if @search.created_at_lt.nil?)
+%table
+  %thead
+    %tr
+      = render 'shared/table_header', headers: %w(gewijzigd_op account omschrijving uitgevoerd_door geaccordeerd_door geaccordeerd_op)
+
+  %tbody
+    - @results.each do |result|
+      - present result do |presenter|
+        %tr
+          %td.word-break= presenter.changed_at
+          %td.word-break= presenter.manager
+          %td.word-break= presenter.description
+          %td.word-break= presenter.creator_manager
+          %td.word-break= presenter.acceptor_manager
+          %td.word-break= presenter.created_at
+
+.pagination
+  .f_left
+    = form_tag request.fullpath do
+      = select_tag :per_page, options_for_select([25, 50, 100, 200], params[:per_page])
+
+  .f_right
+    = link_to_previous_page @results, 'Vorige', params: params.to_h
+    = link_to_next_page @results, 'Volgende', params: params.to_h
+
+
+= javascript_include_tag("inline_submit", nonce: content_security_policy_script_nonce)
+
+- if can?(:export, FourEyesReport)
+  = javascript_include_tag("inline_export", nonce: content_security_policy_script_nonce)
+

@@ -1,0 +1,14 @@
+test:
+  namespace: "test_case<%= ENV["TEST_ENV_NUMBER"].to_i %>"
+  url: redis://<%= ENV['REDIS_HOST'] || "127.0.0.1" %>:6379/<%= ENV["TEST_ENV_NUMBER"].to_i %>
+
+<% if ENV['ASSET_PRECOMPILE'].present? %>
+production:
+  url: redis://<%= ENV['KEYDB_HOST'] %>:6379/0
+  password: "<%= APP_CONFIG.dig('redis', 'password') %>"
+<% else %>
+production:
+  cluster:
+    - redis://<%= ENV['KEYDB_HOST'] %>:6379/0
+  password: "<%= APP_CONFIG.dig('redis', 'password') %>"
+<% end %>    

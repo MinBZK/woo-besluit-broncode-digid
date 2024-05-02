@@ -1,0 +1,64 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%table
+  %thead
+    %tr
+      %th= t('accounts.fields.labels.status')
+      %th= t('accounts.fields.labels.app_code')
+      %th= t('accounts.fields.labels.device_name')
+      %th= t('accounts.fields.labels.last_usage')
+      %th= t('accounts.fields.labels.aangevraagd')
+      %th= t('accounts.fields.labels.geactiveerd_op')
+      %th= t('accounts.fields.labels.geactiveerd_met')
+      - if level == "substantieel"
+        %th= t('accounts.fields.labels.verhoogd')
+        %th= t('accounts.fields.labels.type_id')
+      %th= t('accounts.fields.labels.nfc_reader')
+  %tbody
+    - if @account.app_authenticators.public_send(level).size > 0
+      - @account.app_authenticators.public_send(level).ordered.each do |app_authenticator|
+        %tr
+          - present app_authenticator, AppAuthenticatorPresenter do |app_authenticator_presenter|
+            %td= app_authenticator_presenter.colored_status
+            %td= app_authenticator_presenter.instance_id
+            %td= app_authenticator_presenter.device_name
+            %td= app_authenticator_presenter.last_sign_in_at
+            %td= app_authenticator_presenter.requested_at
+            %td= app_authenticator_presenter.activated_at
+            %td= app_authenticator_presenter.issuer_type
+            - if level == "substantieel"
+              %td= app_authenticator_presenter.verhoogd
+              %td= app_authenticator_presenter.type_id
+            %td= app_authenticator_presenter.nfc_support
+    - else
+      %tr
+        %td= strong red t("accounts.messages.inactive")

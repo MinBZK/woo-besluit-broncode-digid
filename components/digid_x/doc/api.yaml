@@ -1,0 +1,415 @@
+---
+  openapi: 3.0.0
+  info:
+    version: "1.0.0"
+    title: "DigiD kern koppelvlakken"
+    contact:
+      name: "DigiD Kern API"
+  consumes:
+    - "application/json"
+  tags:
+    - name: IAPI - Balie
+      description: Balie verzoeken
+    - name: IAPI - Overig
+      description: Overige IAPI verzoeken
+    - name: Shared endpoints
+      description: Endpoints that apply to all scenario's
+
+  paths:
+    /iapi/front_desk_registrations/search:
+      post:
+        tags:
+          - IAPI - Balie
+        description: Search front-desk registrations
+        operationId: "iapi_front_desk_search"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  front_desk_registration:
+                    type: object
+                    properties:
+                      baliecode:
+                        type: string
+                      burgerservicenummer:
+                        type: string
+                      status:
+                        type: string
+
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+          400:
+            $ref: '#/components/responses/missing_headers'
+
+    /iapi/front_desk_registrations/update:
+      post:
+        tags:
+          - IAPI - Balie
+        description: Wijzig bestaande balie aanvraag
+        operationId: "iapi_front_desk_search"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  front_desk_registration:
+                    type: object
+                    properties:
+                      front_desk_id:
+                        type: integer
+                      front_desk_registration_id:
+                        type: integer
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+          400:
+            $ref: '#/components/responses/missing_headers'
+
+    /iapi/front_desk_news_items/{id}:
+      get:
+        tags:
+          - IAPI - Balie
+        description: "Haal balie nieuwsberichten op"
+        operationId: "iapi_front_desk_get"
+        parameters:
+          - $ref: '#/components/parameters/NewsItemPage'
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            content:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+            examples:
+              empty: {}
+              success:
+                id: 1
+                name: name
+                body: null
+                active: true
+                active_from: 2018-09-01T10:57:20.000+02:00
+                active_until: 2020-09-06T10:57:32.000+02:00
+                created_at: 2018-09-06T10:52:57.000+02:00
+                updated_at: 2018-09-06T10:57:34.000+02:00
+
+    /iapi/sms:
+      post:
+        tags:
+          - IAPI - Overig
+        description: Versturen van een sms
+        operationId: "iapi_sms"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - sms
+                properties:
+                  sms:
+                    type: object
+                    properties:
+                      account_id:
+                        type: integer
+                      gateway:
+                        type: string
+                        enum: [spoken, regular]
+                      timeout:
+                        type: integer
+                      sender:
+                        type: string
+                      message:
+                        type: string
+                      phone_number:
+                        type: string
+                      code_gid:
+                        type: string
+                      spoken:
+                        type: boolean
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+          400:
+            $ref: '#/components/responses/missing_headers'
+    /iapi/log:
+      post:
+        tags:
+          - IAPI - Overig
+        description: Het invoeren van een logregel
+        operationId: "iapi_log"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - iapi
+                properties:
+                  iapi:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      payload:
+                        type: object
+                        properties:
+                          account_id:
+                            type: integer
+                          hidden:
+                            type: boolean
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+          400:
+            $ref: '#/components/responses/missing_headers'
+
+    /iapi/letter:
+      post:
+        tags:
+          - IAPI - Overig
+        description: Brief versturen
+        operationId: "iapi_letter"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  letter:
+                    type: object
+                    properties:
+                      account_id:
+                        type: integer
+                      sequence_no:
+                        type: string
+                      card_type:
+                        type: string
+                      action:
+                        type: string
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+          400:
+            $ref: '#/components/responses/missing_headers'
+
+    /iapi/task:
+      post:
+        tags:
+          - IAPI - Overig
+        description: Opties <ul>
+          <li>handle_letters_job</li>
+          <li>clean_up_expired_deceased_accounts</li>
+          <li>clean_up_expired_activations</li>
+          <li>clean_up_inactive_app_authenticators</li>
+          <li>clean_up_app_authenticators_with_expired_activationcode</li>
+          <li>clean_up_sms_tools_with_expired_activationcode</li>
+          <li>clean_up_aselect</li>
+          <li>clean_up_saml</li>
+          <li>clean_up_initial_accounts</li>
+          <li>clean_up_email_deliveries</li>
+          <li>send_activation_reminders</li>
+          <li>send_expiry_notifications</li>
+          <li>expire_accounts</li>
+          <li>clean_up_expired_accounts</li>
+        operationId: "iapi_task"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+                    example: "handle_letters_job"
+        parameters:
+          - $ref: '#/components/parameters/authToken'
+        responses:
+          200:
+            $ref: '#/components/responses/ok'
+
+  components:
+    responses:
+      ok:
+        description: Returned altijd OK
+        schema:
+          $ref: '#/components/schema/status'
+        examples:
+          succes:
+            status: OK
+      missing_headers:
+        description: Er ontbreken headers of parameters
+        schema:
+          $ref: '#/components/schema/status'
+        examples:
+          missing_headers:
+            message: 'Missing headers.'
+          missing_parameters:
+            message: 'Missing parameters.'
+      invalid:
+        description: invalid
+      app_session_not_found:
+        description: App session niet gevonden of in een invalide staat
+        schema:
+          $ref: '#/components/schema/status'
+        examples:
+          app_session_not_found:
+            error: "app_session_not_found"
+      503_service_unavailable:
+        description: "Service Unavailable"
+      404_not_found:
+        description: "Not Found"
+      wid_authentication_success:
+        description: Eid sessie informatie om het scan process te kunnen starten
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: OK
+            url:
+              type: string
+              example: SSSSSSSSSSSSSSSSSSSSS
+            session_id:
+              type: string
+              example: "123e4567-e89b-12d3-a456-426655440000"
+            webservice:
+              type: string
+              example: Mijn DigiD
+            return_url:
+              type: string
+              example: SSSSSSSSSSSSSSSSSSSSSS
+            action:
+              type: string
+              example: verify
+        examples:
+          wid_authentication:
+            status: OK
+            url: SSSSSSSSSSSSSSSSSSSSS
+            session_id: f789f03b-d34a-450d-bd86-c38bfcbfabf9
+            webservice: Mijn DigiD
+            return_url: SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      app_version_check:
+        description: Wordt terug gestuurd als de opgegegeven APP-VERSION http header geen actieve app versie kon vinden.
+        schema:
+          type: object
+          properties:
+            action:
+              type: string
+              example: kill_app
+            message:
+              type: string
+              example: De versie die u gebruikt is niet meer geldig. U moet de DigiD app opnieuw downloaden en dan activeren in Mijn DigiD.
+        examples:
+          kill_app:
+            action: kill_app
+            message: De versie die u gebruikt is niet meer geldig. U moet de DigiD app opnieuw downloaden en dan activeren in Mijn DigiD.
+          kill_app_unknown_version:
+            action: kill_app
+            message: De versie die u gebruikt is niet geldig. U kunt de DigiD app opnieuw downloaden en activeren in Mijn DigiD.
+          force_update:
+            action: force_update
+            message: Update uw DigiD app. De versie die u gebruikt is niet meer geldig.
+          update_warning:
+            action: update_warning
+            message: Update uw DigiD app. Er is een nieuwe versie beschikbaar.
+    schema:
+      status:
+        type: object
+        properties:
+          status:
+            type: string
+            example: Ok
+
+    parameters:
+      apiVersion:
+        in: header
+        name: API-version
+        description: The api version
+        required: true
+        schema:
+          type: string
+        example: "1"
+      appVersion:
+        in: header
+        name: App-Version
+        description: The app version as configured in Admin
+        required: true
+        schema:
+          type: string
+      kioskVersion:
+        in: header
+        name: App-Version
+        description: The kiosk version as configured in Admin
+        required: true
+        schema:
+          type: string
+      widCheckerVersion:
+        in: header
+        name: App-Version
+        description: The wid checker version as configured in Admin
+        required: true
+        schema:
+          type: string
+      OSVersion:
+        in: header
+        name: OS-Version
+        description: The operating system version
+        required: true
+        schema:
+          type: string
+        example: "8"
+      ReleaseType:
+        in: header
+        name: Release-Type
+        description: Beta of Production version
+        required: false
+        schema:
+          type: string
+        example: Productie
+      osType:
+        in: header
+        name: OS-Type
+        description: The clients operation system
+        required: true
+        schema:
+          type: string
+        example: Android
+      NewsItemPage:
+        name: id
+        in: path
+        description: Niewsbericht locatie name
+        required: true
+        schema:
+          type: string
+      authToken:
+        in: header
+        name: X-Auth-Token
+        description: IAPI authentication token
+        required: true
+        schema:
+          type: string
+        example: development

@@ -1,0 +1,3 @@
+:concurrency: 5
+:queues:
+  - ['balie-cron', 1]

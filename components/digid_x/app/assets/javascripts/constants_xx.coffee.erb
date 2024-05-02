@@ -1,0 +1,294 @@
+<%
+ # IMPORTANT: change window.asset_version in the locale variants if you change this file
+%>
+window.path_locale = '<%= I18n.locale == I18n.default_locale ? '' : "/#{I18n.locale}" %>'
+window.constants = {} unless window.constants
+window.constants.spacerUrl = "<%= image_url('spacer.gif') %>"
+window.constants.extra_sms_check_dialog_message = "<%= I18n.t('extra_sms_check_dialog_message') %>"
+window.constants.warning_two_factor_deactivate_app_other_authenticators = "<%= I18n.t('warning_two_factor_deactivate_app_other_authenticators') %>"
+window.constants.warning_two_factor_deactivate_app_last_authenticator = "<%= I18n.t('warning_two_factor_deactivate_app_last_authenticator').html_safe %>"
+window.constants.is_digid_app_not_installed_notice = "<%= I18n.t('is_digid_app_not_installed_notice') %>"
+window.constants.regexes =
+  capitals: /<%= CharacterClass::CAPITALS.source %>/g
+  digits: /<%= CharacterClass::DIGITS.source %>/g
+  email: /^<%= CharacterClass::EMAIL.source %>$/i
+  email_len_to_at_sign: /^<%= CharacterClass::EMAIL_LEN_TO_AT_SIGN.source %>$/i
+  idNumber: /^<%= CharacterClass::ID_NUMBER.source %>$/
+  idNumberForeign: /^<%= CharacterClass::ID_NUMBER_FOREIGN.source %>$/
+  miniscules: /<%= CharacterClass::MINUSCULES.source %>/g
+  specialCharacters: /<%= CharacterClass::SPECIAL_CHARACTERS.source %>/g
+  only:
+    bsn_format: /^<%= CharacterClass::BSN_FORMAT.source %>$/
+    house_number_addition: /^<%= CharacterClass::HOUSE_NUMBER_ADDITION.source %>$/
+    house_number: /^<%= CharacterClass::HOUSE_NUMBER.source %>$/
+    password: /^<%= CharacterClass::PASSWORD.source %>$/
+    postal_code: /^<%= CharacterClass::POSTAL_CODE.source %>$/
+    username: /^<%= CharacterClass::USERNAME.source %>$/
+
+window.constants.show_password = "<%= I18n.t('show_password') %>"
+window.constants.hide_password = "<%= I18n.t('hide_password') %>"
+window.constants.log_in = "<%= I18n.t('log_in') %>"
+window.constants.next = "<%= I18n.t('next') %>"
+window.constants.answerVisible = "<%= I18n.t('this_answer_is_currently_visible_select_question_to_close') %>"
+window.constants.answerHidden = "<%= I18n.t('this_answer_is_currently_hidden_select_question_to_open') %>"
+window.constants.information_boxes =
+  aria_labels_close_prefix: "<%= I18n.t('information_boxes.aria_labels.close_prefix') %>"
+window.constants.spokenSmsMessagesIsEnabled = "<%= I18n.t('spoken_sms_messages_is_enabled') %>"
+window.constants.show_password_button = "<%= I18n.t('show_password_button') %>"
+window.constants.show_password_button_keyboard = "<%= I18n.t('show_password_button_keyboard') %>"
+window.constants.actionTexts = <%= {
+  annie_are_you_okay: I18n.t('annie_are_you_okay'),
+  cancel_ok: I18n.t('annie_are_you_okay'),
+  cancel: I18n.t('cancel'),
+  yeah: I18n.t('yeah'),
+  continue_without_phone_number: I18n.t('extra_sms_check_dialog_continue'),
+  ok_without_phone_number: I18n.t('extra_sms_check_dialog_ok'),
+  download_the_app: I18n.t('download_the_app')
+}.to_json %>
+window.constants.something_wrong = "<%= I18n.t('something_went_wrong') %>"
+window.constants.validationMessages = <%= {
+  account: {
+    adres: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('email_address')),
+      invalid: I18n.t('activemodel.errors.models.my_digid/email.attributes.address.invalid'),
+      tooLong: I18n.t('activemodel.errors.messages.too_long', attribute: I18n.t('email_address'), count: '254'),
+    },
+    email_attributes: {
+      adres: {
+        blank: I18n.t('activerecord.errors.models.email.attributes.adres.blank', attribute: I18n.t('email_address')),
+        invalid: I18n.t('activerecord.errors.models.email.attributes.adres.invalid'),
+        input_or_checkbox: I18n.t('activerecord.errors.models.email.attributes.adres.input_or_checkbox'),
+        tooLong: I18n.t('activerecord.errors.models.email.attributes.adres.too_long', attribute: I18n.t('email_address'), count: '254'),
+      },
+    },
+    password_authenticator_attributes: {
+      username: {
+        blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('username')),
+        invalid: I18n.t('activerecord.errors.models.authenticators/password.attributes.username.invalid'),
+        tooLong: I18n.t('activerecord.errors.models.authenticators/password.attributes.username.too_long'),
+        tooShort: I18n.t('activerecord.errors.models.authenticators/password.attributes.username.too_short'),
+      },
+      password: {
+        blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('password')),
+        invalid: I18n.t('activemodel.errors.models.password_check.attributes.password.invalid'),
+        tooFewCapitals: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_capitals'),
+        tooFewDigits: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_digits'),
+        tooFewMinuscules: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_minuscules'),
+        tooFewSpecialCharacters: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_special_characters'),
+        tooLong: I18n.t('activemodel.errors.models.password_check.attributes.password.too_long'),
+        tooShort: I18n.t('activemodel.errors.models.password_check.attributes.password.too_short'),
+      },
+      password_confirmation: {
+        blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('repeat_password')),
+        confirmation: I18n.t('activerecord.errors.models.authenticators/password.attributes.password.confirmation'),
+      }
+    },
+    sms_tools_attributes: {
+      phone_number: {
+        blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('activerecord.attributes.sms_tool.phone_number')),
+        tooLong: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.too_long'),
+        tooShort: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.too_short'),
+        invalid: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.invalid'),
+      }
+    }
+  },
+  authenticators_sms_tool: {
+    phone_number: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('activerecord.attributes.sms_tool.phone_number')),
+      tooLong: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.too_long'),
+      tooShort: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.too_short'),
+      invalid: I18n.t('activerecord.errors.models.sms_tool.attributes.phone_number.invalid'),
+    }
+  },
+  account_to_recover: {
+    password: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('new_password')),
+      invalid: I18n.t('activemodel.errors.models.password_check.attributes.password.invalid'),
+      tooFewCapitals: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_capitals'),
+      tooFewDigits: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_digits'),
+      tooFewMinuscules: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_minuscules'),
+      tooFewSpecialCharacters: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_special_characters'),
+      tooLong: I18n.t('activemodel.errors.models.password_check.attributes.password.too_long'),
+      tooShort: I18n.t('activemodel.errors.models.password_check.attributes.password.too_short'),
+    },
+    password_confirmation: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('repeat_password')),
+      confirmation: I18n.t('activerecord.errors.models.authenticators/password.attributes.password.confirmation'),
+    }
+  },
+  activationcode: {
+    activationcode: {
+      blank: I18n.t('activemodel.errors.models.activationcode.attributes.activationcode.blank'),
+      invalid: I18n.t('activemodel.errors.models.activationcode.attributes.activationcode.invalid'),
+      tooShort: I18n.t('activemodel.errors.messages.too_short', attribute: I18n.t('activation_code'), count: '9'),
+    },
+  },
+  authentication: {
+    username: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('digid_username')),
+    },
+    password: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('password')),
+    },
+    test_zekerheidsniveau: {
+      blank: I18n.t('activemodel.errors.models.authentication.attributes.test_zekerheidsniveau.not_a_number'),
+    },
+  },
+  email: {
+    address: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('email_address')),
+      invalid: I18n.t('activemodel.errors.models.my_digid/email.attributes.address.invalid'),
+      tooLong: I18n.t('activemodel.errors.messages.too_long', attribute: I18n.t('email_address'), count: '254'),
+    },
+  },
+  email_code: {
+    code: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('activemodel.attributes.email_code.code')),
+      invalid: I18n.t('activemodel.errors.models.email_code.attributes.code.invalid'),
+      tooShort: I18n.t('activemodel.errors.messages.too_short', attribute: I18n.t('email_code'), count: '9'),
+    },
+  },
+  password_changing_account: {
+    current_password: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('current_password'))
+    },
+    password: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('new_password')),
+      invalid: I18n.t('activemodel.errors.models.password_check.attributes.password.invalid'),
+      tooFewCapitals: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_capitals'),
+      tooFewDigits: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_digits'),
+      tooFewMinuscules: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_minuscules'),
+      tooFewSpecialCharacters: I18n.t('activemodel.errors.models.password_check.attributes.password.too_few_special_characters'),
+      tooLong: I18n.t('activemodel.errors.models.password_check.attributes.password.too_long'),
+      tooShort: I18n.t('activemodel.errors.models.password_check.attributes.password.too_short'),
+    },
+    password_confirmation: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('repeat_password')),
+      confirmation: I18n.t('activerecord.errors.models.authenticators/password.attributes.password.confirmation')
+    },
+  },
+  password_verification: I18n.t('activemodel.errors.models.password_verification.attributes').deep_merge(
+    password: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('password'))
+    }
+  ),
+  recover_account: {
+    burgerservicenummer: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('citizen_service_number')),
+      invalid: I18n.t('activemodel.errors.models.recover_account.attributes.burgerservicenummer.invalid'),
+      invalid_8: I18n.t('activemodel.errors.models.recover_account.attributes.burgerservicenummer.invalid_8')
+    },
+    username: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('username'))
+    }
+  },
+  recovery_code: {
+    herstelcode: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('recover_code')),
+      invalid: I18n.t('activerecord.errors.models.recovery_code.attributes.herstelcode.invalid'),
+      tooShort: I18n.t('activerecord.errors.messages.too_short', attribute: I18n.t('recover_code'), count: '9'),
+    },
+  },
+  wid_revocation_code: {
+    intrekkingscode: {
+      invalid: I18n.t('activerecord.errors.models.wid_revocation_code.attributes.intrekkingscode.invalid')
+    },
+  },
+  app_verification_code: {
+    verification_code: {
+      blank: I18n.t('activerecord.errors.models.app_verification_code.attributes.verification_code.blank'),
+      invalid: I18n.t('activerecord.errors.models.app_verification_code.attributes.verification_code.invalid')
+    },
+  },
+  registration: {
+    burgerservicenummer: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('activerecord.attributes.registration.burgerservicenummer')),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.burgerservicenummer.invalid'),
+      invalid_8: I18n.t('activerecord.errors.models.registration.attributes.burgerservicenummer.invalid_8')
+    },
+    geboortedatum_dag: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.invalid'),
+      date_blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.date_blank')
+    },
+    geboortedatum_maand: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_maand.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_maand.invalid')
+    },
+    geboortedatum_jaar: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_jaar.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_jaar.invalid'),
+      invalid_future: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum.invalid_future')
+    },
+    huisnummer: {
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.huisnummer.invalid')
+    },
+    huisnummertoevoeging: {
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.huisnummertoevoeging.invalid')
+    },
+    postcode: {
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.postcode.invalid')
+    }
+  },
+  registration_balie: {
+    burgerservicenummer: {
+      blank: I18n.t('activerecord.errors.messages.blank', attribute: I18n.t('activerecord.attributes.registration.burgerservicenummer')),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.burgerservicenummer.invalid'),
+      invalid_8: I18n.t('activerecord.errors.models.registration.attributes.burgerservicenummer.invalid_8')
+    },
+    geboortedatum_dag: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.invalid'),
+      date_blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_dag.date_blank')
+    },
+    geboortedatum_maand: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_maand.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_maand.invalid')
+    },
+    geboortedatum_jaar: {
+      blank: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_jaar.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum_jaar.invalid'),
+      invalid_future: I18n.t('activerecord.errors.models.registration.attributes.geboortedatum.invalid_future')
+    },
+    valid_until_day: {
+      blank: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_day.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_day.invalid'),
+      date_blank: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_day.date_blank')
+    },
+    valid_until_month: {
+      blank: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_month.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_month.invalid')
+    },
+    valid_until_year: {
+      blank: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_year.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until_year.invalid'),
+      year_is_in_past: I18n.t('activerecord.errors.models.registration_balie.attributes.valid_until.invalid_past'),
+    },
+    id_number: {
+      blank: I18n.t('activerecord.errors.models.registration_balie.attributes.id_number.blank'),
+      invalid: I18n.t('activerecord.errors.models.registration_balie.attributes.id_number.invalid'),
+      invalid_foreign: I18n.t('activerecord.errors.models.registration_balie.attributes.id_number.invalid_foreign'),
+      contains_o: I18n.t('activerecord.errors.models.registration_balie.attributes.id_number.contains_o')
+    }
+  },
+  smscode: {
+    smscode: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('activemodel.attributes.smscode.smscode')),
+      invalid: I18n.t('activemodel.errors.models.smscode.attributes.smscode.invalid')
+    },
+  },
+  unblockingscode: {
+    unblockingscode: {
+      blank: I18n.t('activemodel.errors.models.unblockingscode.attributes.unblockingscode.blank', attribute: I18n.t('activemodel.attributes.unblockingscode.unblockingscode')),
+      invalid: I18n.t('activemodel.errors.models.unblockingscode.attributes.unblockingscode.invalid', attribute: I18n.t('activemodel.attributes.unblockingscode.unblockingscode')),
+      wrong: I18n.t('activemodel.errors.models.unblockingscode.attributes.unblockingscode.wrong', attribute: I18n.t('activemodel.attributes.unblockingscode.unblockingscode'))
+    },
+  },
+  app_activationcode: {
+    activationcode: {
+      blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('activemodel.attributes.app_activationcode.activationcode')),
+      invalid: I18n.t('activemodel.errors.models.app_activationcode.attributes.activationcode.invalid'),
+      tooShort: I18n.t('activemodel.errors.messages.exact', attribute: I18n.t('activemodel.attributes.app_activationcode.activationcode'), count: 6),
+    },
+  }
+}.to_json %>

@@ -1,0 +1,1 @@
+ALTER TABLE services ADD entity_id VARCHAR(255) NOT NULL;

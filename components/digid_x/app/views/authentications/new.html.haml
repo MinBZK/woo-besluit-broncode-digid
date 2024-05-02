@@ -1,0 +1,80 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name) : heading_with_icon(t('log_in'))
+
+= render('shared/news_item', news_items: @news_items)
+
+- if webservice.present?
+  %h2.orange_heading#authentication_heading= t('login_with_what')
+
+- if @session_ends_label && wrapped_session.expires_at.present?
+  = render('shared/session_countdown', key: 'no_extension')
+
+= block_with_icon(@federation_name) if @federation_name
+= flash_alert
+= flash_notice
+
+- if webservice.present?
+  - icon_options = [:information, class: "login_level_notification"]
+  - if webservice.assurance_date.present?
+    - if webservice.basis_to_midden? && @level == 'basis'
+      = block_with_icon(t('info_basis_to_midden', url: link_to(t('my_digid.self'), my_digid_url), date: l(webservice.assurance_date, format: :date)).html_safe, *icon_options)
+    - elsif webservice.assurance_to == "Substantieel" && %w(Midden Basis).include?(webservice.assurance_from) && (@level == 'basis' || @level == 'midden')
+      - if inlogniveau_verhogen_via_mydigid_enabled?
+        = block_with_icon(t('info_midden_to_substantieel', date: l(webservice.assurance_date, format: :date), id_check: external_link_to(t('my_digid.login_methods.id_check'), 'https://www.digid.nl/inlogmethodes/id-check'), webservice: webservice_name, url: my_digid_url).html_safe, *icon_options)
+      - else
+        = block_with_icon(t('info_midden_to_substantieel_via_mijn_digid_inactive', date: l(webservice.assurance_date, format: :date), id_check: external_link_to(t('my_digid.login_methods.id_check'), 'https://www.digid.nl/inlogmethodes/id-check')).html_safe, *icon_options)
+
+%div.authentications
+  - if @login_options.any?
+    - @login_options.each.with_index(1) do |login_option, index|
+      %a.authentication.login_tile{id: "authentication_type_account_#{login_option.type}", class: login_option.type == :app ? "app active" : "", href: login_option.url || "#", 'aria-label': t('login_tile_label', current_option: index, total_options: @login_options.size, login_method: login_option.text)}
+        %h2
+          = icon(login_option.type.to_s, hidden: true) if login_option.type != :app
+          %span= login_option.text
+          -if login_option.type == :app
+            %p.description= t('the_easiest_way_to_login_safely')
+          - else
+            %p.description
+        = icon("3941-delta-links-24px", css_class: "right", hidden: true)
+      = block_with_icon(*login_option.error) if login_option.error.present?
+
+%div.actions
+  = action_button(:cancel, sign_in_url(commit: t('cancel')), arrow: true)
+
+- if @level == 'midden'
+  = t('you_need_to_log_in_with_this_method', digid_app: external_link_to(t('my_digid.login_methods.digid_app'), 'https://www.digid.nl/inlogmethodes/digid-app'), sms_verification: external_link_to(t('my_digid.login_methods.sms_downcase'), 'https://www.digid.nl/inlogmethodes/sms-controle')).html_safe
+- elsif @level == 'substantieel'
+  = t('you_need_to_log_in_with_app_id_check', digid_app: external_link_to(t('my_digid.login_methods.digid_app'), 'https://www.digid.nl/inlogmethodes/digid-app'), id_check: external_link_to(t('my_digid.login_methods.id_check'), 'https://www.digid.nl/inlogmethodes/id-check')).html_safe
+
+%ul.list-with-arrows.margin-bottom-48px
+  %li#request-new-digid= link_to(t('no_digid_request_new_digid'), new_registration_url)

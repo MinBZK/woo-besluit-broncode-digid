@@ -1,0 +1,70 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+!!!
+%html
+  %head
+    %title DigiD Beheer
+    = stylesheet_link_tag 'application', media: 'all', nonce: content_security_policy_style_nonce
+    = javascript_include_tag 'application', nonce: content_security_policy_script_nonce
+    = favicon_link_tag
+    = csrf_meta_tag
+    = yield(:head)
+  %body.theme{ class: APP_CONFIG["admin_theme"] || Rails.env}
+    #menu
+      #env
+        %h1= (APP_CONFIG["admin_theme"] || Rails.env).capitalize
+        %span= digid_version
+      = link_to 'Dashboard', root_path, class: 'selected dashboard'
+      = render partial: 'shared/menu'
+    #header
+      - if logged_in?
+        Ingelogd als: #{current_user.name.first} #{current_user.surname}
+        |
+        = link_to 'Mijn account', show_own_manager_path(current_user)
+        |
+        = link_to 'Uitloggen', destroy_session_path
+        #search_field
+          = form_tag '/search' do
+            = text_field_tag :query, params[:query] || ''
+            = submit_tag 'Zoek »'
+      - else
+        %br
+    #wrapper
+      #main
+        - if can?(:view_cert_alerts, ApplicationController)
+          = render 'shared/cert_alert'
+        - if alert
+          %p#alert= alert
+        - if notice
+          %p#notice= notice
+        %div{ id: params[:controller], class: params[:action] }= yield
+        = render partial: 'shared/session_timer'

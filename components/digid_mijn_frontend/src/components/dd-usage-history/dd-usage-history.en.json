@@ -1,0 +1,16 @@
+{
+  "history": {
+    "page-title": "My DigiD | Usage History",
+    "header": "Usage history",
+    "btn": "View my usage history",
+    "subtitle": "You can see the usage history of your DigiD here. Do you suspect that something is wrong?",
+    "dutch-time-footer": "All time mentioned above is Dutch time.",
+    "table-date-header": "Date",
+    "table-time-header": "Time",
+    "table-date-time-header": "Date and time",
+    "table-action-header": "Action",
+    "displaying": "displaying ",
+    "results": " results",
+    "no-results": "there are no results"
+  }
+}

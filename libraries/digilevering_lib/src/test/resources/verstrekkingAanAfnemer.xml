@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:VerstrekkingAanAfnemer xmlns:ns2="http://www.digilevering.nl/digilevering.xsd">
+    <datumtijdstempelDigilevering>2018-02-02T11:59:04.170+01:00</datumtijdstempelDigilevering>
+    <datumtijdstempelLV>2017-11-27T14:33:05.010+01:00</datumtijdstempelLV>
+    <kenmerkDigilevering>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</kenmerkDigilevering>
+    <kenmerkLV>SSSSSSSSSSSSSSSSSSSSSSSSSSSSS</kenmerkLV>
+    <versieBerichttype>3.10</versieBerichttype>
+    <abonnement>
+        <naam></naam>
+        <versie></versie>
+    </abonnement>
+    <basisregistratie>BRP</basisregistratie>
+    <gebeurtenissoort>
+        <naam>Gv01</naam>
+        <versie>1.0</versie>
+    </gebeurtenissoort>
+    <gebeurtenisinhoud>
+        <gv01 aNummer="SSSSSSSSSS" randomKey="00000000">
+            <categorie nummer="08">
+                <element nummer="PPPP">PPPPPPPPPPPPPPPPPPPP</element>
+                <element nummer="PPPP">PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</element>
+                <element nummer="PPPP"></element>
+            </categorie>
+            <categorie nummer="58">
+                <element nummer="PPPP">PPPPPPPPPPPPPPPPPPPPP</element>
+                <element nummer="PPPP">PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</element>
+                <element nummer="PPPP">O</element>
+            </categorie>
+        </gv01>
+    </gebeurtenisinhoud>
+</ns2:VerstrekkingAanAfnemer>

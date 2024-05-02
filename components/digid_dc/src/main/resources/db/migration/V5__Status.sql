@@ -1,0 +1,6 @@
+CREATE TABLE statuses (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  active BOOLEAN NOT NULL DEFAULT 0,
+  active_from DATETIME,
+  active_until DATETIME
+);

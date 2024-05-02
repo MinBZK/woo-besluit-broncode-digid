@@ -1,0 +1,14 @@
+.ui-tooltip {
+  -webkit-box-shadow: 0 0 5px #aaa;
+  box-shadow: 0 0 5px #aaa;
+  left: -100px;
+  max-width: 1000px;
+  padding: 8px;
+  position: absolute;
+  top: -100px;
+  z-index: 9999;
+}
+
+body .ui-tooltip {
+  border-width: 2px;
+}

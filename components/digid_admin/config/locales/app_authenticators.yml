@@ -1,0 +1,11 @@
+nl:
+  app_authenticator:
+    nfc_support:
+      nee: Nee
+      ja: Ja
+      onbekend: Onbekend
+    substantieel_document_type:
+      id_card: Nederlandse identiteitskaart
+      passport: Nederlands paspoort
+      driving_licence: Nederlands rijbewijs (Uitgegeven na 14-11-2014)
+      driving_license: Nederlands rijbewijs (Uitgegeven na 14-11-2014)

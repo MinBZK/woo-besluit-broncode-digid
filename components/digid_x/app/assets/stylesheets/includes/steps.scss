@@ -1,0 +1,78 @@
+.simple-step-counter {
+  margin-bottom: 8px;
+}
+
+.steps{
+  width: 100%;
+  height: 24px;
+  position: relative;
+  overflow-y:hidden;
+  margin-bottom: 8px;
+}
+
+.steps-container{
+  width: 100%;
+  height: 24px;
+  display: table;
+}
+
+.step{
+  background-color: #fbf2cb;
+  min-width: 32px;
+  padding-top: 3px;
+  height: 20px;
+  padding-left: 7px;
+  text-align: center;
+  position: relative;
+  display: table-cell;
+  font-size: 95%;
+}
+
+.step:after{
+  content: "";
+  width:1.15rem;
+  height: 1.15rem;
+  background-color: #fbf2cb;
+  position: absolute;
+  top: 0.22em;
+  right: -8px;
+  transform: rotate(45deg);
+  z-index: 10;
+  box-shadow: 1px -1px 0px white, inset -1px 1px 0 white;
+}
+
+.step.step-unfinished-last,
+.step.step-unfinished{
+  background-color: $nrs-f8f8f9;
+}
+
+.step.step-unfinished-last:after,
+.step.step-unfinished:after{
+  background-color: $nrs-f8f8f9;
+}
+
+.step.step-current-last,
+.step.step-current{
+  background-color: #fadb3c;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.step.step-current:after{
+  background-color: #fadb3c;
+}
+
+.step.step-unfinished-last:after,
+.step.step-last:after,
+.step.step-current-last:after{
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 450px) {
+  .step-title {
+    display: none;
+  }
+}
+

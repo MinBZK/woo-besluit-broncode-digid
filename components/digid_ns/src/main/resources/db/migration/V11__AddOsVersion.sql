@@ -1,0 +1,1 @@
+ALTER TABLE notification_registrations ADD os_version VARCHAR(255);

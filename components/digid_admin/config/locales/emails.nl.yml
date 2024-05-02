@@ -1,0 +1,72 @@
+nl:
+  mailer:
+    subject:
+      notify_geblokkeerd_wid: "De inlogfunctie van uw %{document_type} is geblokkeerd" # EB003
+      notify_pin_wid: "De brief met pincode voor uw %{document_type} is aangevraagd" # EB005
+      notify_deblokkeringscode: "De deblokkeringscode voor de inlogfunctie van uw %{document_type} is verzonden" # EB004
+    body:
+      # algemeen
+      aanhef: Geachte heer/mevrouw,
+      notify_geblokkeerd_wid: | # EB003
+        Op uw verzoek hebben wij de inlogfunctie van uw %{document_type} geblokkeerd. Dit betekent dat u niet meer kunt inloggen met uw %{document_type} via DigiD.
+
+        Heeft u deze blokkering zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.
+
+        Heeft u deze blokkering niet zelf aangevraagd? Neem dan contact op met de DigiD Helpdesk. Zij kunnen u helpen om de inlogfunctie van uw %{document_type} weer te activeren.
+      notify_geblokkeerd_wid_html: | # EB003
+        <p>Op uw verzoek hebben wij de inlogfunctie van uw %{document_type} geblokkeerd. Dit betekent dat u niet meer kunt inloggen met uw %{document_type} via DigiD.</p>
+        <p>Heeft u deze blokkering zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.</p>
+        <p>Heeft u deze blokkering niet zelf aangevraagd? Neem dan contact op met de DigiD Helpdesk. Zij kunnen u helpen om de inlogfunctie van uw %{document_type} weer te activeren.</p>
+
+      notify_deblokkeringscode: | # EB004
+        De door u aangevraagde deblokkeringscode is per brief verstuurd. Hiermee kunt u de inlogfunctie van uw %{document_type} deblokkeren en kunt u weer inloggen met uw %{document_type}.
+
+        Heeft u de deblokkeringscode zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.
+
+        Heeft u de deblokkeringscode niet zelf aangevraagd? Dan kan het zijn dat:
+
+        - dit e-mailadres ook gebruikt wordt voor de DigiD van bijvoorbeeld een familielid. Mogelijk heeft diegene de deblokkeringscode voor zichzelf aangevraagd. Wij adviseren u dit na te gaan. U hoeft geen contact met ons op te nemen.
+
+        - iemand anders de deblokkeringscode voor de inlogfunctie van uw %{document_type} heeft aangevraagd zonder uw toestemming. Vermoedt u dat dit het geval is, neem dan direct contact met ons op.
+      notify_deblokkeringscode_html: | # EB004
+        <p>De door u aangevraagde deblokkeringscode is per brief verstuurd. Hiermee kunt u de inlogfunctie van uw %{document_type} deblokkeren en kunt u weer inloggen met uw %{document_type}.</p>
+        <p>Heeft u de deblokkeringscode zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.</p>
+        <p>Heeft u de deblokkeringscode niet zelf aangevraagd? Dan kan het zijn dat:</p>
+        <div style="margin-left: 5%">
+          <span>- dit e-mailadres ook gebruikt wordt voor de DigiD van bijvoorbeeld een familielid. Mogelijk heeft diegene de deblokkeringscode voor zichzelf aangevraagd. Wij adviseren u dit na te gaan. U hoeft geen contact met ons op te nemen.</span>
+          <br />
+          <span>- iemand anders de deblokkeringscode voor de inlogfunctie van uw %{document_type} heeft aangevraagd zonder uw toestemming. Vermoedt u dat dit het geval is, neem dan direct contact met ons op.</span>
+        </div>
+
+      notify_pin_wid: | # EB005
+        De brief met de pincode voor uw %{document_type} is aangevraagd. Met deze brief kunt u de persoonlijke pincode van uw %{document_type} herstellen.
+
+        Heeft u deze brief zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.
+
+        Heeft u deze brief niet zelf aangevraagd? Neem dan contact op met de DigiD Helpdesk.
+      notify_pin_wid_html: | # EB005
+        <p>De brief met de pincode voor uw %{document_type} is aangevraagd. Met deze brief kunt u de persoonlijke pincode van uw %{document_type} herstellen.<p>
+        <p>Heeft u deze brief zelf aangevraagd? Dan hoeft u niets te doen en kunt u deze e-mail negeren.<p>
+        <p>Heeft u deze brief niet zelf aangevraagd? Neem dan contact op met de DigiD Helpdesk.</p>
+
+      signature: |
+        Met vriendelijke groet,
+
+
+        DigiD Helpdesk
+        Bereikbaar op werkdagen van 8.00 tot 22.00 uur. Op zaterdagen van 9.00 uur tot 17.00 uur. (Nederlandse tijd)
+        T 088 123 65 55
+      signature_html: |
+        Met vriendelijke groet,
+        <br />
+        <br />
+        DigiD Helpdesk
+        <br />
+        Bereikbaar op werkdagen van 8.00 tot 22.00 uur. Op zaterdagen van 9.00 uur tot 17.00 uur. (Nederlandse tijd)
+        <br />
+        T 088 123 65 55
+
+      footer_html: |
+        <p>Dit is een automatisch gegenereerd bericht. Een reactie op dit bericht wordt niet gelezen of beantwoord.</p>
+
+        <p>DigiD stuurt nooit een link naar de website. Ontvangt u toch een e-mail van DigiD met daarin een link, dan is dit een valse e-mail. Deze is verstuurd door iemand die zich voordoet als DigiD met als doel uw gegevens te achterhalen. Ga daarom altijd zelf naar de website van DigiD via uw browser.</p>

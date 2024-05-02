@@ -1,0 +1,56 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h2= t("accounts.headers.general")
+= field t("state"), (!@verification.audit ? I18n.t("verification.state.#{@verification.state}") : I18n.t("verification.suspected_fraud"))
+- if @verification.audit
+  = field t("reason"), @verification.audit.motivation
+= field t("citizen_service_number_registration"), @verification.citizen_service_number
+= field t("registration_finished_at"), l(Time.parse(@verification.front_desk_registration_created_at), format: :default)
+= field "#{t("registration_finished_at")} #{t("front_desks.in_local_time", offset: @verification.front_desk.tz.formatted_offset_utc)}", l(Time.parse(@verification.front_desk_registration_created_at).in_time_zone(@verification.front_desk.time_zone), format: :default)
+= field t("has_account_been_activated"), @verification.activated ? t("human_true") : t("human_false")
+
+%h2= t("release")
+= field t("released_by"), link_to(truncate(@verification.user.pseudonym, length: 15), pseudonym_front_desks_path(@verification.user.pseudonym), remote: true)
+= field t("nationality"), @verification.nationality
+= field t("id_document_number"), @verification.verification_correction ? @verification.verification_correction.original_id_number : @verification.id_number
+- if @verification.verification_correction
+  = field "#{t("id_document_number")} (#{t("corrected")})", @verification.id_number
+= field t("valid_until"), l(Date.parse(@verification.verification_correction ? @verification.verification_correction.original_id_expires_at : @verification.id_expires_at), format: :default)
+= field "#{t("valid_until")} #{t("front_desks.in_local_time", offset: @verification.front_desk.tz.formatted_offset_utc)}", l(Date.parse(@verification.verification_correction ? @verification.verification_correction.original_id_expires_at : @verification.id_expires_at).in_time_zone(@verification.front_desk.time_zone), format: :default)
+- if @verification.verification_correction
+  = field "#{t("valid_until")} (#{t("corrected")})", l(Date.parse(@verification.id_expires_at), format: :default)
+  = field "#{t("valid_until")} (#{t("corrected")}) #{t("front_desks.in_local_time", offset: @verification.front_desk.tz.formatted_offset_utc)}", l(Date.parse(@verification.id_expires_at).in_time_zone(@verification.front_desk.time_zone), format: :default)
+  = field t("motivation_correction"), @verification.verification_correction.motivation
+- if @verification.activated_at
+  = field t("time_release"), l(@verification.activated_at, format: :default)
+  = field "#{t("time_release")} #{t("front_desks.in_local_time", offset: @verification.front_desk.tz.formatted_offset_utc)}", l(@verification.activated_at.in_time_zone(@verification.front_desk.time_zone), format: :default)
+= field t("suspected_fraud_at_release"), @verification.suspected_fraud ? t("human_true") : t("human_false")

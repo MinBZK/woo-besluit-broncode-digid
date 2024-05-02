@@ -1,0 +1,19 @@
+window.constants = {} unless window.constants
+window.constants.spacerUrl = "<%= image_url('spacer.gif') %>"
+window.constants.spinnerHtml = "<div class=\"lds-spinner\" aria-label=\"Een ogenblik geduld alstublieft.\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>"
+window.constants.regexes =
+    capitals: /<%= CharacterClass::CAPITALS.source %>/g
+    digits: /<%= CharacterClass::DIGITS.source %>/g
+    email: /^<%= CharacterClass::EMAIL.source %>$/i
+    email_len_to_at_sign: /^<%= CharacterClass::EMAIL_LEN_TO_AT_SIGN.source %>$/i
+    idNumber: /^<%= CharacterClass::ID_NUMBER.source %>$/
+    idNumberForeign: /^<%= CharacterClass::ID_NUMBER_FOREIGN.source %>$/
+    miniscules: /<%= CharacterClass::MINUSCULES.source %>/g
+    specialCharacters: /<%= CharacterClass::SPECIAL_CHARACTERS.source %>/g
+    only:
+      bsn_format: /^<%= CharacterClass::BSN_FORMAT.source %>$/
+      house_number_addition: /^<%= CharacterClass::HOUSE_NUMBER_ADDITION.source %>$/
+      house_number: /^<%= CharacterClass::HOUSE_NUMBER.source %>$/
+      password: /^<%= CharacterClass::PASSWORD.source %>$/
+      postal_code: /^<%= CharacterClass::POSTAL_CODE.source %>$/
+      username: /^<%= CharacterClass::USERNAME.source %>$/

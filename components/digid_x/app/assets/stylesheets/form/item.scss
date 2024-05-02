@@ -1,0 +1,401 @@
+// Form items
+//
+// form__item           - default form item
+// form__item--active   - active form item
+// form__item--error    - error form item
+//
+// Styleguide 2.1.2.
+%form-item {
+  margin-top: 16px;
+  padding: 0px 0px;
+  position: relative;
+}
+
+.form__item {
+  @extend %form-item;
+
+  // EXAMPLE
+  .form__item__example {
+    display: block;
+    margin-bottom: 8px;
+    color: $nrs-5a5a5a;
+  }
+
+  // TEXT
+  .form__item__text {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 13px;
+  }
+}
+
+// Hidden legend for screen reader support
+.form__item__legend__visually__hidden { 
+  position: absolute !important;
+  height: 1px; 
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
+
+.form__item--active {
+  &.form__item {
+  }
+
+  &.form__item--error {
+  }
+}
+
+.form__item--error {
+  @extend %form-item;
+
+  // EXAMPLE
+  .form__item__example {
+    display: block;
+    margin-bottom: 8px;
+    color: $nrs-5a5a5a;
+  }
+}
+
+.form__item--error + .gesproken_sms_infobox {
+  margin-top: 5px;
+}
+
+// BOX-LABEL
+.form__item__box-label {
+  display: block;
+  margin-left: 30px;
+  padding-top: 3px;
+  position: relative;
+}
+
+// ERRORS
+.form__item__errors {
+  background-image: image-url('error.svg');
+  background-color: $rs-rood-lichte-tint-alternative;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  background-size: 21px 21px;
+  min-height: 20px;
+  padding: 5px;
+  padding-left: 38px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: auto;
+  border-radius: $default-border-radius;
+  position: relative;
+
+  @media screen and (min-width: 1px) {
+    &:before {
+      border-color: transparent;
+      border-bottom-color: $rs-rood-lichte-tint-alternative;
+      border-style: solid;
+      border-width: 0 15px 15px 15px;
+      content: '';
+      height: 0;
+      left: 30px;
+      top: -15px;
+      width: 0;
+      position: absolute;
+    }
+  }
+}
+
+ul.form__item__errors {
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+// FIELD
+%form-item-field {
+  border-color: $nrs-282828;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  font-family: "RO Sans", Verdana, Arial, sans-serif;
+  font-size: 110%;
+  margin-right: 6px;
+  // max-width: 333px;
+  padding: 8px 3%;
+  height: 30px;
+
+  // code fields are shown in capitals
+  &[data-code],
+  &[data-capitals] {
+    text-transform: uppercase;
+  }
+
+  .form__item--error & {
+    border-color: $nrs-960000;
+  }
+}
+
+.form__item--error .code_box:nth-last-child(4) {
+  margin-right: 0px;
+}
+
+.form__item--error .code_box.code_box_length_4:nth-last-child(4) {
+  margin-right: 2%;
+}
+
+.form__item--error .code_box.code_box_length_4:nth-last-child(3) {
+  margin-right: 0px;
+}
+
+input[type="text"], input[type="password"], input[type="tel"], input[type="number"] {
+  &:focus {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.24);
+    outline: none;
+    margin-top: -2px;
+    margin-bottom: 2px;
+
+    & + .icon-1008-oog {
+      bottom: 36px;
+    }
+  }
+}
+
+.code_box{
+  @extend %form-item-field;
+  text-align: center;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  transition: all 0.15s;
+
+  &:focus {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.24);
+    outline: none;
+    transform:translateY(-2px)
+  }
+
+  &.code_box_length_4{
+    width: 23.5%;
+    height: 48px;
+    margin-right: 2%;
+  }
+
+  &.code_box_length_6{
+    width: 14.40%;
+    height: 48px;
+    margin-right: 2%; //TODO use 100% width 
+  }
+
+  &.code_box_length_4:nth-last-child(1), &.code_box_length_6:nth-last-child(1){
+    margin-right: 0px;
+  }
+}
+
+.form__item__field {
+  @extend %form-item-field;
+  width: 94%;
+}
+
+select.form__item__field {
+  padding: 0;
+}
+
+// position eye icon relative to form item
+.show_password_field .icon-1008-oog {
+  position: relative;
+  left: 92%;
+  bottom: 34px;
+  font-size: 125%;
+}
+
+// for Internet Explorer browser: remove the browser-specific password reveal and clear icons (overlaps with .show_password_field icon of DigiD)
+input::-ms-reveal, input::-ms-clear {
+    display: none;
+}
+
+.form__item__field--box {
+  margin-top: 5px;
+  position: absolute;
+}
+
+.form__item__field--extra-small {
+  @extend %form-item-field;
+  width: 30px;
+}
+
+.form__item__field--medium {
+  @extend %form-item-field;
+  max-width: 158px;
+}
+
+.form__item__field--small {
+  @extend %form-item-field;
+  width: 66px;
+}
+
+// INFORMATION
+.form__item__information {
+  transition: left linear .2s;
+  @include block-with-icon($nrs-d9ebf7, image-url('session.svg'));
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  left: 74%;
+  // left margin is specific for IE8 (for which we remove the triangle)
+  margin: 15px 0 5px -30px;
+  padding: 10px 15px 10px 40px;
+  position: absolute;
+  top: -20px;
+  visibility: hidden;
+  width: 210px;
+  z-index: 10;
+
+  // no negative left margin for IE9+ and other browsers
+  @media screen and (min-width: 1px) {
+    margin-left: 0;
+  }
+
+  .window.small & {
+    display: none;
+    left: auto;
+    position: relative;
+    top: auto;
+    visibility: visible;
+    width: auto;
+  }
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    display: none;
+    left: auto;
+    position: relative;
+    top: auto;
+    visibility: visible;
+    width: auto;
+  }
+
+  // because of issues with the leading triangle in IE8, use a media query to
+  // prevent the triangle from showing up in IE8
+  @media screen and (min-width: 1px) {
+    &:before {
+      border-color: transparent;
+      border-right-color: $nrs-d9ebf7;
+      border-style: solid;
+      border-width: 15px;
+      content: '';
+      height: 0;
+      left: -30px;
+      position: absolute;
+      top: 30px;
+      width: 0;
+
+      .window.small & {
+        border-bottom-color: $nrs-d9ebf7;
+        border-right-color: transparent;
+        left: 30px;
+        right: auto;
+        top: -30px;
+      }
+
+      @media screen and (max-width: $breakpoint2 - 1) {
+        border-bottom-color: $nrs-d9ebf7;
+        border-right-color: transparent;
+        left: 30px;
+        right: auto;
+        top: -30px;
+      }
+    }
+  }
+
+  .form__item__field.focus ~ &,
+  .form__item__field--box.focus ~ &,
+  .form__item__field--extra-small.focus ~ &,
+  .form__item__field--medium.focus ~ &,
+  .form__item__field--small.focus ~ & {
+    left: 77%;
+    visibility: visible;
+
+    .window.small & {
+      display: block;
+      left: auto;
+    }
+
+    @media screen and (max-width: $breakpoint2 - 1) {
+      display: block;
+      left: auto;
+    }
+  }
+
+  input[type='radio'] ~ & {
+    left: 94%;
+
+    @media screen and (min-width: 1px) {
+      margin-left: 0;
+    }
+
+    @media screen and (max-width: $breakpoint3 - 1) {
+      display: none;
+      left: auto;
+      position: relative;
+      top: auto;
+      visibility: visible;
+      width: auto;
+    }
+
+    &:before {
+      @media screen and (max-width: $breakpoint3 - 1) {
+        border-bottom-color: $nrs-fce559;
+        border-right-color: transparent;
+        left: 30px;
+        right: auto;
+        top: -30px;
+      }
+    }
+  }
+
+  input[type='radio'].form__item__field:checked ~ &,
+  input[type='radio'].form__item__field--box:checked ~ &,
+  input[type='radio'].form__item__field--extra-small:checked ~ &,
+  input[type='radio'].form__item__field--medium:checked ~ &,
+  input[type='radio'].form__item__field--small:checked ~ & {
+    left: 97%;
+    visibility: visible;
+
+    @media screen and (max-width: $breakpoint3 - 1) {
+      display: block;
+      left: auto;
+    }
+  }
+}
+
+// LEGEND (HTML <legend> Tag: Used to group related elements in a form )
+.form__legend {
+  font-weight: bold;
+  display: table; /* Enable line-wrapping in IE8+ */
+  white-space:normal; /* Enable line-wrapping in old versions of some other browsers */
+  margin-bottom: 5px;
+  font-size: 112%;
+}
+
+.form__item--error.with_legend .form__legend{
+  color: $nrs-960000;
+}
+
+.form__legend__required {
+  margin-left: 5px;
+}
+
+// LABEL
+.form__item__label {
+  font-size: 112%;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  .form__item--error & {
+    color: $nrs-960000;
+  }
+}
+
+.form__item__label__required {
+  margin-left: 5px;
+}
+
+.form__item__hint {
+  margin-top: 15px;
+}

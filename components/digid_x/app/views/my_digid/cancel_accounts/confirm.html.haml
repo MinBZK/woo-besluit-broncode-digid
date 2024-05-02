@@ -1,0 +1,60 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(t('revoke_digid'))
+
+- if logged_in_with_pass?
+  = steps(1, 2)
+- elsif logged_in_with_wid?
+  - if logged_in_web_to_app?
+    = steps(1, 2)
+  - elsif logged_in_with_desktop_wid?
+    = steps(1, 2)
+  - else
+    = steps(1, 4)
+- elsif logged_in_with_app?
+  - if logged_in_web_to_app?
+    = steps(1, 1)
+  - else
+    = steps(1, 5)
+- else
+  = steps(1, 5)
+
+= block_with_icon do
+  %p
+    %strong= t('beware') + ':'
+    = t('after_this_you_cant_use_any_services_that_require_a_digid')
+
+= extended_form_for(Confirm.new(value: false), url: my_digid_opheffen_digid_url) do |form|
+  = form.confirm_radio_buttons(t('revoke_digid_yes'), t('revoke_digid_no'), label: t('revoke_digid_are_you_sure'))
+  = actions do
+    = action_submit(:next)
+    = cancel_button(my_digid_annuleren_opheffen_digid_url)

@@ -1,0 +1,5 @@
+logius-row {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}

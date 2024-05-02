@@ -1,0 +1,43 @@
+
+// Form header
+//
+// Extended Form For `form.header` and `form.header-with-icon`
+//
+// form__header         - default form header
+// form__header--mail   - form header with mail icon
+// form__header--sms    - form header with sms icon
+//
+// Styleguide 2.1.1.
+
+%form-header {
+  @include clearfix; // Compass
+}
+
+%form-header-with-icon {
+  @extend %form-header;
+  background-position: top left;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+
+.form__header {
+  @extend %form-header;
+}
+
+.form__header--appcode {
+  @extend %form-header-with-icon;
+  background-image: image-url('icon-smartphone.png');
+}
+
+.form__header--mail {
+  @extend %form-header-with-icon;
+  background-image: image-url('icon-mail.png');
+}
+
+.form__header__required-fields {
+  float: right;
+  margin-bottom: 10px;
+  @media screen and (min-width: $breakpoint2) {
+    margin-top: -26px;
+  }
+}

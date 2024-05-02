@@ -1,0 +1,268 @@
+nl:
+  model_attributes: &model_attributes
+    aselect_webservice:
+      assurance_level: Zekerheidsniveau
+      assurance_level_10: Basis
+      assurance_level_20: Midden
+      assurance_level_22: EPD
+      app_id: App ID
+      shared_secrets: Shared secret
+      no_shared_secrets: Geen
+    certificate:
+      created_at: Tijdstip toegevoegd
+      distinguished_name: Certificaat DN
+      cached_certificate: Certificaat
+      certificate: Certificaat
+      not_after: Datum Einde
+      not_before: Datum Ingang
+      type: Soort Certificaat
+      authentication_method: Authenticatiemethode
+    dc/service:
+      id: ID
+      name: Naam
+      website_url: Website URL
+      active_from: Actief vanaf
+      active_until: Actief tot
+      check_redirect_url: Controle redirect URL
+      description: Beschrijving
+      assurance_from: Van zekerheidsniveau
+      assurance_to: Naar zekerheidsniveau
+      assurance_date: Ingangsdatum verhoging zekerheidsniveau
+      note: Opmerkingen
+    dc/organization:
+      note: Opmerkingen
+    dc/connection:
+      note: Opmerkingen
+    dc/service:
+      note: Opmerkingen
+    manager:
+      note: Opmerkingen
+      format:
+        mobile_number: 06 - %{mobile_number}
+      authentications: Authenticatie Middelen
+      account_name: Accountnaam
+      name: Naam
+      surname: Achternaam
+      email: E-mailadres
+      mobile_number: Mobiel
+      active: Actief
+      no_subscribed_notifications: Geen notificaties ingesteld
+      notify_via: Alarmeren via
+      notify_sms: SMS
+      notify_email: Email
+      current_sign_in_at: Ingelogd sinds
+      last_sign_in_at: Laatste keer ingelogd om
+      subscribed_notifications: Alarmeren voor
+      superuser: Superbeheerder
+      roles: Rollen
+      status: Status
+      active_true: Actief
+      active_false: Opgeschort
+      alarm_notifications: Alarmeren voor
+      notify_with: Alarmeren via
+      no_notifications: Geen alarmeringen ingesteld
+      distinguished_name: Certificaat DN
+      no_roles: Dit beheeraccount heeft nog geen rollen toegekend gekregen
+    manager_log:
+      name: Naam
+    news_item:
+      name_nl: Titel NL
+      name_en: Titel EN
+      body_nl: Inhoud NL
+      body_en: Inhoud EN
+      active: Actief
+      active_from: Datum/Tijd actief
+      active_until: Datum/Tijd inactief
+      locations: Zichtbare locatie(s)
+    news_location:
+      name: naam
+      relative_path: pad
+    organization:
+      name: Naam
+      description: Omschrijving
+    question:
+      page: Scherm
+      position: Positie
+      question: Vraag
+      answer: Antwoord
+    role:
+      note: Opmerkingen
+      name: Naam
+      permissions: Privileges
+      managers: Beheeraccounts
+      accounts: Accounts
+      no_permissions: Geen privileges ingesteld
+      no_managers: Geen beheeraccounts ingesteld
+    saml_provider:
+      allow_sso: SSO toepasbaar
+      metadata_url: Metadata URL
+      metadata_file: Metadata XML
+      metadata_filename: Metadata Entity ID
+      entity_id: Metadata Entity ID
+      filename: Metadata Entity ID
+      sso_domain: SSO domein
+      no_sso_domain: Geen
+      cached_metadata: Metadata
+    sector:
+      pretty_name: Presentatie
+      name: Naam
+      number_name: Nummer
+      active_true: Actief
+      active_false: Inactief
+      active: Status
+      expire_time: Verloopperiode
+      test: Test sector
+      test_true: Ja
+      test_false: Nee
+      valid_for: Account vervaltermijn (maanden)
+      warn_before: Notificatie email (termijn in dagen)
+    shared_secret:
+      created_at: Aangemaakt op
+      shared_secret: Shared secret
+      confirmed: bevestigd
+    sso_domain:
+      name: Naam
+      description: Omschrijving
+      session_time: Sessie tijd
+      grace_period_time: Tijd inactiviteit
+      show_current_session_screen: Gebruik tussenscherm
+    webservice:
+      active: Actief
+      active_false: Inactief
+      active_from: Van
+      active_true: Actief
+      active_until: Tot
+      allow_sso: SSO Toepasbaar
+      allow_sso_false: Nee
+      allow_sso_true: Ja
+      app_id: App ID
+      app_to_app: App-to-app
+      apps: Apps
+      app_to_app_false: Inactief
+      app_to_app_true: Actief
+      assurance_date_short: Ingangsdatum
+      assurance_date: Ingangsdatum verhoging zekerheidsniveau
+      assurance_from_short: Van
+      assurance_from: Van zekerheidsniveau
+      assurance_level: Zekerheidsniveau
+      assurance_message: Infomelding aankomende verhoging zekerheidsniveau
+      assurance_to_short: Naar
+      assurance_to: Naar zekerheidsniveau
+      authentication: Authenticatie methode
+      authentication_aselect: ASelect
+      authentication_method: Authenticatie methode
+      authentication_none: Geen
+      authentication_saml: SAML
+      certificate: Certificaat
+      certificates: Certificaten
+      check_redirect_url: Controle redirect URL
+      check_redirect_url_false: Inactief
+      check_redirect_url_true: Actief
+      description: Omschrijving
+      fingerprint: Fingerprint
+      id: ID
+      metadata_url: Metadata URL
+      name: Naam
+      new_shared_secret: Gegenereerd shared secret
+      no_authentication_method: Geen
+      no_certificates: Geen
+      no_metadata: Geen
+      no_sector_authentications: Geen
+      no_sso_domain_name: Geen
+      note: Opmerkingen
+      organization: Organisatie
+      organization_id: Organisatie
+      redirect_url_domain: Controle redirect URL is actief met domein
+      registration: Registratie
+      saml_provider: Saml
+      sector_authentications: Sectoren
+      sector_name: Sectornaam
+      sectors: Sectoren
+      shared_secret: Shared secret
+      shared_secrets: Shared secrets
+      sso_domain: SSO domein
+      sso_domain_id: SSO domein
+      sso_domain_name: SSO domein
+      substantieel_active: Status substantieel
+      substantieel_active_false: Inactief
+      substantieel_active_true: Actief
+      website_url: Website URL
+    webservice/saml_provider:
+      certificate: "Saml metadata"
+    webservice/certificates:
+      cached_certificate: Certificaat
+    sector_authentication:
+      sector: sector
+      position: Volgnummer
+      revocation: Revoceren
+      registration: Aanvragen
+      test: Test account
+    switch:
+      name: Naam
+      description: Omschrijving
+    bulk_order:
+      name: Naam
+      account_status_scope: Accounts met status
+      account_status_scope_active: Actief
+      account_status_scope_suspended: Opgeschort
+      account_status_scope_initial_or_requested: Initieel & aangevraagd
+      csv_upload: BSN bestand
+    app_version:
+      note: Opmerkingen
+      id: Id
+      operating_system: Platform
+      version: Versie
+      release_type: Releasetype
+      not_valid_before: Beschikbaar vanaf
+      not_valid_on_or_after: Force update vanaf
+      kill_app_on_or_after: Kill app vanaf
+    third_party_app:
+      note: Opmerkingen
+      id: Id
+      user_agent: User Agent
+      return_url: Return URL
+    blacklisted_phone_number:
+      description: Omschrijving
+      created_at: Aangemaakt
+    whitelisted_phone_number:
+      phone_number: Telefoonnummer
+      description: Omschrijving
+      note: Opmerkingen
+    kiosk:
+      kiosk_id: Identificatie
+      note: Opmerkingen
+      naam: Naam
+      adres: Adres
+      woonplaats: Woonplaats
+      postcode: Postcode
+      status: Status
+      human_status: Status
+  'true': 'Ja'
+  'false': 'Nee'
+  human_true: 'Ja'
+  human_false: 'Nee'
+  active_true: Actief
+  active_false: Inactief
+  FOUR_EYES_short: "4-ogen"
+  CONTROLLED_short: "Controle achteraf"
+  _short: "niet beschikbaar"
+  FOUR_EYES: "balieuitgifte 4-ogen tijdens uitgifte"
+  CONTROLLED: "balieuitgifte achterafcontrole"
+  helpers:
+    label:
+      <<: *model_attributes
+  activerecord:
+    models:
+      certificate: certificaat
+      manager: beheerder
+      news_item: nieuwsbericht
+      news_location: locatie
+      organization: organisatie
+      question: vraag
+      role: rol
+      sector: sector
+      shared_secret: shared secret
+      sso_domain: SSO domein
+      webservice: webdienst
+    attributes:
+      <<: *model_attributes

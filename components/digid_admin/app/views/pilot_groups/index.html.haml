@@ -1,0 +1,61 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1= t('pilot_group_overview')
+
+.clear
+
+%table
+  %thead
+    %tr
+      %th= t('name')
+      %th= t('description')
+      %th= t('number_of_participants')
+      %th.action
+      - if can? :manage, PilotGroup
+        %th.action
+
+  %tbody
+    - if @pilot_groups.present?
+      - @pilot_groups.each do |pilot_group|
+        %tr
+          %td= pilot_group.name
+          %td= truncate(pilot_group.description, length: 90)
+          %td= pilot_group.subscribers.count
+          %td.action= show_link(t('show'), pilot_group_path(pilot_group))
+          - if can? :manage, PilotGroup
+            %td.action= edit_link(t('edit'), edit_pilot_group_path(pilot_group))
+    - else
+      %tr
+        %td{ colspan: 5 }= t('no_pilot_groups_found')
+
+%br
+= show_manager_actions_for(::Log::SubjectTypes::PILOT_GROUP)

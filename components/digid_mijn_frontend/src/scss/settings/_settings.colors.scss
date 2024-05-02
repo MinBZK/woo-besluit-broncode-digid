@@ -1,0 +1,109 @@
+@forward 'src/scss/settings/settings.fonts';
+
+:root {
+  --base: var(--color-charcoal);
+
+  --base2: var(--color-white);
+  --base3: var(--color-black);
+
+  --error: var(--color-fire);
+  --warning: var(--color-fall);
+  --success: var(--color-leaf);
+  --info: var(--color-river);
+  --link: var(--color-ocean);
+  --link-clicked: var(--color-whale);
+  --button-secondary: var(--color-white);
+  --hint: var(--color-slate);
+
+  --solid0: var(--color-ghost);
+  --solid1: var(--color-feather);
+  --solid2: var(--color-white);
+  --solid3: var(--color-smoke);
+  --solid4: var(--color-ash);
+  --solid5: var(--color-charcoal);
+
+  --solid-error: var(--color-peach);
+  --solid-warning: var(--color-champagne);
+  --solid-success: var(--color-mint);
+  --solid-info: var(--color-sky);
+  --solid-highlight: var(--color-sky);
+
+  --solid-error-accordion: var(--color-pale);
+
+  @media (prefers-color-scheme: dark) {
+    --base: var(--color-feather);
+
+    --base2: var(--color-black);
+    --base3: var(--color-white);
+
+    --error: var(--color-blush);
+    --warning: var(--color-sand);
+    --success: var(--color-meadow);
+    --info: var(--color-lake);
+    --link: var(--color-shore);
+    --link-clicked: var(--color-dolphin);
+    --button-secondary: var(--color-mouse);
+    --hint: var(--color-ash);
+
+    --solid0: var(--color-onyx);
+    --solid1: var(--color-ink);
+    --solid2: var(--color-charcoal);
+    --solid3: var(--color-mouse);
+    --solid4: var(--color-slate);
+    --solid5: var(--color-white);
+
+    --solid-error: var(--color-burgundy);
+    --solid-warning: var(--color-clay);
+    --solid-success: var(--color-forest);
+    --solid-info: var(--color-denim);
+    --solid-highlight: var(--color-ocean);
+
+    --solid-error-accordion: var(--color-mouse);
+  }
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-onyx: #171717;
+  --color-ink: #1d1d1d;
+  --color-elephant: #232323;
+  --color-charcoal: #282828;
+  --color-mouse: #383838;
+  --color-slate: #696969;
+  --color-ash: #a7a7a7;
+  --color-smoke: #e6e6e6;
+  --color-ghost: #f3f3f3;
+  --color-feather: #fbfbfb;
+
+  --color-pumpkin: #e17000;
+  --color-indigo: #154273;
+
+  //Alert colors
+  --color-fire: #d52c1e;
+  --color-fall: #a95400;
+  --color-leaf: #38870b;
+  --color-river: #007bc7;
+
+  --color-peach: #f9dfdd;
+  --color-champagne: #fbead9;
+  --color-mint: #e0eeda;
+  --color-sky: #d9eaf7;
+  --color-pale: #fcf6f6;
+
+  --color-blush: #ea958e;
+  --color-sand: #d4a980;
+  --color-meadow: #9bc385;
+  --color-lake: #80bde3;
+
+  --color-burgundy: #542621;
+  --color-clay: #583717;
+  --color-forest: #2a3f1b;
+  --color-denim: #1b3a4f;
+
+  //Other colors
+  --color-ocean: #004ca0;
+  --color-whale: #4d6f95;
+  --color-hydrangea: #8eb6fa;
+
+  --color-shore: #9dcbff;
+  --color-dolphin: #94acc7;
+}

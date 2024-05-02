@@ -1,0 +1,58 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h3=  I18n.t('accounts.fields.labels.authenticatie_tools')
+.form_wrapper
+  %div.minimum_level
+    %b= "#{I18n.t('accounts.fields.labels.minimum_level')}&nbsp;".html_safe
+    %b= "#{zekerheidsniveau_helper(@account.zekerheidsniveau)}&nbsp;".html_safe
+    %b= zekerheidsniveau_date_helper(@account.last_change_security_level_at)
+
+  %p= t('accounts.fields.labels.ww').html_safe
+  = render 'accounts/account_details/password'
+  %br
+  %p= t('accounts.fields.labels.sms').html_safe
+  = render 'accounts/account_details/sms'
+  %br
+  %p= t('accounts.fields.labels.app').html_safe
+  = render 'accounts/account_details/app', level: "midden"
+  %br
+  %p= t('accounts.fields.labels.app_id_check').html_safe
+  = render 'accounts/account_details/app', level: "substantieel"
+  %br
+  - if (can?(:manage, Account) || can?(:read, Account)) && (can?(:update, Eid::Mu) || can?(:view, Eid::Mu))
+    .personal_data
+      .personal_data_left
+        %p.hoog= t('accounts.fields.labels.hoog').html_safe
+      .personal_data_right
+        .relative
+          .eid_button= link_to('Raadplegen eID middel(en)', eid_view_wids_path(@account.id), remote: true, class: 'edit_button')
+    = render 'accounts/account_details/hoog'

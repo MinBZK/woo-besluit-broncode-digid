@@ -1,0 +1,57 @@
+$rs-pageid-achtergrond: #e6e6e6;
+$rs-pageid-schijding-kleur: #4e4e4e;
+$rs-pageid-schijdingslijn: 3px solid $rs-pageid-schijding-kleur;
+
+.footer {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 32px 40px;
+  padding-top: 32px;
+  text-align: left;
+  @media screen and (max-width: $breakpoint2 - 1) {
+    padding: 16px 16px;
+  }
+}
+
+.pageid-footer {
+  background-color: $rs-pageid-achtergrond;
+  border-top: $rs-pageid-schijdingslijn;
+  color: $rs-achtergrond-links;
+  display: table;
+  height: 58px;
+  width: 100%;
+
+  .pageid-inner {
+    display: table-row;
+
+    @media screen and (max-width: $breakpoint2 - 1) {
+      display: block;
+      margin-top: 20px;
+    }
+  }
+
+  .pageid-left,
+  .pageid-center,
+  .pageid-right {
+    display: table-cell;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    width: 33.33333%;
+
+    @media screen and (max-width: $breakpoint2 - 1) {
+      display: block;
+      padding-right: inherit;
+      padding-top: inherit;
+      width: inherit;
+
+      p {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  p + p {
+    margin-top: 5px;
+  }
+}

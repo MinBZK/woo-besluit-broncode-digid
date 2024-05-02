@@ -1,0 +1,13 @@
+spring.application.name: digid_dc
+spring.main.banner-mode: 'OFF'
+spring.cloud:
+  consul:
+    config:
+      enabled: ${CONSUL_ENABLED:false}
+    host: ${CONSUL_HOST:localhost}
+  vault:
+    enabled: ${VAULT_ENABLED:false}
+    host: ${VAULT_HOST:localhost}
+    scheme: ${VAULT_SCHEME:http}
+    authentication: TOKEN
+    token: ${VAULT_TOKEN:}

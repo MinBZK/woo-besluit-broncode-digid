@@ -1,0 +1,19 @@
+nl:
+  search_engine:
+    filters:
+      account: Account
+      certificate: Certificaat
+      email: Email
+      manager: Beheerder
+      organization: Organisatie
+      role: Rol
+      sector: Sector
+      sso_domain: SSO domein
+      webservice: Webdienst
+      sectorcode: Sectoraal nummer
+      account_log: Transactie
+      active: Actief
+      superuser: Superbeheerder
+    filter:
+      'true': Ja
+      'false': Nee

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:dgl="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="unqualified" attributeFormDefault="unqualified" vc:minVersion="1.1" dgl:version="5.0">
+    <xs:include schemaLocation="Digilevering_Types-5.1.xsd"/>
+	<xs:element name="AfnemersberichtAanDGL" type="dgl:AfnemersberichtAanDGLType">
+		<xs:annotation>
+			<xs:documentation>Een bericht van de afnemer (bijv. een afnemersindicatie) dat door Digilevering nog moet worden verwerkt</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AfnemersberichtVanDGL" type="dgl:AfnemersberichtVanDGLType">
+		<xs:annotation>
+			<xs:documentation>Een bericht (bijv. een afnemersindicatie van de afnemer) dat door Digilevering bij een HLV wordt afgeleverd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LeveringVanDGL" type="dgl:LeveringVanDGLType">
+		<xs:annotation>
+			<xs:documentation>Een bericht dat door Digilevering wordt afgeleverd bij de ontvanger</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LeveringAanDGL" type="dgl:LeveringAanDGLType">
+		<xs:annotation>
+			<xs:documentation>Een bericht van de HLV dat voor verdere verwerking wordt aangeboden aan Digilevering</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

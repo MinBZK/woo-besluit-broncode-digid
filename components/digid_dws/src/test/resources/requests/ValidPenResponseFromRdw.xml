@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://rdw.nl/eid.wus.crb/1.0">
+  <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+    <wsa:Action>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</wsa:Action>
+    <wsa:RelatesTo><%= @message_id %></wsa:RelatesTo>
+    <wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:MessageID>urn:uuid:<%= SecureRandom.uuid %></wsa:MessageID>
+  </soapenv:Header>
+  <soapenv:Body>
+    <ns:PenAanvraag_eID_Response DateTime="<%= Time.zone.now %>">
+      <ns:ResponseDescription>Ok</ns:ResponseDescription>
+    </ns:PenAanvraag_eID_Response>
+  </soapenv:Body>
+</soapenv:Envelope>

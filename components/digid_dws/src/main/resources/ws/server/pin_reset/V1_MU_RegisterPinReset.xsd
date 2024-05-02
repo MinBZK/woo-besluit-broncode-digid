@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+    <xsd:element name="RegisterPinResetRequest">
+        <xsd:annotation>
+            <xsd:documentation>Request message to register PIN reset.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:DHProvideRequestBaseType">
+                    <xsd:sequence>
+                        <xsd:element name="RequestDateTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>De datum waarop de PIN (re)set aanvraag is ontvangen.  In het geval dat de aanvraag door de MU is geïnitieerd, bepaalt de MU deze datum (alleen RDW bij betalen). In de andere gevallen is het de datum waarop de aanvraag door DigiD bij de MU is ingediend.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="BSN" minOccurs="1" maxOccurs="1" type="xsd:string"></xsd:element>
+                        <xsd:element name="DocType" type="digid:DocTypeType" minOccurs="1" maxOccurs="1"></xsd:element>
+                        <xsd:element name="SequenceNr" type="digid:SequenceNrType" minOccurs="1" maxOccurs="1"></xsd:element>
+                    </xsd:sequence>
+
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType abstract="true" name="DHProvideRequestBaseType">
+        <xsd:sequence>
+            <xsd:element name="Requester" type="digid:OINType" minOccurs="1" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"></xsd:attribute>
+        <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required"></xsd:attribute>
+    </xsd:complexType>
+    <xsd:simpleType name="DocTypeType">
+        <xsd:annotation>
+            <xsd:documentation>Type voor het soort document waarop een DH middel is geplaatst
+				(eRijbewijs, eNIK).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"></xsd:maxLength>
+            <xsd:enumeration value="NI"></xsd:enumeration>
+            <xsd:enumeration value="NL-rijbewijs"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="MsgVersionType">
+        <xsd:annotation>
+            <xsd:documentation>Type voor de unieke identificatie van een berichtversie. Gebruikt
+				alleen major versions.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"></xsd:maxLength>
+            <xsd:pattern value="[0-9]+"></xsd:pattern>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="SequenceNrType">
+        <xsd:annotation>
+            <xsd:documentation>Type voor de unieke identificatie van een DH middel van een
+				documentType van een burger. De combinatie van Einde Geldigheid DS certificaat en
+				door de MU toegekend volgnummer. Typedef conform UsVE 1.0</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"></xsd:maxLength>
+            <xsd:pattern value="[0-9]+"></xsd:pattern>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="OINType">
+        <xsd:annotation>
+            <xsd:documentation>OIN type.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{20}"></xsd:pattern>
+            <xsd:length value="20" fixed="true"></xsd:length>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="RegisterPinResetResponse">
+        <xsd:annotation>
+            <xsd:documentation>Response to a RegisterPinResetRequest.
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:DHProvideResponseBasetype">
+                    <xsd:sequence>
+                        <xsd:element name="ResponseMessage" type="digid:ResponseMessageType"></xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="ResponseMessageType">
+        <xsd:annotation>
+            <xsd:documentation>Type voor response statussen.
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"></xsd:maxLength>
+            <xsd:enumeration value="Verwerkt"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType abstract="true" name="DHProvideResponseBasetype">
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"></xsd:attribute>
+        <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required"></xsd:attribute>
+    </xsd:complexType>
+    <xsd:element name="NotFoundFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Not Found fault detail</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="TechnicalFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Technical fault detail</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VersionMismatchFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Version mismatch fault detail
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ValidationErrorFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Validation error fault detail
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="faultstringType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NotFound"></xsd:enumeration>
+            <xsd:enumeration value="TechnicalFault"></xsd:enumeration>
+            <xsd:enumeration value="VersionMismatch"></xsd:enumeration>
+            <xsd:enumeration value="ValidationError"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

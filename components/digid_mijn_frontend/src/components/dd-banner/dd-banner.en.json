@@ -1,0 +1,12 @@
+{
+  "banner": {
+    "title": "Protect your personal data even better?",
+    "title-idCheck": "View or change extra privacy-sensitive data?",
+    "btn-app": "Download the DigiD app",
+    "btn-2fa": "Turn on 'Always log in using at least two steps'",
+    "text-app": "The DigiD app is the easiest way to log in securely. You no longer have to remember a password. Only a PIN code of your choice.",
+    "text-2fa": "If you select this option in your settings, you always log in with the DigiD app, SMS verification or an identity document. You can no longer log in using only your username and password. This helps you to protect your personal data even better.",
+    "text-idCheck": "To be able to view or change extra privacy-sensitive data online, such as information about your health. You need to add a once-only ID check of your passport, driving licence or identity card to your app. More and more organisations requiring this extra check.",
+		"banner-closed": "Notification is closed"
+  }
+}

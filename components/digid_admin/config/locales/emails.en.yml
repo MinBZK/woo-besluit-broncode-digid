@@ -1,0 +1,71 @@
+en:
+  mailer:
+    subject:
+      notify_geblokkeerd_wid: "The login function of your %{document_type} has been blocked" # EB003
+      notify_pin_wid: "The letter with PIN code for your %{document_type} has been requested" # EB005
+      notify_deblokkeringscode: "The unblock code for the login function of your %{document_type} has been sent" # EB004
+    body:
+      # algemeen
+      aanhef: Dear Sir/Madam,
+      notify_geblokkeerd_wid: | # EB003
+        At your request, we have blocked the login function of your %{document_type}. This means that you can no longer log in with your %{document_type} via DigiD.
+
+        If you requested this blockage yourself, you do not have to do anything and you can disregard this email.
+
+        If you did not request this blockage, please contact the DigiD Helpdesk. They can help you reactivate the login function of your %{document_type}.
+      notify_geblokkeerd_wid_html: | # EB003
+        <p>At your request, we have blocked the login function of your %{document_type}. This means that you can no longer log in with your %{document_type} via DigiD.</p>
+        <p>If you requested this blockage yourself, you do not have to do anything and you can disregard this email.</p>
+        <p>If you did not request this blockage, please contact the DigiD Helpdesk. They can help you reactivate the login function of your %{document_type}.</p>
+
+      notify_deblokkeringscode: | # EB004
+        The unblock code you requested has been sent by letter. It will allow you to unblock the login function of your %{document_type} and to log in again with your %{document_type}.
+
+        If you requested the unblock code yourself, you do not have to do anything and you can disregard this email.
+
+        If you did not request the unblock code yourself, then:
+
+        - this email address may also be used for the DigiD of, for example, a family member. They may have requested the unblock code for themselves. We advise you to check this. You do not need to contact us.
+
+        - someone else may have requested the unblock code for the login function of your %{document_type} without your permission. If you suspect that this is the case, please contact us immediately.
+      notify_deblokkeringscode_html: | # EB004
+        <p>The unblock code you requested has been sent by letter. It will allow you to unblock the login function of your %{document_type} and to log in again with your %{document_type}.</p>
+        <p>If you requested the unblock code yourself, you do not have to do anything and you can disregard this email.</p>
+        <p>If you did not request the unblock code yourself, then:</p>
+        <div style="margin-left: 5%">
+          <span>- this email address may also be used for the DigiD of, for example, a family member. They may have requested the unblock code for themselves. We advise you to check this. You do not need to contact us.</span>
+          <br />
+          <span>- someone else may have requested the unblock code for the login function of your %{document_type} without your permission. If you suspect that this is the case, please contact us immediately.</span>
+        </div>
+      notify_pin_wid: | # EB005
+        The letter with the PIN code for your %{document_type} has been requested. With this letter you can reset the personal PIN code of your %{document_type}.
+
+        If you requested this letter yourself, you do not have to do anything and you can disregard this email.
+
+        If you did not request this letter, please contact the DigiD Helpdesk.
+      notify_pin_wid_html: | # EB005
+        <p>The letter with the PIN code for your %{document_type} has been requested. With this letter you can reset the personal PIN code of your %{document_type}.<p>
+        <p>If you requested this letter yourself, you do not have to do anything and you can disregard this email.<p>
+        <p>If you did not request this letter, please contact the DigiD Helpdesk.</p>
+
+      signature: |
+        Kind regards,
+
+
+        DigiD Helpdesk
+        Available on working days from 8 am to 10 pm. On Saturdays from 9 am to 5 pm. (Dutch time)
+        T 088 123 65 55
+      signature_html: |
+        Kind regards,
+        <br />
+        <br />
+        DigiD Helpdesk
+        <br />
+        Available on working days from 8 am to 10 pm. On Saturdays from 9 am to 5 pm. (Dutch time)
+        <br />
+        T 088 123 65 55
+
+      footer_html: |
+        <p>This is an automated email, please do not reply. Your message will not be read or answered.</p>
+
+        <p>DigiD never sends a link to a website. If you do receive a link from DigiD by email, then this email is fake. It is sent by someone pretending to be DigiD with the aim of retrieving your personal details. Therefore, always go directly to the website of DigiD via your browser.</p>

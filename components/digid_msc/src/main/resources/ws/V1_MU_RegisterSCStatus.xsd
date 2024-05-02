@@ -1,0 +1,219 @@
+<xsd:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+  elementFormDefault="qualified" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <xsd:element name="RegisterStatusSCRequest" type="digid:RegisterStatusSCRequestType">
+    <xsd:annotation>
+      <xsd:documentation>Request message to register a SC status.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="RegisterStatusSCRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="digid:DHProvideRequestBaseType">
+        <xsd:sequence>
+          <xsd:element name="EncryptedPseudonym" type="digid:EncryptedPseudonymType" />
+          <xsd:element name="DocType" type="digid:DocTypeType" />
+          <xsd:element name="StateSource" type="digid:StateSourceType" />
+          <xsd:element name="SequenceNr" type="digid:SequenceNrType" />
+          <xsd:element name="Status" type="digid:StatusType" />
+          <xsd:element name="StatusDateTime" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="MU" type="digid:MUType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType abstract="true" name="DHProvideRequestBaseType">
+    <xsd:sequence>
+      <xsd:element name="Requester" type="digid:OINType" />
+    </xsd:sequence>
+    <xsd:attribute name="DateTime" type="xsd:dateTime" use="required" />
+    <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="MUType">
+    <xsd:sequence>
+      <xsd:element name="Status-MU" type="digid:MU-StatusType" />
+      <xsd:element name="StatusDateTime-MU" type="xsd:dateTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="DocTypeType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Type voor het soort document waarop een DH
+        middel is geplaatst
+        (eRijbewijs, eNIK).
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="16" />
+      <xsd:enumeration value="NI" />
+      <xsd:enumeration value="NL-rijbewijs" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="StateSourceType">
+    <xsd:annotation>
+      <xsd:documentation>
+        De bron (kanaal) vanwaar een statuswijziging is
+        geinitieerd (DigiD
+        Servicecentrum, DigiD Zelfservice).
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="26" />
+      <xsd:enumeration value="DigiD Zelfservice" />
+      <xsd:enumeration value="DigiD Servicecentrum" />
+      <xsd:enumeration value="RDW" />
+      <xsd:enumeration value="RvIG" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="MsgVersionType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Type voor de unieke identificatie van een
+        berichtversie. Gebruikt
+        alleen major versions.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="4" />
+      <xsd:pattern value="[0-9]+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SequenceNrType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Type voor de unieke identificatie van een DH
+        middel van een
+        documentType van een burger. De combinatie van Einde
+        Geldigheid DS
+        certificaat en door de MU toegekend volgnummer.
+        Typedef conform
+        UsVE 1.0
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="16" />
+      <xsd:pattern value="[0-9]+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="StatusType">
+    <xsd:annotation>
+      <xsd:documentation>Type voor de DH middel statussen.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="26" />
+      <xsd:enumeration value="Uitgereikt" />
+      <xsd:enumeration value="Geactiveerd" />
+      <xsd:enumeration value="Geblokkeerd" />
+      <xsd:enumeration value="Tijdelijk geblokkeerd" />
+      <xsd:enumeration value="Ingetrokken" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="MU-StatusType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Type voor de DH middel statussen specifiek voor
+        de RDW MU.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12" />
+      <xsd:enumeration value="Actief" />
+      <xsd:enumeration value="Geschorst" />
+      <xsd:enumeration value="Ingetrokken" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EncryptedPseudonymType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Pseudonym encrypted as an EncryptedPseudonym
+        according to typedef conform
+        UsVE 1.0
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:base64Binary" />
+  </xsd:simpleType>
+  <xsd:simpleType name="OINType">
+    <xsd:annotation>
+      <xsd:documentation>OIN type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{20}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="RegisterStatusSCResponse" type="digid:RegisterStatusSCResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Response to a RegisterStatusSCRequest.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="RegisterStatusSCResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="digid:DHProvideResponseBasetype">
+        <xsd:sequence>
+          <xsd:element name="ResponseMessage" type="digid:ResponseMessageType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ResponseMessageType">
+    <xsd:annotation>
+      <xsd:documentation>Type voor response statussen.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10" />
+      <xsd:enumeration value="Verwerkt" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType abstract="true" name="DHProvideResponseBasetype">
+    <xsd:attribute name="DateTime" type="xsd:dateTime" use="required" />
+    <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required" />
+  </xsd:complexType>
+
+  <xsd:element name="NotFoundFaultDetail" type="digid:FaultDetailType">
+    <xsd:annotation>
+      <xsd:documentation>Not Found fault detail</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="TechnicalFaultDetail" type="digid:FaultDetailType">
+    <xsd:annotation>
+      <xsd:documentation>Technical fault detail</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="VersionMismatchFaultDetail" type="digid:FaultDetailType">
+    <xsd:annotation>
+      <xsd:documentation>Version mismatch fault detail
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="ValidationErrorFaultDetail" type="digid:FaultDetailType">
+    <xsd:annotation>
+      <xsd:documentation>Validation error fault detail
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:simpleType name="faultstringType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NotFound" />
+      <xsd:enumeration value="TechnicalFault" />
+      <xsd:enumeration value="VersionMismatch" />
+      <xsd:enumeration value="ValidationError" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="FaultDetailType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Extension on the default soap type
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="faultstring" type="digid:faultstringType" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+

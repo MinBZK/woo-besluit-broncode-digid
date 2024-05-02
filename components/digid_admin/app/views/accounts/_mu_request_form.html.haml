@@ -1,0 +1,115 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- columns = %w( type status documentnummer status_bron laatste_statuswijziging eid_toeslag opmerking )
+#accounts
+  %table
+    %thead
+      %tr
+        - columns.each do |name|
+          %th= t name, scope: [:accounts, :fields, :labels]
+        %th
+    %tbody
+      - if @driving_licences.present?
+        - @driving_licences.each do |driving_licence|
+          - present driving_licence, DrivingLicencePresenter do |driving_licence_presenter|
+            %tr
+              - columns.each do |name|
+                %td
+                  - if name == "status"
+                    = driving_licence_presenter.colored_status
+                  - else
+                    = driving_licence_presenter.public_send(name)
+              %td
+                - if can?(:update, Eid::Mu) && can?(:read, Account)
+                  - if driving_licence_presenter.driving_licence.status == "Actief" && driving_licence_presenter.driving_licence.status_mu != "Gerevoceerd"
+                    = link_to(t(:block_button), eid_block_wid_path('driving_licence', @account.id, driving_licence.sequence_no), id: "driving_licence_block_button", class: 'mu-status-button', data: { confirm: are_you_sure_to_block(t(:the_driving_licence)) }, method: :post)
+                    %br
+                  - if driving_licence_presenter.driving_licence.status == "Geblokkeerd" && driving_licence_presenter.driving_licence.status_mu == "Actief"
+                    = link_to(t(:deblock_button), eid_deblock_wid_path('driving_licence', @account.id, driving_licence.sequence_no), id: "driving_licence_deblock_button", class: 'mu-status-button', data: { confirm: are_you_sure_to_deblock(t(:driving_licence)) }, method: :post)
+                    %br
+                  - if ["Uitgereikt", "Actief", "Geblokkeerd"].include? driving_licence_presenter.driving_licence.status
+                    = link_to(t(:pin_button), eid_pin_wid_path('driving_licence', @account.id, driving_licence.sequence_no), id: "driving_licence_pin_button", class: 'mu-status-button', data: { confirm: t(:are_you_sure_to_pin, the_id_or_driving_licence: t(:the_driving_licence)) }, method: :post)
+                    %br
+      - else
+        %tr
+          %td= t('type', scope: [:accounts, :driving_licence]).html_safe
+          - if @rdw_error
+            %td
+              %b.red= t('rdw_unavailable')
+          - elsif @rdw_fault
+            %td
+              %b.red= t('rdw_fault')
+          - elsif controller_name == "accounts"
+            %td= t("geen_gegevens_opgevraagd", scope: [:accounts, :messages])
+          - else
+            %td= t('niet_uitgegeven', scope: [:accounts, :driving_licence])
+      - if @identity_cards.present?
+        - @identity_cards.each do |identity_card|
+          - present identity_card, IdentityCardPresenter do |identity_card_presenter|
+            %tr
+              - columns.each do |name|
+                %td
+                  - if name == "status"
+                    = identity_card_presenter.colored_status
+                  - else
+                    = identity_card_presenter.public_send(name)
+              %td
+                - if can?(:update, Eid::Mu) && can?(:read, Account)
+                  - if identity_card_presenter.identity_card.status == "Geactiveerd"
+                    = link_to(t(:block_button), eid_block_wid_path('id_card', @account.id, identity_card.sequence_no), id: "id_card_block_button", class: 'mu-status-button', data: { confirm: are_you_sure_to_block(t(:the_id_card)) }, method: :post)
+                    %br
+                  - if identity_card_presenter.identity_card.status == "Geblokkeerd"
+                    = link_to(t(:deblock_button), eid_deblock_wid_path('id_card', @account.id, identity_card.sequence_no), id: "id_card_deblock_button", class: 'mu-status-button', data: { confirm: are_you_sure_to_deblock(t(:id_card)) }, method: :post)
+                    %br
+                  - if identity_card_presenter.identity_card.status == "Uitgereikt" || identity_card_presenter.identity_card.status == "Geactiveerd" || identity_card_presenter.identity_card.status == "Geblokkeerd"
+                    = link_to(t(:pin_button), eid_pin_wid_path('id_card', @account.id, identity_card.sequence_no), id: "id_card_pin_button", class: 'mu-status-button', data: { confirm: t(:are_you_sure_to_pin, the_id_or_driving_licence: t(:the_id_card)) }, method: :post)
+                    %br
+      - else
+        %tr
+          %td= t('type', scope: [:accounts, :identity_card]).html_safe
+          - if @rvig_error
+            %td
+              %b.red= t('rvig_unavailable')
+          - elsif @rvig_fault
+            %td
+              %b.red= t('rvig_fault')
+          - elsif controller_name == "accounts"
+            %td= t("geen_gegevens_opgevraagd", scope: [:accounts, :messages])
+          - else
+            %td= t('niet_uitgegeven', scope: [:accounts, :identity_card])
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+

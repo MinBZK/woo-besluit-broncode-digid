@@ -1,0 +1,24 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.login-method.mixins' as *;
+
+.dd-login-options-app-details {
+  @include details;
+
+  &__ID-check {
+    align-items: baseline !important;
+  }
+
+  &__card-wrapper {
+    display: flex;
+    list-style-type: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+#other-apps {
+  margin-bottom: 1.5rem;
+}

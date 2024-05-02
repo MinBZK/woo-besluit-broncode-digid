@@ -1,0 +1,75 @@
+#main {
+
+  .opmerking {
+    margin: -8px 0 8px 150px;
+  }
+
+  .field {
+    .content {
+      // scss-lint:disable NestingDepth
+      .faq {
+        font-family: Verdana, Arial, sans-serif;
+        font-size: 11px;
+        margin: 20px 0;
+        width: 490px;
+
+        .faq_list {
+          border: 1px solid #ddd;
+          border-top: 0;
+          margin: 10px 0 0;
+          padding: 0;
+        }
+
+        .faq_item {
+          border-top: 1px solid #ddd;
+          list-style: none;
+        }
+
+        .faq_question {
+          background: url('/assets/arrows.png') 5px 10px no-repeat #f5f5f5;
+          color: #000;
+          display: block;
+          font-weight: bold;
+          padding: 5px 5px 5px 18px;
+          text-decoration: none;
+
+          &.active {
+            background-position: 5px -80px;
+          }
+        }
+
+        .faq_answer {
+          background-color: #fff;
+          padding: 4px 20px;
+
+          &.hidden {
+            display: none;
+          }
+
+          p {
+            line-height: 1.5;
+            margin: 4px 0;
+          }
+
+          ol,
+          ul {
+            padding: 0;
+
+            li {
+              margin: 4px 0;
+            }
+          }
+
+          ul {
+            padding: 0;
+          }
+
+          li {
+            list-style-position: inside;
+            list-style-type: disc;
+          }
+        }
+      }
+    }
+  }
+}

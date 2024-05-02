@@ -1,0 +1,10 @@
+.dd-toast {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: -20px;
+
+  &__msg {
+    margin: 0.5rem 0;
+  }
+}

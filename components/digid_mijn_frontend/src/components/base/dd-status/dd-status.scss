@@ -1,0 +1,9 @@
+.dd-status {
+  display: flex;
+  flex-direction: row;
+
+  &__icon {
+    margin-right: 0.5rem;
+    margin-left: -0.25rem;
+  }
+}

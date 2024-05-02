@@ -1,0 +1,35 @@
+.dd-backdrop {
+  display: none;
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  z-index: 1;
+
+  &__shadow {
+    display: block;
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.24);
+  }
+
+  &-body-scrollblock {
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll;
+
+    .dd-backdrop {
+      display: block;
+    }
+  }
+
+  &__children > * {
+    display: block !important;
+  }
+}

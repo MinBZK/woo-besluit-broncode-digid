@@ -1,0 +1,36 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+@mixin vertical-table-align {
+  display: flex;
+  align-items: center;
+}
+
+//Used for Language and header links in mijn DigiD
+@mixin menuLink {
+  a {
+    text-decoration: none;
+    color: var(--base) !important;
+    cursor: pointer;
+
+    &:hover {
+      font-family: core.$bold;
+    }
+  }
+
+  .active-link {
+    font-family: core.$bold;
+    border-bottom: 0.125rem solid var(--color-pumpkin);
+  }
+}
+
+
+@mixin hidden-element {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}

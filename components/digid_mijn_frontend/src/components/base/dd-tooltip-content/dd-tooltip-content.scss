@@ -1,0 +1,11 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-tooltip-content {
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: var(--solid-info);
+  div {
+    margin-left: 12px;
+  }
+}

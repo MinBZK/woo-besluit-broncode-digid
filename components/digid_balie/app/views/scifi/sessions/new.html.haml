@@ -1,0 +1,70 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1
+  = t('log_in_with')
+  = image_tag('eherkenning.gif', class: 'header-inline-image')
+
+= block_with_icon(nil, :error) do
+  Deze pagina simuleert het inloggen met eHerkenning en is alleen beschikbaar in de test- en
+  acceptatieomgeving.
+
+%h2 "Beschikbare balie's"
+
+.table
+  .table-row
+    .table-cell--heading Naam
+    .table-cell--heading KvK&#8209;nummer
+    .table-cell--heading Vestigingsnummer
+  - front_desks.each do |front_desk|
+    .table-row
+      .table-cell= front_desk.name
+      .table-cell= front_desk.kvk_number
+      .table-cell= front_desk.establishment_number
+
+%h2 Beschikbare gebruikers
+
+.table
+  .table-row
+    .table-cell--heading Gebruiker
+    .table-cell--heading Pseudoniem
+    .table-cell--heading KvK&#8209;nummer
+    .table-cell--heading Vestigingsnummer
+  - eherkenning_users.each do |user|
+    .table-row
+      .table-cell--setting-description= user[:name]
+      .table-cell= user[:pseudonym]
+      .table-cell= user[:kvk_number]
+      .table-cell= user[:establishment_number]
+      .table-cell--setting-links
+        = form_tag(scifi_assertion_consumer_service_path) do
+          = hidden_field_tag(:pseudonym, user[:pseudonym])
+          = action_submit('inloggen', :right, class: "left")

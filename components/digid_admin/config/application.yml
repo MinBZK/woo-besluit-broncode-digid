@@ -1,0 +1,89 @@
+# DigiD_admin application config
+default: &default
+  alarm_email_address:PPPPPPPPPPPPPPPPP
+  dot_environment: false
+  locales: "nl|en"
+  configuration_cache: 600
+  cache_store: :redis_cache_store
+  consider_all_requests_local: true
+  csv_codes_file: "digid_global/csv/codes.csv"
+  log_read_separated: true
+  db:
+    query_timeout: 270
+  account_minimal_query_size: 1
+  ns_switch_path: /iapi
+  app_switch_path: /iapi
+  exception_notifier: false
+  authentication_method: fingerprint
+  alarm_email_address:PPPPPPPPPPPPPPPPP
+  rda_timeout: 5
+  eid_timeout: 5
+  test_betrouwbaarheidsniveau: false
+  use_switches_from_app_ms: false
+  skip_ca_check: false
+
+development: &development
+  <<: *default
+  hosts:
+    digid: "SSSSSSSSSS"
+    was: "SSSSSSSSSSSSSS"
+  urls:
+    internal:
+      balie: "SSSSSSSSSSSSSSSSSSSSSSS"
+      dgl: "SSSSSSSSSSSSSSSSSSSSS"
+      x:SSSSSSSSSSSSSSSSSS
+      eid:SSSSSSSSSSSSSSSSSSSSSS
+      ns:SSSSSSSSSSSSSSSSSSSSSSS
+      app:SSSSSSSSSSSSSSSSSSSSSSSS
+      ss:SSSSSSSSSSSSSSSSSSSSSSS
+      dc:SSSSSSSSSSSSSSSSSSSSSSS
+      scheduler:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      rda:SSSSSSSSSSSSSSSSSSSSSS
+    external:
+      gba:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      mu_endpoint:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      mu_rvig_endpoint:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+  development_login: true
+  dot_environment: true
+  configuration_cache: 5
+  mailer_default_email_address: "noreply@digid.nl"
+  log_read_separated: false
+  digidentity_ca_file:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  saml_ssl_cert_file:SSSSSSSSSSSSSSSSSSSSSSSSS
+  saml_ssl_cert_key_file:SSSSSSSSSSSSSSSSSSSSSSSSSSS
+  sms_gateway:
+    regular:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  trusted_ca_file:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  skip_ca_check: true
+
+test:
+  <<: *development
+  cache_store: :memory_store
+  configuration_cache: 0
+  development_login: true
+
+production:
+  <<: *default
+  log_level: :error
+  consider_all_requests_local: "true"
+  locales: "en|nl"
+  gba_ssl_ca_cert_file: "/etc/ssl/certs/ca-bundle.crt"
+  munin_directory: "/usr/local/share/munin/status"
+  urls:
+    internal:
+      balie:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      dgl:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      x:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      eid:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      ns:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      app:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      ss:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      dc:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      scheduler:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      rda:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      consul:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    external:
+      gba:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      mu_endpoint:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      mu_rvig_endpoint:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:complexType name="AfnemersberichtAanDGLType">
+		<xs:sequence>
+			<xs:element name="BerichtHeader" type="BerichtHeaderType">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de routering en kunnen gebruikt worden om het bericht te traceren</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stuurgegevens">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de payload</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="StuurgegevensType">
+							<xs:sequence>
+								<xs:element name="Berichtsoort" type="VersiebeheerType"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Inhoud" type="xs:anyType">
+				<xs:annotation>
+					<xs:documentation>De payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AfnemersberichtVanDGLType">
+		<xs:sequence>
+			<xs:element name="BerichtHeader">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de routering en kunnen gebruikt worden om het bericht te traceren</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="BerichtHeaderType">
+							<xs:sequence>
+								<xs:element name="DatumtijdstempelLogius" type="xs:dateTime">
+									<xs:annotation>
+										<xs:documentation>Timestamp die toegekend is door Logius bij ontvangst van het bericht</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="KenmerkLogius" type="xs:string">
+									<xs:annotation>
+										<xs:documentation>GUID door Logius toegekend aan het oorspronkelijk ontvangen bericht</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Stuurgegevens">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de payload</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="StuurgegevensType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Inhoud" type="xs:anyType">
+				<xs:annotation>
+					<xs:documentation>De payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LeveringAanDGLType">
+		<xs:sequence>
+			<xs:element name="BerichtHeader" type="BerichtHeaderType">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de routering en kunnen gebruikt worden om het bericht te traceren</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stuurgegevens">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de payload</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="StuurgegevensType">
+							<xs:sequence>
+								<xs:element name="Basisregistratie" type="xs:string"/>
+								<xs:element name="Gebeurtenissoort" type="VersiebeheerType"/>
+								<xs:element name="Filterinhoud" type="FilterinhoudType" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Inhoud" type="xs:anyType">
+				<xs:annotation>
+					<xs:documentation>De payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LeveringVanDGLType">
+		<xs:sequence>
+			<xs:element name="BerichtHeader">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de routering en kunnen gebruikt worden om het bericht te traceren</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="BerichtHeaderType">
+							<xs:sequence>
+								<xs:element name="DatumtijdstempelLogius" type="xs:dateTime">
+									<xs:annotation>
+										<xs:documentation>Timestamp die toegekend is door Logius bij ontvangst van het bericht</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="KenmerkLogius" type="xs:string">
+									<xs:annotation>
+										<xs:documentation>GUID door Logius toegekend aan het oorspronkelijk ontvangen bericht</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Stuurgegevens">
+				<xs:annotation>
+					<xs:documentation>Deze gegevens zeggen iets over de payload</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="StuurgegevensType">
+							<xs:sequence>
+								<xs:element name="Abonnement" type="VersiebeheerType"/>
+								<xs:element name="Basisregistratie" type="xs:string"/>
+								<xs:element name="Gebeurtenissoort" type="VersiebeheerType"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Inhoud" type="xs:anyType">
+				<xs:annotation>
+					<xs:documentation>De payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BerichtHeaderType">
+		<xs:sequence>
+			<xs:element name="OntvangerId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Het Id (bijv. OIN) van de uiteindelijke informatieafnemer (in postkantoor termen de geadresseerde)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VerstrekkerId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Het Id (bijv. OIN) van de oorspronkelijke informatieverstrekker (in postkantoor termen de afzender)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DatumtijdstempelVerstrekker" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Timestamp toegekend door de oorspronkelijke informatieverstrekker</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KenmerkVerstrekker" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Uniek kenmerk dat door de oorspronkelijke informatieerstrekker aan het bericht is toegekend. Dit is een kenmerk dat door de gehele keten geldt en uniek is</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+                        <xs:element name="Berichtversie" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Versienummer van de berichtsoort van dit bericht (bijv. v1.1)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FilterinhoudType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:choice>
+				<xs:element name="Filter1" type="xs:anyType"/>
+				<xs:element name="Filter2" type="xs:anyType"/>
+				<xs:element name="Filter3" type="xs:anyType"/>
+				<xs:element name="Filter4" type="xs:anyType"/>
+				<xs:element name="Filter5" type="xs:anyType"/>
+				<xs:element name="Filter6" type="xs:anyType"/>
+				<xs:element name="Filter7" type="xs:anyType"/>
+				<xs:element name="Filter8" type="xs:anyType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StuurgegevensType">
+		<xs:sequence>
+			<xs:element name="VersieBerichttype" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Versienummer dat geldt voor de catalogus van de basisregistratie waar de inhoud (payload) op gebaseerd is (bijv. LO_GBA v3.10).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VersiebeheerType">
+		<xs:sequence>
+			<xs:element name="Naam" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Naam van het parentelement (bijv. van de Gebeurtenissoort)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Versie" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Versienummer van het parentelement (bijv. van de Gebeurtenissoort)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

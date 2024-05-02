@@ -1,0 +1,50 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+-# General data
+%h3= I18n.t('accounts.headers.brp')
+.form_wrapper
+  #brp_request
+    #brp_request_link= link_to('Raadpleeg de BRP', gba_request_account_path(@account.id), remote: true, class: 'edit_button') if can? :gba_request, Account
+    #brp_error
+  #brp_response
+.clear
+
+= render 'accounts/account_details/general'
+.clear
+.personal_data
+  .personal_data_left
+    = render 'accounts/account_details/distribution'
+  .personal_data_right
+    = render 'accounts/account_details/email'
+= render 'accounts/account_details/letter' if can? :last_activation_data, Account
+= render 'accounts/account_details/preferences'
+= render 'accounts/account_details/recovery'

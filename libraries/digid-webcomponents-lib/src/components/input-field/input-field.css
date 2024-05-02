@@ -1,0 +1,26 @@
+logius-input-field {
+  margin: 10px;
+  display: block;
+}
+
+logius-input-field h5 {
+  margin: 0 0 5px 0;
+}
+
+logius-input-field .hint {
+  height: 24px;
+  width: 256px;
+  color: #5A5A5A;
+  /*font-family: RijksoverheidSansWebText;*/
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: 0 0 5px 0;
+}
+
+logius-input-field input {
+  height: 48px;
+  padding: 0 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+}

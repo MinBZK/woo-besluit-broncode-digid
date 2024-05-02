@@ -1,0 +1,62 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(t("headers.mijn_digid.change_email.D9"))
+
+= flash_notice
+
+- if logged_in_with_app? && !logged_in_web_to_app?
+  = steps(1, 6)
+- elsif logged_in_with_app? && logged_in_web_to_app?
+  = steps(1, 2)
+- elsif logged_in_with_wid? && !logged_in_with_desktop_wid? && !logged_in_web_to_app?
+  = steps(1, 5)
+- else
+  = steps(1, 3)
+
+%h2.orange_heading=t("headers.mijn_digid.change_email.D9").html_safe
+
+= extended_form_for(@email, as: :email, url: my_digid_email_url, method: :put) do |form|
+
+  = form.header
+
+  = form.content do
+    %label.form__item__label= t("current_email_address")
+    %p.break-all= current_account.adres
+
+  - if current_account.sms_tools.active?
+    = form.text_field(:address, accessibility_information: t("information_boxes.email_address_midden"), "data-email" => true, "data-maximum-length" => "254", information: t("information_boxes.email_address_midden"), label: t("new_email_address"))
+  - else
+    = form.text_field(:address, accessibility_information: t("information_boxes.email_address_basis"), "data-email" => true, "data-maximum-length" => "254", information: t("information_boxes.email_address_basis"), label: t("new_email_address"))
+
+  = actions do
+    = action_submit(:next)
+    = cancel_button(cancel_my_digid_email_url)

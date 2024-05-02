@@ -1,0 +1,122 @@
+.qr_container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  .actions--link {
+    line-height: 112%;
+    padding: .4em;
+  }
+}
+
+.qr_label {
+  text-align: center;
+}
+
+.qr_option {
+  text-align: center;
+  width: 40%;
+
+  .icon {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 5px;
+  }
+}
+
+.qr_option:first-child {
+  padding-right: 10px;
+}
+
+.qr_option a,
+.qr_option span {
+  display: inline-block;
+
+  .subtxt {
+    font-size: 80%;
+    font-weight: normal;
+    min-height: 32px;
+  }
+}
+
+.qr_switch.link {
+  color: $nrs-0162cd;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+h2.orange_heading + .qr_code {
+  margin-top: 0px;
+}
+
+.qr_code {
+  border: 5px solid white;
+  display: inline-block;
+  width: 196px;
+  height: 196px;
+
+  #app_session_id {
+    display: none;
+  }
+}
+
+.qr_code_block {
+  position:relative;
+  margin: 5px;
+  margin-top: 12px;
+  image-rendering: -moz-crisp-edges;          /* Firefox                        */
+  image-rendering: -o-crisp-edges;            /* Opera                          */
+  image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+  image-rendering: pixelated;                 /* Chromes                         */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+  text-align: center;
+}
+
+.digid-qr-code-logo{
+  position: absolute;
+  border-radius: $default-border-radius;
+  background: $rs-wit;
+  width: 40px;
+  height: 40px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  margin: auto;
+  padding: 4px;
+}
+
+
+.digid-qr-code-logo-small{
+  width: 39px;
+  height: 39px;
+}
+
+.app_instruction_graphic {
+  border-bottom: 1px solid $rs-oranje-volle-kleur;
+  margin-bottom: 15px;
+}
+
+.app_instruction_graphic table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.app_instruction_graphic table tr td.right{
+  vertical-align: bottom;
+}
+
+.app_instruction_graphic table tr td.right img{
+  display: block;
+  max-width: 196px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.app_instruction_graphic > img{
+  display: block;
+  width: 80%;
+  margin-left: 5%;
+  border-collapse: collapse;
+}

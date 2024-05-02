@@ -1,0 +1,27 @@
+nl:
+  activerecord:
+    models:
+      nationality: Nationaliteit
+    attributes:
+      nationality:
+        nationalitycode: Nationaliteitscode
+        registrations: ""
+        start_date: "Ingangsdatum"
+        end_date: "Einddatum"
+    errors:
+      attributes:
+        start_date: "Ingangsdatum"
+      models:
+        nationality:
+          attributes:
+            base:
+              add_eer_is_true: "Toevoegen mislukt omdat de EER is gevuld maar de ingangsdatum niet is gevuld"
+              edit_eer_is_true: "Wijzigen mislukt omdat de EER is gevuld maar de ingangsdatum niet is gevuld"
+              add_end_date_present: "Toevoegen mislukt omdat de einddatum is gevuld maar de ingangsdatum niet is gevuld"
+              edit_end_date_present: "Wijzigen mislukt omdat de einddatum is gevuld maar de ingangsdatum niet is gevuld"
+              add_after_end_date: "Toevoegen mislukt omdat de ingangsdatum vóór %{end_date} dient te liggen"
+              edit_after_end_date: "Wijzigen mislukt omdat de ingangsdatum vóór %{end_date} dient te liggen"
+              add_before_start_date: "Toevoegen mislukt omdat de einddatum dient na %{start_date} te liggen"
+              edit_before_start_date: "Wijzigen mislukt omdat de einddatum dient na %{start_date} te liggen"
+            registrations:
+              not_empty: "Verwijderen mislukt omdat er een DigiD aanvraag is met nationaliteit %{nationality}"

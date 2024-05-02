@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+    <xs:element name="af01" type="af01"/>
+
+    <xs:element name="af11" type="af11"/>
+
+    <xs:element name="ag01" type="ag01"/>
+
+    <xs:element name="ag11" type="ag11"/>
+
+    <xs:element name="ag21" type="ag21"/>
+
+    <xs:element name="ag31" type="ag31"/>
+
+    <xs:element name="ap01" type="ap01"/>
+
+    <xs:element name="av01" type="av01"/>
+
+    <xs:element name="delR" type="delR"/>
+
+    <xs:element name="dt01" type="dt01"/>
+
+    <xs:element name="dw01" type="dw01"/>
+
+    <xs:element name="gv01" type="gv01"/>
+
+    <xs:element name="gv02" type="gv02"/>
+
+    <xs:element name="ha01" type="ha01"/>
+
+    <xs:element name="hf01" type="hf01"/>
+
+    <xs:element name="hq01" type="hq01"/>
+
+    <xs:element name="ng01" type="ng01"/>
+
+    <xs:element name="null" type="null"/>
+
+    <xs:element name="pf01" type="pf01"/>
+
+    <xs:element name="pf02" type="pf02"/>
+
+    <xs:element name="pf03" type="pf03"/>
+
+    <xs:element name="staR" type="staR"/>
+
+    <xs:element name="sv01" type="sv01"/>
+
+    <xs:element name="sv11" type="sv11"/>
+
+    <xs:element name="vb01" type="vb01"/>
+
+    <xs:element name="vb02" type="vb02"/>
+
+    <xs:element name="wa11" type="wa11"/>
+
+    <xs:element name="xa01" type="xa01"/>
+
+    <xs:element name="xf01" type="xf01"/>
+
+    <xs:element name="xq01" type="xq01"/>
+
+    <xs:complexType name="af01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="foutreden" type="xs:string"/>
+                <xs:attribute name="gemeente" type="xs:string"/>
+                <xs:attribute name="aNummer" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType abstract="true" name="abstractMessage">
+        <xs:sequence/>
+        <xs:attribute name="randomKey" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="container">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="element" type="element"/>
+        </xs:sequence>
+        <xs:attribute name="nummer" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="element">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="nummer" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="af11">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="foutreden" type="xs:string"/>
+                <xs:attribute name="gemeente" type="xs:string"/>
+                <xs:attribute name="aNummer" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ag01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ag11">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ag21">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ag31">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ap01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:int" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="av01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="delR">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="foutOorzaak" type="xs:string"/>
+                    <xs:element minOccurs="0" name="origineelKenmerk" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute name="rapportTijdstip" type="xs:string"/>
+                <xs:attribute name="berichtNummer" type="xs:int" use="required"/>
+                <xs:attribute name="ontvanger" type="xs:string"/>
+                <xs:attribute name="berichtTijdstip" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="dt01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tabel" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:string"/>
+                <xs:attribute name="tabel" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="dw01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tabel" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:string"/>
+                <xs:attribute name="tabel" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="gv01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="aNummer" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="gv02">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="aNummer" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ha01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="hf01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="foutreden" type="xs:string"/>
+                <xs:attribute name="gemeente" type="xs:string"/>
+                <xs:attribute name="aNummer" type="xs:string"/>
+                <xs:attribute name="aantal" type="xs:string"/>
+                <xs:attribute name="gevraagdeRubrieken" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="hq01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:string"/>
+                <xs:attribute name="aantal" type="xs:string"/>
+                <xs:attribute name="gevraagdeRubrieken" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ng01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="null">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="pf01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="pf02">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="pf03">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="staR">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="notificationType" type="xs:string"/>
+                    <xs:element minOccurs="0" name="foutOorzaak" type="xs:string"/>
+                    <xs:element minOccurs="0" name="origineelKenmerk" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute name="ontvanger" type="xs:string"/>
+                <xs:attribute name="berichtNummer" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="sv01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="status" type="xs:string"/>
+                <xs:attribute name="datum" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="sv11">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="vb01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bericht" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="vb02">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bericht" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute name="communicatiePartnerAan" type="xs:int"/>
+                <xs:attribute name="communicatiePartnerVan" type="xs:int"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="wa11">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="aNummer" type="xs:string"/>
+                <xs:attribute name="datumGeldigheid" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="xa01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="xf01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="foutreden" type="xs:string"/>
+                <xs:attribute name="aantal" type="xs:string"/>
+                <xs:attribute name="gevraagdeRubrieken" type="xs:string"/>
+                <xs:attribute name="adresFunctie" type="xs:string"/>
+                <xs:attribute name="identificatie" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="xq01">
+        <xs:complexContent>
+            <xs:extension base="abstractMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="categorie" type="container"/>
+                </xs:sequence>
+                <xs:attribute name="herhaling" type="xs:string"/>
+                <xs:attribute name="aantal" type="xs:string"/>
+                <xs:attribute name="gevraagdeRubrieken" type="xs:string"/>
+                <xs:attribute name="adresFunctie" type="xs:string"/>
+                <xs:attribute name="identificatie" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,49 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- questions = Question.for([page_name, *other_questions], I18n.locale)
+%div.footer-questions
+  - if questions.present?
+    %h4= t("question_and_answer")
+    %ul.questions
+      - questions.each do |question|
+        %li.questions-item
+          %a.questions-question{ href: "#" }
+            = icon("3941 delta links 24px", css_class: "faq", hidden: true)
+            = question.question
+            .accessibility__information= t("this_answer_is_currently_hidden_select_question_to_open")
+          .questions-answer= markdown(question.answer)
+
+    %h4= t("no_answer_to_your_question")
+  - else
+    %h4= t("do_you_have_questions_or_remarks")
+
+  %p!= t("questions_remarks_message", questions_url: external_link_to(t("view_digid_website"), t("view_digid_website_link")), contact_url: external_link_to(t("contact_us"), t("contact_us_link")))

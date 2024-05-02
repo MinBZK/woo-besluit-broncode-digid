@@ -1,0 +1,133 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+-# ---------------------
+-# -- Persoonlijke gegevens
+-# ---------------------
+%h2.heading-with-separator= t('personal_information')
+-# Gebruikersnaam
+- if current_account.password_authenticator&.active?
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t('username')
+        .col.col-val= current_account.password_authenticator&.username
+  -# Wachtwoord
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t('password')
+        - if current_account.blocking_manager.blocked?
+          .col.col-val.setting-inactive
+            =t('blocked')
+            %button.info-button.info{'aria-label': t('information_boxes.aria_labels.password_totp')}
+        - else
+          .col.col-val.verdana
+            != '&bull;' * 8
+            %button.info-button.info{'aria-label': t('information_boxes.aria_labels.password_totp')}
+      .col.col-info.info-box
+        %p= t('information_boxes.password_totp')
+    .col.col-links.extended-height
+      %ul.list-with-arrows
+        - if digid_app_enabled? && current_account.app_authenticator_active? && current_account.blocking_manager.blocked?
+          %li= link_to(t("password_change"), my_digid_change_via_app_url) unless current_account.deceased?
+        - elsif digid_app_enabled? && current_account.app_authenticator_active?
+          %li= link_to(t("password_change"), my_digid_choose_password_or_app_url) unless current_account.deceased?
+        - elsif (!digid_app_enabled? || !current_account.app_authenticator_active?) && current_account.blocking_manager.blocked?
+          %li= link_to(t("password_change"), my_digid_choose_password_or_app_url, remote: true) unless current_account.deceased?
+        - else
+          %li= link_to(t("password_change"), my_digid_change_via_password_url) unless current_account.deceased?
+
+-# Telefoonnummer
+- if current_account.sms_tools.active? || current_account.sms_in_uitbreiding?
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t('mobile_phone_number')
+        .col.col-val
+          - if current_account.mobiel_kwijt_in_progress? || current_account.sms_in_uitbreiding?
+            = mobile_number(mobile_number: current_account.pending_phone_number)
+          - else
+            = mobile_number(mobile_number: current_account.phone_number)
+          %button.info-button.info{'aria-label': t('information_boxes.aria_labels.mobile_phone_number_totp')}
+      .col.col-info.info-box
+        %p= t('information_boxes.mobile_phone_number_totp')
+    .col.col-links
+      %ul.list-with-arrows
+        - if current_account.sms_in_uitbreiding? || current_account.mobiel_kwijt_in_progress?
+          %li= link_to(t('change_phone_number'), new_my_digid_change_mobile_url, remote: true) unless current_account.deceased?
+        - else
+          %li= link_to(t('change_phone_number'), new_my_digid_change_mobile_url) unless current_account.deceased?
+-# E-mailadres
+.row
+  .wrap-main
+    .col.highlight{ class: ('notice' if current_account.email_pending?) }
+      .col.col-name= t('email_address')[0].capitalize + t('email_address')[1..-1]
+      .col.col-val{ class: ('setting-inactive' if current_account.email_pending?) }
+        %button.info-button.info{'aria-label': t('information_boxes.aria_labels.email_address')}
+        - if current_account.email_address_present?
+          %p.break-all= current_account.email.adres
+          - if current_account.email_pending?
+            %p.compact-paragraph= '(' + t('not_verified_yet') + ')'
+        - else
+          %p.compact-paragraph= t('not_added_yet')
+    .col.col-info.info-box
+      - if current_account.email_address_present?
+        - if current_account.email_pending?
+          %p= t('your_email_address_is_not_verified_totp', mailadres: current_account.email.adres)
+        - else
+          %p= t('your_email_address_is_verified_totp')
+      - else
+        %p= t('we_recommend_you_to_add_your_email_address')
+  .col.col-links.extended-height
+    %ul.list-with-arrows
+      - unless current_account.deceased?
+        - if current_account.email_address_present?
+          - if current_account.email_pending?
+            %li= link_to(t('enter_control_code'), check_email_my_digid_url)
+            %li= link_to(t('resend_control_code'), my_digid_repeat_email_url(g4: true))
+          %li= link_to(t('change_email_address'), edit_my_digid_email_url)
+          %li= link_to(t('delete_email_address'), confirm_destroy_my_digid_email_url)
+        - else
+          %li= link_to(t('add_email_address'), new_my_digid_email_url)
+-# Burgerservicenummer
+- @current_sectorcodes.each do |sectorcode|
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t("sector_#{sectorcode.sector_name.downcase}").html_safe
+        .col.col-val
+          -# FIXME: Only show if we have SOFI/BSN
+          - if sectorcode.sector_name.downcase != "oeb"
+            %button.info-button.info{ "aria-label": t("information_boxes.aria_labels.bsn") }
+          %p= mask_personal_number(sectorcode.sectoraalnummer).html_safe
+      .col.col-info.info-box
+        %p= t('information_boxes.bsn')

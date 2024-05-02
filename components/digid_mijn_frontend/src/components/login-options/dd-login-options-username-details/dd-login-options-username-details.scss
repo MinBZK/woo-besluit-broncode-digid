@@ -1,0 +1,6 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.login-method.mixins' as *;
+
+.dd-login-options-username-details {
+  @include details;
+}

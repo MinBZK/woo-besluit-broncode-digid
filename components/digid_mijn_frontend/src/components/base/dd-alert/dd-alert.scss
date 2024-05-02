@@ -1,0 +1,58 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.general.mixins' as *;
+
+.dd-alert {
+  display: inline-flex;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+
+  &--error {
+    background: var(--solid-error);
+    .dd-alert__type-icon {
+      margin-left: -3px;
+      margin-top: -3px;
+    }
+  }
+
+  &--warning {
+    background: var(--solid-warning);
+  }
+
+  &--information {
+    background: var(--solid-info);
+  }
+
+  &--success {
+    background: var(--solid-success);
+  }
+
+  &__close-btn {
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &__header {
+    font-weight: bold;
+    line-height: 1.5rem;
+  }
+
+  &__body {
+    line-height: 1.5rem;
+    margin: 0;
+		white-space:pre-wrap;
+  }
+
+  &--hidden {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    margin: 0 !important;
+    padding: 0;
+    pointer-events: none;
+  }
+}

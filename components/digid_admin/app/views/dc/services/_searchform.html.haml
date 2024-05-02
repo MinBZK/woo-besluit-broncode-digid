@@ -1,0 +1,110 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= form_for @service, url: search_dc_services_path, method: "post" do |f|
+  %table.half-width
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th
+      %th
+    %tr
+      %td= f.label :service_id, t("services.services.id")
+      %td= f.text_field :id,  value: params.dig(:dc_service, :id)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :connection_id, t("services.services.connection.id")
+      %td= f.text_field :connection_id,  value: params.dig(:dc_service, :connection_id)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :connection_entity_id, t("services.services.connection.entity_id")
+      %td= f.text_field :connection_entity_id,  value: params.dig(:dc_service, :connection_entity_id)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :naam, t("services.services.name")
+      %td= f.text_field :name, value: params.dig(:dc_service, :name)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :service_uuid, t("services.services.service_uuid")
+      %td= f.text_field :service_uuid,  value: params.dig(:dc_service, :service_uuid)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :entity_id, t("services.services.entity_id")
+      %td= f.text_field :entity_id, value: params.dig(:dc_service, :entity_id)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= label_tag :active, t("services.active")
+      %td= select_tag "dc_service[active]", options_for_select([['', "na"], ['Ja', true], ['Nee', false]], params[:dc_service] ? params.dig(:dc_service,  :active) : "na")
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :digid, t("services.indication_digid")
+      %td= select_tag "dc_service[digid]", options_for_select([['', "na"], ['Ja', true], ['Nee', false]], params[:dc_service] ? params.dig(:dc_service,  :digid) : true)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :machtigen, t("services.indication_machtigen")
+      %td= select_tag "dc_service[machtigen]", options_for_select([['', "na"], ['Ja', true], ['Nee', false]], params[:dc_service] ? params.dig(:dc_service,  :machtigen) : true)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= submit_button 'Filter »'
+      %td
+      %td
+      %td
+      %td
+      %td

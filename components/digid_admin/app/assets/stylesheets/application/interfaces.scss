@@ -1,0 +1,48 @@
+#letters,
+#sms_messages,
+#emails {
+  form#letters {
+    margin-bottom: 10px;
+  }
+
+  table#letters_overview {
+    margin-bottom: 50px;
+  }
+
+  div#letter_not_sent {
+    height: 100%;
+    margin-bottom: 25px;
+    width: 500px;
+  }
+
+  .field {
+    .label_letters {
+      float: left;
+      font-weight: bold;
+      margin-top: 2px;
+      width: 300px;
+    }
+
+    .content_letters {
+      margin-left: 325px;
+    }
+
+    input.letters_conf {
+      // scss-lint:disable ImportantRule
+      width: 50px !important;
+    }
+
+    .content_submit {
+      margin-left: 293px;
+    }
+  }
+
+  #search_sms_field,
+  #search_email_field {
+    margin-bottom: 10px;
+  }
+
+  .show_account {
+    width: 100px;
+  }
+}

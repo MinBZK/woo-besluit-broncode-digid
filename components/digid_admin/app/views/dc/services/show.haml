@@ -1,0 +1,101 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper
+  %h1= t("services.services.service") + " #{@service.name}"
+  .actions_top
+    = link_to(t("services.back_to_overview"), dc_services_path)
+    = link_to(t("services.services.edit") , edit_dc_service_path(@service), class: 'edit_button') if can? :update, Dc::Service
+  .clear
+  = field t("services.services.identity") do
+    = field t("services.id"), @service.id
+    = field t("services.service.legacy_id"), @service.legacy_service_id
+    - if @service.connection.protocol_type != "OIDC_APP"
+      = field t("services.services.service_uuid"), @service.service_uuid
+      = field t("services.services.entity_id"), @service.entity_id
+    = field t("services.services.connection_id"), @service.connection_id
+
+  %hr
+  = field t("services.services.standard") do
+    = field t("services.services.standard_name"), @service.name
+    = field t("services.services.standard_website_url"), @service.website_url
+    = field t("services.services.standard_min_reliability_level"), @service.minimum_reliability_level
+    = field t("services.services.standard_permission_question"), @service.permission_question
+    = field t("services.services.standard_encryption_type_id"), @service.encryption_id_type
+
+  - if @service.connection.protocol_type != "OIDC_APP"
+    %hr
+    = field t("services.services.new_reliability_level") do
+      = field t("services.services.new_reliability_level_level"), @service.new_reliability_level
+      = field t("services.date_from"), render_from(@service.new_reliability_level_starting_date)
+      = field t("services.services.new_reliability_level_change_msg"), @service.new_reliability_level_change_message
+
+  %hr
+  = field t("services.digid") do
+    - if @service.connection.protocol_type != "OIDC_APP"
+      = field t("services.digid_enabled"), I18n.t(@service.digid)
+    - if @service.digid
+      = field t("services.services.standard_permission_question"), @service.permission_question
+
+  - if @service.connection.protocol_type != "OIDC_APP"
+    %hr
+    = field t("services.machtigen.title") do
+      = field t("services.machtigen_enabled"), I18n.t(@service.machtigen)
+      - if @service.machtigen
+        = field t("services.machtigen.position"), @service.position
+        = field t("services.machtigen.authorization_type"), @service.authorization_type
+        = field t("services.machtigen.duration_authorization"), @service.duration_authorization
+        = field t("services.machtigen.description"), @service.description
+        = field t("services.machtigen.explanation"), @service.explanation
+
+        = render 'dc/services/service_organization_roles', service: @service
+        = render 'dc/services/child_services', service: @service
+        = render 'dc/services/parent_services', service: @service
+        = render 'dc/services/keywords', service: @service
+
+  %hr
+  = field t("services.validity") do
+    = render_status(@service)
+
+  - if @service.digid && @service.connection.protocol_type == "OIDC_APP"
+    %hr
+    = field "App" do
+      = field "Actief", t(@service.app_active)
+      = field "Client ID", @service.client_id
+      = field "Return url", @service.app_return_url
+      = field "Icon url", @service.icon_uri
+
+  .actions
+    = link_to(t("services.services.delete"), dc_service_path(id: @service.id), class: 'delete_button', data: { confirm: t('are_you_sure_service') }, method: :delete) if can? :destroy, Dc::Service
+
+  .clear
+%br= show_service_actions(@service.legacy_service_id)
+%br= show_manager_actions_for(Log::SubjectTypes::DC_SERVICE, @service.id)

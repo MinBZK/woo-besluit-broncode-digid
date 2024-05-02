@@ -1,0 +1,8 @@
+{
+  "search": {
+    "search-aria-label": "Search",
+    "search-usage-history-label": "Search your usage history",
+    "input-placeholder": "Enter a search term",
+    "no-results": "No suggestions found"
+  }
+}

@@ -1,0 +1,91 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= form_for @certificate, url: search_dc_certificates_path do |f|
+  %table.half-width
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th
+      %th
+    %tr
+      %td= f.label :naam, t("services.certificate.organization.name")
+      %td= text_field_tag "dc_certificate[organization][name]", params.dig(:dc_certificate, :organization, :name)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :aansluiting, t("services.certificate.connection.connection_select")
+      %td= check_box_tag "dc_certificate[connection][is_connection]", "true", params.dig(:dc_certificate, :connection, :is_connection)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :dienst, t("services.certificate.service.service_select")
+      %td= check_box_tag "dc_certificate[service][is_service]", "true", params.dig(:dc_certificate, :service, :is_service)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :fingerprint, t("services.certificate.fingerprint")
+      %td= text_field_tag "dc_certificate[certificate][fingerprint]", params.dig(:dc_certificate, :certificate, :fingerprint)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :kind, t("services.certificate.cert_type")
+      %td= select_tag "dc_certificate[certificate][cert_type]", options_for_select([['TLS'], ['SIGNING'], ["ENCRYPTION"]], params.dig(:dc_certificate, :certificate, :cert_type)), include_blank: true
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :active_from, t("services.date_from")
+      %td
+        %span.datepicker= date_select("dc_certificate[certificate]", :active_from, include_blank: true, selected: params.dig(:dc_certificate, :certificate, :active_from))
+      %td= f.label :active_until, t("services.date_until")
+      %td
+        %span.datepicker= date_select("dc_certificate[certificate]", :active_until, include_blank: true, selected: params.dig(:dc_certificate, :certificate, :active_until))
+      %td
+      %td
+    %tr
+      %td= submit_button 'Filter »'
+      %td
+      %td
+      %td
+      %td
+      %td

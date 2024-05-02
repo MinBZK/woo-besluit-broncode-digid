@@ -1,0 +1,200 @@
+// Form items
+//
+// form__item           - default form item
+// form__item--active   - active form item
+// form__item--error    - error form item
+%form-item {
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  position: relative;
+}
+
+.form__item {
+  @extend %form-item;
+  background-color: $nrs-f5f5f5;
+}
+
+.form__item--active {
+  &.form__item {
+    background-color: $nrs-dcdcdc;
+  }
+
+  &.form__item--error {
+    background-color: $nrs-ea9790;
+  }
+}
+
+.form__item--error {
+  @extend %form-item;
+  background-color: $rs-rood-lichte-tint;
+
+  .field_with_errors {
+    display: inline;
+  }
+}
+
+// BOX-LABEL
+.form__item__box-label {
+  display: block;
+  margin-left: 30px;
+  padding-top: 3px;
+  position: relative;
+}
+
+// BUTTON
+.form__item__button {
+  color: $nrs-5a5a5a;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+// ERRORS
+.form__item__errors {
+  background-image: image-url('message_err.png');
+  background-position: 0 5px;
+  background-repeat: no-repeat;
+  min-height: 20px;
+  padding: 5px;
+  padding-left: 30px;
+  width: 75%;
+}
+
+// EXAMPLE
+.form__item__example {
+  color: $nrs-5a5a5a;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+// FIELD
+%form-item-field {
+  border-color: $rs-zwart;
+  border-style: solid;
+  border-width: 1px;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  margin-right: 8px;
+  max-width: 333px;
+  padding: 5px 10px;
+
+  // code fields are shown in capitals
+  &[data-code],
+  &[data-capitals] {
+    text-transform: uppercase;
+  }
+
+  .form__item--error & {
+    border-color: $nrs-960000;
+  }
+}
+
+.form__item__field {
+  @extend %form-item-field;
+  width: 91%;
+}
+
+.form__item__field--box {
+  margin-top: 5px;
+  position: absolute;
+}
+
+.form__item__field--extra-small {
+  @extend %form-item-field;
+  width: 20px;
+}
+
+.form__item__field--medium {
+  @extend %form-item-field;
+  max-width: 158px;
+  width: 91%;
+}
+
+.form__item__field--small {
+  @extend %form-item-field;
+  width: 66px;
+}
+
+// INFORMATION
+.form__item__information {
+  @include transition(left linear .2s); // Compass
+  background-color: $nrs-fce559;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  left: 74%;
+  // left margin is specific for IE8 (for which we remove the triangle)
+  margin: 15px 0 5px -30px;
+  padding: 10px 15px;
+  position: absolute;
+  top: -20px;
+  visibility: hidden;
+  width: 210px;
+  z-index: 10;
+
+  // no negative left margin for IE9+ and other browsers
+  @media screen and (min-width: 1px) {
+    margin-left: 0;
+  }
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    display: none;
+    left: auto;
+    position: relative;
+    top: auto;
+    visibility: visible;
+    width: auto;
+  }
+
+  // because of issues with the leading triangle in IE8, use a media query to
+  // prevent the triangle from showing up in IE8
+  @media screen and (min-width: 1px) {
+    &:before {
+      border-color: transparent;
+      border-right-color: $nrs-fce559;
+      border-style: solid;
+      border-width: 15px;
+      content: '';
+      height: 0;
+      left: -30px;
+      position: absolute;
+      top: 30px;
+      width: 0;
+
+      @media screen and (max-width: $breakpoint2 - 1) {
+        border-bottom-color: $nrs-fce559;
+        border-right-color: transparent;
+        left: 30px;
+        right: auto;
+        top: -30px;
+      }
+    }
+  }
+
+  // if the input field gets focus, display information boxes
+  .form__item__field:focus ~ &,
+  .form__item__field--box:focus ~ &,
+  .form__item__field--extra-small:focus ~ &,
+  .form__item__field--medium:focus ~ &,
+  .form__item__field--small:focus ~ & {
+    left: 77%;
+    visibility: visible;
+
+    @media screen and (max-width: $breakpoint2 - 1) {
+      display: block;
+      left: auto;
+    }
+  }
+}
+
+// LABEL
+.form__item__label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 3px;
+
+  .form__item--error & {
+    color: $nrs-960000;
+  }
+}
+
+.form__item__label__required {
+  margin-left: 5px;
+}

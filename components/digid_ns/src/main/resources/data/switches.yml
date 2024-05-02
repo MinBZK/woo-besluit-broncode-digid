@@ -1,0 +1,15 @@
+- id: 1
+  name: 'Koppeling met MCC Notificatie Service (MNS)'
+  description: 'Deze switch is standaard actief voor alle accounts en zorgt ervoor dat DigiD apps geregistreerd / gederegistreerd / geüpdatet kunnen worden voor pushnotificaties bij de MCC Notificatie Service (MNS) en er pushnotificaties naar DigiD apps verstuurd kunnen worden via de MNS'
+  status: 1
+  pilot_group_id: 0
+- id: 2
+  name: 'Koppeling met Firebase Cloud Messaging (FCM)'
+  description: 'Deze switch is standaard actief voor alle accounts en zorgt ervoor dat pushnotificaties naar DigiD apps op Android devices via FCM (Google Notification Service) verstuurd kunnen worden.'
+  status: 1
+  pilot_group_id: 0
+- id: 3
+  name: 'Koppeling met Apple Push Notification service (APNs)'
+  description: 'Deze switch is standaard actief voor alle accounts en zorgt ervoor dat pushnotificaties naar DigiD apps op Apple devices via APNs verstuurd kunnen worden.'
+  status: 1
+  pilot_group_id: 0

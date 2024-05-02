@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<jxb:bindings version="1.0"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+  jxb:extensionBindingPrefixes="inheritance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+                                  https://raw.githubusercontent.com/Siggen/jaxb2-namespace-prefix/master/src/main/resources/prefix-namespace-schema.xsd">
+
+
+  <jxb:bindings schemaLocation="V1_MU_RegisterPinReset.xsd">
+    <jxb:bindings node="xsd:simpleType[@name='DocTypeType']">
+      <inheritance:implements>nl.logius.digid.dws.model.EnumValue</inheritance:implements>
+    </jxb:bindings>
+  </jxb:bindings>
+
+</jxb:bindings>

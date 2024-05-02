@@ -1,0 +1,191 @@
+nl:
+  en : Engels
+  nl : Nederlands
+  accounts:
+    fields:
+      labels:
+        basis: Basis
+        midden: Midden
+        substantieel: Substantieel
+        hoog: Hoog
+        active: "Actief"
+        ww: "<strong>Gebruikersnaam / Wachtwoord</strong> (basis)"
+        sms: "<strong>Sms-controle</strong> (midden)"
+        app: "<strong>DigiD-apps</strong> (midden)"
+        app_id_check: <strong>DigiD apps met ID-check</strong> (substantieel)
+        hoog: "<strong>Rijbewijs / identiteitskaart</strong> (hoog)"
+        id: "ID"
+        inactive: "Niet actief"
+        username: "PPPPPPPPPPPPPP"
+        sectoraalnummmer: "Sectoraalnummer"
+        status: "Status"
+        wachtwoord: Wachtwoord
+        totp: Authenticator app
+        gba_status: "BRP status"
+        requested: "Aanvraag gestart"
+        aangevraagd: Aangevraagd op
+        geactiveerd: "Geactiveerd"
+        geactiveerd_op: "Geactiveerd op"
+        geactiveerd_met: "Geactiveerd met"
+        policy: "Policy nummer"
+        current_policy: "huidige policy: 2"
+        account_histories: "Heraanvragen"
+        part_of_pilotgroups: 'Maakt deel uit van pilotgroep(en)'
+        preferred_language: "Voorkeurstaal"
+        no_history: "geen historische gegevens"
+        updated: "Laatst gewijzigd"
+        last_log_in: "Laatst ingelogd"
+        last_usage: Laatst gebruikt
+        verhoogd: Verhoogd op
+        type_id: Type ID
+        issuer_type: Uitgifte middel
+        nfc_reader: NFC-lezer
+        type_id_card: Type identiteitsbewijs
+        email: "E-mailadres"
+        mobile_number: "Telefoonnummer"
+        expiry_date: "Vervaldatum"
+        reason_suspension: "Reden opschorting"
+        reason_suspension_updated_at: "Datum laatste wijziging"
+        authenticatie_tools: "Authenticatiemiddelen"
+        minimum_level: "Instelling 'Altijd inloggen in minimaal 2 stappen':"
+        service_messages: "Serviceberichten per e-mail"
+        last_email: "Laatste e-mail"
+        send_on: "Verstuurd op"
+        password_recovery: "Wachtwoordherstel per e-mail"
+        spoken_sms_messages: "Gesproken sms"
+        login_once: "Eenmalig inloggen"
+        sms_attempts: "Sms pogingen"
+        app_attempts: "Inlogpogingen met de DigiD app"
+        password_attempts: "Inlogpogingen wachtwoord(/sms)"
+        request_attempts: "DigiD aanvraagpogingen"
+        request_recovery_attempts: "Herstelcode invoerpogingen"
+        request_recovery_requests: "Herstelcodes aangevraagd per e-mail (laatste %{dag} uur)"
+        request_recovery_requests_month: "Herstelcodes aangevraagd per brief (laatste maand)"
+        set: "Ingesteld"
+        not_set: "Niet ingesteld"
+        possible: "Mogelijk"
+        impossible: "Niet mogelijk"
+        unknown: Onbekend
+        not_activated: "Niet gecontroleerd"
+        activated: "Gecontroleerd"
+        blocked: "Geblokkeerd"
+        blocked_till: "Geblokkeerd tot"
+        change_status: "Wijzig status"
+        bsn: "BSN-nummer"
+        change_sectorcode: "Wijzig sectorcode"
+        titles: "Titel"
+        herkomst: "Herkomst"
+        uitgifte: "Uitgifte account"
+        balie: "Balie"
+        regulier: "Regulier"
+        regulier_app: "Regulier (via DigiD app)"
+        gemeentebalie: "Gemeentebalie"
+        uitgifteproces: "Uitgifteproces"
+        functiescheiding: "Functiescheiding"
+        activation_code: "Activatiecode"
+        e_rijbewijs: "Rijbewijs"
+        e_identiteitskaart: "Identiteitskaart"
+        issued_at: "Uitgereikt"
+        last_status_change_at: "Laatste statuswijziging"
+        app_code: Appcode
+        device_name: Device naam
+        type: Type
+        status: Status
+        documentnummer: Documentnummer
+        status_bron: Status bron
+        laatste_statuswijziging: Laatste statuswijziging
+        eid_toeslag: eID-Toeslag
+        opmerking: Opmerking
+        replace_blocked: Vervangen account geblokkeerd
+
+    presenter:
+      blocked: Geblokkeerd
+      states:
+        initial: 'Initieel'
+        active: 'Actief'
+        expired: 'Vervallen'
+        removed: 'Verwijderd'
+        revoked: 'Ingetrokken door BI'
+        requested: 'Wacht op activering'
+        suspended: 'Opgeschort'
+
+    sms_tool:
+      status:
+        active: Actief
+        inactive: Niet actief
+        pending: Wacht op activering
+        blocked: Geblokkeerd
+
+    password_tool:
+      status:
+        initial: Initieel
+        active: Actief
+        inactive: Niet actief
+        pending: Wacht op activering
+        blocked: Geblokkeerd
+
+    app_authenticator:
+      status:
+        initial: Initieel
+        active: Actief
+        inactive: Niet actief
+        pending: Wacht op activering
+        blocked: Geblokkeerd
+
+    messages:
+      accounts_not_found: "Er zijn geen DigiD accounts gevonden."
+      managing_logs_not_found: "Er zijn geen beheerlogs gevonden."
+      transaction_logs_not_found: "Er zijn geen transactielogs gevonden"
+      geen_balie: "kan niet gevonden worden"
+      geen_gegevens_opgevraagd: "Geen gegevens opgevraagd"
+      inactive: "Niet actief"
+    notifications:
+      state_changed:
+        active: "De status van het account is gewijzigd naar actief."
+        suspended: "De status van het account is gewijzigd naar opgeschort."
+      account_deleted: "Het DigiD account is verwijderd."
+      activated: "De opschorting is ongedaan gemaakt. Het account is weer actief."
+      sofi_set_to_bsn: "Account omgezet van Sofi naar BSN gelukt"
+      sofi_not_set_to_bsn: "Account omgezet van Sofi naar BSN mislukt"
+      sofi_not_set_to_bsn_anummer: "Account omgezet van Sofi naar BSN mislukt (A-nummer conflict)"
+      no_letters: "Er zijn voor dit account geen brieven beschikbaar."
+    headers:
+      accounts: "DigiD accounts"
+      account: "Account"
+      details: "Details"
+      transactions: "Transacties"
+      managing_acts: "Beheerhandelingen"
+      brp: "BRP gegevens"
+      general: "Algemeen"
+      status: "Status"
+      preferences: "Instellingen"
+      name_data: "Naamgegevens"
+      address_data: "Adresgegevens"
+      travel_documents: "Gegevens Nederlandse reisdocumenten"
+
+    states:
+      active: 'Actief'
+      expired: 'Vervallen'
+      initial: 'Initieel'
+      removed: 'Verwijderd'
+      revoked: 'Ingetrokken door BI'
+      requested: 'Aangevraagd'
+      suspended: 'Opgeschort'
+    driving_licence:
+      niet_uitgegeven: Niet uitgegeven
+      uitgereikt: Uitgereikt
+      actief: Actief
+      geschorst: Geschorst
+      geblokkeerd: Geblokkeerd
+      ingetrokken: Ingetrokken
+      niet_actief: Inactief
+      type: <strong>Rijbewijs</strong>
+    identity_card:
+      niet_uitgegeven: Niet uitgegeven
+      uitgereikt: Uitgereikt
+      actief: Actief
+      geblokkeerd: Geblokkeerd
+      ingetrokken: Ingetrokken
+      niet_actief: Inactief
+      tijdelijk_geblokkeerd: Tijdelijk geblokkeerd
+      type: <strong>Identiteitskaart</strong>

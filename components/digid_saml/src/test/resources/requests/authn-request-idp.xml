@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<samlp:AuthnRequest AssertionConsumerServiceIndex="0"
+                    Destination="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                    ID="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" IssueInstant="2021-02-22T14:11:40Z" Version="2.0"
+                    xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"
+                    xmlns:ext="urn:oasis:names:tc:SAML:attributes:ext"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <saml:Issuer>urn:nl-eid-gdi:1.0:LC:00000008888888888000:entities:0000</saml:Issuer>
+    <ds:Signature>
+        <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <ds:Reference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+                <ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+                        <ec:InclusiveNamespaces PrefixList="ds saml samlp xs"/></ds:Transform>
+                </ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <ds:DigestValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:KeyName>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:KeyName>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <samlp:Extensions>
+        <saml:Attribute Name="urn:nl-eid-gdi:1.0:IntendedAudience">
+            <saml:AttributeValue>urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000</saml:AttributeValue>
+        </saml:Attribute>
+        <saml:Attribute Name="urn:nl-eid-gdi:1.0:ServiceUUID">
+            <saml:AttributeValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</saml:AttributeValue>
+        </saml:Attribute>
+    </samlp:Extensions>
+    <samlp:Scoping>
+        <samlp:RequesterID>urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000</samlp:RequesterID>
+    </samlp:Scoping>
+</samlp:AuthnRequest>

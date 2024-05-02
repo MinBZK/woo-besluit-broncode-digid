@@ -1,0 +1,75 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- prevent_changes ||= false
+
+%table.half-width{class: certificates.any? ? "display-table" : "hidden"}
+  %thead
+    %tr
+      %th= t("services.name")
+      %th
+      %th
+  %tbody
+    - if certificates.any?
+      - certificates.each_with_index do |certificate, index|
+        - if certificate.valid?
+          - @certificate = certificate
+          %tr
+            %td= certificate.common_name
+            %td
+              - if certificate.new_record?
+                %input.checkbox{type: "hidden", name: "#{prefix}[cached_certificate]", value: certificate.cached_certificate}
+              - else
+                %input.checkbox{type: "hidden", name: "#{prefix}[cached_certificate]", value: ""}
+                = hidden_field(:id, "dc_connection[certificates][][id]")
+
+              = link_to t("show"), "#", id: "certificate_dialog_#{index}"
+              - @dn = '/' + certificate.distinguished_name.to_s
+              .hidden.dialog-wrapper
+                .title= "Bekijk certificaat"
+                .body= render('dc/certificates/show')
+
+              - unless show? || prevent_changes
+                %td
+                  %input.checkbox{type: "hidden", name: "#{prefix}[id]", value: certificate.id}
+                  %input.checkbox{type: "hidden", name: "#{prefix}[_destroy]"}
+                  .delete_button= t('certificates.form.remove')
+
+- if (show? || prevent_changes) && certificates.empty?
+  Geen certificaten gevonden.
+- else
+  %ul
+- unless show? || prevent_changes
+  %br
+  = new_link(t('certificates.form.new'), "#", id: "new_certificate", label: t('certificates.form.label'), prefix: prefix)
+
+= javascript_include_tag("inline_certificate", nonce: content_security_policy_script_nonce)
+= javascript_include_tag("inline_certificate_dialog", nonce: content_security_policy_script_nonce)

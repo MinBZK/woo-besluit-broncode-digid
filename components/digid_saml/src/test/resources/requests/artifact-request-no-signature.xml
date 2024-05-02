@@ -1,0 +1,12 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <samlp:ArtifactResolve xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+                               xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                               ID="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" Version="2.0"
+                               IssueInstant="2021-06-03T10:38:38Z"
+                               Destination="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+            <saml:Issuer>urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000</saml:Issuer>
+            <samlp:Artifact>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</samlp:Artifact>
+        </samlp:ArtifactResolve>
+    </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,16 @@
+$rs-pageid-achtergrond: #e6e6e6;
+$rs-pageid-schijding-kleur: #4e4e4e;
+$rs-pageid-schijdingslijn: 3px solid $rs-pageid-schijding-kleur;
+
+.pageid-footer {
+  background-color: $rs-pageid-achtergrond;
+  border-top: $rs-pageid-schijdingslijn;
+  color: $rs-achtergrond-links;
+  height: 58px;
+
+  .page_id {
+    padding-right: 150px;
+    padding-top: 20px;
+    text-align: right;
+  }
+}

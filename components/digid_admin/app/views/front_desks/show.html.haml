@@ -1,0 +1,86 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if @front_desk
+  .form_wrapper
+    %h1 Balie #{@front_desk.name}
+    .actions_top
+      = link_to 'Terug naar overzicht', front_desks_path
+      = link_to('Wijzig balie', edit_front_desk_path(@front_desk), class: 'edit_button') if can? :edit, FrontDesk
+    .clear
+    %h2= red('Geblokkeerd') if @front_desk.blocked?
+    = field 'ID', @front_desk.id
+    = field I18n.t('activemodel.attributes.front_desk.code'), @front_desk.code
+    = field I18n.t('activemodel.attributes.front_desk.name'), @front_desk.name
+    = field I18n.t('activemodel.attributes.front_desk.kvk_number'), @front_desk.kvk_number
+    = field I18n.t('activemodel.attributes.front_desk.establishment_number'), @front_desk.establishment_number
+    = field I18n.t('activemodel.attributes.front_desk.location'), @front_desk.location
+    = field I18n.t('activemodel.attributes.front_desk.time_zone'), @front_desk.time_zone_object
+    = field I18n.t('activemodel.attributes.front_desk.alarm_unchecked_accounts'), @front_desk.alarm_unchecked_accounts
+    = field I18n.t('activemodel.attributes.front_desk.alarm_fraud_suspension'), @front_desk.alarm_fraud_suspension
+    = field I18n.t('activemodel.attributes.front_desk.issues_max_executed'), @front_desk.activation_codes_today.to_s + ' / ' + @front_desk.max_issues.to_s
+
+    .actions
+      - if can? :block, FrontDesk
+        - if @front_desk.blocked?
+          = link_to('Deblokkeer balie', unblock_front_desk_path(@front_desk), method: :put, class: 'unblock_button')
+        - else
+          = link_to('Blokkeer balie', block_front_desk_path(@front_desk), method: :put, class: 'block_button', data: { confirm: t('are_you_sure') })
+      = link_to('Verwijder balie', front_desk_path(@front_desk), method: :delete, class: 'delete_button', data: { confirm: t('are_you_sure') }) if can? :destroy, FrontDesk
+    .clear
+  %br
+
+  %h2= I18n.t('front_desks.relations_overview').html_safe
+  .clear
+  %table
+    %thead
+      %tr
+        = render 'shared/table_header', headers: %w( pseudoniem balienaam )
+        - if can? :edit, FrontDesk
+          %th.action
+    %tbody
+      - if @front_desk.users.present?
+        = render partial: 'front_desk_relations/front_desk_relation', collection: @front_desk.users, locals: { front_desk: @front_desk }
+      - else
+        %tr
+          %td= I18n.t('front_desks.no_relations')
+  - if can?(:manage, FrontDesk) || can?(:read, FrontDesk)
+    = render 'unaudited'
+  - if can? :audit, Verification
+    = render 'fraud_suspicion'
+  = show_front_desk_action_for(@front_desk)
+  = show_manager_actions_for(Log::SubjectTypes::FRONT_DESK, @front_desk.id)
+- else
+  .form_wrapper
+    %h1 Balie met ID #{params[:id]} niet gevonden.
+    .actions_top
+      = link_to 'Terug naar Balies', front_desks_path
+    .clear

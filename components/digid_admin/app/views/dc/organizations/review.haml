@@ -1,0 +1,58 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= render "four_eyes_reviews/heading", four_eyes_review: @four_eyes_review
+%br
+%table{:class => "four_eyes_reviews #{@four_eyes_review.action}"}
+  %thead
+    %tr
+      %th{:colspan=>2}
+        - if ['update', 'create'].include? @four_eyes_review.action
+          = t("services.four_eyes.new_values")
+      %th{:colspan=>2}
+        - if ['update', 'destroy'].include? @four_eyes_review.action
+          = t("services.four_eyes.old_values")
+  %tbody
+    - changes_for @four_eyes_review.original, @four_eyes_review.updated, @four_eyes_review do |changes|
+      - changes.text :id, label: "ID"
+      - changes.text :oin, label: t("services.organizations.oin")
+      - changes.text :name, label: t("services.organizations.name")
+      - changes.text :description, label: t("services.description")
+      - changes.has_one :status, value_attribute: :active, label: "Status", true: "Actief", false: "Inactief", compare_values: true
+      - changes.has_one :status, value_attribute: :active_from, label: t("services.date_from"), compare_values: true
+      - changes.has_one :status, value_attribute: :active_until, label: t("services.date_until"), compare_values: true
+      - changes.has_many :organization_roles, label: "Organisatie/rol", fields: [:type, :formatted_active, :active_from, :active_until], headers: ["Type", "Status", "Datum ingang", "Datum einde"]
+
+.clear
+%p.actions
+  = render partial: 'four_eyes_reviews/actions', locals: {four_eyes_review: @four_eyes_review}
+.clear
+%br= show_manager_actions_for(Log::SubjectTypes::DC_ORGANIZATION, @four_eyes_review.updated.id)

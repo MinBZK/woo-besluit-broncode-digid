@@ -1,0 +1,26 @@
+{
+  "contact": {
+    "summary": "Contactgegevens",
+    "title": "Contactgegevens",
+    "sub-title": "Bij belangrijke wijzigingen aan uw DigiD sturen wij u een bericht. Bijvoorbeeld wanneer u een nieuwe manier van inloggen heeft geactiveerd. Het is daarom belangrijk dat wij u kunnen bereiken per e-mail en sms. Hieronder staan uw contactgegevens die bij ons bekend zijn.",
+    "email": "E-mailadres",
+    "email-link-change": "E-mailadres wijzigen",
+    "email-link-add": "E-mailadres toevoegen",
+    "email-link-remove": "E-mailadres verwijderen",
+    "email-link-insert": "Controlecode invoeren",
+    "email-link-resend": "Controlecode nogmaals verzenden",
+    "email-not-verified-tooltip-a": "Uw e-mailadres is nog niet gecontroleerd. Er is een e-mail gestuurd naar: ",
+    "email-not-verified-tooltip-b": ". Kies voor 'Controlecode invoeren' en vul de code uit de e-mail in om uw e-mailadres te bevestigen.",
+    "email-added-with-username-tooltip": "Met uw e-mailadres kunt u eenvoudig uw wachtwoord herstellen als u deze ooit vergeet.",
+    "email-added-without-username-tooltip": "Met uw e-mailadres ontvangt u bij belangrijke wijzigingen van uw DigiD een e-mail ter controle.",
+    "email-not-added-with-username-tooltip": "Voeg uw e-mailadres toe zodat u snel een nieuw wachtwoord kunt instellen. Bij belangrijke wijzigingen van uw DigiD ontvangt u een e-mail ter controle.",
+    "email-not-added-without-username-tooltip": " Voeg uw e-mailadres toe. Bij belangrijke wijzigingen van uw DigiD ontvangt u een e-mail ter controle.",
+    "tel": "Telefoonnummer",
+    "tel-tooltip": "Op dit telefoonnummer krijgt u een sms-code om in te loggen.",
+    "pref-lang": "Voorkeurstaal",
+    "pref-lang-link": "Voorkeurstaal wijzigen",
+    "pref-lang-tooltip": "U kunt uw voorkeurstaal instellen voor de e-mails, (gesproken) sms-berichten en brieven die u ontvangt van DigiD. Kies uit Nederlands of Engels.",
+    "not-yet-added": "Nog niet toegevoegd",
+    "not-yet-verified": " (nog niet gecontroleerd)"
+  }
+}

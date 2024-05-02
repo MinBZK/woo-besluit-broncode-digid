@@ -1,0 +1,15 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+   <SOAP-ENV:Header />
+  <SOAP-ENV:Body wsu:Id="body" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:eid-ws="urn:nl-gdi-eid:1.0:webservices" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#">
+    <SOAP-ENV:Fault>
+      <faultcode>SOAP-ENV:Client</faultcode>
+      <faultstring>Het bericht kan niet worden verwerkt.</faultstring>
+      <detail>
+        <eid-ws:ProvideEncryptedFault>
+          <eid-ws:FaultReason>AuthorizationError</eid-ws:FaultReason>
+          <eid-ws:FaultDescription lang="en">Request rejected. Authentication invalid or access denied. A HTTP 403 status response MAY be given instead of a SOAP-fault with this response.</eid-ws:FaultDescription>
+        </eid-ws:ProvideEncryptedFault>
+      </detail>
+    </SOAP-ENV:Fault>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

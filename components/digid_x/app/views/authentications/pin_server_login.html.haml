@@ -1,0 +1,46 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name) : heading_with_icon(t('log_in'))
+%h2.orange_heading= t('login_in_fill_in_your_username_and_password')
+= block_with_icon(@federation_name) if @federation_name
+= flash_alert
+= flash_notice
+= extended_form_for(@auth, url: sign_in_url, html: { :class => 'remember_login pin_server_login' }) do |form|
+  = form.header(nil, base: :authentication, show_fields_required: false)
+  .normal-login#normal-login
+    = form.radio_buttons(:type_account, @login_options, label: t('log_in_method'), required: true, fieldset_class: "hidden")
+    :plain
+      <fieldset class="form__item" id="username-field"><label class="form__item__label" for="authentication_digid_username">DigiD gebruikersnaam<span class="form__item__label__required">*</span></label><input autocapitalize="none" class="form__item__field" autocomplete="off" spellcheck="false" data-required="true" type="text" name="authentication[digid_username]" id="authentication_digid_username"></fieldset>
+      <fieldset class="form__item capslock_notifier" id="password-field"><label class="form__item__label" for="authentication_wachtwoord">Wachtwoord<span class="form__item__label__required">*</span></label><input class="form__item__field" autocomplete="off" data-required="true" type="password" name="authentication[wachtwoord]" id="authentication_wachtwoord"><span class="form__item__example">Caps Lock is ingeschakeld</span></fieldset>
+      <div class="actions"><input type="submit" name="commit" value="Inloggen" class="actions__right--button primary--button" id="submit-button" data-disable-with="Inloggen">
+      <input type="submit" name="commit" value="Annuleren" class="actions__left--button" formnovalidate="formnovalidate" id="cancel-button" data-disable-with="Annuleren">
+      </div>

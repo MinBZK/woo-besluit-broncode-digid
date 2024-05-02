@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+    <xsd:element name="ValidateAppActivationRequest">
+        <xsd:annotation>
+            <xsd:documentation>Request message to validate the WID.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:RSRequestBaseType">
+                    <xsd:sequence>
+                        <xsd:element name="BSN" minOccurs="1" maxOccurs="1" type="digid:BSNType"></xsd:element>
+                        <xsd:element name="DocumentNr" minOccurs="1" maxOccurs="1" type="digid:DocumentNrType"></xsd:element>
+                        <xsd:element name="StationId" minOccurs="1" maxOccurs="1" type="digid:StationIdType">
+                            <xsd:annotation>
+                                <xsd:documentation>Identifier to uniquely identify the station from which the request originated.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="TransactionId" minOccurs="1" maxOccurs="1" type="digid:TransactionIdType">
+                            <xsd:annotation>
+                                <xsd:documentation>Identifier to link ValidateAppActivationRequest to AppActivationRequest.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AppActivationRequest">
+        <xsd:annotation>
+            <xsd:documentation>Request message to activate the app.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:RSRequestBaseType">
+                    <xsd:sequence>
+                        <xsd:element name="TransactionId" minOccurs="1" maxOccurs="1" type="digid:TransactionIdType">
+                            <xsd:annotation>
+                                <xsd:documentation>Identifier to link ValidateAppActivationRequest to AppActivationRequest.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="AppActivationCode" minOccurs="1" maxOccurs="1" type="digid:AppActivationCodeType"></xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType abstract="true" name="RSRequestBaseType">
+        <xsd:sequence>
+            <xsd:element name="Requester" type="digid:OINType" minOccurs="1" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"></xsd:attribute>
+        <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required"></xsd:attribute>
+    </xsd:complexType>
+    <xsd:simpleType name="MsgVersionType">
+        <xsd:annotation>
+            <xsd:documentation>Type for the unique identification of message version. Uses major versions only.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"></xsd:maxLength>
+            <xsd:pattern value="[0-9]+"></xsd:pattern>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BSNType">
+        <xsd:annotation>
+            <xsd:documentation>BSN type 9 numbers</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]+"/>
+            <xsd:maxLength value="9"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="DocumentNrType">
+        <xsd:annotation>
+            <xsd:documentation>Document number of travel document scanned by Aanvraagstation</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+            <xsd:pattern value="[0-9A-Z]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="StationIdType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9"/>
+            <xsd:pattern value="AS-[0-9]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TransactionIdType">
+        <xsd:annotation>
+            <xsd:documentation>This code needs enough entropy to be unique</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="36" fixed="true" />
+            <xsd:pattern value="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="AppActivationCodeType">
+        <xsd:annotation>
+            <xsd:documentation>De code zal niet uit alle letters bestaan. Nadere beperking volgt.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="R[BCDFGHJKLMNPQRSTVWXZ2-9]{5}"/>
+            <xsd:length value="6" fixed="true"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="OINType">
+        <xsd:annotation>
+            <xsd:documentation>OIN type.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{20}"></xsd:pattern>
+            <xsd:length value="20" fixed="true"></xsd:length>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="ValidateAppActivationResponse">
+        <xsd:annotation>
+            <xsd:documentation>Response message to ValidateAppActivationRequest.
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:RSResponseBasetype">
+                    <xsd:sequence>
+                        <xsd:element name="ResponseMessage" type="digid:ResponseMessageType"></xsd:element>
+                        <xsd:element name="ErrorCode" type="digid:ErrorCodeType" minOccurs="0" maxOccurs="1"></xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AppActivationResponse">
+        <xsd:annotation>
+            <xsd:documentation>Response message to AppActivationRequest.
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="digid:RSResponseBasetype">
+                    <xsd:sequence>
+                        <xsd:element name="ResponseMessage" type="digid:ResponseMessageType"></xsd:element>
+                        <xsd:element name="ErrorCode" type="digid:ErrorCodeType" minOccurs="0" maxOccurs="1"></xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="ResponseMessageType">
+        <xsd:annotation>
+            <xsd:documentation>Type for response status.
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"></xsd:maxLength>
+            <xsd:enumeration value="OK"></xsd:enumeration>
+            <xsd:enumeration value="NOK"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType abstract="true" name="RSResponseBasetype">
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"></xsd:attribute>
+        <xsd:attribute name="MsgVersion" type="digid:MsgVersionType" use="required"></xsd:attribute>
+    </xsd:complexType>
+    <xsd:element name="TechnicalFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Technical fault detail</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VersionMismatchFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Version mismatch fault detail
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="OinMismatchFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>OIN mismatch fault detail
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ValidationErrorFaultDetail">
+        <xsd:annotation>
+            <xsd:documentation>Validation error fault detail
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="faultstring" type="digid:faultstringType"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="faultstringType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="TechnicalFault"></xsd:enumeration>
+            <xsd:enumeration value="VersionMismatch"></xsd:enumeration>
+            <xsd:enumeration value="OinMismatch"></xsd:enumeration>
+            <xsd:enumeration value="ValidationError"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ErrorCodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="E_FEATURE_NOT_AVAILABLE"></xsd:enumeration>
+            <xsd:enumeration value="E_BSN_NOT_VALID"></xsd:enumeration>
+            <xsd:enumeration value="E_DOCUMENT_NOT_VALID"></xsd:enumeration>
+            <xsd:enumeration value="E_DIGID_ACCOUNT_NOT_VALID"></xsd:enumeration>
+            <xsd:enumeration value="E_APP_ACTIVATION_CODE_NOT_FOUND"></xsd:enumeration>
+            <xsd:enumeration value="E_GENERAL"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

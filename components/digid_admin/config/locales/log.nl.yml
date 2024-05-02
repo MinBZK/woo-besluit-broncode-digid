@@ -1,0 +1,555 @@
+nl:
+  digid_admin:
+    280: "Alarmering verzonden, %{subject}"
+    358: Vragen overzicht inzien gelukt
+    364: Vraag zoeken gelukt
+    365: Configuraties overzicht inzien gelukt
+    366: Nieuwsbericht %{news_item} inzien gelukt
+    367: Maandrapportage overzicht inzien gelukt
+    368: Weekrapportage overzicht inzien gelukt
+    369: Standaardrapportage overzicht inzien gelukt
+    370: Frauderapportage overzicht inzien gelukt
+    371: Integriteitrapportage overzicht inzien gelukt
+    372: Securityrapportage overzicht inzien gelukt
+    373: "Webdienst overzicht inzien gelukt"
+    374: "Webdienst zoeken gelukt"
+    375: "Dashboard inzien gelukt"
+    376: "Downloaden controlebestand gelukt"
+    412: 'Gegevens opgeheven account: Gebruikersnaam: %{username}; Telefoonnummer: %{phone_number} (Gesproken sms: %{spoken_sms}); E-mailadres: %{email} (Gecontroleerd: %{email_checked}); DigiD app: %{phone_name}, %{sub_id_type};'
+    426: Baliecode ongeldig, reeds gebruikt
+    431: Baliecode succesvol gebruikt
+    454: "Controle regel gemarkeerd als 'gecontroleerd'"
+    602: "Pilot switch %{switch_name} gewijzigd; aan (pilotdeelnemers)"
+    608: "Fraudeonderzoek overzicht inzien gelukt"
+    609: "Fraudeonderzoekrapportages loggegevens overzicht inzien gelukt"
+    610: "Fraudeonderzoekrapportages accountgegevens overzicht inzien gelukt"
+    611: "Fraudeonderzoekrapportages transactiegegevens overzicht inzien gelukt"
+    # 612: "Download rapportage gelukt, ‘%{file_name}’"
+    613: "Aanvraag voor rapport fraude onderzoek transactiegevens gelukt"
+    761: "Webdienst inzien om te wijzigen gelukt"
+    776: "App-versie verwijderd ter accordering: %{version}/%{operating_system}/%{release_type}, %{not_valid_before}/%{not_valid_on_or_after}/%{kill_app_on_or_after}"
+    798: "Overzicht certificaten webdiensten inzien gelukt"
+    807: "Beheersessie verlopen, maximale sessieduur bereikt"
+    823: Wijziging DigiD app-versie '%{version}/%{operating_system}/%{release_type}' inzien gelukt
+    825: Wijziging DigiD app-versie '%{version}/%{operating_system}/%{release_type}' geaccordeerd
+    826: Wijziging DigiD app-versie '%{version}/%{operating_system}/%{release_type}' afgekeurd
+    827: Wijziging DigiD app-versie '%{version}/%{operating_system}/%{release_type}' ingetrokken
+    928: Raadplegen status rijbewijs mislukt, geen response van RDW
+    929: Raadplegen status identiteitskaart mislukt, geen response van RvIG
+    933: RDW raadplegen voor status rijbewijs gelukt
+    934: RvIG raadplegen voor status identiteitskaart gelukt
+    963: "Briefgegevens raadplegen gelukt (briefcode '%{briefcode}'; aanvraagdatum '%{aanvraagdatum}')"
+    1005: "Blokkeren inlogfunctie %{doc_type} niet gelukt"
+    1035: "Reden blokkeren inlogfunctie %{doc_type} niet gelukt: %{reason}"
+    1038: "Aanvragen PIN-brief %{doc_type} gestart door medewerker DigiD"
+    1039: "\"PIN-brief %{doc_type}\"-e-mail verstuurd"
+    1041: "Versturen PIN-brief %{doc_type} niet gelukt. %{reason}"
+    1042: "Versturen PIN-brief %{doc_type} niet gelukt"
+    1043: "PIN-brief %{doc_type} aangevraagd"
+    1215: Controle-overzicht beheerders inzien gelukt
+    1216: "Controle-overzicht beheerders geëxporteerd (filtercriteria: '%{filter_query}', '%{from}/%{to}')"
+    1103: Aanmaken eID AT-veroek ‘%{document_type}-%{sequence_no}’ mislukt. Foutmelding %{error}.
+    1104: Overzicht eID AT-verzoeken inzien gelukt
+    1105: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ inzien gelukt
+    1106: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ aangemaakt ter accordering
+    1107: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ geaccordeerd
+    1109: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ verzonden
+    1110: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ afgerond
+    1111: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ downloaden gelukt
+    1112: Overzicht eID CRL inzien gelukt
+    1113: eID CRL ‘%{issuer}’ inzien gelukt
+    1114: eID CRL ‘%{issuer}’ importeren gelukt
+    1117: eID certificaat '%{subject}' inzien gelukt
+    1126: "Transactielogregels geëxporteerd (filtercriteria: '%{query}', '%{from}/%{to}')"
+    1174: "Brief geprint in PDF (briefcode '%{briefcode}', aanvraagdatum '%{aanvraagdatum}')"
+    1192: Overzicht RDA CRL inzien gelukt
+    1237: Uitvoering bulkopdracht %{id}/%{name}/%{type} gestart
+    1347: Inzien microservices gelukt
+    1422: "%{entity} zoeken gelukt"
+    1423: "%{entity} inzien gelukt"
+    1424: "%{entity} aanmaken gelukt"
+    1425: "%{entity} wijzigen gelukt"
+    1426: "%{entity} verwijderen gelukt"
+    1432: "%{entity} inzien ten behoeve van accorderen gelukt."
+    1433: "%{entity} accorderen gelukt"
+    1434: "%{entity} accorderen niet gelukt, afgekeurd."
+    1435: "%{entity} accorderen niet gelukt, ingetrokken."
+    1442: "Nationaliteit overzicht inzien gelukt"
+    1463: 'Gebruiken algemene zoekfunctie met zoekcriteria: "%{query}" gelukt'
+    1470: 'Zoeken DigiD accounts met zoekcriteria: "%{query}" gelukt'
+    1495: "Starten verwijderen afnemersindicatie niet gelukt"
+    1496: "Starten verwijderen afnemersindicatie gelukt"
+    1541: "Pilot switch %{switch_name} gewijzigd; aan (alle accounts)"
+    1542: "Pilot switch %{switch_name} gewijzigd; uit"
+    1543: "Pilot switch %{switch_name} gewijzigd; gedeeltelijk"
+    1544: "Pilot switch %{switch_name} gewijzigd; omschrijving"
+    1557: "Vervangen account %{type} gelukt"
+    1580: "Brief aangetekend verstuurd (briefcode '%{briefcode}', aanvraagdatum '%{aanvraagdatum}')"
+    1585: Sms met activeringscode wordt verstuurd
+    1586: Sms met activeringscode is nog niet ontvangen en opnieuw verstuurd
+    1587: Sms met activeringscode is verstuurd, balie-aanvraag is afgerond
+
+    pilot_group:
+      listed_successfully: Pilotgroepen overzicht inzien gelukt
+      updated_successfully: 'Pilotgroep %{pilot_group} gewijzigd'
+      viewed_successfully: 'Pilotgroep %{pilot_group} inzien gelukt'
+      update_failed: 'Pilotgroep %{pilot_group} wijzigen mislukt'
+
+    subscriber:
+      added_successfully: "Deelnemer %{bsn} toegevoegd aan pilotgroep %{pilotgroep}"
+      deleted_successfully: "Deelnemer %{bsn} verwijderd uit pilotgroep %{pilotgroep}"
+      all_deleted_successfully: "Alle deelnemers uit pilotgroep %{pilotgroep} verwijderd"
+
+    pilot_switch:
+      pilot_switches_inzien_gelukt: Pilot switches overzicht inzien gelukt
+      inzien_gelukt: "Pilot switch %{switch_name} inzien gelukt"
+      inzien_aanpassen_gelukt: "Pilot switch %{switch_name} inzien om te wijzigen gelukt"
+      wijzigen_mislukt: "Pilot switch %{switch_name} wijzigen mislukt"
+      wijzigen_via_script: "Pilot switch %{switch_name} via script gewijzigd; %{status}"
+
+    app_version:
+      inzien: 'Overzicht DigiD app-versies inzien gelukt'
+      edit: 'DigiD app-versie %{version}/%{operating_system}/%{release_type} inzien om te wijzigen gelukt'
+      created: "Nieuwe app-versie toegevoegd ter accordering: %{version}/%{operating_system}/%{release_type}/%{not_valid_before}/%{not_valid_on_or_after}/%{kill_app_on_or_after}"
+      updated: "DigiD app-versie %{version}/%{operating_system}/%{release_type} gewijzigd ter accordering: was %{not_valid_before_was}/%{not_valid_on_or_after_was}/%{kill_app_on_or_after_was}, is nu %{not_valid_before}/%{not_valid_on_or_after}/%{kill_app_on_or_after}"
+      destroyed: "DigiD app-versie verwijderd ter accordering: %{version}/%{operating_system}/%{release_type}, %{not_valid_before}/%{not_valid_on_or_after}/%{kill_app_on_or_after}"
+
+    third_party_app:
+      inzien: 'Overzicht third-party app inzien gelukt'
+      edit: 'Third-party app %{user_agent}/%{return_url} inzien om te wijzigen gelukt'
+      created: "Third-party app toegevoegd ter accordering: %{user_agent}/%{return_url}"
+      updated: "Third-party app %{user_agent}/%{return_url} gewijzigd ter accordering: was %{user_agent_was}/%{return_url_was}, is nu %{user_agent}/%{return_url}"
+      destroyed: "Third-party app verwijderd ter accordering: %{user_agent}/%{return_url}"
+
+    kiosk:
+      inzien: 'Overzicht kiosken inzien gelukt'
+      edit: 'Kiosk %{kiosk_id}/%{naam} inzien om te wijzigen gelukt'
+      updated: "Kiosk %{kiosk_id}/%{naam} gewijzigd ter accordering: was %{status_was}, is nu %{status}"
+      destroyed: "Kiosk verwijderd ter accordering: %{kiosk_id}/%{naam}"
+
+      four_eyes:
+        inzien: Wijziging Kiosk '%{kiosk_id}/%{naam}' inzien gelukt
+        accept: Wijziging Kiosk '%{kiosk_id}/%{naam}' geaccordeerd
+        reject: Wijziging Kiosk '%{kiosk_id}/%{naam}' afgekeurd
+        withdraw: Wijziging kiosk '%{kiosk_id}/%{naam}' ingetrokken
+
+    blacklisted_phone_number:
+      inzien: 'Blacklist telefoonnummers inzien gelukt'
+      created: 'Prefix blacklist telefoonnummers aanmaken gelukt: %{prefix}'
+      updated: 'Prefix blacklist telefoonnummers wijzigen gelukt: %{prefix}'
+      edit: 'Blacklist telefoonnummers: prefix %{prefix} geopend voor wijziging'
+      destroyed: 'Prefix blacklist telefoonnummers verwijderen gelukt: %{prefix}'
+
+    four_eyes_review:
+      inzien: Overzicht wijzigingen inzien gelukt
+
+    digid_hoog:
+      request_unblock_letter:
+        abort:
+          invalid_pl: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+          invalid_deceased: Aanvraag mislukt, PL status is 'Overleden'
+          invalid_emigrated: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+          invalid_suspended: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+          invalid_not_found: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+          invalid_investigate: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+          invalid_error: Aanvraag mislukt, PL status is geëmigreerd, RNI, onbekend, in onderzoek of opgeschort
+      status_rijbewijs_rdw_fault: "Raadplegen status rijbewijs mislukt, foutbericht van RDW. Fouttekst: %{message}"
+      status_identity_card_rvig_fault: "Raadplegen status identiteitskaart mislukt, foutbericht van RvIG. Fouttekst: %{message}"
+
+    # UC8
+    #
+    uc8:
+      inloggen_beheer_gelukt: "Inloggen beheermodule gelukt"
+      inloggen_beheer_mislukt_niet_geauthoriseerd: "Inloggen beheermodule mislukt, gebruiker is niet geauthoriseerd"
+      # inloggen_beheer_mislukt_onbekende_fout: "Inloggen beheermodule mislukt, onbekende foutmelding" # Not possible, external plugin
+      uitloggen_beheer_gelukt: "Uitloggen beheermodule gelukt"
+      uitloggen_beheer_mislukt: "Uitloggen beheermodule mislukt"
+      uitloggen_beheersessie_verlopen_inactive:  "Beheersessie verlopen, time-out vanwege inactiviteit" #<log806>
+
+    # UC9
+    #
+    uc9:
+      beheer_overzicht_bekijken_gelukt: "Beheeraccount overzicht bekijken gelukt"
+      beheer_zoeken_gelukt: "Beheeraccount zoeken gelukt"
+      beheer_inzien_gelukt: "Beheeraccount inzien gelukt"
+      beheer_inzien_wijzigen_gelukt: "Beheeraccount inzien om te wijzigen gelukt"
+
+    # UC10
+    #
+    uc10:
+      beheerhandelingen_inzien_gelukt: "Beheerhandelingen inzien gelukt"
+
+    # UC11
+    #
+    uc11:
+      nieuws_inzien_gelukt: "Nieuws en onderhoudsberichten inzien gelukt"
+      nieuws_verwijderen_gelukt: "Nieuws en onderhoudsberichten verwijderen gelukt"
+      nieuws_wijzigen_gelukt: "Nieuws en onderhoudsberichten wijzigen gelukt"
+      nieuws_aanmaken_gelukt: "Nieuws en onderhoudsberichten aanmaken gelukt"
+
+    # UC12
+    #
+    uc12:
+      sectoren_inzien_gelukt: "Sectoren inzien gelukt"
+      sector_inzien_gelukt: "Sector inzien gelukt"
+      sector_wijzigen_gelukt: "Sector wijzigen gelukt"
+      sector_wijzigen_mislukt: "Sector wijzigen mislukt"
+      sector_aanmaken_gelukt: "Sector aanmaken gelukt"
+      sector_aanmaken_mislukt: "Sector aanmaken mislukt"
+
+    # UC13
+    #
+    uc13:
+      webdienst_inzien_gelukt: "Webdienst inzien gelukt"
+
+    # UC14
+    #
+    uc14:
+      webdienst_aanmaken_gelukt: "Webdienst '%{name}' aangemaakt ter accordering"
+      webdienst_verwijderen_gelukt: "Webdienst verwijderen gelukt"
+      webdienst_inactief_zetten_gelukt: "Webdienst op inactief gezet ter accordering"
+      webdienst_actief_zetten_gelukt: "Webdienst geactiveerd ter accordering"
+      webdienst_wijzigen_gelukt: "Webdienst '%{name}' gewijzigd ter accordering"
+
+      wijziging_webdienst_inzien: "Wijziging webdienst '%{name}' inzien gelukt"
+      wijziging_webdienst_geaccordeerd: "Wijziging webdienst '%{name}' geaccordeerd"
+      wijziging_webdienst_afgekeurd: "Wijziging webdienst '%{name}' afgekeurd"
+      wijziging_webdienst_ingetrokken: "Wijziging webdienst '%{name}' ingetrokken"
+
+    # UC15
+    #
+    uc15:
+      transacties_inzien_gelukt: "Transacties inzien gelukt"
+      transacties_zoeken_gelukt: "Transactie zoeken gelukt"
+      inzien_overzicht_omgeving_gelukt: "Inzien overzicht omgevingen gelukt"
+
+    # UC16
+    #
+    uc16:
+      account_overzicht_inzien_gelukt: "DigiD account overzicht inzien gelukt"
+      account_inzien_gelukt: "DigiD account inzien gelukt"
+      account_verwijderen_gelukt: "DigiD account verwijderen gelukt"
+      opgeschort_account_verwijderen_gelukt: "Opgeschort DigiD account verwijderen gelukt"
+
+      account_opschorten_gelukt: "DigiD account opschorten gelukt"
+      account_opschorten_ongedaan_maken_gelukt: "DigiD account opschorten ongedaan maken gelukt"
+      account_omzetten_sofi_bsn_gelukt: "DigiD account van Sofi naar BSN omzetten gelukt"
+      sms_versturen_mislukt: 'Sms versturen mislukt'
+
+      account_mu_block_gestart: "Blokkeren inlogfunctie %{doc_type} gestart door medewerker DigiD"
+      account_driving_licence_block_gelukt: "inlogfunctie rijbewijs geblokkeerd"
+      account_id_card_block_gelukt: "inlogfunctie identiteitskaart geblokkeerd"
+      account_mu_block_mislukt: "Blokkeren inlogfunctie %{doc_type} mislukt" # 1005
+      account_mu_block_mislukt_reden : "Reden blokkeren inlogfunctie %{doc_type} mislukt: %{reason}" # 1035
+      account_mu_block_onmogelijk_switch_uit: "Blokkeren inlogfunctie %{doc_type} niet mogelijk, switch is niet actief"
+
+      account_mu_pin_mislukt: "Versturen PIN-brief %{doc_type} mislukt" # 1042
+      account_mu_pin_mislukt_reden : "Versturen PIN-brief %{doc_type} mislukt. %{reason}" # 1041
+      account_mu_pin_onmogelijk_switch_uit: "Aanvragen PIN-brief %{doc_type} niet mogelijk, switch is niet actief"
+
+      account_iapi_deblock_gestart: "Aanvragen deblokkeringscode inlogfunctie %{doc_type} per brief gestart door medewerker DigiD"
+      account_iapi_deblock_timeout: BRP controle mislukt timeout
+
+    # UC17
+    #
+    uc17:
+      gba_raadplegen_gelukt: "BRP raadplegen gelukt"
+      gba_raadplegen_gelukt_no_match: "BRP raadplegen gelukt geen record gevonden"
+      gba_raadplegen_mislukt_onbereikbaar: "BRP raadplegen mislukt, GBA niet bereikbaar"
+      gba_geen_anummer: "BRP controle gelukt, BSN gevonden Anummer niet aanwezig"
+
+    # UC18
+    #
+    uc18:
+      grafieken_raadplegen_gelukt: "Grafieken raadplegen gelukt"
+
+    # TODO - when UC19 Testaccounts / UC20/UC21 alarmeringen are implemented
+
+    # UC19
+    #
+    uc19:
+    #   testaccount_aanmaken_gelukt: "Testaccount aanmaken gelukt" - Beheerder
+    #   testaccount_aanmaken_mislukt_onbekende_fout: "Testaccount aanmaken mislukt, onbekende foutmelding" - Beheerder
+
+    # UC21
+    #
+    uc21:
+    #   beheeraccount_alarmering_wijzigen_gelukt: "Beheeraccount alarmering wijzigen gelukt"
+    #   alarmering_verzonden_gba_onbereikbaar: "Alarmering verzonden, GBA niet te bereiken"
+    #   alarmering_verzonden_sms_provider_onbereikbaar: "Alarmering verzonden, SMS leverancier niet te bereiken"
+    #   alarmering_verzonden_geen_verzonden_briefbestand: "Alarmering verzonden Briefbestand is niet mogelijk te versturen naar briefleverancier"
+    #   alarmering_verzonden_lange_responsetijden: "Alarmering verzonden, te grote responstijden van DigiD server"
+    #   alarmering_verzonden_systeemfouten: "Alarmering verzonden, systeemfouten treden op"
+    #   alarmering_verzonden_overbelasting: "Alarmering verzonden overbelasting van het systeem"
+    #   alarmering_verzonden_abnormaal_verkeer: "Alarmering verzonden, abnormaal verkeer gesignaleerd"
+
+    # UC22
+    #
+    uc22:
+      inzien_post_gelukt: "Inzien post kanaal gelukt"
+      inzien_email_gelukt: "Inzien email kanaal gelukt"
+      inzien_sms_gelukt: "Inzien sms kanaal gelukt"
+      downloaden_briefbestand_gelukt: "Downloaden briefbestand gelukt"
+      zoeken_sms_gelukt: "Zoeken sms kanaal gelukt"
+      zoeken_email_gelukt: "Zoeken email kanaal gelukt"
+      post_wijzigen_gelukt: "Postkanaal wijzigen gelukt"
+      # email_wijzigen_gelukt: "Emailkanaal wijzigen gelukt" # Not possible, no functionality
+
+    # UC23
+    #
+    uc23:
+      organisatie_overzicht_inzien_gelukt: "Organisatie overzicht inzien gelukt"
+      organisatie_inzien_gelukt: "Organisatie inzien gelukt"
+      organisatie_aanmaken_gelukt: "Organisatie aanmaken gelukt"
+      organisatie_verwijderen_gelukt: "Organisatie verwijderen gelukt"
+      organisatie_wijzigen_gelukt: "Organisatie wijzigen gelukt"
+
+    # UC24
+    #
+    uc24:
+      email_reminder_account_activation_send: Herinneringse-mail aanvraag nog activeren verstuurd
+      email_block_versturen_gelukt: "Inlogfunctie %{doc_type} geblokkeerd - e-mail verstuurd"
+      email_block_versturen_mislukt: "Inlogfunctie %{doc_type} geblokkeerd - e-mail versturen mislukt"
+      email_deblock_versturen_gelukt: "\"Deblokkeringscode inlogfunctie %{doc_type} per brief aangevraagd\"-e-mail verstuurd"
+      email_deblock_versturen_mislukt: "\"Deblokkeringscode inlogfunctie %{doc_type} per brief aangevraagd\"-e-mail versturen mislukt"
+      email_pin_versturen_mislukt: "\"PIN-brief %{doc_type}\"-e-mail versturen mislukt"
+
+    # UC25
+    #
+    uc25:
+      beheeraccount_aanmaken_gelukt: "Beheeraccount '%{name}' aangemaakt ter accordering"
+      beheeraccount_wijzigen_gelukt: "Beheeraccount gewijzigd ter accordering"
+      beheeraccount_opschorten_gelukt: "Beheeraccount opgeschort ter accordering"
+      beheeraccount_opschorten_ongedaan_maken_gelukt: "Beheeraccount opschorting ongedaan gemaakt ter accordering"
+      beheeraccount_authenticatiemiddel_toevoegen_gelukt: "Beheeraccount authenticatiemiddel toegevoegd ter accordering"
+      beheeraccount_authenticatiemiddel_verwijderen_gelukt: "Beheeraccount authenticatiemiddel verwijderd ter accordering"
+      beheeraccount_rol_toekennen_gelukt: "Beheeraccount rol toekennen gelukt"
+      wijziging_beheeraccount_inzien_gelukt: "Wijziging beheeraccount '%{name}' inzien gelukt"
+      wijziging_beheeraccount_geaccordeerd: Wijziging beheeraccount '%{name}' geaccordeerd
+      wijziging_beheeraccount_afgekeurd: Wijziging beheeraccount '%{name}' afgekeurd
+      wijziging_beheeraccount_ingetrokken: Wijziging beheeraccount '%{name}' ingetrokken
+
+    # UC26
+    #
+    uc26:
+      eigen_beheeraccount_wijzigen_gelukt: "Eigen beheeraccount wijzigen gelukt"
+      eigen_beheeraccount_inzien_gelukt: Eigen beheeraccount inzien gelukt
+      eigen_beheeraccount_inzien_wijzigen_gelukt: Eigen beheeraccount inzien om te wijzigen gelukt
+
+    # UC27
+    #
+    uc27:
+      beheerrollen_overzicht_inzien_gelukt: "Beheerrollen overzicht inzien gelukt"
+      beheerrol_inzien_gelukt: "Beheerrol inzien gelukt"
+      beheerrol_aanmaken_gelukt: "Beheerrol '%{name}' aangemaakt ter accordering"
+      beheerrol_inzien_wijzigen_gelukt: "Beheerrol inzien om te wijzigen gelukt"
+      beheerrol_gewijzigd_ter_accorderen: "Beheerrol gewijzigd ter accordering"
+      beheerrol_verwijderen_gelukt: "Beheerrol verwijderd ter accordering"
+      beheerrol_verwijderen_mislukt: "Beheerrol verwijderen mislukt"
+      beheerder_beheerrol_verwijderen_gelukt: "Beheerder uit beheerrol verwijderd ter accordering: %{accounts}"
+      beheerder_beheerrol_toevoegen_gelukt: "Beheerder aan beheerrol toegevoegd ter accordering: %{accounts}"
+      beheerprivilege_toevoegen_beheerrol_gelukt: "Beheerprivilege aan beheerrol toegevoegd ter accordering: %{privileges}"
+      beheerprivilege_verwijderen_beheerrol_gelukt: "Beheerprivilege van beheerrol verwijderd ter accordering: %{privileges}"
+      beheerprivilege_toevoegen_beheerrol_mislukt: "Beheerprivilege %{privileges} verwijderen van beheerrol mislukt"
+      wijziging_beheerrol_inzien_gelukt: "Wijziging rol '%{name}' inzien gelukt"
+      wijziging_beheerrol_geaccordeerd: "Wijziging rol '%{name}' geaccordeerd"
+      wijziging_beheerrol_afgekeurd: "Wijziging rol '%{name}' afgekeurd"
+      wijziging_beheerrol_ingetrokken: "Wijziging rol '%{name}' ingetrokken"
+
+
+    # UC28
+    #
+    uc28:
+      rapportage_download_gelukt: "Download rapportage gelukt, %{bestand}"
+      rapportage_aanvraag_logging_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek logging gelukt"
+      rapportage_aanvraag_account_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek accounts gelukt"
+      rapportage_aanvraag_account_bsn_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek accounts via BSN gelukt"
+      rapportage_aanvraag_account_ip_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek accounts via IP-adres gelukt"
+      rapportage_aanvraag_account_zip_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek accounts via postcode gelukt"
+      rapportage_aanvraag_logging_bsn_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek logging via BSN gelukt"
+      rapportage_aanvraag_logging_ip_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek logging via IP-adres gelukt"
+      rapportage_aanvraag_logging_zip_onderzoek_gelukt: "Aanvraag voor rapport fraude onderzoek logging via postcode gelukt"
+
+      type:
+        fraud: "fraude"
+        integrity: "integriteits"
+        monthly: "maand"
+        weekly: "week"
+        sec: "security"
+        std: "standaard"
+
+    # UC29
+    #
+    uc29:
+      sso_domein_overzicht_inzien_gelukt: "SSO domeinen overzicht inzien gelukt"
+      sso_domein_inzien_gelukt: "SSO domein %{domain} inzien gelukt"
+      sso_domein_wijzigen_gelukt: "SSO domein %{domain} wijzigen gelukt"
+      sso_domein_wijzigen_mislukt: "SSO domein %{domain} wijzigen mislukt"
+      sso_domein_aanmaken_gelukt: "SSO domein %{domain} aanmaken gelukt"
+      sso_domein_aanmaken_mislukt: "SSO domein %{domain} aanmaken mislukt"
+      sso_domein_verwijderen_gelukt: "SSO domein %{domain} verwijderen gelukt"
+      sso_domein_verwijderen_mislukt: "SSO domein %{domain} verwijderen mislukt"
+
+    uc30:
+      front_desk_employee_assigned_to_front_desk: Baliemdw in baliefunctie ingelogd
+      front_desk_employee_log_in_fail_unknown_front_desk: Baliemdw inlog mislukt, KvKnr en/of Vestigingsnr onbekend
+      front_desk_employee_log_in_fail_unknown_autorisation: Baliemdw inlog mislukt, autorisatie onbekend
+      baliemdw_inloggen_zekerheidsniveau_te_laag: "*Baliemdw inlog mislukt, zekerheidsniveau te laag"
+      baliemdw_inloggen_mislukt_balie_geblokkeerd: "Baliemdw inlog mislukt, uitgiftepunt is inactief"
+      front_desk_employee_log_out: Baliemdw uit baliefunctie uitgelogd
+      baliemdw_sessie_verlopen: "Baliemdw sessie verlopen"
+      baliemdw_identificatie_gestart: "Functie 'Registreer identificatie' gestart"
+      front_desk_id_check_successful: ID controle succesvol
+      baliemdw_identificatie_gelukt_activatiecode: "Vastleggen identificatie voor activatie gelukt"
+      baliemdw_identificatie_mislukt: "Vastleggen identificatie mislukt"
+      front_desk_id_check_fail_not_unique_for_citizen_service_number: Nummer identiteitsbewijs al bij ander BSN geregistreerd
+      front_desk_id_check_empty_fields: Validatie mislukt, niet alle verplichte velden ingevuld
+      front_desk_activation_letter_shown: Activeringsbrief wordt getoond
+      front_desk_activation_code_activated: Activeringscode is vrijgegeven
+      baliemdw_baliecode_aanmaken_start: "Start aanmaken baliecode"
+      baliemdw_baliecode_aanmaken_gelukt: "Baliecode %{baliecode} succesvol aangemaakt"
+      baliemdw_baliecode_aanmaken_mislukt_quota: "Baliecode aanmaken mislukt; quota overschreden"
+      baliemdw_baliecode_aanmaken_mislukt_gebruikt: "Baliecode aanmaken mislukt; reeds gebruikt"
+      baliemdw_niet_gemachtigd: "Baliemdw niet gemachtigd voor balie '%{front_desk_id}'"
+      front_desk_audit_one_case_shown: Controle regel wordt getoond
+      front_desk_audit_case_marked_as_fraud: "Controle regel gemarkeerd als 'fraude vermoeden'"
+      baliemdw_identificatie_bsn_gevonden: "Ingevulde BSN gevonden"
+      baliemdw_identificatie_bsn_niet_gevonden: "Ingevulde BSN niet gevonden; bestaat niet (vervallen)"
+      baliemdw_identificatie_bsn_niet_gevonden_geen_aanvraag: "Ingevulde BSN niet gevonden; geen aanvraag met baliecode"
+      baliemdw_identificatie_bsn_niet_gevonden_aanvraag_klaar: "Ingevulde BSN niet gevonden; aanvraag reeds afgerond"
+      baliemdw_identificatie_bsn_niet_gevonden_andere_balie: "De aanvraag is gedaan met een baliecode die niet afkomstig is van deze balie"
+      baliemdw_identificatie_mislukt_vier_ogen: "Vastleggen identificatie mislukt; Vier ogen principe."
+      front_desk_employee_log_in_fail_front_desk_blocked: Baliemdw inlog mislukt, uitgiftepunt is geblokkeerd
+      front_desk_employee_log_in_fail: Baliemdw inlog mislukt
+      front_desk_activation_letter_printed: Activeringsbrief is uitgeprint
+      front_desk_activation_letter_marked_as_sent: Activeringsbrief gemarkeerd als verstuurd
+      front_desk_audit_started: Controle overzicht succesvol gestart
+      front_desk_employee_front_desk_selected: "Baliemdw %{pseudonym} gekoppeld aan balie %{front_desk_id}"
+      front_desk_start_activation_process: Start uitgeven activeringscode via balie
+      front_desk_start_activation_process_session: Start sessie verificatieproces
+      front_desk_employee_start_selection_of_front_desk: Start selecteren balie
+      front_desk_employee_no_front_desk_found_for_identifier: Geen balie gevonden bij KvK-nummer
+      front_desk_id_check_correction: Typefout gecorrigeerd
+      front_desk_maximum_per_day_reached: Maximum aantal activeringscodes per balie per dag bereikt
+      front_desk_code_no_longer_valid: Uitgeven activeringscode mislukt, baliecode niet meer geldig
+      front_desk_code_combination_invalid: Uitgeven activeringscode mislukt, combinatie BSN en baliecode onjuist
+      front_desk_id_check_correction_empty_fields: Typefout correctie mislukt, niet alle verplichte velden ingevuld
+      front_desk_id_check_cancelled: Identiteit niet vastgesteld, activeringscode niet uitgegeven
+      front_desk_employee_session_expired: Sessie verlopen (baliefunctie)
+      front_desk_id_check_id_signaled: ID is gesignaleerd, activeringscode niet uitgegeven
+      front_desk_employee_session_ended_front_desk_blocked: Baliesessie beëindigd, balie is geblokkeerd
+      front_desk_id_check_failed_no_changes: Typefout correctie mislukt, geen gegevens gecorrigeerd
+      front_desk_activation_process_cancelled: Uitgeven activeringscode mislukt, annuleren geklikt
+      front_desk_employee_log_in_successful: Baliemdw ingelogd met eHerkenning
+
+    uc31:
+      front_desk_show: Balie inzien gelukt
+      front_desk_update_success: Balie wijzigen gelukt
+      front_desk_update_fail: Balie wijzigen mislukt
+      front_desk_create_success: Balie aanmaken gelukt
+      front_desk_create_fail: Balie aanmaken mislukt
+      front_desk_destroy_success: Balie verwijderen gelukt
+      front_desk_destroy_fail: Balie verwijderen mislukt
+      front_desk_block_success: Balie blokkeren gelukt
+      front_desk_block_fail: Balie blokkeren mislukt
+      front_desk_unblock_success: Balie deblokkeren gelukt
+      front_desk_unblock_fail: Balie deblokkeren mislukt
+      balie_emigratie_aan: "Indicatie 'Emigratie' aangezet"
+      balie_emigratie_uit: "Indicatie 'Emigratie' uitgezet"
+      balie_baliecode_quota_wijziging: "Baliecode quota aangepast"
+      balie_baliecode_geldigheid_wijziging: "Baliecode geldigheidsperiode aangepast"
+      balie_baliecode_blokkeren_gelukt: "Baliecodes geblokkeerd"
+      balie_baliecode_blokkeren_mislukt: "Baliecodes blokkeren mislukt"
+      front_desk_audit_case_shown: Controle regel wordt getoond
+      front_desk_activation_code_duration_changed: Activeringsperiode aangepast
+      balie_functie_scheiding_op_4ogen: "Functiescheiding gewijzigd naar 4-Ogen"
+      balie_functie_scheiding_op_controle_achteraf: "Functiescheiding gewijzigd naar Controle achteraf"
+      front_desk_overview_shown: Balieoverzicht inzien gelukt
+      front_desk_relation_destroyed: "Koppeling baliemdw %{pseudonym} en balie %{front_desk_id} verwijderd"
+      front_desk_relation_destruction_failed: "Verwijderen koppeling baliemdw %{pseudonym} en balie %{front_desk_id} mislukt"
+      front_desk_maximum_per_day_adjusted: Maximum uitgiftes per dag aangepast
+      front_desk_show_edit_successful: Balie inzien om te wijzigen gelukt
+      front_desk_warning_unaudited_changed: Alarmering aantal niet gecontroleerde accounts gewijzigd
+      front_desk_warning_fraud_suspicions_changed: Alarmering aantal fraude vermoeden gewijzigd
+      front_desk_audit_confirmed: 'Controleregel gemarkeerd als afgehandeld, fraudevermoeden'
+      front_desk_audit_negated: 'Controleregel gemarkeerd als afgehandeld, geen fraudevermoeden'
+
+    uc32:
+      afmeldlijst_inzien_gelukt: "Afmeldlijst inzien gelukt"
+      afmelding_aanmaken_gelukt: "Afmeldingen aanmaken gelukt voor bsn %{subject}"
+      afmelding_verwijderen_gelukt: "Afmeldingen verwijderen gelukt voor bsn %{subject}"
+
+    uc33:
+      vraag_inzien_gelukt: "Vraag inzien gelukt"
+      vraag_verwijderen_gelukt: "Vraag verwijderen gelukt"
+      vraag_wijzigen_gelukt: "Vraag wijzigen gelukt"
+      vraag_aanmaken_gelukt: "Vraag aanmaken gelukt"
+
+    uc40:
+      beveiligde_bezorging_postcodes_inzien_gelukt:     "Inzien overzicht van postcodes voor beveiligde bezorging gelukt"
+      beveiligde_bezorging_postcode_verwijderen_gelukt: "Verwijderen gelukt van postcodegebied %{postcode_gebied} van postcodes voor beveiligde bezorging"
+      beveiligde_bezorging_postcode_aanmaken_gelukt:    "Aanmaken gelukt van %{postcode_gebied} in lijst postcodes voor beveiligde bezorging"
+
+    uc46:
+      bulk_order_overview_shown: Overzicht bulkopdrachten inzien gelukt
+      bulk_order_show: Bulkopdracht %{id}/%{name}/%{type} inzien gelukt
+      bulk_order_approved: Bulkopdracht %{id}/%{name}/%{type} geaccordeerd
+      bulk_order_rejected: Bulkopdracht %{id}/%{name}/%{type} afgekeurd
+      bulk_order_destroyed: Bulkopdracht %{id}/%{name}/%{type} verwijderd
+      bulk_order_created: Nieuwe bulkopdracht %{id}/%{name}/%{type} toegevoegd
+      bulk_order_created_invalid: Ongeldige bulkopdracht %{id}/%{name}/%{type} toegevoegd
+      bulk_order_download_overview: Download overzicht bulkopdrachten gelukt
+      bulk_order_download_invalid_bsn: Download ongeldige BSN's van bulkopdracht %{id}/%{name}/%{type} gelukt
+      bulk_order_download_account_status: Download account status van bulkopdracht %{id}/%{name}/%{type} gelukt
+      bulk_order_download_address_list: Download adreslijst van bulkopdracht %{id}/%{name}/%{type} gelukt
+      bulk_order_add_command_failed: "Toevoegen opdracht niet gelukt, geen geldig BSN bestand: [geen CSV file/bestandsnaam onbekend/bestand bevat onbekende data]"
+      bulk_order_csv_amount: "Toevoegen opdracht niet gelukt, geen geldig BSN bestand: bevat [geen/teveel] BSN's"
+      bulk_order_brp_details_complete: Adresgegevens bulkopdracht %{id}/%{name}/%{type} verwijderd
+      bulk_order_brp_started: "Opvragen adressen bulkopdracht %{id}/%{name}/%{type} gestart"
+      bulk_order_brp_finished: "Bulkopdracht %{id}/%{name}/%{type} uitgevoerd"
+      bulk_order_brp_not_completed: "Bulkopdracht %{id}/%{name}/%{type} niet uitgevoerd: %{reason}"
+      bulk_order_brn_request_started: "BRP opvraging adres voor BSN %{bsn} start"
+      bulk_order_brn_request_finished: "BRP opvraging adres voor BSN %{bsn} gelukt"
+      bulk_order_brn_request_not_completed: "BRP opvraging adres voor BSN %{bsn} niet gelukt; time-out"
+      bulk_order_delete_accounts_finished: Verwijderen accounts van bulkopdracht %{id}/%{name}/%{type} afgerond
+      bulk_order_account_deleted: DigiD account verwijderd via bulkopdracht %{id}/%{name}/%{type}
+      bulk_order_deleting_accounts_not_completed: 'Verwijderen accounts van bulkopdracht %{id}/%{name}/%{type} niet afgerond: %{reason}'
+      bulk_order_change_status_accounts_finished: Aanpassen accounts van bulkopdracht %{id}/%{name}/%{type} afgerond
+      bulk_order_account_status_changed: DigiD account aangepast via bulkopdracht %{id}/%{name}/%{type}
+      bulk_order_changing_status_accounts_not_completed: 'Aanpassen accounts van bulkopdracht %{id}/%{name}/%{type} niet afgerond: %{reason}'
+
+
+    uc54:
+      eid_certificate_import_error: Importeren eID certificaat met bestandsnaam ‘%{file_name}’ mislukt. Foutmelding %{error}.
+      eid_certificate_overview_shown: Overzicht eID certificaten inzien gelukt
+      eid_certificate_imported: eID certificaat ‘%{subject}’ importeren gelukt
+      eid_certificate_downloaded: eID certificaat ‘%{subject}’ downloaden gelukt
+
+    uc55:
+      eid_at_request_rejected: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ afgekeurd
+      eid_at_request_aborted: eID AT-verzoek ‘%{document_type}-%{sequence_no}’ afgebroken
+
+    uc56:
+      eid_crl_import_error: Importeren eID CRL met bestandsnaam ‘%{file_name}’ mislukt. Foutmelding %{error}.
+      eid_crl_downloaded: eID CRL ‘%{issuer}’ downloaden gelukt
+
+    uc58:
+      rda_certificate_import_error: Importeren RDA certificaat met bestandsnaam ‘%{file_name}’ mislukt. Foutmelding %{error}.
+      rda_certificate_overview_shown: Overzicht RDA certificaten inzien gelukt
+      rda_certificate_shown: RDA certificaat '%{subject}' inzien gelukt
+      rda_certificate_imported: RDA certificaat ‘%{subject}’ importeren gelukt
+      rda_certificate_downloaded: RDA certificaat ‘%{subject}’ downloaden gelukt
+
+    uc59:
+      rda_crl_import_error: Importeren RDA CRL met bestandsnaam ‘%{file_name}’ mislukt. Foutmelding %{error}.
+      rda_crl_shown: RDA CRL ‘%{issuer}’ inzien gelukt
+      rda_crl_imported: RDA CRL ‘%{issuer}’ importeren gelukt
+      rda_crl_downloaded: RDA CRL ‘%{issuer}’ downloaden gelukt
+
+
+    cron:
+      aanvraaggegevens_opschonen_gelukt: "Aanvraaggegevens opschonen gelukt"
+
+    admin_report:
+      overview_success: "Rapportages overzicht inzien gelukt"
+      filter_overview_success: "Rapportages gefilterd overzicht inzien gelukt"

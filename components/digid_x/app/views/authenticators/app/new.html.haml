@@ -1,0 +1,56 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name) : heading_with_icon(t('log_in'))
+
+- if @session_ends_label && wrapped_session.expires_at.present?
+  = render('shared/session_countdown', key: 'no_extension')
+
+- if mobile_browser?
+  %h2.orange_heading= t('login_which_device')
+  .app-login#app-login.margin-top-8px
+    %div.app-device-icons
+      %a.login_tile.highlighted.smartphone{ href: digid_app_web_to_app_url, class: "open_app_on_device" }
+        %h2
+          %span= t('app.open_on_this_device')
+        = icon("3941-delta-links-24px", css_class: "right")
+      %a.login_tile.smartphone{ href: digid_app_sign_in_url(confirm: true) }
+        %h2
+          %span= t('app.open_on_other_device')
+        = icon("3941-delta-links-24px", css_class: "right")
+
+= actions do
+  = cancel_button(sign_in_url, action: :previous, arrow: true)
+
+%ul.list-with-arrows.margin-bottom-48px
+  %li= external_link_to(t('no_digid_app_read_how_to_install_and_activate'), 'https://www.digid.nl/over-digid/app')
+
+.poller{ data: { url: digid_app_poll_url(do_nothing_unless_failed: true), timeout: 3000 } }

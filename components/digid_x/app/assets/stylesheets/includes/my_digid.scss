@@ -1,0 +1,402 @@
+$nrs-bcbcbc: #bcbcbc;
+
+.my_digid_edit_settings {
+  margin-bottom: 20px;
+  @media screen and (max-width: $breakpoint4 - 1) {
+    display: none;
+  }
+}
+
+.info-box {
+  background: $nrs-d9ebf7;
+  position: relative;
+
+  p {
+    padding-right: 30px;
+  }
+
+  // Defines the CSS arrow.
+  &:after {
+    border: solid transparent;
+    border-color: rgba(246, 212, 178, 0) rgba(246, 212, 178, 0) $nrs-d9ebf7;
+    border-width: 4px;
+    bottom: 100%;
+    content: ' ';
+    height: 0;
+    margin-left: -4px;
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    width: 0;
+  }
+}
+
+.wrap-main {
+  float: left;
+
+  @media screen and (min-width: $my-digid-breakpoint1) {
+    width: 480px;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint1 - 1) {
+    width: 100%;
+  }
+
+
+  @media screen and (min-width: $my-digid-breakpoint3) {
+    &.extended-height {
+      display: table-cell;
+      float: none;
+      vertical-align: top;
+    }
+  }
+
+  &.yellow-highlight {
+    background-color: $rs-oranje-lichtste-tint;
+
+    &.info-box-active {
+      background-color: $nrs-d9ebf7;
+    }
+
+    & .col-val .info-button.info {
+      background-color: $rs-oranje-lichtste-tint;
+    }
+
+  }
+}
+
+.row {
+  @include clearfix;
+
+  margin-bottom: 10px;
+
+  &.extended-height {
+    display: table;
+  }
+
+  @media screen and (min-width: $my-digid-breakpoint1) {
+    width: 720px;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint3 - 1 ) {
+     &.extended-height {
+      display: block;
+    }
+  }
+
+  .col ul.list-with-arrows li {
+    margin-right: 16px;
+  }
+
+  &:after {
+    clear: both;
+    content: '';
+  }
+}
+
+.col {
+  display: block;
+  float: left;
+
+  @media screen and (max-width: $my-digid-breakpoint1 - 1) {
+    clear: both;
+    float: none;
+  }
+
+  &.info-box-active {
+    background-color: $nrs-d9ebf7;
+    border-top: 1px solid $rs-wit;
+  }
+
+    &.highlight.notice {
+      background-color: $rs-oranje-lichtste-tint;
+
+      &.info-box-active {
+        background-color: $nrs-d9ebf7;
+      }
+
+      & .col-val .info-button.info {
+        background-color: $rs-oranje-lichtste-tint;
+      }
+
+  }
+
+}
+
+
+.no-highlight {
+  @include clearfix;
+  padding: 5px 10px;
+}
+
+
+.highlight {
+  @include clearfix;
+
+  padding: 5px 10px;
+  background-color: #F5F5F5;
+  &.notice {
+    background-color: $rs-oranje-lichtste-tint;
+  }
+}
+
+.space-bottom {
+  margin-bottom: 10px;
+}
+
+// .row:hover .highlight {
+//   @include transition(background-color .6s);
+
+//   background-color: $nrs-f5f5f5;
+// }
+
+.col-name {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  word-wrap: break-word;
+
+  @media screen and (min-width: $my-digid-breakpoint1) {
+    width: 175px;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint1 - 1) {
+    width: 100%;
+  }
+  span:before { content: '\A'; white-space: pre; }
+}
+
+.col-val {
+  font-weight: bold;
+  margin-top: 5px;
+  vertical-align: middle;
+
+  @media screen and (min-width: $my-digid-breakpoint1) {
+    width: 280px;
+  }
+
+  p {
+    overflow: hidden; // This makes the text not wrap
+  }
+
+  .info-button {
+    background-color: #F5F5F5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    border: 0;
+    cursor: pointer;
+    float: right;
+    height: 35px;
+    margin-left: 5px;
+    margin-right: -5px;
+    margin-top: -5px;
+    width: 30px;
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+
+    &.info {
+      // FIXME: Please convert everything to Bootstrap and use FontAwesome (this is fa-info)
+      background-image: image-url('info_icon.svg');
+    }
+
+    &.close {
+      background-color: $nrs-d9ebf7;
+      // This is fa-times
+      background-image: image-url('info_icon.svg');
+      background-size: 18px 18px;
+    }
+
+    @media screen and (max-width: $my-digid-breakpoint1 - 1) {
+      margin-top: -20px;
+    }
+  }
+}
+
+.col-links {
+  float: right;
+  padding-top: 12px;
+  vertical-align: middle;
+  width: 220px;
+
+  &.extended-height {
+    display: table-cell;
+
+  }
+
+  ul {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  &:hover {
+    background-color: $rs-wit;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint3 - 1) {
+    clear: both;
+    float: none;
+    padding-top: 10px;
+    width: unset;
+
+    &.extended-height {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.col-info {
+  background-color: $nrs-d9ebf7;
+  display: block;
+  margin: 10px 0 0;
+  padding: 10px;
+
+  // when Javascript is enabled, answers are shown when the question is clicked
+  .javascript & {
+    display: none;
+  }
+
+  @media screen and (min-width: $my-digid-breakpoint1) {
+    width: 460px;
+  }
+}
+
+.col_val_extra_margin {
+  margin: 5px 0;
+}
+
+p.smartphone {
+  margin-top: 10px;
+  text-align: center;
+  img {
+    width: 40%
+  }
+}
+
+p.usb_reader {
+  margin-top: 10px;
+  text-align: center;
+  img {
+    width: 70%
+  }
+}
+
+table.app-device-icons{
+  width: 100%;
+  margin-bottom: 15px;
+  margin-top: 25px;
+  tr {
+    td.smartphone {
+       text-align: center;
+       vertical-align: top;
+       width: 42%;
+       a { text-decoration: none; }
+      img {
+        width: 69%;
+      }
+    }
+    td.usb_reader{
+      text-align: center;
+      a { text-decoration: none; }
+      img {
+        width: 90%;
+      }
+    }
+  }
+}
+
+// My digid apps overview
+.row.no-overflow {
+  overflow: unset;
+}
+
+.app_authenticator + .col-links {
+  padding-top: 0;
+
+  @media screen and (max-width: $my-digid-breakpoint3 - 1) {
+    margin-bottom: 10px;
+  }
+}
+
+.app_authenticator {
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px 0 transparent;
+
+
+  @media screen and (max-width: $my-digid-breakpoint3 - 1) {
+    margin-bottom: 0
+  }
+
+  .wrap-main {
+    margin-bottom: 0;
+  }
+
+  &.multiple{
+    .wrap-main {
+      display: none;
+
+      &.first {
+        display: block;
+
+        .col-name {
+          font-weight: bold;
+          max-width: 182px;
+          height: 25px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:before {
+            font-family: 'icons';
+            content: '\f114';
+            margin-right:10px;
+            display: inline-block;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      margin-top: -2px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24);
+      border-radius: 4px;
+      margin-bottom: 23px;
+      border-bottom: 4px solid #F5F5F5;
+      cursor: pointer;
+
+      @media screen and (max-width: $my-digid-breakpoint3 - 1) {
+        margin-bottom: -2px;
+      }
+    }
+
+
+
+    &.active {
+      .wrap-main {
+        display: block;
+
+        &.first .col-name{
+          height: unset;
+          white-space: unset;
+
+          &:before {
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,1 @@
+ALTER TABLE services MODIFY service_uuid VARCHAR(255) NOT NULL;

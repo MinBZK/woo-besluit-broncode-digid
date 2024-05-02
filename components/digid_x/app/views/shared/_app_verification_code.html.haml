@@ -1,0 +1,43 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if android_browser? && open_url.present?
+  %p= link_to t('open_digid_app_on_device'), open_url
+  %p of
+
+= extended_form_for(@code, url: qr_url, method: :get, html: {class: 'app_verification' }) do |form|
+  = form.verification_code_field(:verification_code, label: t('verification_code_label'), text: t('verification_code_text'), legend: t('verification_code_legend'), hide_required_indicator: true)
+  = actions do
+    = action_submit(:next, arrow: true)
+    = cancel_button(previous_url, action: :previous, arrow: true) if defined?(previous_url) && previous_url
+    = cancel_button(cancel_url, arrow: true) if defined?(cancel_url) && cancel_url
+
+= javascript_include_tag("inline/app_verification_code", nonce: content_security_policy_script_nonce)

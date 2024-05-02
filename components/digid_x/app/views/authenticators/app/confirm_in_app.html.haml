@@ -1,0 +1,63 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name) : heading_with_icon(t('log_in'))
+
+- if wrapped_session.expires_at.present?
+  = render('shared/session_countdown', key: 'no_extension')
+
+= flash_alert
+= flash_notice
+
+- unless cookies[:eha].present?
+  = steps(3, 3, nil)
+
+- if cookies[:eha].present?
+  %h2.orange_heading= t("digid_app.headers.confirm_in_app_to.eha")
+- else
+  %h2.orange_heading= t("digid_app.headers.confirm_in_app_to.general")
+
+
+- @background = "confirm#{mobile_browser? ? "-mobile" : ""}"
+
+- if cookies[:eha].present?
+  = action_button(:skip_eha, digid_app_skip_eha_url, inverted_arrow: true)
+
+= actions do
+  - if session[:session] == 'activation'
+    = cancel_button(activate_url, arrow: true)
+  - else
+    = cancel_button(digid_app_cancel_url, arrow: true)
+
+- if session[:chosen_method] == "app"
+  .poller{ data: { url: wid_poll_url(current_step: "confirm"), timeout: 3000, suspended: Rails.env.test? } }
+- else
+  .poller{ data: { url: digid_app_poll_url(current_step: "confirm"), timeout: 3000, suspended: Rails.env.test? } }

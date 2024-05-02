@@ -1,0 +1,31 @@
+{
+  "app": {
+    "page-title": "My DigiD | DigiD app details",
+    "aria-title": "Your DigiD app",
+    "title": "Using the DigiD app",
+    "details-aria": "DigiD app on {{ name }}, more information",
+    "close-accordion": "Hide more information about DigiD app on {{ name }}",
+    "name": "Device name",
+    "code": "Appcode",
+    "code-tooltip": "This code belongs to your DigiD app. With this code, DigiD recognizes your app.",
+    "log": "Last logged in",
+    "status": "Status app",
+    "status-tooltip": "We have sent a letter with an activation code to your home address. When you have received this code, open the DigiD app and choose \"Start\".",
+    "deactivate": "Deactivate this DigiD app",
+    "remove": "Remove this DigiD app",
+    "activated": "Activated on",
+    "type": "Type of identity document",
+    "type-tooltip": "This is the identity document that you used to add the ID check to your DigiD app.",
+    "doc-num": "Document number",
+    "doc-num-tooltip": "This is the number on the identity card that you used to add the ID-check to your DigiD app.",
+    "other": "Your other DigiD apps",
+    "details-id-active": "You have added the ID check to your DigiD app. You can now also use your DigiD app to access data that is particularly privacy-sensitive, such as your medical file.",
+    "details-id-inactive": "You can add an ID check to your DigiD app. This will allow you to do even more with your DigiD. For example, viewing and modifying information that is particularly privacy-sensitive, such as your medical file.",
+    "details-id-link": "More information about the ID check",
+    "id_card": "Dutch identity card",
+    "driving_licence": "Dutch driving licence",
+    "driving_license": "Dutch driving licence",
+    "passport": "Dutch passport",
+		"null": "Unknown"
+  }
+}

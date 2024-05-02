@@ -1,0 +1,73 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+  targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <wsdl:types>
+    <xs:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+      elementFormDefault="qualified">
+      <xs:import namespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" schemaLocation="V4_MU_RegisterSCStatus.xsd"></xs:import>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterStatusSCResponse">
+    <wsdl:part element="tns:RegisterStatusSCResponse" name="RegisterStatusSCResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RegisterStatusSCRequest">
+    <wsdl:part element="tns:RegisterStatusSCRequest" name="RegisterStatusSCRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NotFoundFault">
+    <wsdl:part name="NotFoundFaultMessage" element="tns:NotFoundFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="TechnicalFault">
+    <wsdl:part name="TechnicalFaultMessage" element="tns:TechnicalFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="VersionMismatchFault">
+    <wsdl:part name="VersionMismatchFaultMessage" element="tns:VersionMismatchFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="ValidationErrorFault">
+    <wsdl:part name="ValidationErrorFaultMessage" element="tns:ValidationErrorFaultDetail" />
+  </wsdl:message>
+  <wsdl:portType name="registerSCStatusPort">
+    <wsdl:operation name="RegisterStatusSC">
+      <wsdl:input wsaw:Action="http://SSSSSSSSSSSS/ws/registerStatusSCRequest" message="tns:RegisterStatusSCRequest" name="RegisterStatusSCRequest"></wsdl:input>
+      <wsdl:output wsaw:Action="http://SSSSSSSSSSSS/ws/registerStatusSCRequest" message="tns:RegisterStatusSCResponse" name="RegisterStatusSCResponse"></wsdl:output>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault" />
+      <wsdl:fault message="tns:TechnicalFault" name="TechnicalFault" />
+      <wsdl:fault message="tns:VersionMismatchFault" name="VersionMismatchFault" />
+      <wsdl:fault message="tns:ValidationErrorFault" name="ValidationErrorFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="registerSCStatusPortSoap11" type="tns:registerSCStatusPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsaw:UsingAddressing wsdl:required="true" />
+    <wsdl:operation name="RegisterStatusSC">
+      <soap:operation soapAction="" />
+      <wsdl:input name="RegisterStatusSCRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterStatusSCResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="TechnicalFault">
+        <soap:fault name="TechnicalFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="VersionMismatchFault">
+        <soap:fault name="VersionMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationErrorFault">
+        <soap:fault name="ValidationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="registerSCStatusPortService">
+    <wsdl:port binding="tns:registerSCStatusPortSoap11" name="registerSCStatusPortSoap11">
+      <soap:address location="http://localhost:8080/ws" />
+      <wsp:Policy xmlns:wsp="http://www.w3.org/ns/ws-policy">
+             <wsam:Addressing xmlns:wsam="http://www.w3.org/2007/02/addressing/metadata">
+                 <wsp:Policy/>
+              </wsam:Addressing>
+         </wsp:Policy>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

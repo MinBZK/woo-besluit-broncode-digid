@@ -1,0 +1,79 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.responsive' as media;
+
+.dd-modal {
+  display: none;
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 4px;
+
+  min-width: 19.5rem;
+  max-width: 31.25rem;
+
+  background: var(--solid2);
+
+  transform: translateX(-50%) translateY(-50%);
+
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
+
+  //@include media('<tablet') {
+  //  top: 50%;
+  //  right: 24px;
+  //  left: 24px;
+  //  width: auto;
+  //  transform: translateY(-50%);
+  //}
+  &-btn {
+    @media screen and (max-width: media.$desktop) {
+      width: 100%;
+      > button {
+        width: 100%;
+        > span {
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  &__close-a {
+    position: absolute;
+
+    right: 24px;
+    top: 26px;
+
+    .dd-icon {
+      margin-left: 4px;
+    }
+  }
+
+  [slot='actions'] {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  [slot='body'] {
+    display: block;
+    max-height: 50vh;
+    overflow: auto;
+    padding: 0 1.5rem 0.5rem 1.5rem;
+  }
+
+  &__header {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+
+    display: flex;
+    font-size: 1.5rem;
+    font-family: core.$bold;
+
+    &__icon {
+      margin-right: 0.75rem;
+    }
+  }
+}

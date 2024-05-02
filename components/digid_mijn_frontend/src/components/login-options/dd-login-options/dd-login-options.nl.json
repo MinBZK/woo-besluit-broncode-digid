@@ -1,0 +1,17 @@
+{
+  "login": {
+    "page-title": "Mijn DigiD",
+    "header": "Inlogmethodes",
+    "btn": "Bekijk mijn inlogmethodes",
+    "title": "Inlogmethodes",
+    "sub-header-1": "U kunt op verschillende manieren inloggen via DigiD. Hoe meer manieren u toevoegt, hoe meer u kunt regelen.",
+    "sub-header-2": "De vorige keer dat u uw DigiD gebruikt heeft was op",
+    "digid-app": "DigiD app",
+    "digid-app-sub": "Dit zijn uw DigiD app('s). Klik op 'Meer details' voor meer informatie of om de app te deactiveren.",
+    "delete-title": "DigiD opheffen",
+    "delete-subtitle": "U kunt uw DigiD opheffen. Hierna kunt u nergens meer met DigiD inloggen, tenzij u daarna opnieuw een DigiD aanvraagt.",
+    "delete-btn": "Hef mijn DigiD op",
+		"homepage": "Hoofdpagina",
+		"logged-in": "U bent ingelogd op Mijn DigiD"
+  }
+}

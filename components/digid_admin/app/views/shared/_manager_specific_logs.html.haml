@@ -1,0 +1,48 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper
+  %h2= @subject || 'Beheerhandelingen'
+
+  - begin
+    %table
+      %thead
+        %tr
+          = render 'shared/table_header', headers: %w(services.time_of_day services.description services.ip_address uitgevoerd_door)
+
+      - @logs.each do |log|
+        %tr
+          %td.word-break= l(log.created_at, format: :default)
+          %td.word-break= log.name if log.name
+          %td.word-break= log.ip_address
+          %td.word-break= log.manager.present? ? four_eyes_show_link(log.manager.name, log.manager, icon: false) : "#{log.manager} (verwijderd)"
+  - rescue
+    %p.cert_alert=I18n.t('log_query_timeout')

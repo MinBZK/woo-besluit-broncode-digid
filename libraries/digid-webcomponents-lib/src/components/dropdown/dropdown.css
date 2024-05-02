@@ -1,0 +1,29 @@
+logius-dropdown {
+  margin: 10px;
+  display: block;
+}
+
+logius-dropdown h5 {
+  margin: 0 0 5px 0;
+}
+
+logius-dropdown select {
+  font-size: 1em;
+  text-align-last: center;
+  text-align: center;
+  height: 48px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+logius-dropdown .hint {
+  height: 24px;
+  width: 256px;
+  color: #5A5A5A;
+  /*font-family: RijksoverheidSansWebText;*/
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: 0 0 5px 0;
+}

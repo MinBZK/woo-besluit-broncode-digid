@@ -1,0 +1,53 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= @webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name(@webservice)) : heading_with_icon(@page_header)
+
+%h2.orange_heading
+  = icon("telefoon-24px", css_class: "orange")
+  = t('sms_code')
+%h3.black_heading
+  %strong
+    = t('no_code_received')
+%ol.decimal.padding-left-20px.margin-bottom-15px
+  %li= t(translation_key_check_code, mobile: mobile_number(mobile_number: sms_keuze_nummer, mask: !(session[:current_flow] == :registration || session[:mydigid_logged_in]))).html_safe
+  %li= t('code_not_received').html_safe
+
+= block_with_icon do
+  = t('called_on_another_number_warning').html_safe
+
+= extended_form_for(@choice_to_proceed, url: sms_keuze_url, method: :get) do |form|
+  = actions do
+    %br
+    = action_submit(:resend_spoken_sms, { formmethod: :get, name: "confirm[value]", value: :resend_spoken_sms, class: "margin-left-min10px"})
+    = action_button(:resend_text_sms, sms_keuze_url(confirm: {value: :resend_text_sms}), { name: "confirm[value]", value: :resend_text_sms, inverse: true, formmethod: :get, class: "margin-top-8px padding-right-20px" })
+
+= link_to(t('back'), authenticators_sms_controleren_url)

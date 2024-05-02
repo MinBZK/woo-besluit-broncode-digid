@@ -1,0 +1,12 @@
+- name: '1'
+  cron: '1'
+  active: 1
+  application: ""
+- name: '2'
+  cron: '2'
+  active: 1
+  application: ""
+- name: '5'
+  cron: '5'
+  active: 0
+  application: ""

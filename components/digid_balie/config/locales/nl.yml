@@ -1,0 +1,265 @@
+nl:
+  unauthorized:
+    destroy:
+      verification: "Het is niet toegestaan om een aanvraag te annuleren welke reeds gecontroleerd is of om de aanvraag van een andere medewerker te behandelen"
+    edit:
+      verification: "Het is niet toegestaan om de gegevens van een aanvraag te controleren welke reeds gecontroleerd is of om de aanvraag van een andere medewerker te behandelen"
+    reject:
+      verification: "Het is niet toegestaan om een aanvraag af te wijzen welke reeds gecontroleerd is of om de aanvraag van een andere medewerker te behandelen"
+    show:
+      verification: "Het is niet toegestaan om de activatiecode van een reeds afgeronde brief op te vragen of om de aanvraag van een andere medewerker te behandelen"
+    update:
+      verification: "Het is niet toegestaan om de gegevens van een aanvraag te veranderen welke reeds gecontroleerd is of om de aanvraag van een andere medewerker te behandelen"
+
+  account_actived_yet: Account geactiveerd?
+  activated_at: Datum uitgifte (lokale tijd)
+  activation_code: Activeringscode
+  activation_code_received: Activeringscode ontvangen?
+  audited_verifications_past_24_hours: Uitgiften gecontroleerd afgelopen 24 uur
+  at_request: bij aanvraag
+  back: Terug
+  birthday: Geboortedatum
+  cancel: Annuleren
+  csn: BSN
+  citizen_service_number: Burgerservicenummer
+  citizen_service_number_applicant: Burgerservicenummer aanvrager
+  choose_pseudonym: 'Kies pseudoniem en bijhorende kvk/vestiging:'
+  clearance_verification: Controle achteraf
+  close: Afsluiten
+  confirm: Bevestigen
+  current_front_desk_blocked: De balie waar u aan gekoppeld bent is geblokkeerd. Neem contact op met het servicecentrum van Logius.
+  current_front_desk_not_authorized: Voor deze balie bent u niet gemachtigd. Neem contact op met het Servicecentrum van Logius.
+  date_time_verification_completed: Datum/tijd uitgifte (lokale tijd)
+  day: Dag
+  dd: DD
+  digid_front_desk: DigiD Balie
+  document_number: Documentnummer
+  expires_at: Identiteitsdocument geldig tot
+  first_names: Voornamen
+  finish_request: Aanvraag afronden
+  front_desk: Balie
+  front_desk_code: Baliecode
+  front_desk_code_is_expired: De baliecode is niet meer geldig. De aanvraag dateert van %{created_at} (Nederlandse tijd). De termijn van %{days} dagen is verlopen. Adviseer de klant om een nieuwe aanvraag te doen via de website van DigiD.
+  front_desk_code_not_found: De combinatie van het door u ingevoerde burgerservicenummer en baliecode is onjuist. Probeer het nogmaals.
+  front_desk_code_already_used: De baliecode is niet meer geldig. Adviseer de klant om een nieuwe aanvraag te doen via de website van DigiD.
+  front_desk_maximum_per_day_reached: Het maximaal aantal uit te geven activeringscodes per dag is bereikt. Neem contact op met het servicecentrum van Logius om meer activeringscodes uit te kunnen geven.
+  front_desk_selection_no_front_desk_for_eherkenning_info: De balie waarvoor u een machtiging heeft is niet aanwezig in het systeem. Neem contact op met het Servicecentrum van Logius.
+  front_desk_selection_only_blocked_front_desk_for_eherkenning_info: De balie waaronder u probeert in te loggen is geblokkeerd. Neem contact op met het servicecentrum van Logius.
+  front_desk_selection_successful: U heeft met succes een balie geselecteerd.
+  id_corrected: ID correctie
+  id_expires_at_day: Dag
+  id_expires_at_month: Maand
+  id_expires_at_year: Jaar
+  id_established: Identiteit vastgesteld
+  id_established_rni: Vastgesteld
+  id_number: Documentnummer
+  id_number_already_in_use: Het nummer van het identiteitsdocument in combinatie met de nationaliteit is al bij een ander burgerservicenummer geregistreerd. Controleer de gegevens en corrigeer eventueel het documentnummer.
+  id_signaled: ID gesignaleerd
+  id_verification: ID controle
+  id_verification_rni: Gegevens controle
+  info_activation_code: "Let op: bij een gesproken sms, zorg ervoor dat de burger de activeringscode noteert."
+  issued_verifications: Aantal uitgegeven activeringscodes
+  log_in_with: Inloggen met
+  log_off: Uitloggen
+  logo_digid: Logo Rijksoverheid - Ga naar www.digid.nl
+  mm: MM
+  month: Maand
+  motivation: Motivatie typefout correctie
+  motivation_correction: Motivatie correctie
+  motivation_label: "Motivatie typefout correctie[*]"
+  nationality: Nationaliteit
+  next: Volgende
+  no_audited_verifications: Er zijn in de afgelopen 24 uur geen uitgiften gecontroleerd.
+  no_unaudited_verifications: Er zijn geen uitgiften die nog gecontroleerd moeten worden.
+  no_resend_sms: Nee, verstuur sms bericht nog een keer
+  nope: Nee
+  okay: OK
+  page_id: "Pagina ID: %{page_id}"
+  period: Periode (lokale tijd)
+  print_or_collect_activation_code: Printen en registratie activeringscode
+  print_the_letter: Brief printen
+  regular_sms: Regulier sms-bericht versturen
+  resend_sms: sms opnieuw verzenden
+  retrieve_request: Ophalen aanvraag
+  required_fields: Verplichte velden
+  save: Opslaan
+  send_activation_code: Activeringscode versturen
+  select_front_desk: Selecteren balie
+  select_the_front_desk_you_work_at: Selecteer de balie waar u werkzaam bent.
+  session_expired: Uw sessie is verlopen
+  sign_in_failed: "Het inloggen is mislukt, neem contact op met de beheerder."
+  signed_in_succesfully: U bent succesvol ingelogd
+  signed_out_succesfully: Uitgelogd uit de baliefunctie
+  spoken_sms: Gesproken sms-bericht versturen
+  state: Status
+  surname: Naam
+  suspected_fraud: Vermoeden van fraude
+  suspected_fraud_after_verification: Vermoeden van fraude bij uitgifte
+  suspected_fraud_after_audit: Vermoeden van fraude na controle
+  total_past_seven_days: Totalen (laatste 7 dagen)
+  typo_correction: Typefout correctie
+  typo_correction_and_motivation: Typefout correctie en motivatie
+  unaudited_verifications: Niet gecontroleerde uitgiften
+  upto: t/m
+  verify_account: Controleren account
+  verification_correct: Uitgifte in orde
+  verification_details: Details uitgifte
+  verification_handled_by: Uitgegeven door
+  account_active: Account actief?
+  verification_process_too_slow: Uw sessie is verlopen. #De behandling van deze aanvraag is meer als twee uur geleden gestart en is daarom verlopen. U heeft geen toegang meer tot deze aanvraag. Als u nog bezig was met het verifieren van de gegevens kunt u opnieuw de aanvraag ophalen.
+  vignet_digid: Vignet DigiD
+  visit_your_eherkenning_agent: Ga naar uw eHerkenningsmakelaar
+  with_id_corrections: Waarvan ID gegevens gecorrigeerd
+  year: Year
+  yeah: Ja
+  yes_sms_received: Ja, burger heeft het ontvangen
+  you_signalled_that_identity_could_not_be_established_or_was_signaled: U heeft aangegeven dat de identiteit van de burger niet vastgesteld kan worden of het ID gesignaleerd is. De baliecode zal ongeldig worden gemaakt en er kan geen activeringscode verstrekt worden.
+  you_signalled_that_identity_could_not_be_established: U heeft aangegeven dat de gegevens van de burger niet vastgesteld kunnen worden. De baliecode zal ongeldig worden gemaakt en er kan geen activeringscode verstrekt worden.
+  your_activation_code_is: "Uw activeringscode is: <strong>%{activation_code}</strong>. <br/>Activeer uw DigiD voor %{activation_code_valid_until} (Nederlandse tijd). Daarna is deze code niet meer geldig en dient u opnieuw uw DigiD aan te vragen."
+  yyyy: JJJJ
+
+  activemodel:
+    attributes:
+      audit_form:
+        motivation: Toelichting resultaat controle
+        verification_correct: Resultaat controle
+      create_verification_form:
+        citizen_service_number: Burgerservicenummer
+        front_desk_code: Baliecode
+      edit_verification_form:
+        id_established: Identiteit vastgesteld
+        id_established_rni: Vastgesteld
+        id_signaled: ID gesignaleerd
+        suspected_fraud: Vermoeden van fraude
+      sms_received_form:
+        sms_received: Activeringscode
+
+      verification_correction_form:
+        motivation: Motivatie typefout correctie
+        id_expires_at_day: Dag
+        id_expires_at_month: Maand
+        id_expires_at_year: Jaar
+        id_number: Documentnummer Nederlands identiteitsdocument
+    errors:
+      messages:
+        blank: "<strong>U heeft het veld \"%{attribute}\" niet ingevuld.</strong> <br />Dit is een verplicht veld."
+        too_long: "<strong>Het veld \"%{attribute}\" mag maximaal %{count} karakters bevatten.</strong>"
+        too_short: "<strong>Het veld \"%{attribute}\" moet minstens %{count} karakters bevatten.</strong>"
+      models:
+        audit_form:
+          attributes:
+            verification_correct:
+              inclusion: "<strong>U heeft het veld \"%{attribute}\" niet ingevuld.</strong> <br />Dit is een verplicht veld."
+        create_verification_form:
+          attributes:
+            citizen_service_number:
+              invalid: "<strong>Geef een geldig Burgerservicenummer (BSN) op.</strong>"
+              invalid_8: "<strong>Een burgerservicenummer (BSN) bestaat uit 8 of 9 cijfers.</strong> <br />Als uw BSN uit 8 cijfers bestaat, voeg dan aan het begin een nul toe. Bijvoorbeeld: PPPPPPPP wordt 0PPPPPPPP."
+            front_desk_code:
+              invalid: "<strong>De baliecode begint met een 'B'.</strong> <br />Controleer of u de code juist heeft ingevuld."
+        edit_verification_form:
+          attributes:
+            id_signaled:
+              accepted: "<strong>U heeft het veld \"%{attribute}\" niet ingevuld.</strong> <br />Dit is een verplicht veld."
+        verification_correction_form:
+          attributes:
+            base:
+              no_changes: "<strong>U heeft geen typefout gecorrigeerd bij het veld \"Documentnummer\" of \"Identiteitsdocument geldig tot\".</strong> <br/>Corrigeer de typefout of kies voor \"Terug\" om de typefout correctie en motivatie af te breken."
+            id_expires_at:
+              invalid: "<strong>Het veld \"Identiteitsdocument geldig tot\" bevat geen geldige datum.</strong>"
+              invalid_future: "<strong>De geldigheidsdatum moet in de toekomst liggen.</strong>"
+              invalid_past: "<strong>De geldigheidsdatum mag niet meer dan 10 jaar in de toekomst liggen.</strong>"
+            id_expires_at_day:
+              invalid: "<strong>Vul een geldige dag in.</strong>"
+            id_expires_at_month:
+              invalid: "<strong>Vul een geldige maand in.</strong>"
+            id_expires_at_year:
+              invalid: "<strong>Vul een geldig jaartal in.</strong>"
+              year_is_in_past: "<strong>De geldigheidsdatum moet in de toekomst liggen.</strong>"
+            id_number:
+              invalid: "<strong>Geef een geldig documentnummer op.</strong>"
+              contains_o: "<strong>Een documentnummer bevat nooit de hoofdletter 'O'. Weet u zeker dat er geen cijfer '0' staat?<strong>"
+              blank: "<strong>U heeft het veld \"Documentnummer\" niet ingevuld.</strong> <br />Dit is een verplicht veld."
+
+  activerecord:
+    attributes:
+      verification:
+        activated:
+          no: 'Nee'
+          yes: 'Ja'
+        id_signaled:
+          no: 'Nee'
+          yes: 'Ja'
+        state:
+          completed: 'Gecontroleerd'
+          rejected: 'Afgewezen'
+          verified: 'Niet gecontroleerd'
+        suspected_fraud:
+          no: 'Nee'
+          yes: 'Ja'
+      verification_correction:
+        present:
+          no: 'Nee'
+          yes: 'Ja'
+
+  date:
+    abbr_day_names:
+    - zo
+    - ma
+    - di
+    - wo
+    - do
+    - vr
+    - za
+    abbr_month_names:
+    -
+    - jan
+    - feb
+    - mrt
+    - apr
+    - mei
+    - jun
+    - jul
+    - aug
+    - sep
+    - okt
+    - nov
+    - dec
+    day_names:
+    - zondag
+    - maandag
+    - dinsdag
+    - woensdag
+    - donderdag
+    - vrijdag
+    - zaterdag
+    formats:
+      default: ! '%d-%m-%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    -
+    - januari
+    - februari
+    - maart
+    - april
+    - mei
+    - juni
+    - juli
+    - augustus
+    - september
+    - oktober
+    - november
+    - december
+    order:
+    - :day
+    - :month
+    - :year
+
+  time:
+    formats:
+      date: "%e %B %Y"
+      date_at_time_hour: "%-d %B %Y om %H:%M uur"
+      date_comma_time_hour: "%e %B %Y, %k:%M uur"
+      time: "%k:%M"
+      short: ! '%d-%m-%Y %H:%M'

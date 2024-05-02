@@ -1,0 +1,99 @@
+@message_dialog = (options) ->
+  $('meta[name="viewport"]').attr('content', 'width=device-width,initial-scale=1,maximum-scale=1')
+  $('.message-dialog').append(render_message(options))
+
+  if options.spinner
+    $('.message-dialog').append(render_spinner)
+
+  $('.message-dialog').append(render_actions(options))
+
+  $('.message-dialog').dialog
+    close: -> $('body').css('overflow', 'visible')
+    create: -> $('body').css('overflow', 'hidden')
+    modal: true,
+    width: Math.min(500, $(window.document).width() - 20)
+
+  window.setTimeout (->
+    clone = $('.message-dialog').clone(true, true)
+    $('.message-dialog').html("")
+    clone.appendTo(".message-dialog")
+    $('.message-dialog').parent().find(':focusable .primary--button').focus()
+  ), 50
+
+update_width = () ->
+  win = $(this);
+  $('.message-dialog').dialog( "option", "width", Math.min(500, win.width() - 20 ));
+
+render_message = (options) ->
+  if options.alert
+    msg = options.alert
+    variant = 'error'
+  else if options.notice
+    msg = options.notice
+    variant = 'information'
+  else
+    return ''
+  block_icon = $('<div/>').addClass("block-with-icon--#{variant}")
+  block_icon.attr('role', 'text')
+  if options.notice_has_html
+    block_icon.append($('<p/>').append(msg))
+  else
+    block_icon.append($('<p/>').text(msg))
+
+render_spinner = (options) ->
+  $('<div/>').html(window.constants.spinnerHtml)
+
+# TODO:  move  this logic to the dialog files
+render_actions = (options) ->
+  div = $('<div class="actions"/>')
+
+  if options.ok
+    div.append(render_action_link('annie_are_you_okay', options.ok))
+  if options.ok_without_phone_number
+    link = render_action_link('ok_without_phone_number', "#").on 'click', =>
+      options.ok_without_phone_number()
+    div.append(link)
+
+  if options.cancel
+    div.append(render_action_link('cancel', options.cancel))
+  if options.continue_without_phone_number
+    link = render_action_link('continue_without_phone_number', '#').on 'click', =>
+      options.continue_without_phone_number()
+    div.append(link)
+
+  if options.download_the_app
+    link = render_action_link('download_the_app', '#').on 'click', =>
+      options.download_the_app()
+    div.append(link)
+  if options.download_the_app_cancel
+    link = render_action_link('cancel', '#').on 'click', =>
+      options.download_the_app_cancel()
+    div.append(link)
+
+  if options.yeah
+    link = render_action_link('yeah', '#').on 'click', =>
+      options.yeah()
+    div.append(link)
+  if options.open_deactivate_app_dialog_cancel
+    link = render_action_link('cancel', '#').on 'click', =>
+      options.open_deactivate_app_dialog_cancel()
+    div.append(link)
+
+  return div
+
+buttons = (action) ->
+  switch action
+    when 'annie_are_you_okay' then <%= Button.new(action: 'annie_are_you_okay').attributes.to_json %>
+    when 'ok_without_phone_number' then <%= Button.new(action: 'ok_without_phone_number').attributes.to_json %>
+    when 'continue_without_phone_number' then <%= Button.new(action: 'continue_without_phone_number').attributes.to_json %>
+    when 'cancel' then <%= Button.new(action: 'cancel').attributes.to_json %>
+    when 'download_the_app' then <%= Button.new(action: 'download_the_app').attributes.to_json %>
+    when 'download_the_app_cancel' then <%= Button.new(action: 'cancel').attributes.to_json %>
+    when 'yeah' then <%= Button.new(action: 'yeah').attributes.to_json %>
+    else {}
+
+render_action_link = (text, link) ->
+  $('<a />')
+    .addClass(buttons(text).css_class)
+    .attr('href', link)
+    .text(window.constants.actionTexts[text])

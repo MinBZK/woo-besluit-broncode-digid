@@ -1,0 +1,61 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1 Overzicht vragen
+.actions_top= link_to('Nieuwe vraag', new_question_path, class: 'new_button') if can? :create, Question
+.clear
+.form_wrapper
+  = form_for :question do |f|
+    = f.select(:page, Question.options, include_blank: true)
+    = f.select(:locale, Language.all) if Language.show?
+
+%table#list_questions
+  %thead
+    %tr
+      %th Scherm
+      %th Positie
+      %th Vraag
+      - if Language.show?
+        %th Taal
+      %th.action
+      %th.action= '' if can? :update, Question
+  %tbody
+    - @questions.each do |question|
+      %tr
+        %td= question.full_page_name
+        %td= question.position
+        %td= question.question
+        - if Language.show?
+          %td= question.locale
+        %td.action= show_link 'Bekijk', question
+        %td.action= edit_link 'Wijzig', edit_question_path(question) if can? :manage, Question
+
+= javascript_include_tag("inline_question_search", nonce: content_security_policy_script_nonce)

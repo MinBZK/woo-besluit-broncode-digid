@@ -1,0 +1,28 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  pool: 5
+  timeout: 5000
+  username: SSSSSSS
+
+development:
+  <<: *default
+  database: digid_balie_development
+
+test:
+  <<: *default
+  host: <%= ENV['MYSQL_HOST'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+  database: <%= ENV['MYSQL_DATABASE'] || "digid_balie_test" %>
+
+production:
+  <<: *default
+  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  host: <%= APP_CONFIG.dig("db","balie","host") %>
+  database: <%= APP_CONFIG.dig("db","balie","name") %>
+  username: <%= APP_CONFIG.dig("db", "balie", "username") %>
+  port: <%= APP_CONFIG.dig("db", "balie", "port") || "3306" %>
+  password: <%= APP_CONFIG.dig("db","password") %>
+  timeout: 3000
+  ssl_mode:  <%= APP_CONFIG.dig("db", "use_ssl").to_s == "true" ? "required" : "preferred"  %>

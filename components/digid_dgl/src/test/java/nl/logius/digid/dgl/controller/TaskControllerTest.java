@@ -1,0 +1,106 @@
+
+/*
+  Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+  gericht is op transparantie en niet op hergebruik. Hergebruik van 
+  de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+  van broncode waarvoor een andere licentie is aangegeven.
+  
+  Het archief waar dit bestand deel van uitmaakt is te vinden op:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+  
+  Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+  
+  This code has been disclosed in response to a request under the Dutch
+  Open Government Act ("Wet open Overheid"). This implies that publication 
+  is primarily driven by the need for transparence, not re-use.
+  Re-use is permitted under the EUPL-license, with the exception 
+  of source files that contain a different license.
+  
+  The archive that this file originates from can be found at:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  using the reference "Logius, publicly disclosed source code DigiD" 
+  
+  Other questions regarding this Open Goverment Act decision may be
+  directed via email to open@logius.nl
+*/
+
+package nl.logius.digid.dgl.controller;
+
+import nl.logius.digid.dgl.model.Afnemersbericht;
+import nl.logius.digid.dgl.model.ScheduledTask;
+import nl.logius.digid.dgl.repository.AfnemersberichtRepository;
+import nl.logius.digid.dgl.service.AfnemersindicatieService;
+import nl.logius.digid.dgl.service.DglMessageFactory;
+import nl.logius.digid.dgl.service.DglSendService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static nl.logius.digid.dgl.service.AfnemersindicatieService.RESENT_TASK_NAME;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+class TaskControllerTest {
+
+    private TaskController classUnderTest;
+
+    @Mock
+    private AfnemersindicatieService afnemersindicatieService;
+
+    @Mock
+    private Afnemersbericht afnemersbericht;
+
+    @Mock
+    private AfnemersberichtRepository afnemersberichtRepository;
+
+    private DglMessageFactory dglMessageFactory = new DglMessageFactory();
+
+    private AfnemersberichtAanDGLFactory afnemersberichtAanDGLFactory = new AfnemersberichtAanDGLFactory("oin1", "oin2");
+
+    @Mock
+    private DglSendService dglSendServiceMock;
+
+    @BeforeEach
+    public void setup() {
+        afnemersindicatieService = new AfnemersindicatieService(afnemersberichtAanDGLFactory, dglMessageFactory, afnemersberichtRepository, dglSendServiceMock);
+        classUnderTest = new TaskController(afnemersindicatieService);
+    }
+    @Test
+    void testResend(){
+        when(afnemersbericht.getType()).thenReturn(Afnemersbericht.Type.Ap01);
+        List<Afnemersbericht> afnemersberichten = Arrays.asList(afnemersbericht);
+        when(afnemersberichtRepository.findByStatus(Afnemersbericht.Status.SEND_FAILED)).thenReturn(afnemersberichten);
+
+        classUnderTest.performScheduleTask(new ScheduledTask(RESENT_TASK_NAME));
+
+        verify(dglSendServiceMock, times(1)).sendAfnemersBerichtAanDGL(any(), any());
+        verify(afnemersberichtRepository, times(1)).delete(afnemersbericht);
+    }
+
+    @Test
+    void testResendWithApv01(){
+        when(afnemersbericht.getType()).thenReturn(Afnemersbericht.Type.Av01);
+        List<Afnemersbericht> afnemersberichten = Arrays.asList(afnemersbericht);
+        when(afnemersberichtRepository.findByStatus(Afnemersbericht.Status.SEND_FAILED)).thenReturn(afnemersberichten);
+
+        classUnderTest.performScheduleTask(new ScheduledTask(RESENT_TASK_NAME));
+
+        verify(dglSendServiceMock, times(1)).sendAfnemersBerichtAanDGL(any(), any());
+        verify(afnemersberichtRepository, times(1)).delete(afnemersbericht);
+    }
+}

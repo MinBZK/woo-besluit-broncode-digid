@@ -1,0 +1,65 @@
+1452:
+	text: "Registreren DigiD app ($device_name) bij DigiD NS gelukt"
+	categories:
+    - transaction_log
+1453:
+	text: "Deregistreren DigiD app ($device_name) bij DigiD NS gelukt"
+	categories:
+    - transaction_log
+1454:
+	text: "Versturen pushnotificatie \"$title\" naar DigiD app ($device_name) gelukt"
+	categories:
+    - transaction_log
+    - my_digid
+1455:
+	text: "Versturen pushnotificatie \"$title\" naar DigiD app ($device_name) niet gelukt, app kan geen notificaties (meer) ontvangen"
+	categories:
+    - transaction_log
+1456:
+	text: "Gewijzigd NotificatieID van DigiD app ($device_name) ontvangen"
+	categories:
+    - transaction_log
+1457:
+	text: "Updaten NotificatieID van DigiD app ($device_name) gelukt"
+	categories:
+    - transaction_log
+1458:
+	text: "DigiD app ($device_name) niet geregistreerd voor pushnotificaties"
+	categories:
+    - transaction_log
+1459:
+	text: "(De)registreren DigiD app ($device_name) bij MNS niet mogelijk, switch 'Koppeling met MCC Notificatie Service (MNS)' is niet actief"
+	categories:
+    - transaction_log
+1460:
+	text: "Registreren DigiD app ($device_name) bij MNS gelukt"
+	categories:
+    - transaction_log
+1461:
+	text: "Registreren DigiD app ($device_name) bij MNS niet gelukt, foutmelding of MNS niet bereikbaar / beschikbaar"
+	categories:
+    - transaction_log
+1462:
+	text: "Versturen pushnotificatie \"$title\" niet mogelijk, switch 'Koppeling met MCC Notificatie Service (MNS)' is niet actief"
+	categories:
+    - transaction_log
+1471:
+	text: "Deregistreren DigiD app ($device_name) bij MNS gelukt"
+	categories:
+    - transaction_log
+1472:
+	text: "Deregistreren DigiD app ($device_name) bij MNS niet gelukt, foutmelding of MNS niet bereikbaar / beschikbaar"
+	categories:
+    - transaction_log
+1473:
+	text: "Systeem taak 'Opnieuw versturen notificaties' gestart"
+	categories:
+    - transaction_log
+1474:
+	text: "Systeem taak 'Aantal opnieuw verstuurde notificaties: $amount'"
+  categories:
+    - transaction_log
+1475:
+	text: "Systeem taak 'Opnieuw versturen notificaties' afgebroken, switch 'Koppeling met MCC Notificatie Service (MNS)' is niet actief"
+  categories:
+    - transaction_log

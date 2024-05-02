@@ -1,0 +1,48 @@
+en:
+  letters:
+    activation_letter:
+      title: DigiD activation code
+      author: DigiD
+      subject: DigiD activation code
+      keywords: DigiD activation code
+      creator: DigiD
+      producer: DigiD
+      postal: Postbus 96810
+      zip: 2509 JE Den Haag
+      website: www.digid.nl
+      helpdesk: Helpdesk DigiD
+      phonenumber: T 088 123 65 55
+      contact_form: Or via www.digid.nl/en/contact
+      reach_us_1: You can contact our helpdesk
+      reach_us_2: from Monday to Friday, 8am
+      reach_us_3: to 10pm (CET)
+      reference: Reference
+      return_address: "> Return address Postbus 96810 2509 JE Den Haag"
+      confidental: CONFIDENTIAL
+      date: Date
+      re: Subject
+      letter_title: DigiD activation code
+      request: You have applied for a DigiD. You can only use your DigiD after you have activated it. Hereby you receive the activation code. With this code you can activate your DigiD.
+      your_activation_code: "Your activation code is:"
+      activate_before: <b>Please note!</b> Activate your DigiD before %{date} (CET). Otherwise the application will expire and you will have to apply for a new DigiD.
+      activate_digid_steps: "You can activate your DigiD in two different ways."
+      app_header: "Activate DigiD with the DigiD app:"
+      app_step_1_1: "1. Go to the Apple App Store or Google Play Store"
+      app_step_1_2: "and download the DigiD app."
+      app_step_2: "2. Open the DigiD app and follow the instructions."
+      site_header: "Activate DigiD through the DigiD website:"
+      site_step_1: 1. Go to www.digid.nl.
+      site_step_2: "2. Click 'Enter code'."
+      site_step_3: "3. Click 'Enter activation code'."
+      site_step_4: "4. Click 'Enter activation code'."
+      site_step_5_1: "5. Enter your chosen username"
+      site_step_5_2: "and password."
+      site_step_6: "6. Click 'Log in'."
+      site_step_7_1: "7. You will now receive an SMS with a code;"
+      site_step_7_2: "enter this code and click 'Next'."
+      site_step_8: "8. Enter the activation code mentioned above."
+
+      request_digid: If you have forgotten your username and/or password, you cannot activate your DigiD. Then please apply for a new DigiD via www.digid.nl/aanvragen.
+      contact: "<b>Questions?</b><br/>Available on working days from 8 am to 10 pm. On Saturdays from 9 am to 5 pm. (Dutch time), by telephone (+31 88 - 123 65 55) or go to www.digid.nl/en/contact."
+      greetings: Kind regards,
+      digid_private: "<i><b>Please note!</b> Your DigiD is private. Do not share your login credentials with anyone. DigiD Employees never ask for this information.</i>"

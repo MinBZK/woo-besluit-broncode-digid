@@ -1,0 +1,64 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(t('digid_app.headers.deactivate'))
+
+- if logged_in_with_app?
+  = steps(1, 5)
+- elsif logged_in_with_pass?
+  = steps(1, 2)
+- elsif logged_in_with_desktop_wid?
+  = steps(1, 2)
+- elsif logged_in_with_wid?
+  = steps(1, 4)
+
+= block_with_icon do
+  %p
+  - if logged_in_with_app?
+    = t('confirm_using_digid_app')
+  - elsif logged_in_with_pass?
+    = t("confirm_using_pass")
+  - elsif logged_in_with_wid?
+    = t('confirm_using_wid')
+
+  %p
+    - if app_authenticator&.substantieel_activated_at
+      = t('deactivation_warning_sub', device_name: app_authenticator.device_name).html_safe
+    - else
+      = t('deactivation_warning', device_name: app_authenticator.device_name).html_safe
+
+  %p
+    - if (current_account.app_authenticators.active.count + current_account.sms_tools.active.count) == 1
+      = t("sometimes_sms_verification_required")
+
+= actions do
+  = action_button(:deactivate, my_digid_new_verification_url, method: :get)
+  = cancel_button(my_digid_apps_deactivation_cancel_url)

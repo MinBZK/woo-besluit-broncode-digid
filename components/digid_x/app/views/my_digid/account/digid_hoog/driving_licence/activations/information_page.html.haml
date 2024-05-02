@@ -1,0 +1,48 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(@page_header)
+
+%h2.orange_heading= t('log_in_with_wid_possible_after_activation', wid_type: t('document.driving_licence'))
+.block-with-icon--information.margin-top-8px
+  %p
+    = t('letter_received_after_wid_was_granted', wid_type_1: t('document.driving_licence_capitalized'), wid_type_2: t('document.driving_licence'), date: @rdw_uitgifte_datum).html_safe
+  %p
+    = t('more_info_digid').html_safe
+  %p
+    - if mobile_browser?
+      = t('download_the_app_question', url: @store_url).html_safe
+    - else
+      = t('download_the_app_question', url: @desktop_url).html_safe
+
+= actions do
+  = action_link_with_role_button(:continue_activating, my_digid_licence_activation_choose_cardreader_url(card_type: current_flow[:card_type_chosen], sequence_no: current_flow[:sequence_no_chosen]))
+  = cancel_button(my_digid_licence_activation_cancel_information_page_url)

@@ -1,0 +1,429 @@
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:bsnk="urn:nl-gdi-eid:1.0:webservices"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
+                  name="BSNK_activate"
+                  targetNamespace="urn:nl-gdi-eid:1.0:webservices">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:nl-gdi-eid:1.0:webservices"
+                    attributeFormDefault="unqualified"
+                    elementFormDefault="qualified">
+            <xsd:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+                        schemaLocation="saml-schema-assertion-2.0.xsd"/>
+            <xsd:element name="ProvidePPRequest" type="bsnk:ProvidePolymorphicRequestType">
+                <xsd:annotation>
+                    <xsd:documentation>Request message to provide PP for a
+                        specific user, for future use via ProvideEP queries.
+                        The 'BSNk' will generate one or more
+                        polymorphic pseudonym(s) for the identified user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProvidePP_PPCAOptimizedRequest" type="bsnk:ProvidePPCARequestType">
+                <xsd:annotation>
+                    <xsd:documentation>Request message to provide PP for a
+                        specific user, for future use via ProvideEP queries.
+                        The 'BSNk' will generate one or more
+                        polymorphic pseudonym(s) for the identified user. This
+                        request will result in one-or-more polymorphic
+                        pseudonyms in a form optimized for usage as a PPCA.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProvidePP_RepresentationRequest" type="bsnk:ProvidePolymorphicRequestType">
+                <xsd:annotation>
+                    <xsd:documentation>Request message to provide PP for a
+                        specific user, for future use via ProvideEP queries.
+                        The 'BSNk' will generate one or more
+                        polymorphic pseudonym(s) for the identified user. This
+                        request is for usage by a MachtigingenRegister for the
+                        purpose of representation.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:complexType name="ProvidePolymorphicRequestType">
+                <xsd:complexContent>
+                    <xsd:extension base="bsnk:BSNkProvideRequestBasetype">
+                        <xsd:sequence>
+                            <xsd:element name="RequesterKeySetVersion" type="bsnk:KeyVersionType" />
+                            <xsd:choice>
+                                <xsd:element name="BSN" type="bsnk:BSNType" />
+                                <xsd:element name="EncryptedBSN" type="bsnk:EncryptedBSNType"/>
+                                <xsd:element name="EncryptedIdentity" type="bsnk:EncryptedIdentityType" />
+                                <xsd:sequence>
+                                    <xsd:element name="eIDAS-UniquenessID" type="bsnk:eIDAS-UniquenessIDType"/>
+                                    <xsd:element name="EncryptedBSN" type="bsnk:EncryptedBSNType" minOccurs="0"/>
+                                </xsd:sequence>
+                            </xsd:choice>
+                            <xsd:element name="DocumentType" type="bsnk:DocumentTypeType" minOccurs="0" />
+                            <xsd:element name="DocumentID" type="bsnk:DocumentIDType" minOccurs="0" />
+                            <xsd:element name="GivenNames" type="bsnk:GivenNamesType" minOccurs="0" />
+                            <xsd:element name="SurName" type="bsnk:SurNameType" minOccurs="0" />
+                            <xsd:element name="DateOfBirth" type="bsnk:BirthDateType" minOccurs="0" />
+                            <xsd:element name="PlaceOfBirth" type="bsnk:PlaceOfBirthType" minOccurs="0" />
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ProvidePPCARequestType">
+                <xsd:complexContent>
+                    <xsd:extension base="bsnk:ProvidePolymorphicRequestType">
+                        <xsd:sequence>
+                            <xsd:element name="Verifiable" type="xsd:boolean" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="BSNkProvideRequestBasetype" abstract="true">
+                <xsd:sequence>
+                    <xsd:element name="Requester" type="bsnk:OINType" />
+                </xsd:sequence>
+                <xsd:attribute name="DateTime" type="xsd:dateTime" use="required" />
+                <xsd:attribute name="RequestID" type="xsd:ID" use="required" />
+            </xsd:complexType>
+            <xsd:simpleType name="KeyVersionType">
+                <xsd:annotation>
+                    <xsd:documentation>Key(set) version type.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:positiveInteger"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="BSNType">
+                <xsd:annotation>
+                    <xsd:documentation>In case a BSN consists of a number of
+                        only 8 digits, the BSN shall be padded with a preceding
+                        '0' (digit zero).
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:length value="9" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="EncryptedIdentityType">
+                <xsd:annotation>
+                    <xsd:documentation>Identity encrypted as an EncryptedIdentity
+                        according to Polymorphic Pseudonimization.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:base64Binary" />
+            </xsd:simpleType>
+            <xsd:simpleType name="eIDAS-UniquenessIDType">
+                <xsd:annotation>
+                    <xsd:documentation>To be used only in eIDAS context.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string" />
+            </xsd:simpleType>
+            <xsd:complexType name="EncryptedBSNType">
+                <xsd:annotation>
+                    <xsd:documentation>BSN encrypted in the form of a
+                        SAML2 EncryptedID.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element ref="saml2:EncryptedID" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="OINType">
+                <xsd:annotation>
+                    <xsd:documentation>OIN type.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:length value="20" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="DocumentIDType">
+                <xsd:annotation>
+                    <xsd:documentation>Document ID as appearing on the Identity
+                        Document referenced
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="15" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="DocumentTypeType">
+                <xsd:annotation>
+                    <xsd:documentation>Type of Identity Document referenced.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="NL-Paspoort" />
+                    <xsd:enumeration value="NL-Identiteitskaart" />
+                    <xsd:enumeration value="NL-Rijbewijs" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="GivenNamesType">
+                <xsd:annotation>
+                    <xsd:documentation>Given names as these appear on the
+                        Identity Document referenced. If given names are not
+                        fully known than must contain all known initials.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="200" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="SurNameType">
+                <xsd:annotation>
+                    <xsd:documentation>Surname as appears on the
+                        Identity Document referenced.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="210" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="BirthDateType">
+                <xsd:union>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:date" />
+                    </xsd:simpleType>
+                    <xsd:simpleType >
+                        <xsd:restriction base="xsd:gYearMonth" />
+                    </xsd:simpleType>
+                    <xsd:simpleType >
+                        <xsd:restriction base="xsd:gYear" />
+                    </xsd:simpleType>
+                </xsd:union>
+            </xsd:simpleType>
+            <xsd:simpleType name="PlaceOfBirthType">
+                <xsd:annotation>
+                    <xsd:documentation>For Dutch places of birth this value
+                        must correspond to the exact value as listed in table
+                        33 of the logic design of the BRP. MUST NOT be used for
+                        foreign places of birth.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="40" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="ProvidePPResponse" type="bsnk:ProvidePolymorphicResponseType">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Response to a ProvidePPRequest or
+                        ProvidePP_PPCAOptimizedRequest.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProvidePP_PPCAOptimizedResponse" type="bsnk:ProvidePolymorphicResponseType">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Response to a ProvidePP_PPCAOptimizedRequest.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProvidePP_RepresentationResponse" type="bsnk:ProvidePolymorphicResponseType">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Response to a ProvidePP_RepresentationRequest.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:complexType name="ProvidePolymorphicResponseType">
+                <xsd:complexContent>
+                    <xsd:extension base="bsnk:BSNkProvideResponseBasetype">
+                        <xsd:sequence>
+                            <xsd:element name="PolymorphicPseudonym" type="bsnk:PolymorphicPseudonymType" maxOccurs="unbounded" />
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="BSNkProvideResponseBasetype" abstract="true">
+                <xsd:attribute name="DateTime" type="xsd:dateTime" use="required" />
+                <xsd:attribute name="ResponseID" type="xsd:ID" use="required" />
+                <xsd:attribute name="InResponseTo" type="xsd:NCName" use="required" />
+            </xsd:complexType>
+            <xsd:complexType name="PolymorphicPseudonymType">
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:base64Binary" />
+                </xsd:simpleContent>
+            </xsd:complexType>
+            <xsd:element name="ProvidePolymorphicFault" type="bsnk:ProvidePolymorphicFaultType">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Fault response to a ProvidePPRequest or
+                        ProvidePP_PPCAOptimizedRequest.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:complexType name="ProvidePolymorphicFaultType">
+                <xsd:sequence>
+                    <xsd:element name="FaultReason" type="bsnk:ProvidePolymorphicFaultReasonType" />
+                    <xsd:element name="FaultDescription" type="bsnk:FaultDescriptionType" maxOccurs="unbounded" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="ProvidePolymorphicFaultReasonType">
+                <xsd:union memberTypes="bsnk:FaultReasons bsnk:ProvidePolymorphicFaultReasons" />
+            </xsd:simpleType>
+            <xsd:simpleType name="FaultReasons">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="NotFound">
+                        <xsd:annotation>
+                            <xsd:documentation>Provided information results in
+                                zero matches.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="AuthorizationError">
+                        <xsd:annotation>
+                            <xsd:documentation>Authentication invalid or access denied.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="SyntaxError">
+                        <xsd:annotation>
+                            <xsd:documentation>Request invalid.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="TemporarilyUnavailable">
+                        <xsd:annotation>
+                            <xsd:documentation>Request could temporarily not be
+                                processed. A new request for activation MAY be send
+                                at a later moment by the requesting party.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ProvidePolymorphicFaultReasons">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="NotEnoughInfo">
+                        <xsd:annotation>
+                            <xsd:documentation>Provided information may resolve
+                                to a unique match, but not enough assurance
+                                (e.g. against typos) can be established.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="NotUnique">
+                        <xsd:annotation>
+                            <xsd:documentation>Provided information results in
+                                more than one match.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="DocumentRejected">
+                        <xsd:annotation>
+                            <xsd:documentation>Document not accepted.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="ProvisioningRefused">
+                        <xsd:annotation>
+                            <xsd:documentation>Activation refused for other
+                                (non-disclosed) reason.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:enumeration>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:complexType name="FaultDescriptionType">
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                        <xsd:attribute name="lang" type="xsd:language" />
+                    </xsd:extension>
+                </xsd:simpleContent>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="BSNK_ProvidePPRequest">
+        <wsdl:part name="in" element="bsnk:ProvidePPRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePP_PPCAOptimizedRequest">
+        <wsdl:part name="in" element="bsnk:ProvidePP_PPCAOptimizedRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePP_RepresentationRequest">
+        <wsdl:part name="in" element="bsnk:ProvidePP_RepresentationRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePPResponse">
+        <wsdl:part name="out" element="bsnk:ProvidePPResponse" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePP_PPCAOptimizedResponse">
+        <wsdl:part name="out" element="bsnk:ProvidePP_PPCAOptimizedResponse" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePP_RepresentationResponse">
+        <wsdl:part name="out" element="bsnk:ProvidePP_RepresentationResponse" />
+    </wsdl:message>
+
+    <wsdl:message name="BSNK_ProvidePolymorphicFault">
+        <wsdl:part name="fault" element="bsnk:ProvidePolymorphicFault" />
+    </wsdl:message>
+
+    <wsdl:portType name="BSNK_Activate_Port">
+        <wsdl:operation name="BSNK_ProvidePP">
+            <wsdl:input message="bsnk:BSNK_ProvidePPRequest" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePPRequest" />
+            <wsdl:output message="bsnk:BSNK_ProvidePPResponse" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePPResponse" />
+            <wsdl:fault message="bsnk:BSNK_ProvidePolymorphicFault" name="BSNK_ProvidePolymorphic_Fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="BSNK_ProvidePP_PPCAOptimized">
+            <wsdl:input message="bsnk:BSNK_ProvidePP_PPCAOptimizedRequest" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePP_PPCAOptimizedRequest" />
+            <wsdl:output message="bsnk:BSNK_ProvidePP_PPCAOptimizedResponse" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePP_PPCAOptimizedResponse" />
+            <wsdl:fault message="bsnk:BSNK_ProvidePolymorphicFault" name="BSNK_ProvidePolymorphic_Fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="BSNK_ProvidePP_Representation">
+            <wsdl:input message="bsnk:BSNK_ProvidePP_RepresentationRequest" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePP_RepresentationRequest" />
+            <wsdl:output message="bsnk:BSNK_ProvidePP_RepresentationResponse" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvidePP_RepresentationResponse" />
+            <wsdl:fault message="bsnk:BSNK_ProvidePolymorphicFault" name="BSNK_ProvidePolymorphic_Fault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="BSNK_Activate_SOAP" type="bsnk:BSNK_Activate_Port">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="BSNK_ProvidePP">
+            <soap:operation soapAction="urn:nl-gdi-eid:1.0:webservices:ProvidePPRequest" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="BSNK_ProvidePolymorphic_Fault">
+                <soap:fault name="BSNK_ProvidePolymorphic_Fault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="BSNK_ProvidePP_PPCAOptimized">
+            <soap:operation soapAction="urn:nl-gdi-eid:1.0:webservices:ProvidePP_PPCAOptimizedRequest" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="BSNK_ProvidePolymorphic_Fault">
+                <soap:fault name="BSNK_ProvidePolymorphic_Fault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="BSNK_ProvidePP_Representation">
+            <soap:operation soapAction="urn:nl-gdi-eid:1.0:webservices:ProvidePP_RepresentationRequest" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="BSNK_ProvidePolymorphic_Fault">
+                <soap:fault name="BSNK_ProvidePolymorphic_Fault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="BSNK_Activate_Service">
+        <wsdl:port binding="bsnk:BSNK_Activate_SOAP" name="BSNK_Activate">
+            <soap:address location="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" />
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,110 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if mobile_browser?
+  = content_for(:meta_tags) do
+    %meta{ 'name' => 'format-detection', content: "telephone=no" }
+
+- if session[:session].eql?('sign_in')
+  = @webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name(@webservice)) : heading_with_icon(t('log_in'))
+- else
+  = heading_with_icon(@page_header)
+
+- case session[:session]
+- when 'sign_in', 'activation'
+  - if @session_ends_label && wrapped_session.expires_at.present?
+    = render('shared/session_countdown', key: 'no_extension')
+
+- case session[:session]
+- when 'mijn_digid'
+  - if session[:sms_options][:step] == :request_sms_code_verification
+    = steps(2, 3)
+  - if session[:sms_options][:step] == :confirm_old_mobile_number && !session[:change_via_app]
+    = steps(2, 4)
+  - if session[:sms_options][:step] == :confirm_new_mobile_number && !session[:change_via_app]
+    = steps(4, 4)
+  - if session[:sms_options][:step] == :apps_sms_verification
+    = steps(2, 5)
+  - if session[:sms_options][:step] == :confirm_new_mobile_number_via_app || session[:sms_options][:step] == :activate_sms_authenticator
+    = steps(2, mobile_browser? ? 7 : 6)
+
+- when 'recover_account'
+  - if session[:sms_options][:step] == :request_recover_password
+    = steps(2, 3)
+  - if session[:sms_options][:step] == :enter_recover_code
+    = steps(2, 5)
+  - if session[:sms_options][:step] == :request_recover_password_via_email
+    = steps(4, 5)
+
+- when 'registration'
+  = steps(3, 4)
+
+= flash_alert
+= flash_notice_for_sms
+
+- if @sms_uitdaging
+  - mask_mobile = session[:sms_options][:step] == :request_recover_password || session[:session] == 'sign_in' || session[:session] == 'activation' || session[:session] == 'recover_account'
+  -# promote app if user has no app and is signing in with sms
+  - if gesproken_sms_for_session
+    %h2.orange_heading= t('sms_spoken_code_sent_to', mobile: mobile_number(mobile_number: @sms_uitdaging.mobile_number, mask: mask_mobile)).html_safe
+    %p.margin-bottom-24px= t('sent_spoken_code_at', at: l(@sms_uitdaging.created_at, format: :date_comma_time_text_tzone_in_brackets))
+  - else
+    %h2.orange_heading= t('sms_code_sent_to', mobile: mobile_number(mobile_number: @sms_uitdaging.mobile_number, mask: mask_mobile)).html_safe
+    %p.margin-bottom-24px= t('sent_sms_code_at', at: l(@sms_uitdaging.created_at, format: :date_comma_time_text_tzone_in_brackets))
+
+= extended_form_for(@smscode, url: authenticators_confirm_sms_url) do |form|
+
+  = form.sms_code_field(:smscode, label: icon("telefoon-24px") + t("enter_code_received_by_phone"), text: t("enter_code_received_by_phone_text"), legend: t("enter_code_received_by_phone_legend"), required: true, hide_required_indicator: true)
+
+  %div.no_code_received
+    - if session[:session] == "registration"
+      = link_to(t('examples.no_code_received'), authenticators_check_mobiel_url(sms_keuze: true))
+      %br
+      = t("examples.phone_number_wrong")
+      = link_to(t("examples.change_phone_number"), edit_phone_number_url)
+    - else
+      = link_to(t('examples.no_code_received'), authenticators_check_mobiel_url(sms_keuze: true))
+
+  = form.buttons({action: :next, arrow: true}, :cancel)
+
+- if session[:session].eql?('sign_in') && !@account.app_authenticator_active? && !@account.app_authenticator_pending?
+  %p= t('digid_app_promotion_short').html_safe
+  %p= t("login_fast_and_secure_with_the_digid_app")
+  %p= t("digid_app_promotion_refering_to_primary_button")
+
+  = actions do
+    = action_button(:download_the_app, mobile_browser? ? digid_app_store_link : desktop_store_info_link)
+
+%ul.list-with-arrows
+  - if session[:session].eql?('sign_in')
+    %li= link_to(t('not_able_to_receive_sms_question'), authenticators_can_not_receive_sms_url)
+  - if session[:session].eql?('recover_account')
+    %li= link_to(t('forgot_password_and_new_sms'), new_registration_url)

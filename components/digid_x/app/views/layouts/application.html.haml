@@ -1,0 +1,111 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+!!! 5
+%html.no-javascript{ lang: I18n.locale.to_s }
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{ name: 'description', content: t('meta.description') }
+    %meta{ name: 'keywords', content: t('meta.keywords') }
+    %meta{ name: 'robots', content: Rails.env.productie? ? 'index, follow' : 'noindex, nofollow' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    %meta{ name: 'msapplication-config', content: 'none' }
+    = yield(:meta_tags)
+    = csrf_meta_tags
+    %title= @page_title || t(@page_name, scope: 'titles')
+    %link{ href: asset_path('ro-favicon-wit-0xffffff.png'), rel: 'shortcut icon' }
+    = stylesheet_link_tag 'application', media: 'all', nonce: content_security_policy_style_nonce
+    = javascript_include_tag "constants_#{I18n.locale}", nonce: content_security_policy_script_nonce
+    = javascript_include_tag 'application', nonce: content_security_policy_script_nonce
+
+    %link{ rel: "apple-touch-icon", href: asset_path('digid_eo_rgb_180x180.png') }
+    %link{ rel: "apple-touch-icon", sizes: "180x180", href: asset_path('digid_eo_rgb_180x180.png') }
+    %link{ rel: "apple-touch-icon", sizes: "167x167", href: asset_path('digid_eo_rgb_167x167.png') }
+    %link{ rel: "apple-touch-icon", sizes: "152x152", href: asset_path('digid_eo_rgb_152x152.png') }
+
+    /[if lt IE 9]
+      %script{ src: asset_path('html5shiv-printshiv.js') }
+
+  %body{ class: ('my-digid-index' if my_digid_index?) }
+    .message-dialog{"tabindex" => -1}
+    %nav#skiplink
+      %ul
+        %li
+          %a{ href: '#main_content', title: t('skiplink.directly_to', part: t('skiplink.the_main_content')), tabindex: 1 }
+            = t('skiplink.go_directly_to', part: t('skiplink.main_content'))
+        - if show_navigation?
+          %li
+            %a{ href: '#navigation', title: t('skiplink.directly_to', part: t('skiplink.the_navigation')), tabindex: 1 }
+              = t('skiplink.go_directly_to', part: t('skiplink.navigation'))
+    .window{ class: ('small' if !my_digid_index?) }
+      .content
+        %header.header
+          %div
+            = render(partial: "layouts/language_selector")
+            = link_to(image('RO_DigiD_Logo_Homepage.svg', alt: t('logo_digid'), class: 'rijksoverheid-logo'), digid_website_link)
+            %nav.header-navigation
+              - if active_session?
+                = icon("logout", css_class: "orange font-size-90")
+                = link_to(t('log_off'), request_logout_url, class: 'header-navigation-logout-link')
+          .margin-top-15px
+            - if show_navigation?
+              %div.header-title
+                = heading_with_icon(t('my_digid.welcome_only'), t("my_digid.self"))
+            - if show_navigation?
+              %nav.header-menu
+                = link_to('#navigation', class: 'header-menu-link header-menu-link--expand') do
+                  %div.hamburger
+                    %div.slice
+                  %span.screen-reader= t('go_to')
+                  %span.hamburger_label= t('menu')
+                %ul.navigation#navigation
+                  %li= active_link_to(t('my_details'), my_digid_path, class: 'header-menu-link')
+                  %li= active_link_to(t('history_usage'), index_my_digid_history_path, active_paths: my_digid_history_path, class: 'header-menu-link')
+        .main{class: @background? "background background-#{@background}" : ""}
+          = image('digid_eo_rgb.svg', alt: t('vignet_digid'), class: 'mydigid-logo')
+          %section.main-content#main_content.no-outline{ tabindex: "-1"}
+            - if !@session_ends_label && @extend_session_popup && wrapped_session.expires_at.present?
+              %div.hidden-for-javascript= t('session_will_expire_no_javascript', timestamp: l(wrapped_session.expires_at, format: :time_text_tzone_in_brackets))
+            = yield
+          - unless @background
+            %div.bld-footer-ribbon
+      %footer.footer
+        - if @show_fields_required
+          %div.form__header__required-fields
+            %span.form__item__label__required= '*'
+            = t('required_fields').html_safe
+
+        = render('shared/questions', page_name: @page_name, other_questions: @other_questions)
+      - if APP_CONFIG["analytics"]["enabled"] == true
+        = hidden_field_tag(:analytics_site_id, APP_CONFIG["analytics"]["site_id"])
+        = hidden_field_tag(:analytics_host, APP_CONFIG["analytics"]["host"])
+        = javascript_include_tag("inline/analytics", nonce: content_security_policy_script_nonce)
+    = render(partial: 'shared/timeout') if show_extend_session_popup? || show_absolute_session_popup?

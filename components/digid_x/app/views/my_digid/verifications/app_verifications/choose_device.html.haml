@@ -1,0 +1,58 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(@page_header)
+
+- if current_flow.process == :activate_sms_authenticator
+  = steps(3, 7)
+- elsif current_flow.process == :change_password
+  = steps(2, 6)
+- elsif current_flow.process == :change_phone_number
+  = steps(3, 7)
+- elsif current_flow.process == :authenticate_substantial
+  = steps(2, 8)
+
+%h2.orange_heading= t('texts.choose_app_title')
+.app-login#app-login
+  %div.app-device-icons
+    %div.login_tile.highlighted.smartphone
+      = link_to(my_digid_web_to_app_path, class: android_browser? ? "no-dec waiting_poller" : "no-dec", data: { url: my_digid_controleer_app_poll_url(current_step: "enter_pin"), timeout: 3000, suspended: Rails.env.test? }) do
+        %h2
+          %span= t('app.open_on_this_device')
+        = icon("3941-delta-links-24px", css_class: "right", hidden: true)
+    %div.login_tile.smartphone
+      = link_to(my_digid_app_verification_code_path, class: "no-dec") do
+        %h2
+          %span= t('app.open_on_other_device')
+        = icon("3941-delta-links-24px", css_class: "right", hidden: true)
+
+= actions do
+  = cancel_button(current_flow[:cancelled][:redirect_to])

@@ -1,0 +1,10 @@
+<% if ENV['ASSET_PRECOMPILE'].present? %>
+production:
+  url: redis://<%= ENV['KEYDB_HOST'] %>:6379/0
+  password: "<%= APP_CONFIG.dig('redis', 'password') %>"
+<% else %>
+production:
+  cluster:
+    - redis://<%= ENV['KEYDB_HOST'] %>:6379/0
+  password: "<%= APP_CONFIG.dig('redis', 'password') %>"
+<% end %>   

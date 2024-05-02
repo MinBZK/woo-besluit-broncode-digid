@@ -1,0 +1,48 @@
+.left { float: left; }
+.right { float: right; }
+.padding-left-10px{ padding-left: 10px; }
+.padding-left-20px{ padding-left: 20px; }
+
+.padding-top-30px{ padding-top: 30px; }
+.padding-bottom-30px{ padding-bottom: 30px; }
+
+.padding-right-20px{ padding-right: 20px }
+
+.margin-top-8px{ margin-top: 8px; }
+.margin-top-15px{ margin-top: 15px; }
+
+.margin-bottom-8px{ margin-bottom: 8px; }
+.margin-bottom-15px{ margin-bottom: 15px; }
+.margin-bottom-25px{ margin-bottom: 25px; }
+.margin-bottom-28px{ margin-bottom: 28px; }
+.margin-bottom-48px{ margin-bottom: 48px; }
+
+.margin-right-5px{ margin-bottom: 5px; }
+
+.margin-left-5per{margin-left: 5%; }
+.margin-left-min10px { margin-left: -10px; }
+.no-dec { text-decoration: none;}
+.center { text-align: center; }
+.orange { color: #e17000; }
+
+.font-size-90 { font-size: 90%; }
+.light-gray { color: #5a5a5a; }
+
+.no-outline { outline: none; }
+
+.playstore-badge { width: 154px; height: 59px }
+.faq { font-size: 75%; color: #282828 }
+
+.dev-info-block {
+  overflow: hidden; margin: 2em
+}
+.background-confirm-mobile { background-image: image-url('backgrounds/confirm-mobile.svg')}
+.background-confirm { background-image: image-url('backgrounds/confirm.svg')}
+.background-id-mobile { background-image: image-url('backgrounds/id-mobile.svg')}
+.background-id { background-image: image-url('backgrounds/id.svg')}
+.background-koppelcode-mobile { background-image: image-url('backgrounds/koppelcode-mobile.svg')}
+.background-koppelcode { background-image: image-url('backgrounds/koppelcode.svg')}
+.background-pin-mobile { background-image: image-url('backgrounds/pin-mobile.svg')}
+.background-pin { background-image: image-url('backgrounds/pin.svg')}
+.background-qr-mobile { background-image: image-url('backgrounds/qr-mobile.svg');}
+.background-qr { background-image: image-url('backgrounds/qr.svg');}

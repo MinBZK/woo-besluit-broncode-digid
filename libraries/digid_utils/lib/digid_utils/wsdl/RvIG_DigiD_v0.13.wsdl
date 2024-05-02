@@ -1,0 +1,158 @@
+<!--
+	This document describes the Web Services that are exposed in order to
+	communicate with the DigiD Zelfservice/Servicecentrum external system.
+-->
+<wsdl:definitions xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" name="DigiDServices" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+	<wsdl:types>
+		<xsd:schema targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+			<xs:include schemaLocation="RvIGDEFTypes_v0.13.xsd"/>
+			<xs:include schemaLocation="PinMailer_RvIG_DigiD_v0.13.xsd"/>
+			<xs:include schemaLocation="PinReset_RvIG_DigiD_v0.13.xsd"/>
+			<xs:include schemaLocation="RetrieveVPUK_RvIG_DigiD_v0.13.xsd"/>
+			<xs:include schemaLocation="StatusChange_RvIG_DigiD_v0.13.xsd"/>
+			<xs:include schemaLocation="DHDocument_RvIG_DigiD_v0.13.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="statusChangeRequest">
+		<wsdl:part name="in" element="tns:StatusChange-RequestMsg"/>
+	</wsdl:message>
+	<wsdl:message name="statusChangeResponse">
+		<wsdl:part name="out" element="tns:StatusChange-ResponseMsg"/>
+	</wsdl:message>
+	<wsdl:message name="statusChangeFault">
+		<wsdl:part name="fault" element="tns:StatusChange-FaultMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinMailerRequest">
+		<wsdl:part name="in" element="tns:PinMailer-RequestMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinMailerResponse">
+		<wsdl:part name="out" element="tns:PinMailer-ResponseMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinMailerFault">
+		<wsdl:part name="fault" element="tns:PinMailer-FaultMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinResetRequest">
+		<wsdl:part name="in" element="tns:PinReset-RequestMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinResetResponse">
+		<wsdl:part name="out" element="tns:PinReset-ResponseMsg"/>
+	</wsdl:message>
+	<wsdl:message name="pinResetFault">
+		<wsdl:part name="fault" element="tns:PinReset-FaultMsg"/>
+	</wsdl:message>
+	<wsdl:message name="retrieveVPUKRequest">
+		<wsdl:part name="in" element="tns:RetrieveVPUK-RequestMsg"/>
+	</wsdl:message>
+	<wsdl:message name="retrieveVPUKResponse">
+		<wsdl:part name="out" element="tns:RetrieveVPUK-ResponseMsg"/>
+	</wsdl:message>
+	<wsdl:message name="retrieveVPUKFault">
+		<wsdl:part name="fault" element="tns:RetrieveVPUK-FaultMsg"/>
+	</wsdl:message>
+	<wsdl:message name="dhDocumentRequest">
+		<wsdl:part name="in" element="tns:DHDocument-RequestMsg"/>
+	</wsdl:message>
+	<wsdl:message name="dhDocumentResponse">
+		<wsdl:part name="out" element="tns:DHDocument-ResponseMsg"/>
+	</wsdl:message>
+	<wsdl:message name="dhDocumentFault">
+		<wsdl:part name="fault" element="tns:DHDocument-FaultMsg"/>
+	</wsdl:message>
+	<wsdl:portType name="DigiDServicesPortType">
+		<wsdl:operation name="statusChange">
+			<wsdl:input message="statusChangeRequest"/>
+			<wsdl:output message="statusChangeResponse"/>
+			<wsdl:fault name="fault" message="statusChangeFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="pinMailer">
+			<wsdl:input message="pinMailerRequest"/>
+			<wsdl:output message="pinMailerResponse"/>
+			<wsdl:fault name="fault" message="pinMailerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="pinReset">
+			<wsdl:input message="pinResetRequest"/>
+			<wsdl:output message="pinResetResponse"/>
+			<wsdl:fault name="fault" message="pinResetFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveVPUK">
+			<wsdl:input message="retrieveVPUKRequest"/>
+			<wsdl:output message="retrieveVPUKResponse"/>
+			<wsdl:fault name="fault" message="retrieveVPUKFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="dhDocument">
+			<wsdl:input message="dhDocumentRequest"/>
+			<wsdl:output message="dhDocumentResponse"/>
+			<wsdl:fault name="fault" message="dhDocumentFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DigiDServicesSoapBinding" type="DigiDServicesPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsaw:UsingAddressing wsdl:required="false"/>
+		<wsdl:operation name="statusChange">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="pinMailer">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="pinReset">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveVPUK">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="dhDocument">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DigiDService">
+		<wsdl:documentation>WSDL File for DigiD Status Change / PinMailer / PinReset / RetrieveVPUK / Document Info services </wsdl:documentation>
+		<wsdl:port name="DigiDServicesPortType" binding="DigiDServicesSoapBinding">
+			<soap:address location="http://localhost:8080/br-soapHandlers/DigiDService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

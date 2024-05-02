@@ -1,0 +1,98 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+    :css
+      <!--
+        Some webbased e-mail clients wraps the HTML e-mail in a div. See 'Head styles' on:
+        http://www.codechewing.com/library/html-email-ninja-pro-style
+      -->
+      #outlook a { padding: 0; }
+      .ReadMsgBody { width: 100%; }
+      .ExternalClass { width: 100%; }
+      .ExternalClass * { line-height:100%; }
+      body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+      table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+      img { display: block; margin: auto; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+      p { display: block; margin: 13px 0; }
+    / outlook 2007 and older doesn't support 'max-width'
+    /[if mso lte 12]
+      <style type="text/css">
+      \.layout {
+      width: 600px;
+      }
+      </style>
+  %body{:style => "background:#f3f3f3;margin:0;padding:15px"}
+    %center{:style => "background:#f3f3f3;"}
+      %table.layout{:style => "background:#f3f3f3;max-width:600px;"}
+        %tr
+          %td
+            / Logo - Wrap <center> tag around <img> to fix Hotmail rendering problem.
+            %div{:style => "text-align:center; background: #ffffff; height: 77px;"}
+              %center= image_tag(attachments["rijkslogo_op_wit-compressed.png"].url, alt: 'Logo Rijksoverheid', width: '44', height: '77', border: '0', style: "border:none;width:44px;height:77px;")
+            / DigiD logo
+            %table{:bgcolor => "ffffff", :border => "0", :cellpadding => "18", :cellspacing => "0", :width => "100%"}
+              %tr
+                %td{:align => "left"}
+                  = image_tag(attachments['digid.png'].url, alt: "Logo DigiD", width: '65px', height: "auto", align: "left", style: "border:none;width:65px;height:auto;")
+            / Header orange bar
+            %table{:bgcolor => "e17000", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tr{:height => "30"}
+                %td{:style => "font-size:0px;line-height:0px;"}  
+            %table{:bgcolor => "#fbead9", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tr{:height => "3"}
+                %td{:style => "font-size:0px;line-height:0px;"}  
+            / Message body
+            %table{:bgcolor => "ffffff", :border => "0", :cellpadding => "18", :cellspacing => "0", :width => "100%"}
+              %tr
+                %td{:align => "left"}
+                  %div{:style => "cursor:auto;color:#535353;font-family:Verdana, Arial, sans-serif;font-size:12px;line-height:21px; word-break:break-word;"}
+                    = yield
+                    = yield :signature
+            / Logo bottom - Wrap <center> tag around <img> to fix Hotmail rendering problem.
+            %div{:style => "text-align:center; background: #ffffff; height: 22px;"}
+              %center= image_tag(attachments["rijksblauw_op_wit-compressed.png"].url, alt: "Logo Rijksoverheid", width: "44", height: "22", border: "0", style: "display:block;border:none;width:44px;height:22px;")
+            / Logo bottom bar
+            %table{:bgcolor => "ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tr{:height => "2"}
+                %td{:style => "font-size:0px;line-height:0px;", :width => "10%"}  
+                %td{:bgcolor => "114274", :style => "font-size:0px;line-height:0px;", :width => "80%"}  
+                %td{:style => "font-size:0px;line-height:0px;", :width => "10%"}  
+            / Disclaimer & footnote
+            %table{:bgcolor => "#f3f3f3", :border => "0", :cellpadding => "18", :cellspacing => "0", :width => "100%"}
+              %tr
+                %td{:align => "left"}
+                  %div{:style => "cursor:auto;color:#000000;font-family:Verdana, Arial, sans-serif;font-size:10px;line-height:15px;"}
+                    = yield :footer

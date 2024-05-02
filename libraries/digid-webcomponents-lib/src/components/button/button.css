@@ -1,0 +1,40 @@
+logius-button {
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 16%);
+  padding: 0 10px;
+  font-size: 19px;
+  font-weight: bold;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  margin: 10px;
+  cursor: pointer;
+  display: block;
+}
+
+logius-button.white {
+  background-color: #fff;
+  border: 1px solid black;
+  color: black;
+}
+
+logius-button.primary {
+  background-color: #e17000;
+  border-color: #e17000;
+  color: #fff;
+}
+
+logius-button.primary {
+  background-color: #e17000;
+  border-color: #e17000;
+  color: #fff;
+}
+
+logius-button.primary.arrow:after {
+  content: '>';
+  color: #fff;
+  margin-left: 10px;
+}
+
+

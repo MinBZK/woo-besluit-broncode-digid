@@ -1,0 +1,17 @@
+{
+  "login": {
+    "page-title": "My DigiD",
+    "header": "Login methods",
+    "btn": "View my login methods",
+    "title": "Login methods",
+    "sub-header-1": "There are different ways of logging in with your DigiD. The more login methods you add, the more you can arrange online.",
+    "sub-header-2": "The last time you logged in to DigiD was on",
+    "digid-app": "DigiD app",
+    "digid-app-sub": "These are your DigiD apps. Click on 'More details' for more information or to deactivate the app.",
+    "delete-title": "Delete DigiD",
+    "delete-subtitle": "You can delete your DigiD. In that case, you cannot log in with DigiD anywhere, unless you request a new DigiD.",
+    "delete-btn": "Delete my DigiD",
+		"homepage": "Homepage",
+		"logged-in" : "You are logged in to My DigiD"
+  }
+}

@@ -1,0 +1,47 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice_name) : heading_with_icon(t('log_in'))
+= render('shared/session_countdown', key: 'read_wid', key_options: {wid_type: @wid_type})
+
+= steps(4, 4, t("read_identity_with_app", wid_type: t('document.id_document')))
+
+%p.smartphone
+  = image_tag("hoog_smartphone.png", alt: "")
+
+= actions do
+  = cancel_button(wid_cancel_url)
+
+%ul.list-with-arrows
+  %li
+    = external_link_to(t('desktop_app_instruction_links', wid_type: @wid_type), 'https://www.digid.nl/identiteitsbewijs')
+
+.poller{ data: { url: wid_poll_url(current_step: "scan"), timeout: 3000, suspended: Rails.env.test? } }

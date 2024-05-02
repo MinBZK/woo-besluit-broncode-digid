@@ -1,0 +1,427 @@
+---
+  openapi: 3.0.0
+  info:
+    version: "0.0.1"
+    title: "DigiD balie koppelvlakken"
+    contact:
+      name:PPPPPPPPPPPPPPPP
+  consumes:
+    - "application/json"
+  tags:
+    - name: IAPI - Activaties
+      description: Activaties via IAPI
+    - name: IAPI - Balie
+      description: Balie requests
+    - name: IAPI - Balie medewerkers
+      description: Balie medewerkers
+    - name: IAPI - Aanvragen
+      description: Aanvragen
+
+  paths:
+    /iapi/activations:
+      get:
+        operationId: "iapi_activation_get"
+        tags:
+          - IAPI - Activaties
+        description: "Laat bestaande aanvragen zien en hun activatie status"
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Activation'
+            examples:
+              no_activations:
+                activations: []
+              activated:
+                activations:
+                  - id: 1
+                    activated: true
+
+    /iapi/activations/{id}:
+      patch:
+        description: "Update activatie status"
+        operationId: "iapi_activation_patch"
+        tags:
+          - IAPI - Activaties
+        parameters:
+          - $ref: '#/components/parameters/ID'
+        requestBody:
+          description:
+            "description"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activation:
+                    type: object
+                    properties:
+                      activated:
+                        type: boolean
+        responses:
+          200:
+            description: Returned altijd OK
+
+    /iapi/front_desks:
+      get:
+        description: "Laat een lijst met bestaande balies zien"
+        operationId: "iapi_front_desks_get_all"
+        tags:
+          - IAPI - Balie
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/FrontDesk'
+            examples:
+              no_front_desks:
+                front_desks: []
+              example_front_desk:
+                -  id: 1
+                   code: "LONDON"
+                   name: "London"
+                   created_at: "2018-09-04T14:28:04.000"
+                   updated_at: "2018-09-04T14:28:04.000"
+                   kvk_number: "12345678"
+                   establishment_number:PPPPPPPPPPPPPPP
+                   location: null
+                   time_zone: "Europe/Amsterdam"
+                   alarm_unchecked_accounts: null
+                   alarm_fraud_suspension: null
+                   max_issues: 100
+                   blocked": false
+                   activation_codes_today: 0
+                   users: []
+      post:
+        description: "Maak een nieuwe balie aan"
+        operationId: "iapi_front_desks_post"
+        tags:
+          - IAPI - Balie
+        requestBody:
+          description:
+            "description"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  front_desk:
+                    type: object
+                    properties:
+                      kvk_number:
+                        type: string
+                      code:
+                        type: string
+                      name:
+                        type: string
+                      establishment_number:
+                        type: string
+                      location:
+                        type: string
+                      time_zone:
+                        type: string
+                        example: "Europe/Amsterdam"
+                      alarm_unchecked_accounts:
+                        type: integer
+                      alarm_fraud_suspension:
+                        type: integer
+                      max_issues:
+                        type: integer
+                      blocked:
+                        type: boolean
+
+        responses:
+          200:
+            description: "Balie aangemaakt"
+
+    /iapi/front_desks/{id}:
+      get:
+        description: "Haal informatie op van een bestaande balie op basis van ID"
+        operationId: "iapi_front_desks_get"
+        tags:
+          - IAPI - Balie
+        parameters:
+          - $ref: '#/components/parameters/ID'
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+            examples:
+              success:
+                front_desk:
+                  $ref: '#/components/examples/front_desk'
+          404:
+            description: Balie niet gevonden
+
+      patch:
+        description: "Wijzig de gegevens van een balie"
+        operationId: "iapi_front_desks_patch"
+        tags:
+          - IAPI - Balie
+        parameters:
+          - $ref: '#/components/parameters/ID'
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+          404:
+            description: Balie niet gevonden
+
+      delete:
+        description: "Verwijder een bestaande balie"
+        operationId: "iapi_front_desks_delete"
+        tags:
+          - IAPI - Balie
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+          404:
+            description: Balie niet gevonden
+
+    /iapi/front_desk_relations/{id}:
+      get:
+        description: "Haal op bij welke balie een medewerker hoort"
+        operationId: "iapi_front_desks_relations_get"
+        parameters:
+          - $ref: '#/components/parameters/pseudonym'
+        tags:
+          - IAPI - Balie medewerkers
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+            examples:
+              success:
+                $ref: '#/components/examples/front_desk_relation'
+      delete:
+        description: "Verwijder balie medewerker"
+        operationId: "iapi_front_desks_relations_delete"
+        parameters:
+          - $ref: '#/components/parameters/pseudonym'
+        tags:
+           - IAPI - Balie medewerkers
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+
+    /iapi/verifications:
+      get:
+        description: "Ophalen van alle aanvragen"
+        operationId: "iapi_verifications_get_all"
+        tags:
+          - IAPI - Aanvragen
+        responses:
+          200:
+            $ref: '#/components/responses/get_verifications_success'
+
+    /iapi/verifications/fraud_suspicion:
+      get:
+        description: "Ophalen van bestaande aanvragen waar een vermoeden van fraude is"
+        operationId: "iapi_verifications_fraud"
+        tags:
+          - IAPI - Aanvragen
+        responses:
+          200:
+            $ref: '#/components/responses/get_verifications_success'
+
+    /iapi/verifications/unaudited:
+      get:
+        description: "Ophalen van aanvragen die nog niet zijn gecontroleerd"
+        operationId: "iapi_verifications_unaudited"
+        tags:
+          - IAPI - Aanvragen
+        responses:
+          200:
+            $ref: '#/components/responses/get_verifications_success'
+
+    /iapi/verifications/{id}:
+      get:
+        description: "Ophalen van informatie over een specifieke aanvraag"
+        operationId: "iapi_verifications_get"
+        tags:
+          - IAPI - Aanvragen
+        parameters:
+          - $ref: '#/components/parameters/ID'
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Verification'
+            examples:
+              success:
+                verification:
+                  $ref: '#/components/examples/verification'
+      patch:
+        description: "Wijzigen van een bestaande aanvraag"
+        operationId: "iapi_verifications_patch"
+        tags:
+          - IAPI - Aanvragen
+        parameters:
+          - $ref: '#/components/parameters/ID'
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audit:
+                    type: object
+                    properties:
+                      state:
+                        type: string
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Verification'
+
+  components:
+    parameters:
+      ID:
+        name: id
+        in: path
+        description: ID
+        required: true
+        schema:
+          type: integer
+      pseudonym:
+        name: id
+        in: path
+        description: Medewerkers pseudoniem
+        required: true
+        schema:
+          type: string
+    responses:
+      get_verifications_success:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/Verification'
+        examples:
+          no_verifications:
+            verifications: []
+          example_verification:
+            verifications:
+              - $ref: '#/components/examples/verification'
+
+    schema:
+      Activation:
+        type: object
+        properties:
+          front_desks:
+            type: array
+            items:
+              type: object
+              properties:
+                id: integer
+      FrontDesk:
+        type: object
+        properties:
+          front_desks:
+            type: array
+            items:
+              type: object
+              properties:
+                id: integer
+      Verification:
+        type: object
+        properties:
+          verifications:
+            type: array
+            items:
+              type: object
+              properties:
+                id: integer
+
+    examples:
+      front_desk:
+        id: 1
+        code: "LONDON"
+        name: "London"
+        created_at: "2018-09-04T14:28:04.000+02:00"
+        updated_at: "2018-09-04T14:28:04.000+02:00"
+        kvk_number: "12345678"
+        establishment_number:PPPPPPPPPPPPPPP
+        location: null
+        time_zone: "Europe/Amsterdam"
+        alarm_unchecked_accounts: null
+        alarm_fraud_suspension: null
+        max_issues: 100
+        blocked: false
+        activation_codes_today: 0,
+        users: []
+
+      verification:
+        id: 1
+        citizen_service_number: "string"
+        id_number: "string"
+        id_expires_at: "2018-01-01T12:00:00.000"
+        id_established: false
+        suspected_fraud: false
+        created_at: "2018-01-01T12:00:00.000"
+        updated_at: "2018-01-01T12:00:00.000"
+        front_desk_code: "string"
+        activation_code: "string"
+        state": "completed"
+        salutation: "Geachte"
+        full_name: "John Doe"
+        activation_code_end_date: "2018-01-01"
+        first_names: "John"
+        surname: "Doe"
+        birthday: "2000-01-01"
+        front_desk_id: null
+        user_id: 1
+        activated_at: "2018-01-01T12:00:00.000"
+        activated: true
+        front_desk_account_id: 1
+        front_desk_registration_id: 1
+        front_desk_registration_created_at: "2018-01-01T12:00:00.000"
+        id_signaled: false
+        front_desk: null
+        user: null
+        audit: null
+        verification_correction: null
+
+
+

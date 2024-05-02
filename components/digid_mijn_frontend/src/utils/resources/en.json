@@ -1,0 +1,47 @@
+{
+  "general": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "waiting-activation": "Wait for activation",
+    "completed": "Completed",
+    "incomplete": "Not completed",
+    "blocked": "Blocked",
+    "suspended": "Suspended",
+    "revoked": "Revoked",
+    "your-bsn": "Your citizen service number is",
+    "questions-title": "Do you have questions?",
+    "website": "View the DigiD website",
+    "contact1": "Contact the DigiD helpdesk",
+    "contact2": "contact the DigiD helpdesk",
+    "new-window": "opens in a new window",
+    "or": "or ",
+    "welcome": "Welcome to My DigiD",
+    "close": "Close",
+    "at": " at ",
+    "dutch-time": "Dutch time",
+    "hour": "hour",
+    "tooltip": "tooltip",
+    "tooltip-aria": "Information about",
+    "never": "Never"
+  },
+  "alert": {
+    "close-aria-label": "Close notification"
+  },
+  "button": {
+    "back-to-login": "Back to login methods",
+    "logout": "Log out",
+    "more-details": "More details"
+  },
+  "date-picker": {
+    "placeholder": "DD-MM-YYYY"
+  },
+  "modal": {
+    "close-btn-aria-label": "Close modal",
+    "close-btn": "Close"
+  },
+  "toast": {
+    "timeout": "Your session has timed out, please log in again",
+    "no-connection": "There is currently no database connection",
+    "failed-retrieval": "There was an error when trying to retrieve the data, please try again later."
+  }
+}

@@ -1,0 +1,12 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-footer {
+  //background-color: var(--solid2);
+  margin: 0 0.5rem;
+  &__title {
+    font-family: core.$bold;
+    margin-top: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+}

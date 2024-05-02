@@ -1,0 +1,115 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if current_account.bsn.present? && show_identity_card?(current_account.bsn)
+  - if !identity_card_partly_enabled?
+    .row.extended-height
+      .wrap-main
+        .col.highlight.notice
+          .col.col-name= t('identity_card')
+          .col.col-val.col_val_extra_margin
+            %p.setting-inactive.secure-active= t('information_boxes.identity_card_temporarily_unavailable_no_activation').html_safe
+        .col.col-info.info-box
+          %p= t('information_boxes.identity_card_temporarily_unavailable_no_activation').html_safe
+  - elsif @rvig_error
+    .row.extended-height
+      .wrap-main
+        .col.highlight.notice
+          .col.col-name= t('identity_card')
+          .col.col-val.col_val_extra_margin
+            %button#identity_card.info-button.info{'aria-label': t('my_digid.identity_card.aria_label')}
+            %p.setting-inactive.secure-active= @rvig_error.html_safe
+        .col.col-info.info-box
+          %p=  t("rvig_niet_actief", scope: [:my_digid, :account, :mu, :infobox], rvig_issue_date: I18n.l(Date.parse(::Configuration.get_string('rvig_vanaf_datum_uitgifte_nieuwe_identiteitskaarten')), format: '%e %B %Y')).html_safe
+    .row
+      .wrap-main
+        .col.highlight
+          .col.col-name= t('identity_card_number')
+          .col.col-val
+            %button#identity_card_number.info-button.info{'aria-label': t('my_digid.identity_card_number.aria_label')}
+        .col.col-info.info-box= t('identity_card_number_info')
+  - elsif @identity_cards.present?
+    - @identity_cards.each do |identity_card|
+      - unless hidden?(identity_card, ::Configuration.get_int('termijn_tonen_ingetrokken_eid'))
+        - if !identity_card.valid?
+          .row.extended-height
+            .wrap-main
+              .col.highlight.notice
+                .col.col-name= t('identity_card')
+                .col.col-val.col_val_extra_margin
+                  %button#identity_card.info-button.info{'aria-label': t('my_digid.identity_card.aria_label')}
+                  %p.setting-inactive.secure-active= t('information_boxes.rvig_error').html_safe
+              .col.col-info.info-box
+                = t("my_digid.account.mu.infobox.rvig_niet_actief", rvig_issue_date: I18n.l(Date.parse(::Configuration.get_string('rvig_vanaf_datum_uitgifte_nieuwe_identiteitskaarten')), format: '%e %B %Y')).html_safe
+        - else
+          .row
+            .wrap-main
+              .multiple-info-boxes-wrapper
+                .col.highlight.space-bottom
+                  .col.col-name= t('identity_card')
+                  .col.col-val
+                    %button#identity_card.info-button.info{'aria-label': t('my_digid.identity_card.aria_label')}
+                    - if identity_card.human_status == "actief"
+                      .setting-active= t("my_digid.account.mu.label.actief")
+                    - elsif identity_card.human_status == "niet_actief" || identity_card.human_status == "geblokkeerd" || identity_card.human_status == "geschorst"
+                      .setting-inactive= t("my_digid.account.mu.label.#{identity_card.human_status}")
+                    - else
+                      = t("my_digid.account.mu.label.#{identity_card.human_status}")
+                .col.col-info.info-box
+                  - text_id = identity_card.inactive? ? "niet_actief_but_owns_a_identity_card" : "#{identity_card.human_status}_identity_card"
+                  %p=  t(text_id, scope: [:my_digid, :account, :mu, :infobox], rvig_issue_date: I18n.l(Date.parse(::Configuration.get_string('rvig_vanaf_datum_uitgifte_nieuwe_identiteitskaarten')), format: '%e %B %Y')).html_safe
+              .multiple-info-boxes-wrapper
+                .col.highlight
+                  .col.col-name= t('identity_card_number')
+                  .col.col-val
+                    %button#identity_card_number.info-button.info{'aria-label': t('my_digid.identity_card_number.aria_label')}
+                    %p.setting.secure-active= mask_personal_number(identity_card.document_no).html_safe
+                .col.col-info.info-box= t('identity_card_number_info')
+            .col.col-links.extended-height
+              %ul.list-with-arrows
+                - unless current_account.deceased?
+                  - if identity_card.activatable? && identity_card_enabled?
+                    %li= link_to(t('my_digid.links.activate_identity_card'), my_digid_id_card_activation_start_url(card_type: "NI", sequence_no: identity_card.sequence_no), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+                  - if identity_card.revokable? && identity_card_partly_enabled?
+                    %li= link_to(t('my_digid.links.revoke_identity_card'), my_digid_id_card_revocation_proceed_url(card_type: "NI", sequence_no: identity_card.sequence_no), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+
+                  - if identity_card.deblockable? && current_account.unblock_letter_requested?(bsn: current_account.bsn, sequence_no: identity_card.sequence_no, card_type: "NI")
+                    - if identity_card_enabled?
+                      %li= link_to(t('my_digid.links.fill_in_unblockings_code_from_letter'), my_digid_id_card_unblocking_code_invoeren_url(card_type: "NI", sequence_no: identity_card.sequence_no))
+                    %li= link_to(t('my_digid.links.i_did_not_receive_a_letter'), my_digid_id_card_re_request_unblocking_show_url(card_type: "NI", sequence_no: identity_card.sequence_no))
+                  - elsif identity_card.deblockable?
+                    %li= link_to(t('my_digid.links.unblock_identity_card'), request_unblock_letter_url(card_type: "NI", sequence_no: identity_card.sequence_no), remote: true)
+
+                  - if identity_card.pin_resettable? && identity_card_pin_reset_enabled?
+                    %li= link_to(t('my_digid.links.request_pin'), my_digid_url)
+                  - if identity_card.pin_resettable? && identity_card_pin_reset_enabled?
+                    %li= link_to(t('my_digid.links.set_pin'), my_digid_url)
+          %br

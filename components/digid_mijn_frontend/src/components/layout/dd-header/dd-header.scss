@@ -1,0 +1,43 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-header {
+  position: relative;
+  padding: 4px;
+  margin-top: -0.75rem;
+  display: grid;
+  grid: 8rem 1.5rem / 1fr 2.75rem 1fr;
+  grid-template-areas:
+    'links logo logout'
+    'menu menu menu';
+
+  &__logout {
+    grid-area: logout;
+
+    &__button {
+      float: right;
+      margin-top: 1rem;
+    }
+  }
+
+  &__rijksvaandel {
+    grid-area: logo;
+    cursor: pointer;
+
+    img {
+      width: 2.75rem;
+      height: 4.875rem;
+    }
+  }
+
+  &__links {
+    grid-area: links;
+
+    &__toggle {
+      margin-top: 1rem;
+    }
+  }
+
+  &__menu {
+    grid-area: menu;
+  }
+}

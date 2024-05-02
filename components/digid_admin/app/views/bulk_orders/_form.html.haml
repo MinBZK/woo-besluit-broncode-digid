@@ -1,0 +1,58 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+#bulk_order_form
+  = form_for @bulk_order, html: { multipart: true } do |f|
+    = render_bulk_order_errors
+    = field f.label(:name), f.text_field(:name, required: true)
+    #account_status_scope_section
+      = field(f.label(:account_status_scope)) do
+        = f.radio_button :account_status_scope, :active, checked: false, required: true
+        = f.label :account_status_scope_active
+        = f.radio_button :account_status_scope, :suspended, checked: false, required: true
+        = f.label :account_status_scope_suspended
+        = f.radio_button :account_status_scope, :initial_or_requested, checked: false, required: true
+        = f.label :account_status_scope_initial_or_requested
+    #type_order_section
+      = field(f.label("Type opdracht")) do
+        #remove_order
+          = f.radio_button :bulk_type, "verwijderen", checked: true
+          = f.label "Verwijderen van account(s)"
+        #suspend_order
+          = f.radio_button :bulk_type, "opschorten"
+          = f.label "Opschorten van account(s)"
+        #undo_suspend_order
+          = f.radio_button :bulk_type, "opschorten ongedaan maken"
+          = f.label "opschorten ongedaan maken account(s)"
+
+    = field(f.label(:csv_upload), content_tag(:div, f.file_field(:csv_upload, id: 'bsn_list_input', accept: 'text/csv', required: true), id: 'bsn_list_input_wrapper'))
+    .clear
+    = render 'shared/form_actions', model: @bulk_order

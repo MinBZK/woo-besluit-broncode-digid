@@ -1,0 +1,238 @@
+
+/*
+  Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+  gericht is op transparantie en niet op hergebruik. Hergebruik van 
+  de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+  van broncode waarvoor een andere licentie is aangegeven.
+  
+  Het archief waar dit bestand deel van uitmaakt is te vinden op:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+  
+  Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+  
+  This code has been disclosed in response to a request under the Dutch
+  Open Government Act ("Wet open Overheid"). This implies that publication 
+  is primarily driven by the need for transparence, not re-use.
+  Re-use is permitted under the EUPL-license, with the exception 
+  of source files that contain a different license.
+  
+  The archive that this file originates from can be found at:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  using the reference "Logius, publicly disclosed source code DigiD" 
+  
+  Other questions regarding this Open Goverment Act decision may be
+  directed via email to open@logius.nl
+*/
+
+package nl.logius.digid.eid.integration;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import nl.logius.digid.card.ObjectUtils;
+import nl.logius.digid.card.crypto.EcPrivateKey;
+import nl.logius.digid.eid.Application;
+import nl.logius.digid.eid.config.Constants;
+import nl.logius.digid.eid.helpers.AuthServiceSetup;
+import nl.logius.digid.eid.models.PolymorphType;
+import nl.logius.digid.eid.models.rest.digid.Confirmation;
+import nl.logius.digid.sharedlib.model.ByteArray;
+import org.bouncycastle.util.encoders.Base64;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(SpringExtension.class)
+@ActiveProfiles({ "default", "unit-test" })
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { Application.class })
+public class RDWIntegrationTest extends AuthServiceSetup {
+    private final EcPrivateKey ephemeralKey = ObjectUtils.deserialize(Base64.decode(
+        "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    ), EcPrivateKey.class);
+
+    @BeforeEach
+    public void init() throws Exception {
+        // init mocks
+        MockitoAnnotations.initMocks(this);
+
+        // load db
+        flyway.clean();
+        flyway.migrate();
+        loadCscaCertificate("rdw/acc/csca.crt");
+        loadCvCertificate("rdw/acc/cvca.cvcert", true);
+        loadCvCertificate("rdw/acc/dvca.cvcert", false);
+        loadCvCertificate("rdw/acc/at001.cvcert", false);
+    }
+
+    @Test
+    public void testGetCertificateRestService() throws Exception {
+        createSession(s -> {});
+
+        // request
+        RequestEntity<Map<String,Object>> re = RequestEntity
+            .post(new URI(Constants.URL_RDW_GETCERTIFICATE))
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "127.0.0.1")
+            .body(ImmutableMap.of("header", header(),
+                "userConsentType", "PIP", "documentType", "SSSSSSSSSSSSSSSS"
+            ));
+        ResponseEntity<String> response = restTemplate.exchange(re, String.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        Map<String, Object> result = mapper.readValue(response.getBody(), new TypeReference<Map<String,Object>>() {});
+        Map<String, Object> responseData = (Map<String,Object>) result.get("responseData");
+
+        // assert
+        assertEquals(sessionId, result.get("sessionId"));
+        assertEquals("OK", result.get("status"));
+        assertEquals("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS", responseData.get("atCert"));
+    }
+
+    @Test
+    public void testValidatePolymorphInfoRestService() throws Exception {
+        createSession(s -> s.setAtReference("SSSSSSSSSSSSSSSS"));
+        Mockito.when(securityFactory.generateKey(Mockito.eq(ephemeralKey.toDomainParameters()))).thenReturn(ephemeralKey);
+
+        RequestEntity<Map<String, Object>> re = RequestEntity.post(new URI(Constants.URL_RDW_POLYMORPHICINFO))
+            .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "127.0.0.1")
+            .body(ImmutableMap.of("header", header(), "car", "SSSSSSSSSSSSSSSSSSSSSSSS",
+                "efCardAccess", "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+                "idpicc", "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"));
+
+        ResponseEntity<String> response = restTemplate.exchange(re, String.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        Map<String, Object> result = mapper.readValue(response.getBody(), new TypeReference<Map<String, Object>>() {
+        });
+        Map<String, Object> responseData = (Map<String, Object>) result.get("responseData");
+        assertEquals(sessionId, result.get("sessionId"));
+        assertEquals("OK", result.get("status"));
+        assertEquals("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            responseData.get("ephemeralKey"));
+        assertEquals("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS", responseData.get("dvCert"));
+    }
+
+    @Test
+    public void testGetDigitalSignatureRestService() throws Exception {
+        createSession(s -> {
+            s.setAtReference("SSSSSSSSSSSSSSSS");
+            s.setEphemeralKey(ephemeralKey);
+            s.setIdpicc(ByteArray.fromBase64("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"));
+        });
+
+        final String signature = "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS";
+        Mockito.when(signatureService.sign(
+            Mockito.eq(Base64.decode("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")),
+            Mockito.eq("SSSSSSSSSSSSSSSS"), Mockito.eq(false)
+        )).thenReturn(Base64.decode(signature));
+
+        RequestEntity<Map<String, Object>> re = RequestEntity.post(new URI(Constants.URL_RDW_SIGNATURE))
+            .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "127.0.0.1")
+            .body(ImmutableMap.of("header", header(), "challenge", "SSSSSSSSSSSS"));
+
+        ResponseEntity<String> response = restTemplate.exchange(re, String.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        Map<String, Object> result = mapper.readValue(response.getBody(), new TypeReference<Map<String, Object>>() {
+        });
+        Map<String, Object> responseData = (Map<String, Object>) result.get("responseData");
+
+        assertEquals(sessionId, result.get("sessionId"));
+        assertEquals("OK", result.get("status"));
+        assertEquals(signature, responseData.get("signature"));
+    }
+
+    @Test
+    public void testGenerateSecureAPDUsRestService() throws Exception {
+        createSession(s -> {
+            s.setEphemeralKey(ephemeralKey);
+            s.setKeyReference(2);
+            s.setTaVersion(2);
+            s.setPaceVersion(2);
+            s.setUserConsentType(PolymorphType.PIP);
+            s.setIdpicc(ByteArray.fromBase64("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"));
+        });
+
+        RequestEntity<Map<String, Object>> re = RequestEntity.post(new URI(Constants.URL_RDW_SECAPDU))
+            .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "127.0.0.1")
+            .body(ImmutableMap.of("header", header(),
+                "efCardSecurity", "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+                "pcaApplicationId", "SSSSSSSSSSSS", "rpicc", "SSSSSSSSSSSS", "tpicc", "SSSSSSSSSSSS"));
+
+        ResponseEntity<String> response = restTemplate.exchange(re, String.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        Map<String, Object> result = mapper.readValue(response.getBody(), new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> responseData = (Map<String, Object>) result.get("responseData");
+        assertEquals(sessionId, result.get("sessionId"));
+        assertEquals("OK", result.get("status"));
+        assertEquals(ImmutableList.of(
+            "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+        ), responseData.get("PPPPP"));
+    }
+
+    @Test
+    public void testGetPolymorphicDataRestService() throws Exception {
+        createSession(s -> {
+            s.setkEnc(ByteArray.fromBase64("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"));
+            s.setkMac(ByteArray.fromBase64("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"));
+            s.setUserConsentType(PolymorphType.PIP);
+
+            s.setReturnUrl("http://localhost");
+            s.setConfirmId("confirmId");
+            s.setConfirmSecret("secret");
+        });
+
+        List<String> responses = ImmutableList.of(
+            "SSSSSSSSSSSSSSSSSSSSSSSS",
+            "SSSSSSSSSSSSSSSSSSSSSSSS",
+            "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+        );
+        // request
+        RequestEntity<Map<String, Object>> re = RequestEntity.post(new URI(Constants.URL_RDW_POLYMORPHICDATA))
+            .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+            .header("X-Forwarded-For", "127.0.0.1")
+            .body(ImmutableMap.of("header", header(), "apduResponses",
+                responses));
+        ResponseEntity<String> response = restTemplate.exchange(re, String.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        Map<String, Object> result = mapper.readValue(response.getBody(), new TypeReference<Map<String, Object>>() {
+        });
+        Map<String, Object> responseData = (Map<String, Object>) result.get("responseData");
+
+        // assert
+        assertEquals(sessionId, result.get("sessionId"));
+        assertEquals("OK", result.get("status"));
+        assertEquals("OK", responseData.get("result"));
+        Mockito.verify(confirmService).sendAssertion(Mockito.eq("http://localhost"), Mockito.eq("confirmId"),
+            Mockito.eq("secret"), Mockito.eq(PolymorphType.PIP), Mockito.isA(Confirmation.class));
+    }
+}

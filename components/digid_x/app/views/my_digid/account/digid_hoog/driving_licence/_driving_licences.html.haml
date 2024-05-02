@@ -1,0 +1,126 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if current_account.bsn.present? && show_driving_licence?(current_account.bsn)
+  - if !driving_licence_partly_enabled?
+    .row.extended-height
+      .wrap-main
+        .col.highlight.notice
+          .col.col-name= t('driving_licence')
+          .col.col-val.col_val_extra_margin
+            %p.setting-inactive.secure-active= t('information_boxes.driving_licence_temporarily_unavailable_no_activation').html_safe
+        .col.col-info.info-box
+          %p= t('information_boxes.driving_licence_temporarily_unavailable_no_activation').html_safe
+  - elsif @rdw_error
+    .row.extended-height
+      .wrap-main
+        .col.highlight.notice
+          .col.col-name= t('driving_licence')
+          .col.col-val.col_val_extra_margin
+            %button#driving_licence.info-button.info{'aria-label': t('my_digid.driving_licence.aria_label')}
+            %p.setting-inactive.secure-active= @rdw_error.html_safe
+        .col.col-info.info-box
+          %p=  t("niet_actief", scope: [:my_digid, :account, :mu, :infobox], rdw_issue_date: I18n.l(Date.parse(::Configuration.get_string('rdw_vanaf_datum_uitgifte_nieuwe_rijbewijzen')), format: '%e %B %Y')).html_safe
+    .row
+      .wrap-main
+        .col.highlight
+          .col.col-name= t('driving_licence_number')
+          .col.col-val
+            %button#driving_licence_number.info-button.info{'aria-label': t('my_digid.driving_licence_number.aria_label')}
+        .col.col-info.info-box= t('driving_licence_number_info')
+  - elsif @driving_licences.present?
+    - @driving_licences.each do |driving_licence|
+      - unless hidden?(driving_licence, ::Configuration.get_int('termijn_tonen_ingetrokken_eid'))
+        - if !driving_licence.valid?
+          .row.extended-height
+            .wrap-main
+              .col.highlight.notice
+                .col.col-name= t('driving_licence')
+                .col.col-val.col_val_extra_margin
+                  %button#driving_licence.info-button.info{'aria-label': t('my_digid.driving_licence.aria_label')}
+                  %p.setting-inactive.secure-active= t('information_boxes.rdw_error').html_safe
+              .col.col-info.info-box
+                = t("my_digid.account.mu.infobox.niet_actief", rdw_issue_date: I18n.l(Date.parse(::Configuration.get_string('rdw_vanaf_datum_uitgifte_nieuwe_rijbewijzen')), format: '%e %B %Y')).html_safe
+        - else
+          .row
+            .wrap-main
+              .multiple-info-boxes-wrapper
+                .col.highlight.space-bottom
+                  .col.col-name= t('driving_licence')
+                  .col.col-val
+                    %button#driving_licence.info-button.info{'aria-label': t('my_digid.driving_licence.aria_label')}
+                    - if driving_licence.human_status == "actief"
+                      .setting-active= t("my_digid.account.mu.label.actief")
+                    - elsif ["geblokkeerd", "niet_actief", "geschorst"].include?(driving_licence.human_status)
+                      .setting-inactive= t("my_digid.account.mu.label.#{driving_licence.human_status}")
+                    - else
+                      = t("my_digid.account.mu.label.#{driving_licence.human_status}")
+                .col.col-info.info-box
+                  - if driving_licence.eidtoeslag_not_applicable?
+                    - text_id = "niet_actief_niet_van_toepassing"
+                  - elsif driving_licence.eidtoeslag_payment_info?
+                    - text_id = "niet_actief_met_betaal_info"
+                  - else
+                    - text_id = "niet_actief_but_owns_a_driving_licence"
+                  %p=  t(driving_licence.inactive? ? text_id : driving_licence.human_status, scope: [:my_digid, :account, :mu, :infobox], rdw_issue_date: I18n.l(Date.parse(::Configuration.get_string('rdw_vanaf_datum_uitgifte_nieuwe_rijbewijzen')), format: '%e %B %Y')).html_safe
+              .multiple-info-boxes-wrapper
+                .col.highlight
+                  .col.col-name= t('driving_licence_number')
+                  .col.col-val
+                    %button#driving_licence_number.info-button.info{'aria-label': t('my_digid.driving_licence_number.aria_label')}
+                    %p.setting.secure-active= mask_personal_number(driving_licence.document_no).html_safe
+                .col.col-info.info-box= t('driving_licence_number_info')
+            .col.col-links.extended-height
+              %ul.list-with-arrows
+                - unless current_account.deceased?
+                  - if driving_licence.activatable? && driving_licence_enabled? && toeslag_betaald?(driving_licence)
+                    %li= link_to(t('my_digid.links.activate_driving_licence'), my_digid_licence_activation_start_url(card_type: "NL-Rijbewijs", sequence_no: driving_licence.sequence_no), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+                  - if driving_licence.revokable? && driving_licence_partly_enabled? && toeslag_betaald?(driving_licence)
+                    %li= link_to(t('my_digid.links.revoke_driving_licence'), my_digid_licence_revocation_proceed_url(card_type: "NL-Rijbewijs", sequence_no: driving_licence.sequence_no), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+
+                  - if driving_licence.deblockable? && current_account.unblock_letter_requested?(bsn: current_account.bsn, sequence_no: driving_licence.sequence_no, card_type: "NL-Rijbewijs")
+                    - if driving_licence_enabled?
+                      %li= link_to(t('my_digid.links.fill_in_unblockings_code_from_letter'), my_digid_licence_unblocking_code_invoeren_url(card_type: "NL-Rijbewijs", sequence_no: driving_licence.sequence_no))
+                    %li= link_to(t('my_digid.links.i_did_not_receive_a_letter'), my_digid_licence_re_request_unblocking_show_url(card_type: "NL-Rijbewijs", sequence_no: driving_licence.sequence_no))
+
+
+                  - elsif driving_licence.deblockable?
+                    %li= link_to(t('my_digid.links.unblock_driving_licence'), request_unblock_letter_url(card_type: "NL-Rijbewijs", sequence_no: driving_licence.sequence_no), remote: true)
+
+                  - if driving_licence.pin_resettable? && driving_licence.eidtoeslag_not_paid?
+                    %li= link_to(t('my_digid.links.request_pin'), my_digid_licence_request_pin_start_url(eidtoeslag_behandeld: toeslag_betaald?(driving_licence), sequence_no: driving_licence.sequence_no, document_type: "NL-Rijbewijs"))
+
+                  - if pin_reset_allowed?(driving_licence) && driving_licence.pin_resettable? && (driving_licence_pin_reset_enabled? || driving_licence_pin_reset_partly_enabled?) && toeslag_betaald?(driving_licence)
+                    - if driving_licence.activatable? && driving_licence_enabled?
+                      %li= link_to(t('my_digid.links.set_pin'), my_digid_licence_set_pin_link_url(sequence_no: driving_licence.sequence_no, document_type: "NL-Rijbewijs", extend_with_activation: true), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+                    - else
+                      %li= link_to(t('my_digid.links.set_pin'), my_digid_licence_set_pin_link_url(sequence_no: driving_licence.sequence_no, document_type: "NL-Rijbewijs", extend_with_activation: false), !current_account.email_activated? && current_account.phone_number.blank? ? { remote: true } : {})
+          %br

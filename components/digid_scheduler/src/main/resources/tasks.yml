@@ -1,0 +1,117 @@
+# First number in this cron syntax is seconds
+
+# run every 5 minutes
+- name: 'clean_up_saml'
+  cron: '0 0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
+  active: 1
+  application: "digid_x"
+
+# run 3 times every hour, at minute 2, 22 and 42
+- name: 'clean_up_aselect'
+  cron: '0 2,22,42 * * * *'
+  active: 1
+  application: "digid_x"
+
+# run every hour
+- name: 'clean_up_initial_accounts'
+  cron: '0 0 * * * *'
+  active: 1
+  application: "digid_x"
+
+# run every day at 12:30am
+- name: 'detect_expired_certificates_job'
+  cron: '0 30 0 * * *'
+  active: 1
+  application: "digid_admin"
+
+# run every day at 1:00am
+- name: 'handle_letters_job'
+  cron: '0 0 1 * * *'
+  active: 1
+  application: "digid_x"
+
+# run every day at 2:00am
+- name: 'clean_up_verifications'
+  cron: '0 0 2 * * *'
+  active: 1
+  application: "digid_balie"
+
+# run every day at 2:30am
+- name: 'clean_up_expired_activations'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_x"
+- name: 'clean_up_expired_deceased_accounts'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_x"
+- name: 'clean_up_inactive_app_authenticators'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_x"
+- name: 'clean_up_app_authenticators_with_expired_activationcode'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_x"
+- name: 'clean_up_sms_tools_with_expired_activationcode'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_x"
+- name: 'execute_brp_details_removal_job'
+  cron: '0 30 2 * * *'
+  active: 1
+  application: "digid_admin"
+
+# run every day at 3:00am
+- name: 'clean_up_email_deliveries'
+  cron: '0 0 3 * * *'
+  active: 1
+  application: "digid_x"
+
+# run every day at 3:00am
+- name: 'clean_up_notifications'
+  cron: '0 0 3 * * *'
+  active: 1
+  application: "digid_ns"
+
+# run every day at 4:00am
+- name: 'send_activation_reminders'
+  cron: '0 0 4 * * *'
+  active: 1
+  application: "digid_x"
+
+- name: 'resend_unsent_afnemerindicaties'
+  cron: '0 0 4 * * *'
+  active: 1
+  application: "digid_dgl"
+
+# run every day at 4:30am
+- name: 'send_expiry_notifications'
+  cron: '0 30 4 * * *'
+  active: 1
+  application: "digid_x"
+
+# run every day at 5:00am
+- name: 'expire_accounts'
+  cron: '0 0 5 * * *'
+  active: 1
+  application: "digid_x"
+
+# run every day at 5:30am
+- name: 'clean_up_expired_accounts'
+  cron: '0 30 5 * * *'
+  active: 1
+  application: "digid_x"
+
+
+# run every day at 5:45am
+- name: 're_check_documents'
+  cron: '0 45 5 * * *'
+  active: 1
+  application: "digid_app"
+
+# run every 15 minutes
+- name: 'resend_unsent_pushnotifications'
+  cron: '0 */15 * * * *'
+  active: 1
+  application: "digid_ns"

@@ -1,0 +1,27 @@
+@use 'src/scss/tools/tools.general.mixins' as *;
+
+.dd-menu {
+  @include menuLink;
+  position: absolute;
+  bottom: 0;
+  margin-top: 1rem;
+  margin-bottom: 11px;
+  a {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+    padding: 0 0.5rem 0.75rem 0.5rem;
+    @media screen and (min-width: 353px) {
+      margin-right: 1rem;
+    }
+    @media screen and (min-width: 526px) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      height: 38px;
+      margin-right: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 526px) {
+    margin-bottom: 0.75rem;
+  }
+}

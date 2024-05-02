@@ -1,0 +1,22 @@
+{
+  "modal": {
+    "close-btn-aria-label": "Close modal",
+    "close-btn": "Close",
+    "my-digid": "My DigiD",
+    "timeout-header": "Unfortunately, you have to log in again",
+    "timeout-p1": "There was no screen activity for at least {{ minutes }} minutes.",
+    "timeout-p2-a": "Start again with ",
+    "timeout-p2-b": " or go to the DigiD homepage ",
+    "timeout-p3": "Trouble logging in?",
+    "timeout-p3-li1": "Close and open the browser again",
+    "timeout-p3-li2": "Or delete old cookies and your browser history",
+    "timeout-p3-li3": "Or log in on another browser",
+    "warning-header": "Please note: The maximum login time is almost reached.",
+    "warning-p": "Press the spacebar or click the button to stay logged in.",
+    "extend": "Stay logged in",
+		"2fa-warning-a": "You have set that you always want to log in using at least two steps, like the DigiD app.",
+		"2fa-warning-b": "Are you sure you want to deactivate the DigiD app?",
+		"yes": "Yes",
+		"cancel": "Cancel"
+  }
+}

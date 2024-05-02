@@ -1,0 +1,13 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-highlight {
+  color: var(--base);
+  font-family: inherit;
+  &--bold {
+    font-family: core.$bold;
+  }
+  &--blue {
+    font-family: inherit;
+    background-color: var(--solid-highlight);
+  }
+}

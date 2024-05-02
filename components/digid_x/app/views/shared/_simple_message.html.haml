@@ -1,0 +1,74 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if @heading_with_icon
+  = heading_with_icon(t(@heading_with_icon))
+
+= flash_alert
+= flash_notice
+
+- if @redirect_to
+  %meta{ 'http-equiv' => 'refresh', content: "#{@redirect_timeout/1000}; URL=#{@url}" }
+
+  %p= t("sign_in_aborted_and_redirected_to_#{@redirect_to}")
+
+  %p.margin-bottom-15px
+    = t("your_login_to_webservice_is_being_cancelled", webservice: @webservice).html_safe
+  .center.margin-bottom-15px
+    = spinner
+  %p
+    = t("auto_redirect_not_working_instructions_#{@redirect_to}", url: @url).html_safe
+
+- if @link_back
+  %ul.list-with-arrows
+    %li= link_back_to(APP_CONFIG["urls"]["external"]["digid_home"])
+- unless @redirect_to
+  = actions do
+    - if @actions.key?(:ok)
+      = action_link_with_role_button(:annie_are_you_okay, @actions[:ok])
+    - if @actions.key?(:yes)
+      = action_link_with_role_button(:yeah, @actions[:yes])
+    - if @actions.key?(:previous)
+      = previous_button(@actions[:previous])
+    - if @actions.key?(:yes_continue_revocation)
+      = action_link_with_role_button(:yes_continue_revocation, @actions[:yes_continue_revocation])
+    - if @actions.key?(:ok_fill_in)
+      = action_link_with_role_button(:ok_fill_in, @actions[:ok_fill_in])
+    - if @actions.key?(:cancel)
+      = cancel_button(@actions[:cancel])
+    - if @actions.key?(:not_now)
+      = action_button(:not_now, @actions[:not_now])
+    -if @actions.key?(:no_continue)
+      = action_link_with_role_button(:no_continue, @actions[:no_continue])
+    -if @actions.key?(:continue)
+      = action_button(:continue, @actions[:continue])
+    -if @actions.key?(:nope)
+      = action_button(:nope, @actions[:nope])

@@ -1,0 +1,267 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.general.mixins' as *;
+
+//Styles used for app cards
+@mixin card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: var(--solid3);
+
+  &:hover {
+    border: 1px solid var(--color-pumpkin);
+    box-shadow: none;
+    transform: translateY(-4px);
+    cursor: pointer;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0 1rem;
+    background-color: var(--solid2);
+    border-radius: 5px;
+
+    &__title {
+      display: flex;
+    }
+
+    h4 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__more-details {
+    position: relative;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    height: 2.5rem;
+    width: 100%;
+    background-color: var(--solid3);
+    border-radius: 0 0 5px 5px;
+
+    &__button {
+      margin: 0.25rem 0;
+    }
+  }
+}
+
+//Styles used for app accordions
+@mixin accordion {
+  background-color: var(--solid2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  min-width: 19.4375rem;
+
+  &--opened {
+    border: 1px solid var(--color-pumpkin);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &--icon {
+      margin-left: 0.25rem;
+      height: 28px;
+      width: 28px;
+    }
+
+    &--text {
+      width: 211px;
+      margin-left: 0.75rem;
+      margin-right: 1.5rem;
+      white-space: nowrap;
+
+      &__login {
+        width: 100%;
+        display: flex;
+        line-height: 1.5rem;
+        font-size: 1.125rem;
+        font-family: core.$bold;
+        &--status {
+          font-size: 1.125rem;
+          margin-left: 0.25rem;
+        }
+      }
+    }
+
+    &--chevron {
+      margin-left: auto;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &__content {
+    display: none;
+    border-top: 1px solid var(--base3);
+
+    &--opened {
+      display: block !important;
+    }
+
+    &--item {
+      margin: 0 1rem;
+      padding: 0.75rem 0;
+
+      :first-child {
+        font-family: core.$bold;
+      }
+    }
+
+    &--tooltip {
+      display: grid;
+      //flex-direction: row;
+      grid: min-content min-content min-content min-content / 1fr min-content;
+      grid-template-areas:
+        'title icon'
+        'tt-content tt-content'
+        'content content'
+        'link link';
+      //justify-content: space-between;
+
+      & > div {
+        width: 80%;
+      }
+
+      .narrow {
+        width: 80%;
+      }
+
+      .title {
+        grid-area: title;
+      }
+
+      .content {
+        grid-area: content;
+      }
+
+      .link {
+        grid-area: link;
+        padding-top: 0.5rem;
+      }
+
+      .tooltip-content {
+        display: none;
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        grid-area: tt-content;
+        width: 90%;
+        background-color: var(--solid-info);
+        border-radius: 5px;
+        div {
+          margin-left: 0.75rem;
+        }
+      }
+    }
+
+    &__footer {
+      border-top: 1px solid var(--base3);
+      cursor: pointer;
+
+      &__content {
+        padding: 0.75rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__icon {
+          margin-right: 0.5rem;
+          margin-top: 0.375rem;
+        }
+
+        &__text {
+          font-family: core.$bold;
+        }
+      }
+    }
+  }
+}
+
+//Mixin for the login methods details
+@mixin details {
+  &__button {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__header-margin {
+    margin-top: 2rem;
+  }
+
+  &__table {
+    margin-top: 1.5rem;
+    display: grid;
+    grid: min-content / 1fr;
+    row-gap: 0.5rem;
+
+    &-grid {
+      display: grid;
+      grid: min-content min-content/ minmax(100px, 248px) minmax(100px, 215px) 1fr 42px;
+      grid-template-areas:
+        'name content link tooltip'
+        'tt-content tt-content tt-content tt-content';
+      align-items: start;
+      background-color: var(--solid2);
+      border-radius: 5px;
+      padding: 0.5rem 0;
+
+      &-name {
+        @include vertical-table-align;
+        text-align: start;
+        grid-area: name;
+        font-family: core.$bold;
+        margin: 0 1.5rem;
+      }
+      &-content {
+        @include vertical-table-align;
+        grid-area: content;
+        p {
+          margin-bottom: 0;
+        }
+      }
+      &-link {
+        margin: -0.25rem 0;
+        padding-right: 0.5rem;
+        grid-area: link;
+      }
+      &-link-indented {
+        margin-left: 2rem;
+      }
+      &-tooltip {
+        @include vertical-table-align;
+        grid-area: tooltip;
+        height: 24px;
+        width: 24px;
+        &-content {
+          display: none;
+          grid-area: tt-content;
+          margin: 0.5rem 1.5rem;
+        }
+      }
+      &-additional-info {
+        grid-area: tt-content;
+        margin: 0 1.5rem;
+      }
+    }
+  }
+  .indented-row {
+    margin-left: 2rem;
+  }
+}

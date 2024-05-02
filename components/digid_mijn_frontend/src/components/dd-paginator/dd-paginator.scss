@@ -1,0 +1,133 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.responsive' as media;
+
+@mixin btn-state($hover-bg-color) {
+  &:hover,
+  &:focus {
+    background-color: $hover-bg-color;
+  }
+}
+
+.dd-paginator {
+  margin-top: 16px;
+  display: block;
+  text-align: center;
+
+  &__item {
+    font-weight: normal;
+    font-size: 1rem;
+
+    &--active {
+      font-family: core.$bold;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__list {
+    display: inline-flex;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    li:first-of-type button {
+      margin-left: 0;
+    }
+
+    li:last-of-type button {
+      margin-right: 0;
+    }
+  }
+
+  &__ellipses {
+    padding-top: 0.875rem;
+    margin: 0 0.5rem;
+  }
+
+  &__pager {
+    font-family: core.$bold;
+
+    // Todo: use SCSS mixins that is incoming in a responsive design unit of work
+    //span {
+    //	@media only screen and (max-width: 768px) {
+    //		display: none;
+    //	}
+    //}
+  }
+}
+
+.dd-btn {
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 0.5rem;
+
+  font-size: 1.25rem;
+  font-family: inherit;
+  line-height: 1.5rem;
+  text-decoration: none;
+  color: var(--base);
+
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.1s ease-out;
+
+  &--primary {
+    @include btn-state(var(--color-river));
+
+    background-color: var(--color-river);
+    color: var(--color-white);
+    //box-shadow: 0 2px 2px var(--dd-grey-400);
+  }
+
+  &--subtle {
+    &:hover,
+    &:focus {
+      background-color: var(--solid-info);
+    }
+    background-color: transparent;
+  }
+
+  &--prev-next {
+    &:hover,
+    &:focus {
+      transform: translateY(-4px);
+    }
+    &[disabled] {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+    font-family: core.$bold;
+    background-color: transparent;
+    & > span {
+      display: none;
+    }
+  }
+
+  &__chevron {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 550px) {
+  .dd-btn {
+    &--prev-next {
+      & > span {
+        display: block;
+      }
+    }
+  }
+}

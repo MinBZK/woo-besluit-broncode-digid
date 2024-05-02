@@ -1,0 +1,122 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+-# ---------------------
+-# -- Controle via sms
+-# ---------------------
+%h2.heading-with-separator= t('my_digid.login_methods.extra_sms')
+.table--shades
+  .table-row
+    .table-cell--overview
+      %p= t('texts.sms_code_verification')
+- if current_account.sms_tools.active? && !current_account.sms_in_uitbreiding? && !current_account.mobiel_kwijt_in_progress?
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t('my_digid.login_methods.sms')[0].capitalize + t('my_digid.login_methods.sms')[1..-1]
+        .col.col-val
+          %button#sms_code_verification.info-button.info{'aria-label': t('my_digid.sms.aria_label')}
+          .setting-active= t("active")
+      .col.col-info.info-box
+        %p= t('my_digid.sms.active')
+    .col.col-links
+      %ul.list-with-arrows
+        - unless current_account.deceased?
+          - if current_account.login_level_two_factor?
+            %li= link_to(t('remove_sms_code_verification'), my_digid_sms_authenticators_waarschuwing_inlogniveau_url, remote: true)
+          - else
+            %li= link_to(t('remove_sms_code_verification'), my_digid_sms_authenticators_verwijderen_url)
+- elsif current_account.sms_in_uitbreiding? || current_account.mobiel_kwijt_in_progress?
+  .row.extended-height
+    .wrap-main.yellow-highlight.extended-height
+      .col.no-highlight
+        .col.col-name= t('my_digid.login_methods.sms')
+        .col.col-val
+          %button#sms_code_verification.info-button.info{'aria-label': t('my_digid.sms.aria_label')}
+          .setting-inactive= t("awaiting_activation")
+      .col.col-info.info-box
+        %p= t('my_digid.sms.pending', activate_sms_verification: link_to(t('my_digid.links.activate_sms_verification'), activate_sms_url)).html_safe
+    .col.col-links.extended-height
+      %ul.list-with-arrows
+        - unless current_account.deceased?
+          %li= link_to(t('enter_activation_code'), activate_sms_url)
+          %li
+            - if current_account.app_authenticator_active?
+              = link_to(t('re_request_sms_code_verification_new_style'), existing_sms_request_url)
+            - else
+              = link_to(t('re_request_sms_code_verification_new_style'), request_sms_url, remote: true)
+- else
+  .row
+    .wrap-main
+      .col.highlight
+        .col.col-name= t('my_digid.login_methods.sms')
+        .col.col-val
+          %button#sms_code_verification.info-button.info{'aria-label': t('my_digid.sms.aria_label')}
+          .setting-inactive= t("inactive")
+      .col.col-info.info-box
+        %p= t('my_digid.sms.inactive')
+    .col.col-links
+      %ul.list-with-arrows
+        - unless current_account.deceased?
+          - if current_account.app_authenticator_active? && digid_app_enabled?
+            %li= link_to(t('my_digid.links.activate_sms_code_verification'), my_digid_sms_authenticators_choose_app_or_letter_url)
+          - else
+            %li= link_to(t('request_sms_code_verification_new_style'), request_sms_url, remote: true)
+-# Gesproken sms
+- if current_account.sms_tools.active? ||current_account.sms_in_uitbreiding? || current_account.mobiel_kwijt_in_progress?
+  - if (current_account.sms_tools.active? && current_account.gesproken_sms) || (current_account.pending_activatable? && current_account.pending_gesproken_sms)
+    .row
+      .wrap-main
+        .col.highlight
+          .col.col-name= t('spoken_sms').html_safe
+          .col.col-val
+            %button#spoken_sms.info-button.info{'aria-label': t('my_digid.spoken_sms.aria_label')}
+            .setting-active= t("active")
+        .col.col-info.info-box
+          %p= t('my_digid.spoken_sms.active')
+      .col.col-links
+        %ul.list-with-arrows
+          - unless current_account.deceased?
+            %li= link_to(t('deactivate_spoken_sms'), my_digid_spoken_text_message_url)
+  - else
+    .row
+      .wrap-main
+        .col.highlight
+          .col.col-name= t('spoken_sms').html_safe
+          .col.col-val
+            %button#spoken_sms.info-button.info{'aria-label': t('my_digid.spoken_sms.aria_label')}
+            .setting-inactive= t("inactive")
+        .col.col-info.info-box
+          %p= t('my_digid.spoken_sms.inactive')
+      .col.col-links
+        %ul.list-with-arrows
+          - unless current_account.deceased?
+            %li= link_to(t('activate_spoken_sms'), my_digid_spoken_text_message_url)

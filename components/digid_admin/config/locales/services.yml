@@ -1,0 +1,213 @@
+nl:
+  services:
+    _yes: "Ja"
+    _no: "Nee"
+    services: Diensten
+    active: Actief
+    certificates: Certificaten
+    date_from: Datum ingang
+    date_until: Datum einde
+    digid: DigiD
+    from: "Vanaf"
+    until: "Tot"
+    description: Omschrijving
+    edit: Wijzig
+    entity_id: Entity ID
+    filter: Filter
+    fingerprint: Fingerprint
+    id: ID
+    ip_address: IP adres
+    inactive: Inactief
+    metadata_url: Metadata URL
+    name: Naam
+    website_url: Website URL
+    oin: Organisatie-identificatie
+    protocol: Protocol
+    protocol_type: Soort protocol
+    cert_type: Soort
+    remarks: Opmerkingen
+    remove: Verwijder
+    roles: Rollen
+    saml_metadata: SAML metadata
+    standard: Standaard
+    status: Status
+    app_status: "App: Status"
+    time_of_day: Tijdstip
+    tls_certificates: TLS certificaten
+    validity: Geldigheid
+    version: Versie
+    view: Bekijk
+    back_to_overview: Terug naar overzicht
+    domain: Domein
+    indication_digid: Indicatie DigiD
+    indication_machtigen: Indicatie Machtigen
+    keyword: Trefwoord
+    parent_child:
+      type: "Dienst / Dienst: Soort relatie"
+      id: "Dienst: ID"
+      entity_id: "Dienst: EntityID"
+      name: "Dienst: Naam"
+
+    connection_entity_id: Aansluitings-entityID
+    connection_id: Aansluitings-ID
+    service_entity_id: Dienst-entityID
+    service_uuid: ServiceUUID
+    child_services: "Lijst van diensten die gebruikmaken van deze dienst"
+    parent_services: "Lijst van diensten waarvan deze dienst gebruikmaakt"
+    keyword_list: "Lijst van trefwoorden"
+    digid_enabled: Indicatie DigiD
+    machtigen_enabled: Indicatie machtiging
+    machtigen:
+      title: Machtigen
+      position: Weergavevolgorde
+      authorization_type: Soort machtiging
+      duration_authorization: Looptijd machtigingsaanvraag
+      description: Omschrijving
+      explanation: Toelichting
+    menu:
+      organizations: Organisaties
+      connections: Aansluitingen
+      services: Diensten
+      certificates: Certificaten
+    service_organization_roles:
+      list: "Lijst van organisaties die gebruikmaken van deze dienst"
+      name: "Organisatie: Naam"
+      type: "Organisatie / Rol: Soort Rol"
+      active: "Organisatie: Actief"
+    organizations:
+      overview: Overzicht organisaties
+      add_new: Nieuwe organisatie
+      edit: Wijzig organisatie
+      overview_add_new: Nieuwe organisatie
+      delete: Verwijder organisatie
+      oin: Organisatie-identificatie
+      identity: Identiteit
+      standard: Standaard
+      organization: Organisatie
+      organizations: Organisaties
+      organization_identification: Organisatie-identificatie
+      name: Organisatienaam
+      organization_role: Organisatie/Rol
+      organization_role_type: Soort rol
+      roles: Rollen
+      add_role: Rol toevoegen
+      add_service: Dienst toevoegen
+
+    connections:
+      overview: Overzicht aansluitingen
+      add_new: Nieuwe aansluiting
+      delete: Verwijder aansluiting
+      edit: Wijzig aansluiting
+      uuid: Aansluitingsidentificatie
+      entity_id: EntityID
+      connection: Aansluiting
+      connections: Aansluitingen
+      name: Naam
+      website_url: Website URL
+      id: Id
+      standard: Standaard
+
+      organization:
+        oin: "Organisatie: Organisatie-identificatie"
+        name: "Organisatie: Naam"
+
+      service:
+        id: "Dienst: ID"
+
+    service:
+      overview: Overzicht diensten
+      add_new: Nieuwe dienst
+      edit: Wijzig dienst
+      uuid: Dienst
+      service: Dienst
+      identity: Identiteit
+      connection: Aansluiting
+
+      organization: Organisatie
+      name: Naam
+      description: Omschrijving
+      login_url: Login URL
+      redirect_url: Redirect URL
+      redirect_domain: Redirect domain
+      error_return_url: Error return URL
+      tls_certificate: TLS certificaat
+      sso: SSO
+      sso_active: SSO actief
+      sso_status: SSO status
+      sso_domain: SSO domein
+      sso_logout_url: SSO logout URL
+      legacy_id: Legacy dienst ID
+      delete: Verwijder dienst
+      edit: Wijzig dienst
+      uuid: Dienstidentificatie
+      name: Dienstnaam
+
+    services:
+      id: Id
+      name: Naam
+      overview: Overzicht diensten
+      add_new: Nieuwe dienst
+      delete: Verwijder dienst
+      edit: Wijzig dienst
+      service_id: Dienstidentificatie
+      service: Dienst
+      services: Diensten
+      service_add: Dienst toevoegen
+      service_id: ServiceUUID
+      service_name: Dienstnaam
+      service_uuid: ServiceUUID
+      entity_id: EntityID
+      identity: Identiteit
+      standard: Standaard
+      standard_name: Naam
+      standard_website_url: Website URL
+      standard_min_reliability_level: Minimim betrouwbaarheids-niveau
+      standard_permission_question: Toestemmingsvraag
+      standard_authorization_required: Machtiging vereist
+      standard_encryption_type_id: Soort encryptie ID
+      standard_oin: OIN
+      standard_encryption_certificates: Encryptie certificaten
+      standard_organization_id: Organisatie-identificatie
+      new_reliability_level: Nieuw betrouwbaarheidsniveau
+      new_reliability_level_level: Niveau
+      new_reliability_level_change_msg: Wijzigingsbericht
+      connection:
+        id: "Aansluiting: ID"
+        entity_id: "Aansluiting: EntityID"
+        name: "Aansluiting: Naam"
+
+    certificate:
+      overview: Overzicht certificaten
+      certificates: Certificaten
+      fingerprint: "Fingerprint: "
+      cert_type: "Certificaat soort: "
+      organization:
+        name: "Organisatie: Naam"
+      connection:
+        connection_select: "Aansluiting: "
+      service:
+        service_select: "Dienst: "
+      service:
+        service_select: "Dienst: "
+
+    four_eyes:
+      approve_modification: Accorderen wijziging
+      modification_type: Type wijziging
+      modification_time: Wijziging aangemaakt op
+      modification_by: Wijziging aangemaakt door
+      to_approve: Te accorderen
+      new_values: Nieuwe/gewijzigde waarden
+      old_values: Oude waarden
+
+  process_results:
+    connection: Aansluiting
+    total_processed: Aantal verwerkt totaal
+    total_created: Aantal toegevoegd
+    total_updated: Aantal gewijzigd
+    total_errors: Aantal fout
+    created_at: Verwerkingsdatum
+
+  process_errors:
+    result: Verwerkingsresultaat
+    service: Dienst
+    reason: Foutreden

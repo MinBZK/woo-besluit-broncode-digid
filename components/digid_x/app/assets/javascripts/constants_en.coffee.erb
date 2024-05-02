@@ -1,0 +1,7 @@
+<%
+  locale = I18n.locale
+  I18n.locale = 'en'
+%>
+<%= ERB.new(File.read(Rails.root.join('app', 'assets', 'javascripts', 'constants_xx.coffee.erb'))).result(binding) %>
+window.asset_version = '1.9.26'
+<% I18n.locale = locale %>

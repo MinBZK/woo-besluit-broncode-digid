@@ -1,0 +1,91 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1= t("verify_account")
+.table
+  .table-row
+    .table-cell--heading= t("verification_handled_by")
+    .table-cell= @verification.user&.pseudonym
+  .table-row
+    .table-cell--heading= t("date_time_verification_completed")
+    .table-cell= l(@verification.created_at, format: :date_comma_time_hour)
+
+%h2= t("verification_details")
+.table
+  .table-row
+    .table-cell--heading= t("citizen_service_number_applicant")
+    .table-cell= @verification.citizen_service_number
+  .table-row
+    .table-cell--heading= t("account_actived_yet") 
+    .table-cell= t("activated", scope: "activerecord.attributes.verification")[@verification.activated?]
+  .table-row
+    .table-cell--heading= t("nationality")
+    .table-cell= @verification.nationality
+  .table-row
+    .table-cell--heading= t("document_number")
+    .table-cell= @verification.id_number
+  - if @verification.verification_correction.present? && @verification.verification_correction.id_number_differs?
+    .table-row--highlight
+      .table-cell--heading
+        = t("document_number")
+        = surround("(", ")") do
+          = t("at_request")
+      .table-cell= @verification.verification_correction.original_id_number
+
+  .table-row
+    .table-cell--heading= t("expires_at")
+    .table-cell= l(@verification.id_expires_at, format: :long)
+  - if @verification.verification_correction.present? && @verification.verification_correction.id_expires_at_differs?
+    .table-row--highlight
+      .table-cell--heading
+        = t("expires_at")
+        = surround("(", ")") do
+          = t("at_request")
+      .table-cell= l(@verification.verification_correction.original_id_expires_at, format: :long)
+
+  - if @verification.verification_correction.present?
+    .table-row--highlight
+      .table-cell--heading= t("motivation_correction")
+      .table-cell= @verification.verification_correction.motivation
+
+  .table-row
+    .table-cell--heading= t("suspected_fraud_after_verification")
+    .table-cell= t("suspected_fraud", scope: "activerecord.attributes.verification")[@verification.suspected_fraud]
+
+= extended_form_for(@form, url: audit_path(@verification), method: :put) do |form|
+  = form.header
+
+  = form.radio_buttons(:verification_correct, [[t("verification_correct"), true], [t("suspected_fraud"), false]], required: true)
+  = form.text_area(:motivation, required: @verification.suspected_fraud, type: :textarea)
+
+  = actions do
+    = action_submit(t("save"))
+    = action_link(t("cancel"), audits_path, :right)

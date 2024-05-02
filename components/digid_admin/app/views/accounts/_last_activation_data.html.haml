@@ -1,0 +1,67 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+#accounts
+  #letter_xml_container
+    - if @letters_hash
+      - present @letters_hash, LetterPresenter do |letter_presenter|
+        = field 'Briefcode:', letter_presenter.letter_code
+        = field 'Briefnaam:', letter_presenter.letter_name
+        = field 'Aanvraagdatum:', letter_presenter.registration_date
+        = field 'Aanhef:', letter_presenter.annotation
+        = field 'Naamregel 1:', letter_presenter.name
+        = field 'Adresregel 1:', letter_presenter.address
+        = field 'Adresregel 2:', letter_presenter.address_addition
+        = field 'Adresregel 3:', letter_presenter.more_address_additions if letter_presenter.more_address_additions
+        = field 'Adresregel 4:', letter_presenter.even_more_address_additions if letter_presenter.even_more_address_additions
+        = field 'Landcode:', letter_presenter.country
+        - if @baliecode.present? && @account.password_tool.present? && @account.password_tool.status == PasswordTool::Status::BLOCKED
+          = field 'Baliecode:', @baliecode
+          = field 'Vervaldatum:', I18n.l(@balie_expire_date, format: '%d-%m-%Y')
+          = field 'Vervaltijd:', "#{I18n.l(@balie_expire_date)} (niet op brief)"
+        - else
+          = field 'Code:', letter_presenter.activation_code
+          = field 'Vervaldatum:', letter_presenter.expiry_date
+          = field 'Vervaltijd:', "#{I18n.l(@vervaltijd)} (niet op brief)"
+        %p
+          %h2 Briefadres:
+          %span.letter_row= letter_presenter.name
+          %span.letter_row= letter_presenter.address
+          %span.letter_row= letter_presenter.address_addition
+          %span.letter_row= letter_presenter.more_address_additions if letter_presenter.more_address_additions
+          %span.letter_row= letter_presenter.even_more_address_additions if letter_presenter.even_more_address_additions
+
+        - if letter_presenter.printable?
+          = link_to('Print PDF', generate_pdf_letter_account_path(letter_id: params[:letter_id]), class: 'ui-button ui-corner-all ui-widget right')
+          = link_to('Verstuur aangetekend', resend_letter_registered_account_path(letter_id: params[:letter_id]), class: 'ui-button ui-corner-all ui-widget right')
+
+    - else
+      = I18n.t('accounts.notifications.no_letters')

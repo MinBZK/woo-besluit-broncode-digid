@@ -1,0 +1,67 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(balie_session? ? t('request_digid_abroad') : t('request_digid'))
+= steps(2, 4, t('details'))
+
+= extended_form_for(@account, url: update_account_url, method: :put, :html => {:id => "update_account_form"}) do |form|
+
+  %p= t('select_username_password_and_enter_contact_details')
+  - @show_fields_required = true
+
+  = block_with_icon do
+    %h2= t('remember_your_credentials')
+    %p= t('your_credentials_are_required_to_activate_digid')
+
+  = form.fields_for(:password_authenticator, :include_id => false) do |password_fields|
+    = password_fields.text_field(:username, accessibility_information: t('information_boxes.username'), information: render('username_information'), label: t('username'), required: true, data: { 'minimum-length' => 6, 'maximum-length' => 32, username: true })
+    = password_fields.password_field(:password, autocomplete: "new-password", accessibility_information: t('information_boxes.password'), information: render('password_information'), label: t('password'), password_strength: true, required: true, 'data-identical-to-password-confirmation' => '#account_password_authenticator_attributes_password_confirmation', example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier", toggle_text: true)
+    = password_fields.password_field(:password_confirmation, autocomplete: "new-password", label: t('repeat_password'), required: true, 'data-identical-to' => '#account_password_authenticator_attributes_password', example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier", toggle_text: true)
+
+  = form.header(t('contact_details'), class: "form-header-seperator")
+  %p= t('enter_mobile_phone')
+  = form.fields_for(:sms_tools, @account.sms_tools, include_id: false) do |sms_tool_fields|
+    - if balie_session? || web_registration_not_oeb?
+      = sms_tool_fields.mobile_number_and_spoken_sms(required: true, label: "#{t('mobile_phone_number')}", accessibility_information: t('information_boxes.mobile_number_aanvraag'), information: t('information_boxes.mobile_number_aanvraag'))
+    - else
+      = sms_tool_fields.mobile_number_and_spoken_sms(required: false, label: "#{t('mobile_phone_number')} *", accessibility_information: t('information_boxes.mobile_number_aanvraag'), information: t('information_boxes.mobile_number_aanvraag'))
+
+  = form.fields_for(:email, @account.email, include_id: false) do |email_fields|
+    - if balie_session?
+      = email_fields.text_field(:adres, accessibility_information: t('information_boxes.email_address_balie'), 'data-email' => true, 'data-maximum-length' => '254', information: t('information_boxes.email_address_balie'), label: t('email_address'), required: true)
+    - elsif web_registration_not_oeb?
+      = email_fields.text_field(:adres, accessibility_information: t('information_boxes.email_address_balie'), 'data-email' => true, 'data-maximum-length' => '254', information: t('information_boxes.email_address_midden'), label: t('email_address'), required: true)
+    - else
+      = email_fields.email_and_no_email(required: false, label: t('email_address'), accessibility_information: t('information_boxes.email_address_midden'), information: t('information_boxes.email_address_basis'), class: "skip-validate-on-blur")
+
+  = form.buttons({action: :next, arrow: true}, :cancel)
+
+= javascript_include_tag("inline/account_form", nonce: content_security_policy_script_nonce)

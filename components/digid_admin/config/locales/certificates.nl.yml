@@ -1,0 +1,5 @@
+nl:
+  certificates:
+    ca_verification_failed: "kon niet geverifieerd worden."
+    to_many_certificates: "aan een webdienst kunnen maximaal 2 certificaten gekoppeld zijn"
+    cert_about_to_expire: "Een of meer <strong>%{cert_type}</strong> dreigen te verlopen of zijn reeds verlopen. Klik hier voor meer informatie."

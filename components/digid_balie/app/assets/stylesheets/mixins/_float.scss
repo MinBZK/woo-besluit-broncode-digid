@@ -1,0 +1,17 @@
+@mixin float-left {
+  @include float(left);
+}
+
+@mixin float-right {
+  @include float(right);
+}
+
+@mixin float($side: left) {
+  display: inline;
+  float: unquote($side);
+}
+
+@mixin reset-float($display: block) {
+  float: none;
+  display: $display;
+}

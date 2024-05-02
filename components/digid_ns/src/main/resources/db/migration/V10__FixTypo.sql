@@ -1,0 +1,1 @@
+UPDATE messages SET content_dutch = 'Uw DigiD app <naam van apparaat> is zojuist geactiveerd. \\nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.' WHERE (id = '2');

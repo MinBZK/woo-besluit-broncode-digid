@@ -1,0 +1,64 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1
+  = t("services.four_eyes.approve_modification")
+  = t("four_eyes_reviews.#{four_eyes_review.record_table.underscore}")
+.actions_top
+  = link_to('Terug naar overzicht', send("#{four_eyes_review.record_table.gsub("::", "_").underscore.pluralize}_path")) if can? :index, four_eyes_review.record_table.classify.constantize
+  -if four_eyes_review.manager.id == current_user.id && can?(:edit, four_eyes_review.record_table.classify.constantize) && four_eyes_review.action != FourEyesReview::Action::DESTROY
+    = link_to('Wijzigen', send("edit_review_#{four_eyes_review.record_table.gsub("::", "_").underscore.pluralize}_path", four_eyes_review), :class=>"edit_button")
+.clear
+%br
+%table
+  %tbody
+    %tr
+      %td.bold
+        = t("services.four_eyes.modification_type")
+      %td
+        %span.strong.red
+          = t "four_eyes_reviews.#{four_eyes_review.action}"
+    %tr
+      %td.bold
+        = t("services.four_eyes.modification_time")
+      %td
+        = l(four_eyes_review.created_at, format: :only_date) unless four_eyes_review.created_at.nil?
+    %tr
+      %td.bold
+        = t("services.four_eyes.modification_by")
+      %td
+        = four_eyes_review.manager.account_name
+    %tr
+      %td.bold
+        = t("services.remarks")
+      %td
+        = four_eyes_review.note
+%br

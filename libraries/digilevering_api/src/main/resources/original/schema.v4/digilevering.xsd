@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dgl="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="unqualified" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" version="0.6">
+	<xsd:annotation>
+		<xsd:documentation>
+			Versie 0.6 (2013-01-22):
+				filterinhoud anytype gemaakt en versienummer verhoogd
+
+			Versie 0.5 (2012-11-22):
+				filterinhoud toegevoegd aan 'VerstrekkingDoorLV'
+
+			Versie 0.4 (2011-12-01):
+				versienummer aangepast naar 0.x in plaats van x.0
+				bug gefixt in xsd, gewensteMutatie' is nu van type 'dgl:MutatieType' in plaats van xsd:string
+
+			Versie 0.3 (2010-12-01):
+				versienummer toegevoegd aan xsd (ook bekend als versie 3.0)
+
+			Versie 0.1 (2010-08-30):
+				release 0.1.0 eerste versie
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="VerstrekkingDoorLV">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="datumtijdstempelLV" type="xsd:dateTime"/>
+				<xsd:element name="kenmerkLV" type="xsd:string"/>
+                                <xsd:element minOccurs="0" name="referentieId" type="xsd:string"/>
+				<xsd:element name="versieBerichttype" type="xsd:string"/>
+				<xsd:element name="basisregistratie" type="xsd:string"/>
+				<xsd:element name="gebeurtenissoort" type="dgl:GeversioneerdType"/>
+				<xsd:element minOccurs="0" name="filterinhoud" type="dgl:FilterInhoudType"/>
+				<xsd:element name="gebeurtenisinhoud" type="xsd:anyType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="VerstrekkingAanAfnemer">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="datumtijdstempelDigilevering" type="xsd:dateTime"/>
+				<xsd:element name="datumtijdstempelLV" type="xsd:dateTime"/>
+				<xsd:element name="kenmerkDigilevering" type="xsd:string"/>
+				<xsd:element name="kenmerkLV" type="xsd:string"/>
+                                <xsd:element minOccurs="0" name="referentieId" type="xsd:string"/>
+				<xsd:element name="versieBerichttype" type="xsd:string"/>
+				<xsd:element name="abonnement" type="dgl:GeversioneerdType"/>
+				<xsd:element name="basisregistratie" type="xsd:string"/>
+				<xsd:element name="gebeurtenissoort" type="dgl:GeversioneerdType"/>
+				<xsd:element name="gebeurtenisinhoud" type="xsd:anyType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="MutatieObjectenType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="datumtijdstempelAfzender" type="xsd:string"/>
+				<xsd:element name="kenmerkAfnemer" type="xsd:string"/>
+				<xsd:element name="versieBerichttype" type="xsd:string"/>
+				<xsd:element name="abonnement" type="dgl:GeversioneerdType"/>
+                                <xsd:element name="gewensteMutatie" type="dgl:MutatieType"/>
+				<xsd:element maxOccurs="256" name="objectidentificatie" type="dgl:ObjectidentificatieType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:complexType name="GeversioneerdType">
+		<xsd:sequence>
+			<xsd:element name="naam" type="xsd:string"/>
+			<xsd:element name="versie" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ObjectidentificatieType">
+		<xsd:sequence>
+			<xsd:element name="objecttype" type="xsd:string"/>
+			<xsd:element name="attribuuttype" type="xsd:string"/>
+			<xsd:element name="identificatie" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="PingType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="kenmerk" type="xsd:string"/>
+				<xsd:element name="datumtijdstempel" type="xsd:dateTime"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="PongType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="kenmerkPing" type="xsd:string"/>
+				<xsd:element name="datumtijdstempelPing" type="xsd:dateTime"/>
+				<xsd:element name="kenmerkPong" type="xsd:string"/>
+				<xsd:element name="datumtijdstempelPong" type="xsd:dateTime"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="MutatieType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="toevoeging"/>
+			<xsd:enumeration value="verwijdering"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="FilterInhoudType">
+		<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+			<xsd:choice>
+				<xsd:element name="filter1" type="xsd:anyType"/>
+				<xsd:element name="filter2" type="xsd:anyType"/>
+				<xsd:element name="filter3" type="xsd:anyType"/>
+				<xsd:element name="filter4" type="xsd:anyType"/>
+				<xsd:element name="filter5" type="xsd:anyType"/>
+				<xsd:element name="filter6" type="xsd:anyType"/>
+				<xsd:element name="filter7" type="xsd:anyType"/>
+				<xsd:element name="filter8" type="xsd:anyType"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

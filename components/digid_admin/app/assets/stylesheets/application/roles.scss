@@ -1,0 +1,64 @@
+#roles.show {
+  .left_column {
+    float: left;
+    padding: 0;
+    width: 315px;
+
+    div {
+      overflow: auto;
+      padding: 0 4px 4px;
+    }
+  }
+
+  .right_column {
+    float: right;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 258px;
+
+    div {
+      // scss-lint:disable NestingDepth
+      overflow: auto;
+      padding: 4px;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: block;
+          list-style: none;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+#roles {
+  form {
+    // scss-lint:disable NestingDepth
+    .left_column {
+      float: left;
+      padding: 0;
+      width: 315px;
+
+      div {
+        overflow: auto;
+        padding: 0 4px 4px;
+      }
+    }
+
+    .right_column {
+      float: right;
+      margin-bottom: 10px;
+      padding: 0;
+      width: 258px;
+
+      .form_wrapper {
+        overflow: auto;
+        padding: 4px;
+      }
+    }
+  }
+}

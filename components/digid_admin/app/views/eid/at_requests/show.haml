@@ -1,0 +1,64 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper
+  %h1= "eID AT-verzoek #{@at_request.id}"
+  .actions_top
+    = link_to('Terug naar overzicht', eid_at_requests_path)
+    = link_to('Download', download_eid_at_request_path(@at_request)) if can?(:manage, @at_request) && @at_request.download?
+  .clear
+  = field 'ID', @at_request.id
+  = field 'Documenttype', @at_request.document_type
+  = field 'Autorisatie', @at_request.authorization
+  = field 'Opvolgnummer', @at_request.sequence_no
+  = field 'Referentie', @at_request.reference
+  = field 'Status', @at_request.human_status
+  = field 'Gemaakt op', l(@at_request.created_at)
+  = field 'Gewijzigd op', l(@at_request.updated_at)
+  = field 'Gemaakt door', @at_request.created_by
+  = field 'Geaccordeerd door', @at_request.approved_by
+  = field 'Geaccordeerd op', @at_request.approved_at && l(@at_request.approved_at)
+  = field 'Verzonden door', @at_request.sent_by
+  = field 'Verzonden op', @at_request.sent_at && l(@at_request.sent_at)
+  - if can?(:manage, @at_request)
+    .actions
+      - if @at_request.status == Eid::AtRequest::Status::CREATED
+        - if @at_request.created_by != current_user
+          = link_to('Accorderen', approve_eid_at_request_path, method: :patch, class: 'check_button')
+        = link_to('Afkeuren', reject_eid_at_request_path, method: :patch, class: 'close_button')
+      - elsif @at_request.status == Eid::AtRequest::Status::APPROVED || @at_request.status == Eid::AtRequest::Status::SENT
+        = link_to('Versturen', send_email_eid_at_request_path, method: :patch, class: 'check_button')
+        = link_to('Afbreken', abort_eid_at_request_path, method: :patch, class: 'check_button')
+
+  .clear
+
+%br
+= show_manager_actions_for('Eid::AtRequest', @at_request.id)

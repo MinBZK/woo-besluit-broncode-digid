@@ -1,0 +1,48 @@
+{
+  "general": {
+    "active": "Actief",
+    "inactive": "Niet actief",
+    "waiting-activation": "Wacht op activering",
+    "completed": "Voltooid",
+    "incomplete": "Niet voltooid",
+    "blocked": "Geblokkeerd",
+    "suspended": "Geschorst",
+    "revoked": "Ingetrokken",
+    "your-bsn": "Uw Burgerservicenummer is",
+    "questions-title": "Heeft u vragen of opmerkingen?",
+    "website": "Bekijk de DigiD website",
+    "contact1": "Neem contact op met de DigiD helpdesk",
+    "contact2": "neem contact op met de DigiD helpdesk",
+    "new-window": "opent in een nieuw venster",
+    "or": "of ",
+    "welcome": "Welkom op Mijn DigiD",
+    "close": "Sluiten",
+    "at": " om ",
+    "dutch-time": "Nederlandse tijd",
+    "hour": "uur",
+    "tooltip": "tooltip",
+    "tooltip-aria": "Informatie over",
+    "never": "Nooit",
+    "ID-check": "ID-check"
+  },
+  "alert": {
+    "close-aria-label": "Sluit melding"
+  },
+  "button": {
+    "back-to-login": "Terug naar inlogmethodes",
+    "logout": "Uitloggen",
+    "more-details": "Meer details"
+  },
+  "date-picker": {
+    "placeholder": "DD-MM-JJJJ"
+  },
+  "modal": {
+    "close-btn-aria-label": "Sluit modaal",
+    "close-btn": "Sluit"
+  },
+  "toast": {
+    "timeout": "Uw sessie is verlopen, log opnieuw in aub",
+    "failed-retrieval": "Er is een fout opgetreden bij het ophalen van de data, probeer het later nog een keer.",
+    "no-connection": "Er is momenteel geen database verbinding"
+  }
+}

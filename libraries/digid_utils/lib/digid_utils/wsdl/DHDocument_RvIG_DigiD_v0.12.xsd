@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" elementFormDefault="qualified">
+	<xs:include schemaLocation="RvIGDEFTypes_v0.12.xsd"/>
+	<xs:element name="DHDocument-RequestMsg">
+		<xs:annotation>
+			<xs:documentation>Request message to get DH information</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Bron" type="BronType"/>
+				<xs:element name="BSN" type="BSNType"/>
+				<xs:element name="DocType" type="DocumentType"/>
+				<xs:element name="SequenceNr" type="SequenceNrType" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DHDocument-ResponseMsg">
+		<xs:annotation>
+			<xs:documentation>Response to the message DH Document Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ResponseMsg" type="DHDocument-ResponseMsgType"/>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DHDocument-FaultMsg">
+		<xs:annotation>
+			<xs:documentation>Fault Response op het bericht DHDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FaultMsg" type="DHDocument-FaultMsgType"/>
+			</xs:sequence>
+			<xs:attribute name="DateTime" type="xs:dateTime"/>
+			<xs:attribute name="MsgVersion" type="MsgVersionType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="DHDocument-FaultMsgType">
+		<xs:annotation>
+			<xs:documentation>De verschillende fouten die op kunnen treden.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TechnicalFault">
+				<xs:annotation>
+					<xs:documentation>Technische storing bij de MU.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotFound">
+				<xs:annotation>
+					<xs:documentation>Combinatie van gegevens niet gevonden.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DHDocument-ResponseMsgType">
+		<xs:annotation>
+			<xs:documentation>Het antwoord op de vraag. Als NrOfRecords 0 is dan is dit een positief resultaat.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="1">
+			<xs:element name="Response" type="ResponseType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="NrOfRecords" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="ResponseType">
+		<xs:annotation>
+			<xs:documentation>De documentgegevens die opgevraagd zijn.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DocumentNr" type="DocumentNrType"/>
+			<xs:element name="DocType" type="DocumentType"/>
+			<xs:element name="SequenceNr" type="SequenceNrType" minOccurs="1"/>
+			<xs:element name="Status" type="StatusInfoType"/>
+			<xs:element name="StatusDateTime" type="StatusDateTimeType"/>
+			<xs:element name="StatusBron" type="StatusBronType"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

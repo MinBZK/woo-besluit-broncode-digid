@@ -1,0 +1,226 @@
+// Dark-mode overrides
+// Only use color overwrites here, do not make padding/margin changes
+
+$content-background: #282828;
+$page-background: #1D1D1D;
+
+$text-field-default: #4a4a4a;
+$text-field-focused: #383838;
+
+$border-logo: #696969;
+$info-background: #184968;
+$warning-background: #724518;
+$error-background: #6D2924;
+
+$text-hint: #ccc;
+$text-color: #fff;
+$text-link-color: #8fcae7;
+
+@import 'includes/shared';
+
+@mixin dark-mode {
+  .block-with-icon--information {
+    @include block-with-icon($warning-background, image-url('info-darkmode.svg'));
+  }
+  .block-with-icon--error {
+    @include block-with-icon($error-background, image-url('error-darkmode.svg'));
+  }
+
+  .lds-spinner div:after {
+    background: #fff !important;
+  }
+
+  input, .form__item__field {
+
+    background-color: $text-field-default !important;
+    color: $text-color !important;
+    border-color: $text-color !important;
+
+    &:not(:placeholder-shown), &:focus {
+      background-color: $text-field-focused !important;
+    }
+  }
+
+  body {
+    background-color: $page-background !important;
+    color: $text-color !important;
+
+    &.my-digid-index {
+      background-color: $page-background !important;
+    }
+
+    :not(.my-digid-index) h1:not(.h2):before {
+      border: 1px solid $border-logo;
+      border-radius: 5px;
+    }
+  }
+
+  .actions__right--link,
+  .actions__left--link,
+  .actions__left--button,
+  .actions__right--button {
+    &:not(.primary--button) {
+      background-color: $content-background !important;
+    }
+
+    color: $text-color !important;
+  }
+
+  .content {
+    background-color: $content-background !important;
+  }
+
+  :not(.primary--button).arrow::before, :not(.primary--button).inverted_arrow::before  {
+    background-color: $content-background !important;
+    color: $text-color !important;
+  }
+
+  .highlight {
+    background-color: $text-field-focused !important;
+  }
+
+  h2:not(.orange_heading),
+  h3,
+  h4,
+  .questions-question,
+  .language-menu-item {
+    color: $text-color !important;
+  }
+
+  .login_tile:not(.highlighted) {
+    background-color: $content-background !important;
+    color: $text-color !important;
+  }
+
+  a {
+    color: $text-link-color !important;
+  }
+
+  .block-with-icon--information {
+    background-color: $warning-background !important;
+  }
+
+  .form__item__information, #session_countdown {
+    background-color: $info-background !important;
+  }
+
+  .block-with-icon--error, .form__item__errors {
+    background-color: $error-background !important;
+  }
+
+  .form__item__errors::before {
+    border-bottom-color: $error-background !important;
+  }
+
+  .form__item__information::before {
+    border-bottom-color: $info-background !important;
+  }
+
+  .icon-account::before,
+  .icon-sms_uitbreiding::before {
+    color: $text-color !important;
+  }
+
+  .col-links:hover {
+    background-color: unset;
+  }
+
+  .info-button, .info-button:hover {
+    background-color: unset !important;
+  }
+
+  .col-info {
+    color: $content-background;
+  }
+
+  .table-cell--overview {
+    background-color: $content-background !important;
+  }
+
+  .table-cell--history-date,
+  .table-row .table-cell {
+    background-color: $content-background !important;
+    color: $text-color !important;
+    border: unset !important;
+  }
+
+  .table-cell--heading,
+  .table-cell--heading:hover {
+    background-color: unset !important;
+  }
+
+  .table-row--highlight:hover,
+  .table-row:hover {
+    background-color: $content-background !important;
+  }
+
+  .icon-3941-delta-links-24px:before {
+    color: $text-color !important;
+  }
+
+  .heading_with_icon img {
+    border: 1px solid $border-logo;
+    border-radius: 5px;
+  }
+
+  a.header-menu-link {
+    color: $text-color !important;
+  }
+
+  .login_tile i[class^='icon-'] {
+    color: $text-color;
+  }
+
+  .wrap-main.yellow-highlight {
+    background-color: $content-background !important;
+  }
+
+  .col.info-box-active, .col-info {
+    border-top: $content-background;
+    background-color: $info-background !important;
+    color: $text-color;
+  }
+
+  .info-box:after {
+    border-color: rgba(246, 212, 178, 0) rgba(246, 212, 178, 0) $info-background;
+  }
+
+  .ui-dialog {
+    color: $text-color !important;
+    background-color: $content-background !important;
+
+    .actions__right--link,
+    .actions__left--link,
+    .actions__left--button,
+    .actions__right--button {
+      &:not(.primary--button) {
+        background-color: $content-background !important;
+      }
+    }
+  }
+
+  .checkbox_container .checkbox_checkmark:after, .checkbox_container .checkbox_checkmark {
+    border-color: $text-color;
+    color: $text-color;
+  }
+
+  .form__item .form__item__example, .form__item--error .form__item__example {
+    color: $text-hint !important;
+  }
+
+  .radio_checkmark {
+    background-color: $text-color;
+  }
+
+  #show-password-button {
+    color: white;
+  }
+}
+
+.dark-mode {
+  @include dark-mode;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light-mode) { @include dark-mode; }
+}

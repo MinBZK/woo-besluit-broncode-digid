@@ -1,0 +1,10 @@
+{
+  "paginator": {
+    "nav": "Paginering navigatie",
+    "prev": "Vorige",
+    "prev-aria-label": "Vorige pagina",
+    "next": "Volgende",
+    "next-aria-label": "Volgende pagina",
+    "goto": "Ga naar pagina {{ index }}"
+  }
+}

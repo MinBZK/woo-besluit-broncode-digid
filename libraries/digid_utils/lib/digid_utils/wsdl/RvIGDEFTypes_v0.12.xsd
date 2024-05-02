@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+    <xs:simpleType name="BSNType">
+        <xs:annotation>
+            <xs:documentation>Bsn type 9 cijfers</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+"/>
+            <xs:maxLength value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DocumentNrType">
+        <xs:annotation>
+            <xs:documentation>Type van het Document Nummer</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="[0-9A-Z]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DocumentType">
+        <xs:annotation>
+            <xs:documentation>Type van het Document. NI voor een Identiteitskaart</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NI"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IntrekkingscodeHashType">
+        <xs:annotation>
+            <xs:documentation>De Hash van de intrekkingscode. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:base64Binary"> </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MsgVersionType">
+        <xs:annotation>
+            <xs:documentation>Type voor de unieke identificatie van een berichtversie. Gebruikt alleen major versions.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+"/>
+			<xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OINType">
+        <xs:annotation>
+            <xs:documentation>OIN Type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SequenceNrType">
+        <xs:annotation>
+            <xs:documentation>Type voor de unieke identificatie van een DH middel van een DocumentType van een burger. De combinatie van Einde Geldigheid DS certificaat en door de MU toegekend volgnummer. (YYYYMMDDHHMMSSVV) </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="16"/>
+            <xs:pattern value="[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusType">
+        <xs:annotation>
+            <xs:documentation>Type voor aanvragen van DH middel (eID) statuswijziging</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Geactiveerd"/>
+            <xs:enumeration value="Geblokkeerd"/>
+            <xs:enumeration value="Ingetrokken"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusInfoType">
+        <xs:annotation>
+            <xs:documentation>Type voor de DH middel (eID) document info status</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Uitgereikt"/>
+            <xs:enumeration value="Geactiveerd"/>
+            <xs:enumeration value="Geblokkeerd"/>
+            <xs:enumeration value="Ingetrokken"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusDateTimeType">
+        <xs:annotation>
+            <xs:documentation>Type voor de DatumTijd voor een statuswijziging</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="BronType">
+        <xs:annotation>
+            <xs:documentation>Bron van aanvraag statuswijziging, PIN/PUK mailer of document info (DigiD Servicecentrum, DigiD ZelfService)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DigiD Zelfservice"/>
+            <xs:enumeration value="DigiD Servicecentrum"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusBronType">
+        <xs:annotation>
+            <xs:documentation>Bron van statuswijziging (DigiD Servicecentrum, DigiD ZelfService, RvIG)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DigiD Zelfservice"/>
+            <xs:enumeration value="DigiD Servicecentrum"/>
+            <xs:enumeration value="RvIG"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: RijksoverheidSansWebTextRegular;
+  src: url('../../assets/fonts/ROsanswebtextregular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RijksoverheidSansWebTextItalic;
+  src: url('../../assets/fonts/ROsanswebtextitalic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RijksoverheidSansWebTextBold;
+  src: url('../../assets/fonts/ROsanswebtextbold.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RijksoverheidSansWebTextRegular-webfont;
+  src: url('../../assets/fonts/ROsanswebtextregular-webfont.ttf') format('truetype');
+  font-display: swap;
+}
+
+$regular: RijksoverheidSansWebTextRegular, sans-serif;
+$italic: RijksoverheidSansWebTextItalic, sans-serif;
+$bold: RijksoverheidSansWebTextBold, sans-serif;
+$regular-webfont: RijksoverheidSansWebTextRegular-webfont, sans-serif;

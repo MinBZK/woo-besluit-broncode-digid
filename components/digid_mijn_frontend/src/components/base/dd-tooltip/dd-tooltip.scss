@@ -1,0 +1,13 @@
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-tooltip {
+  height: 1.5rem;
+  width: 1.5rem;
+  display: block;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,72 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= webservice.present? ? heading_with_icon(t('log_in_at_only'), webservice.name) : heading_with_icon(t('log_in'))
+
+%h2.orange_heading= t("not_able_to_receive_sms")
+
+- if current_account.app_authenticator_active? && !current_account.login_level_two_factor?
+  %p= t("cant_login_no_two_factor_active_app")
+- elsif !current_account.app_authenticator_active? && !current_account.login_level_two_factor?
+  %p= t("cant_login_no_two_factor_no_app")
+- elsif current_account.app_authenticator_active? && current_account.login_level_two_factor?
+  %p= t("cant_login_with_two_factor_active_app")
+- elsif !current_account.app_authenticator_active? && current_account.login_level_two_factor?
+  %p= t("cant_login_with_two_factor_no_app")
+
+%br
+
+%ol.with_style
+  - if current_account.app_authenticator_active?
+    %li
+      %p= t("login_with_app_title")
+      = actions do
+        = action_button(:login_with_app, authenticators_can_not_receive_sms_continue_url(choice: "log_in"))
+      %br
+  %li
+    %p= t("download_app_and_install")
+    %p= t("download_app_no_access")
+    = actions do
+      = action_button(:download_the_app, authenticators_can_not_receive_sms_continue_url(choice: "download"), target: "_blank")
+    %br
+  - if !current_account.login_level_two_factor?
+    %li
+      %p= t("re_request_sms_my_digid_title")
+      %p=t("re_request_sms_my_digid", href: authenticators_can_not_receive_sms_continue_url(choice: "re_request_sms")).html_safe
+      %br
+  %li
+    %p= t("request_account_website")
+    %br
+%ul.list-with-arrows
+  %li= link_to(t("request_account_website_action"), authenticators_can_not_receive_sms_continue_url(choice: "request"))
+
+= actions do
+  = previous_button(authenticators_sms_controleren_url)

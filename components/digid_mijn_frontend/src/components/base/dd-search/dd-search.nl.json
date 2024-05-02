@@ -1,0 +1,8 @@
+{
+  "search": {
+    "search-aria-label": "Start de zoekactie",
+    "search-usage-history-label": "Zoek in uw gebruiksgeschiedenis",
+    "input-placeholder": "Type een zoekterm",
+    "no-results": "Geen suggesties gevonden"
+  }
+}

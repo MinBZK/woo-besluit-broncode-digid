@@ -1,0 +1,268 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon("Welkom bij", "Mijn DigiD")
+= heading_with_icon("Inloggen bij", "Een hele lange webdienst naam die je scherm heel erg vol propt. Een hele lange webdienst naam die je scherm heel erg vol propt. ")
+= heading_with_icon("Welkom bij super ")
+= heading_with_icon("Welkom bij super lang Welkom bij super lang Welkom bij super ")
+= heading_with_icon("Welkom bij super lang Welkom bij super lang Welkom bij super lang Welkom bij super lang Welkom bij super super lang Welkom bij super ")
+
+= block_with_icon do
+  %h2= t('remember_your_credentials')
+  %p= t('your_credentials_are_required_to_activate_digid')
+
+%h1= t('upgrade_app_to_substantial')
+
+%h2.orange_heading= "Kop met daarna een p element"
+%p= "Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie"
+
+%h2.orange_heading= "Kop boven een formulier"
+= extended_form_for(PasswordVerification.new, url: password_check_post_url) do |form|
+  = form.header
+  = form.password_field(:password, label: t('check_your_password'), required: true, toggle_text: true, example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier")
+  = actions do
+    = action_submit(:next)
+    = cancel_button(cancel_password_check_url)
+
+
+= extended_form_for(Confirm.new, url: password_check_post_url) do |form|
+  = form.header
+  = form.confirm_radio_buttons(t('yes_i_want_to_use_sms_code_verification'), raw(t('no_dont_use_sms_code_verification')), label: t('do_you_want_to_set_login_with_extra_verification'))
+  = actions do
+    = action_submit(:next)
+    = cancel_button(cancel_password_check_url)
+
+- url = digid_app_provisioning_uri("auth", "asdfasdfasdfdsa")
+%h2.orange_heading= "Kop boven een QR code"
+= inline_qr_tag(url, "QR-code", id: "app_verification_code")
+- @background = "qr#{mobile_browser? ? "-mobile" : ""}"
+
+
+%h2.orange_heading= t('upgrade_app_to_substantial_success_step')
+%div= "Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie"
+
+- login_option = ["Met de DigiD app", "Test omschrijving"]
+%h2.orange_heading= t('upgrade_app_to_substantial_success_step')
+%a.authentication.login_tile{id: "authentication_type_account_#{login_option[1]}", class: login_option[1] == :app ? "app active" : "", href: sign_in_url}
+  %h2
+    = icon(login_option[1].to_s) if login_option[1] != :app
+    %span= login_option[0]
+    -if login_option[1] == :app
+      %p.description= t('the_easiest_way_to_login_safely')
+    - else
+      %p.description
+  = icon("3941-delta-links-24px", css_class: "right", hidden: true)
+
+
+- login_option = ["Met de DigiD app", "Test omschrijving"]
+%h2.orange_heading= t('upgrade_app_to_substantial_success_step')
+%a.authentication.login_tile.active{id: "authentication_type_account_#{login_option[1]}", class: login_option[1] == :app ? "app active" : "", href: sign_in_url}
+  %h2
+    = icon(login_option[1].to_s) if login_option[1] != :app
+    %span= login_option[0]
+    -if login_option[1] == :app
+      %p.description= t('the_easiest_way_to_login_safely')
+    - else
+      %p.description
+  = icon("3941-delta-links-24px", css_class: "right")
+
+
+
+
+
+
+%h2.orange_heading= t('upgrade_app_to_substantial_success_step')
+- flash.now[:notice] = "Een notificatie van een regel"
+= flash_notice
+
+- flash.now[:notice] = "Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie"
+= flash_notice
+
+- flash.now[:notice] = t('digid_app.login_notice.substantieel').html_safe
+= flash_notice
+
+- flash.now[:alert] = "Een notificatie van een regel"
+= flash_alert
+
+- flash.now[:alert] = "Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie. Een wat langere notificatie"
+= flash_alert
+
+= spinner
+
+= icon('hoog_id_card')
+= icon('hoog_driving_licence')
+
+
+%h1= t('digid_app_doesnt_open')
+
+- if wrapped_session.expires_at.present?
+  = render('shared/session_countdown', key: 'no_extension')
+
+%h2= t('digid_app_doesnt_open_title_not_installed').html_safe
+%p
+  = t('digid_app_doesnt_open_text_not_installed')
+%br
+
+%h2= t('digid_app_doesnt_open_title_installed').html_safe
+%p
+  = t('digid_app_doesnt_open_text_installed')
+
+- url = digid_app_provisioning_uri("auth", SecureRandom.uuid)
+= inline_qr_tag(url, "QR-code", id: "app_verification_code")
+- @background = "qr#{mobile_browser? ? "-mobile" : ""}"
+
+%div.block-without-icon.padding-left-10px
+  .left.margin-right-5px
+    = spinner
+  %p= t('you_will_be_redirected_to', url: "https://www.google.com").html_safe
+
+= flash_notice
+
+= steps(6, 6, t('upgrade_app_to_substantial_success_step'))
+= steps(1, 1, t('upgrade_app_to_substantial_success_step'))
+= steps(1, 5, t('upgrade_app_to_substantial_success_step'))
+= steps(3, 5, t('upgrade_app_to_substantial_success_step'))
+= steps(5, 5, t('upgrade_app_to_substantial_success_step'))
+
+%p Het inlogniveau van uw DigiD app is verhoogd naar niveau Substantieel.
+%p Iedere keer dat u inlogt met uw DigiD app, logt u in met niveau Substantieel.
+%p
+  = surround('Dit niveau wordt aangeduid met ', '.') do
+    = icon("2057-online-veiligheid", css_class: "level3", human_name: t("padlock3"))
+%p Dit hogere inlogniveau kan worden gevraagd door webdiensten die privacygevoelige informatie met u willen uitwisselen.
+= actions do
+  = action_button(:annie_are_you_okay, my_digid_url)
+
+%h1 Test cases sms code pasten
+
+%textarea.qr_url{ readonly: true }= "Uw DigiD sms-code om in te loggen bij Mijn DigiD is: 123-321"
+%textarea.qr_url{ readonly: true }= "Random tekst met een code 321123 ergens erin die niet voldoet"
+%textarea.qr_url{ readonly: true }= "9876543"
+%textarea.qr_url{ readonly: true }= "543-987"
+
+- unless @disable_autofocus
+  - @smscode = Smscode.new
+  = extended_form_for(@smscode, url: authenticators_confirm_sms_url) do |form|
+
+    = form.sms_code_field(:smscode, authenticators_check_mobiel_url(sms_keuze: true)), label: icon("telefoon-24px") + t("enter_code_received_by_phone"), text: t("enter_code_received_by_phone_text"), legend: t("enter_code_received_by_phone_text"), required: true)
+    %div.no_code_received
+      = link_to(t('examples.no_code_received')
+
+    = form.buttons(:next, :cancel)
+
+- unless @disable_autofocus
+  %br
+  - @code = ::AppVerificationCode.new
+  = render partial: '/shared/app_verification_code', locals: { open_url: nil, instruction: 'app_mobile_instructions', qr_url: digid_app_qr_code_url, cancel_url: digid_app_cancel_url }
+
+%ul.list-with-arrows
+  %li
+    = external_link_to(t('app_instruction_links'), 'https://www.digid.nl/identiteitsbewijs')
+
+-# --------------------------
+-# -- Login Preference
+-# --------------------------
+%h2.heading-with-separator= t('loginlevel_preference')
+.table--shades
+  .table-row
+    .table-cell--overview
+      %p= t('texts.loginlevel_preference')
+.row
+  .wrap-main
+    .col.highlight
+      .col.col-name= t('loginlevel_preference')
+      .col.col-val
+        = t('loginLevel_basis')
+  .col.col-links
+    %ul.list-with-arrows
+      %li= link_to(t('loginlevel_wijzigen'), my_digid_pilot_login_preference_url, remote: true)
+      - # Empty li test
+      %li
+.row
+  .wrap-main
+    .col.highlight
+      .col.col-name= t('loginlevel_preference')
+      .col.col-val
+        = t('loginLevel_basis')
+  .col.col-links
+    %ul.list-with-arrows
+      %li= link_to(t('loginlevel_wijzigen'), my_digid_pilot_login_preference_url, remote: true)
+
+= "<i class='icon-2057-online-veiligheid' aria-label='Icoon van een hangslot'></i>".html_safe
+
+.row.extended-height
+  .wrap-main.yellow-highlight.extended-height
+    .col.no-highlight
+      .col.col-name= t('my_digid.login_methods.sms')
+      .col.col-val
+        %button#sms_code_verification.info-button.info{'aria-label': t('my_digid.sms.aria_label')}
+        = t('awaiting_activation')
+    .col.col-info.info-box
+      %p= t('my_digid.sms.pending', activate_sms_verification: link_to(t('my_digid.links.activate_sms_verification'), activate_url)).html_safe
+  .col.col-links.extended-height
+    %ul.list-with-arrows
+      %li= link_to(t('enter_activation_code'), activate_url)
+      %li= link_to(t('re_request_sms_code_verification_new_style'), existing_sms_request_url)
+
+- @registration = Registration.new
+%h1= t('request_digid')
+
+= render('shared/news_item', news_items: @news_items)
+
+= steps(1, 3, t('personal_details'))
+
+= flash_notice
+
+= device_dependent_image_tag("scan_id")
+
+#registration-form= render(partial: 'registrations/form', locals: { registration: @registration })
+
+
+
+%h1= t('password')
+
+= extended_form_for(PasswordVerification.new, url: password_check_post_url) do |form|
+
+  = form.header
+
+  = form.password_field(:password, label: t('check_your_password'), required: true, toggle_text: true, example: t('caps_lock_is_on'), fieldset_class: "capslock_notifier")
+
+  = actions do
+    = action_submit(:next)
+    = cancel_button(cancel_password_check_url)
+
+- unless @disable_autofocus
+  = extended_form_for(@smscode, url: authenticators_confirm_sms_url) do |form|
+    = form.buttons({action: :cancel, arrow: true}) do
+      = action_submit(:next, arrow: true)
+
+= render('shared/questions', page_name: "C1", other_questions: "D1")
+

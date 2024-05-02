@@ -1,0 +1,86 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.general.mixins' as *;
+
+//Mixin also used by the dd-search buttons
+@mixin inputButton {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  bottom: 0.65rem;
+  right: 0.75rem;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+
+  &__icon > img {
+    margin-top: 0.25rem;
+  }
+}
+
+.dd-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  label {
+    font-size: 18px;
+    line-height: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__secondary-label {
+    font-weight: normal;
+  }
+
+  &__input {
+    font-family: ROsans, arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--base2);
+    border: 1px solid var(--base3);
+    border-radius: 4px;
+
+    &::placeholder {
+      color: var(--solid4);
+    }
+  }
+
+  &__clear-btn {
+    @include inputButton;
+
+    &__cross {
+      padding: 0.25rem;
+    }
+
+    &:hover {
+      background: var(--solid-highlight);
+    }
+  }
+
+  &__hint {
+    color: var(--hint);
+    margin-bottom: 0.5rem;
+  }
+
+  &--has-hint {
+    label {
+      margin-bottom: 0;
+    }
+  }
+
+  &--has-error {
+    .dd-input__input {
+      border-color: var(--solid-error);
+    }
+  }
+
+  &--allow-clear {
+    .dd-input__input {
+      padding-right: 46px;
+    }
+  }
+}

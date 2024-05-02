@@ -1,0 +1,57 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%p= I18n.t('kiosk.overview_note')
+%br
+= four_eyes_form_for @kiosk do |f|
+  = field f.label(:identificatie), @kiosk.kiosk_id
+  = field f.label(:naam), @kiosk.naam
+  = field f.label(:adres), f.text_field(:adres)
+  = field f.label(:woonplaats), f.text_field(:woonplaats)
+  = field f.label(:postcode), f.text_field(:postcode)
+  - if @kiosk.created_at.present?
+    = field f.label(:aangemaakt), l(@kiosk.created_at, format: :short_custom)
+  - if @kiosk.created_at.present?
+    = field f.label(:Laatst_gewijzigd), l(@kiosk.updated_at, format: :short_custom)
+  = field f.label(:status) do
+    = f.select "status", [ @kiosk.pending? ? ["Pending", ::Kiosk::Status::PENDING] : nil, ["Actief", ::Kiosk::Status::ACTIVE], ["Inactief", ::Kiosk::Status::INACTIVE] ].compact
+  .actions
+    = link_to(t('cancel'), kiosks_path)
+    = submit_tag(t('save_for_review'), class: 'ui-button ui-widget ui-state-default ui-corner-all')
+    - if (request.referer.blank? || !request.referer.include?("kiosks/review")) && can?(:destroy, @kiosk)
+      = link_to(I18n.t('app_version.destroy_button'), kiosk_path(@kiosk), id: "delete_kiosk", class: 'delete_button')
+  .clear
+
+.hidden.dialog-wrapper
+  .title= "Verwijder Kiosk"
+  .notice= t('are_you_sure')
+  .body= render('four_eyes_reviews/note_dialog')
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:dgl="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+	<xs:import namespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" schemaLocation="Logius_Canonical_Berichttypes.xsd"/>
+	<xs:element name="VerstrekkingAanAfnemer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="datumtijdstempelDigilevering" type="xs:dateTime"/>
+				<xs:element name="datumtijdstempelLV" type="xs:dateTime"/>
+				<xs:element name="kenmerkDigilevering" type="xs:string"/>
+				<xs:element name="kenmerkLV" type="xs:string"/>
+				<xs:element minOccurs="0" name="referentieId" type="xs:string"/>
+				<xs:element name="versieBerichttype" type="xs:string"/>
+				<xs:element name="abonnement" type="dgl:GeversioneerdType"/>
+				<xs:element name="basisregistratie" type="xs:string"/>
+				<xs:element name="gebeurtenissoort" type="dgl:GeversioneerdType"/>
+				<xs:element name="gebeurtenisinhoud" type="dgl:VerstrekkingInhoudType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="GeversioneerdType">
+		<xs:sequence>
+			<xs:element name="naam" type="xs:string"/>
+			<xs:element name="versie" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="PingType">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kenmerk" type="xs:string"/>
+				<xs:element name="datumtijdstempel" type="xs:dateTime"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PongType">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kenmerkPing" type="xs:string"/>
+				<xs:element name="datumtijdstempelPing" type="xs:dateTime"/>
+				<xs:element name="kenmerkPong" type="xs:string"/>
+				<xs:element name="datumtijdstempelPong" type="xs:dateTime"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="VerstrekkingInhoudType">
+		<xs:sequence>
+			<!-- Plaatsen afnemersindicatie -->
+			<!-- Ag01: Vulbericht -->
+			<!-- Af01: Foutbericht -->
+			<xs:element name="ag01" type="types:ag01" minOccurs="0"/>
+			<xs:element name="af01" type="types:af01" minOccurs="0"/>
+			<!-- Verwijderen afnemersindicatie -->
+			<!-- Null: Nullbericht -->
+			<!-- Af11: Foutbericht -->
+			<xs:element name="null" type="types:null" minOccurs="0"/>
+			<xs:element name="af11" type="types:af11" minOccurs="0"/>
+			<!-- Spontane berichten -->
+			<!-- Gv01: Spontane verstrekking -->
+			<!-- Ng01: Opschorting PL -->
+			<!-- Ag31: Foutherstelbericht -->
+			<xs:element name="ng01" type="types:ng01" minOccurs="0"/>
+			<xs:element name="gv01" type="types:gv01" minOccurs="0"/>
+			<xs:element name="ag31" type="types:ag31" minOccurs="0"/>
+			<!-- Foutberichten -->
+			<!-- Pf01, Pf02, Pf03: Protocolfouten op Cyclus, Syntax, Inhoudelijk -->
+			<xs:element name="pf01" type="types:pf01" minOccurs="0"/>
+			<xs:element name="pf02" type="types:pf02" minOccurs="0"/>
+			<xs:element name="pf03" type="types:pf03" minOccurs="0"/>
+			<!-- Overige Berichten -->
+			<xs:element name="ag11" type="types:ag11" minOccurs="0"/>
+			<xs:element name="ag21" type="types:ag21" minOccurs="0"/>
+			<xs:element name="gv02" type="types:gv02" minOccurs="0"/>
+			<xs:element name="vb01" type="types:vb01" minOccurs="0"/>
+			<xs:element name="wa11" type="types:wa11" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

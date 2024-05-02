@@ -1,0 +1,52 @@
+// View types
+.four_eyes_reviews.update {}
+.four_eyes_reviews.create {}
+.four_eyes_reviews.destroy {}
+
+// Attributes
+.four_eyes_reviews {
+  .new{}
+  .unchanged {}
+  .changed {
+    .label{color: red; font-weight: bold;}
+    .value{color: red; font-weight: bold;}
+    td.value a{color: red; background-color: transparent; cursor: pointer}
+    td.value a:hover{color: red !important; background-color: transparent !important;}
+  }
+  .destroyed{}
+  .value {
+    word-break: break-all;
+  }
+}
+
+.four_eyes_reviews.create {
+  .changed {
+    .label{color: black; font-weight: bold;}
+    .value{color: black; font-weight: normal;}
+    td.value a{color: black; background-color: transparent; cursor: pointer}
+    td.value a:hover{color: black !important; background-color: transparent !important;}
+  }
+}
+
+.four_eyes_reviews.destroy {
+  .collection.removed .value{text-decoration: none; color: black; font-weight: normal;}
+  .changed {
+    .label{color: black; font-weight: bold;}
+    .value{color: black; font-weight: normal;}
+    td.value a{color: black; background-color: transparent; cursor: pointer}
+    td.value a:hover{color: black !important; background-color: transparent !important;}
+  }
+}
+
+// Collections
+.four_eyes_reviews .collection.header .label{}
+.four_eyes_reviews .collection.removed .value{text-decoration: line-through; color: red; font-weight: bold;}
+.four_eyes_reviews .collection.added .value{color: red; font-weight: bold;}
+
+// Note
+.four_eyes_review_note {padding: 13px 0px 3px 0px; background-color: #f2f2f2; margin-bottom: 15px;}
+.four_eyes_review_note label {margin-left: 10px; padding-top: 2px}
+
+// Note in dialog (used on destroy request appversion and role)
+.ui-dialog .four_eyes_review_note{margin-top: 10px}
+.four_eyes_review_note input {width: 420px !important;}

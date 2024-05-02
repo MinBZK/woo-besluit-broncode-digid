@@ -1,0 +1,12 @@
+{
+  "banner": {
+    "title": "Uw persoonlijke gegevens nog beter beschermen?",
+    "title-idCheck": "Extra privacygevoelige gegevens inzien of wijzigen?",
+    "btn-app": "Download de DigiD app",
+    "btn-2fa": "Zet 'Altijd inloggen in minimaal twee stappen' aan",
+    "text-app": "De DigiD app is de makkelijkste manier om veilig in te loggen. U hoeft geen wachtwoord te onthouden. Alleen een pincode die u zelf kiest.",
+    "text-2fa": "Als u dit instelt, logt u altijd in met de DigiD app, sms-controle of een identiteitsbewijs. U kunt dan niet meer inloggen met alleen uw gebruikersnaam en wachtwoord. Zo zijn uw persoonlijke gegevens nog beter beschermd.",
+    "text-idCheck": "Wilt u extra privacygevoelige gegevens inzien of wijzigen? Bijvoorbeeld gegevens over uw gezondheid. Voeg dan een extra controle (ID-check) van uw paspoort, rijbewijs of identiteitskaart toe aan uw app. Steeds meer organisaties vragen om deze extra controle.",
+		"banner-closed" : "Melding is gesloten"
+  }
+}

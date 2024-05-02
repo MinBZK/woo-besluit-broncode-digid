@@ -1,0 +1,22 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.login-method.mixins' as *;
+
+.dd-login-options-id-details {
+  @include details;
+
+  &__card-wrapper {
+    display: flex;
+    list-style-type: none;
+    margin-top: 1rem;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__link {
+    & > a {
+      margin-bottom: 0.25rem;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.show.form_wrapper#roles
+  %h1 Rol '#{@role.name}'
+  .actions_top
+    = link_to('Terug naar overzicht', index_path_for_model_instance(@role)) if can? :index, @role.class
+    - link_options = (in_review?(@role) || is_frozen?(@role)) ? {class: 'disabled_edit_button', onclick: "return false;"} : {class: 'edit_button'}
+    = link_to 'Wijzig rol', edit_role_path(@role), link_options if can? :update, @role
+  .clear
+  = field 'Naam', @role.name
+  = field 'Aangemaakt op', l(@role.created_at, format: :default)
+  = field 'Gewijzigd op', l(@role.updated_at, format: :default)
+  .clear
+  = column_box(title: 'Privileges', class: 'left_column') do
+    = render 'permissions', role: @role
+  = column_box(title: 'Accounts', border: true, class: 'right_column') do
+    = render 'managers', role: @role
+  .clear
+  .actions
+    = link_to('Verwijder rol ter accordering', "#", id: "delete_role", class: "delete_button") if can? :delete, Role
+    .hidden.dialog-body= render('four_eyes_reviews/note_dialog')
+  .clear
+
+.hidden.dialog-wrapper
+  .title= "Verwijder Rol"
+  .notice= t('are_you_sure')
+  .body= render('four_eyes_reviews/note_dialog')
+
+%br
+= show_manager_actions_for(Log::SubjectTypes::ROLE, @role.id)

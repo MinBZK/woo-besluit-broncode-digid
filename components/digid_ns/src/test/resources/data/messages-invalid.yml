@@ -1,0 +1,11 @@
+- id: 1
+  message_type: 'PSH01'
+  title_english: 'title EN 1'
+  content_english: 'content EN 1'
+  title_dutch: 'title NL 1'
+  content_dutch: 'content NL 1'
+- message_type: 'PSH03'
+  title_english: 'title EN 3'
+  content_english: 'content EN 3'
+  title_dutch: 'title NL 3'
+  content_dutch: 'content NL 3'

@@ -1,0 +1,77 @@
+# DIGID BALIE
+defaults: &defaults
+  consider_all_requests_local: true
+  dot_environment: false
+
+metadata: &metadata
+  organization:
+    organization_names: Logius
+    organization_display_names: Logius
+    organization_urls: www.logius.nl
+  contactperson:
+    contact_type: technical
+    company: Logius
+    given_name: Ketenbeheer
+    email_addresses: servicecentrum@logius.nl
+    telephone_numbers: 0900-5554555
+
+eherkenning: &eherkenning
+  authnrequest:
+    assertion_consumer_service_index: 0
+    authn_context_class_ref: urn:etoegang:core:assurance-class:loa1
+    allowed_levels: loa1,loa2,loa2plus,loa3,loa4
+  enabled: false
+  entity_id:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  gateway:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  artifact_resolution_url:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  service_name: DigiD Balie Lokaal
+  metadata:
+    <<: *metadata
+  signing_cert_file: config/ssl/public.cert
+  signing_key_file: config/ssl/key.pem
+  encryption_cert_file: config/ssl/public.cert
+  encryption_key_file: config/ssl/key.pem
+
+development: &development
+  <<: *defaults
+  secret_key_base:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+  hosts:
+    balie:SSSSSSSSSSSSSSSSS
+    digid:SSSSSSSSSSS
+  urls:
+    internal:
+      admin:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      x:SSSSSSSSSSSSSSSSSS
+      ss:SSSSSSSSSSSSSSSSSSSSS
+  dot_environment: true
+  eherkenning:
+    <<: *eherkenning
+  exception_notifier: false
+  log_level: :debug
+  protocol: http
+  sys_logger_enabled: false
+  stubs_host:SSSSSSSSSSSSSSSSS
+  sms_gateway:
+    regular:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+    spoken:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+test:
+  <<: *development
+  hosts:
+    balie: www.example.com
+
+production:
+  <<: *defaults
+  log_level: :error
+  consider_all_requests_local: "true"
+  locales": "en|nl"
+  eherkenning:
+    <<: *eherkenning
+  exception_notifier: true
+  protocol: https
+  sys_logger_enabled: true
+  urls:
+    internal:
+      x:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      admin:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      ss:SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS

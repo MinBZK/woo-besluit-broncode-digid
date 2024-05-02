@@ -1,0 +1,19 @@
+.dd-chevron {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  fill: currentColor;
+
+  &__vertical {
+    fill: currentColor;
+    height: 0.75rem !important;
+    width: 0.4375rem !important;
+  }
+
+  &__horizontal {
+    fill: currentColor;
+    height: 0.4375rem !important;
+    width: 0.75rem !important;
+  }
+}

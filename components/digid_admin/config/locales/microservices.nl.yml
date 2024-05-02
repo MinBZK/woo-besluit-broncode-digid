@@ -1,0 +1,22 @@
+nl:
+  microservices:
+    human:
+      name:
+        auth: DigiD auth (gebruikersnaam en wachtwoord authenticatie)
+        balie: DigiD balie
+        dws: DigiD webservice
+        eid: DigiD Hoog (kaart uitlees proces)
+        hsm-bsnk: DigiD Hoog - Hardware Security Module (bsnk)
+        hsm-eac: DigiD Hoog - Hardware Security Module (eac)
+        hsm-simulator-dev: DigiD Hoog - Hardware Security Module (dev)
+        msc: DigiD Hoog - Middelen status controller (status cache)
+        ns: DigiD Notificatie Service - Pushmeldingen naar gebruikersapps
+        rda: DigiD Substantieel - Remote Document Authentication
+        redis: Redis - cache
+        redis-sentinel: Redis Sentinel - cache
+        ss: DigiD shared services (Applicatie configuraties)
+        vault: Vault - Database met geheime sleutels voor andere microservices
+      status:
+        passing: "Geslaagd"
+        warning: "Waarschuwing"
+        failing: "Gefaald"

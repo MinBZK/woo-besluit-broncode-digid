@@ -1,0 +1,73 @@
+(function() {
+  window.constants = {
+    regexes: {
+      capitals: /<%= CharacterClass::CAPITALS.source %>/g,
+      digits: /<%= CharacterClass::DIGITS.source %>/g,
+      email: /^<%= CharacterClass::EMAIL.source %>$/i,
+      idNumber: /^<%= CharacterClass::ID_NUMBER.source %>$/,
+      idNumberForeign: /^<%= CharacterClass::ID_NUMBER_FOREIGN.source %>$/,
+      miniscules: /<%= CharacterClass::MINUSCULES.source %>/g,
+      specialCharacters: /<%= CharacterClass::SPECIAL_CHARACTERS.source %>/g,
+      only: {
+        bsn_format: /^<%= CharacterClass::BSN_FORMAT.source %>$/,
+        house_number_addition: /^<%= CharacterClass::HOUSE_NUMBER_ADDITION.source %>$/,
+        house_number: /^<%= CharacterClass::HOUSE_NUMBER.source %>$/,
+        password: /^<%= CharacterClass::PASSWORD.source %>$/,
+        postal_code: /^<%= CharacterClass::POSTAL_CODE.source %>$/,
+        username: /^<%= CharacterClass::USERNAME.source %>$/
+      }
+    },
+    validationMessages: <%= {
+      audit_form: I18n.t('activemodel.errors.models.audit_form.attributes').deep_merge(
+        motivation: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('activemodel.attributes.audit_form.motivation')),
+        },
+        verification_correct: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('activemodel.attributes.audit_form.verification_correct')),
+        },
+      ),
+      create_verification_form: I18n.t('activemodel.errors.models.create_verification_form.attributes').deep_merge(
+        citizen_service_number: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('citizen_service_number')),
+        },
+        front_desk_code: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('front_desk_code')),
+          tooLong: I18n.t('activemodel.errors.messages.too_long', attribute: I18n.t('front_desk_code'), count: '9'),
+          tooShort: I18n.t('activemodel.errors.messages.too_short', attribute: I18n.t('front_desk_code'), count: '9'),
+        },
+      ),
+      edit_verification_form: I18n.t('activemodel.errors.models.edit_verification_form.attributes').deep_merge(
+        id_established: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_established')),
+        },
+        id_signaled: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_signaled')),
+        }
+      ),
+      verification_correction_form: I18n.t('activemodel.errors.models.verification_correction_form.attributes').deep_merge(
+        id_expires_at: {
+          invalid: I18n.t('activemodel.errors.models.verification_correction_form.attributes.id_expires_at.invalid')
+        },
+        id_expires_at_day: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_expires_at_day')),
+          invalid: I18n.t('activemodel.errors.models.verification_correction_form.attributes.id_expires_at_day.invalid')
+        },
+        id_expires_at_month: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_expires_at_month')),
+          invalid: I18n.t('activemodel.errors.models.verification_correction_form.attributes.id_expires_at_month.invalid')
+        },
+        id_expires_at_year: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_expires_at_year')),
+          invalid: I18n.t('activemodel.errors.models.verification_correction_form.attributes.id_expires_at_year.invalid'),
+          year_is_in_past: I18n.t('activemodel.errors.models.verification_correction_form.attributes.id_expires_at_year.year_is_in_past')
+        },
+        id_number: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('id_number')),
+        },
+        motivation: {
+          blank: I18n.t('activemodel.errors.messages.blank', attribute: I18n.t('motivation')),
+        }
+      )
+    }.to_json %>
+  }
+}).call(this);

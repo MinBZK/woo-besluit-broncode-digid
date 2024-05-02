@@ -1,0 +1,868 @@
+// IMPORTANT
+// =========
+
+// * Attempt to use as little nested CSS rules as possible.
+// * Use descriptive and unique class names that they can be defined at root level.
+// * The order of the CSS rules is:
+//   - variables
+//   - global mixins/placeholders
+//   - imports
+//   - elements
+//   - classes (don't use IDs)
+// * Mixins and placeholders can be defined close to the rules that use them.
+// * Order rules alphabetically for easier lookup.
+
+$base-font-family: Verdana, Arial, sans-serif;
+$base-font-size: 12px;
+$base-line-height: 1.5em;
+
+$shadow-width: 10px;
+$reserved-width: 2 * $shadow-width + 20px;
+$window-width-minimum: 320px - $reserved-width;
+$window-width-maximum: 960px;
+$main-width-maximum: $window-width-maximum / 2;
+
+$breakpoint0: $main-width-maximum + $reserved-width;
+$breakpoint1: $main-width-maximum + $reserved-width + 110px;
+$breakpoint2: 768px;
+$breakpoint3: 980px;
+
+$table-border-width: 3px;
+
+// Rijkshuisstijl - Online kleuren
+// http://www.rijkshuisstijl.nl/bouwstenen/kleur/online-kleuren
+$rs-achtergrond-links: #535353;
+$rs-geel-lichte-tint: #fdf6bb;
+$rs-links-visited: #696969;
+$rs-oranje-lichte-tint: #f6d4b2;
+$rs-oranje-lichtste-tint: #fbead9;
+$rs-oranje-volle-kleur: #e17000;
+$rs-rood-lichte-tint: #f2bfbb;
+$rs-tekst-links: #154273;
+$rs-wit: #fff;
+$rs-zwart: #000;
+
+// Niet rijkshuisstijl kleuren
+$nrs-0162cd: #0162cd;
+$nrs-2e742e: #2e742e;
+$nrs-5a5a5a: #5a5a5a;
+$nrs-828282: #828282;
+$nrs-960000: #960000;
+$nrs-bb4c4c: #bb4c4c;
+$nrs-dcdcdc: #dcdcdc;
+$nrs-ddd: #ddd;
+$nrs-deebe3: #deebe3;
+$nrs-ea9790: #ea9790;
+$nrs-f0f0f0: #f0f0f0;
+$nrs-f3f5f6: #f3f5f6;
+$nrs-f5f5f5: #f5f5f5;
+$nrs-f8f8f9: #f8f8f9;
+$nrs-fada3c: #fada3c;
+$nrs-fbf1cb: #fbf1cb;
+$nrs-fbfbfb: #fbfbfb;
+$nrs-fce559: #fce559;
+
+
+@import "mixins/clearfix";
+@import "mixins/float";
+@import "mixins/transition";
+@import "mixins/inline-block-list";
+@import "form/item";
+@import "form/header";
+
+@import "footer";
+@import "pageid-footer";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+// hide elements using the HTML5 hidden attribute
+*[hidden] {
+  display: none;
+}
+
+// Links
+//
+// a          - default
+// :hover     - hover
+// :visited   - visited
+a {
+  color: $rs-tekst-links;
+
+  &:hover {
+    color: $nrs-0162cd;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: $rs-links-visited;
+  }
+
+  // links to new windows (is now valid in HTML5)
+  &[target="_blank"] {
+    background-image: image-url('icon-external.png');
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+  }
+}
+
+body {
+  background-color: $nrs-f3f5f6;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+@mixin h1-with-digid-logo {
+  background-image: image-url('digid_eo_rgb_35px.png');
+  background-position: left top;
+  background-repeat: no-repeat;
+  font-size: 18px;
+  min-height: 25px;
+  padding: 10px 0 0 45px;
+}
+
+h1 {
+  font-family: Arial;
+  font-size: 22px;
+  line-height: $base-line-height;
+  margin-bottom: 20px;
+
+  &:not(.h2) {
+    // for resolutions < 768, the DigiD logo is added as background image
+    @media screen and (max-width: $breakpoint2 - 1) {
+      @include h1-with-digid-logo;
+    }
+  }
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+
+  &[readonly] {
+    background-color: $nrs-f0f0f0;
+  }
+}
+
+li {
+  .list-with-arrows & {
+    background: image-url('arrows.png') no-repeat scroll left 5px transparent;
+    padding-left: 10px;
+  }
+}
+
+// Paragraphs
+//
+// p - default
+// .compact-paragraph - for compact paragraphs
+p {
+  form > & {
+    margin-bottom: 20px;
+  }
+
+  + p {
+    margin-top: 10px;
+  }
+
+  .setting-active + &,
+  .setting-inactive + & {
+    margin-top: 0;
+  }
+}
+
+small {
+  font-size: 11px;
+
+  h1 & {
+    font-size: 14px;
+
+    @media screen and (max-width: $breakpoint0 - 1) {
+      display: none;
+    }
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+textarea {
+  height: 100px;
+}
+
+ul {
+  + p {
+    margin-top: 10px;
+  }
+}
+
+// Text to show when another element is not accessible.
+// For example screen readers can't access the hidden .form__item__information
+// because it is only displayed when the .form__item it belongs to has the focus.
+//
+// Warning: screen readers ignore elements with:
+//   display: none
+//   visibility: hidden
+//
+// Even if Javascript is used to show the elements. So text which should be
+// readable but not visible, should be hidden using other techniques.
+.accessibility__information {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+// Actions
+// The `actions` helper is used to generate the available actions.
+// This may contain one or more actions.
+.actions {
+  @include clearfix;
+
+  padding-bottom: 5px;
+  padding-top: 5px;
+
+  form & {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+%actions-left {
+  @include float-left;
+
+  background-color: $nrs-deebe3;
+  border: 1px solid $rs-zwart;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: .4em 1em;
+
+  &:hover,
+  &:active {
+    background-color: $nrs-828282;
+    color: $nrs-fbfbfb;
+  }
+}
+
+// Left action button
+// Displays a left aligned action button.
+//
+// .actions__left--button - default
+// :active - active
+// :hover - hover
+// :visited - visited
+.actions__left--button {
+  @extend %actions-left;
+  cursor: pointer;
+}
+
+// Left action link (.actions__left--link)
+// Displays a left aligned action link (styled as button).
+//
+// .actions__left--link - default
+// :active - active
+// :hover - hover
+// :visited - visited
+.actions__left--link {
+  @extend %actions-left;
+  color: $rs-zwart;
+  text-decoration: none;
+
+  &:visited {
+    color: $rs-zwart;
+  }
+
+  &:hover,
+  &:active {
+    color: $nrs-fbfbfb;
+    text-decoration: none;
+  }
+}
+
+%actions-right {
+  @include float-right;
+
+  color: $rs-tekst-links;
+  padding-top: 7px;
+
+  &:active,
+  &:hover {
+    color: $rs-tekst-links;
+  }
+}
+
+// Right action button
+// Displays a right aligned action button.
+//
+// .actions__right--button - default
+// :active - active
+// :hover - hover
+// :visited - visited
+.actions__right--button {
+  @extend %actions-right;
+
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+// Right action link
+// Displays a right aligned action link (styled as button).
+//
+// .actions__right--link - default
+// :active - active
+// :hover - hover
+// :visited - visited
+.actions__right--link {
+  @extend %actions-right;
+
+  &:visited {
+    color: $rs-tekst-links;
+  }
+}
+
+// Block with icon
+//
+// The `block_with_icon` helper method is used to display a generic message
+// with icon. When a block is given it yields the block.
+//
+// .block-with-icon--error       - Error message
+// .block-with-icon--information - Informational message
+// .block-with-icon--waiting     - Waiting message
+@mixin block-with-icon($background-color, $background-image) {
+  background-color: $background-color;
+  background-image: $background-image;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 10px;
+  padding-left: 40px;
+
+  > h2 {
+    margin-bottom: 4px;
+  }
+}
+
+.block-with-icon--error {
+  @include block-with-icon($rs-rood-lichte-tint, image-url('message_err.png'));
+  margin-bottom: 20px;
+}
+
+.block-with-icon--information {
+  @include block-with-icon($rs-geel-lichte-tint, image-url('message_info.png'));
+  margin-bottom: 20px;
+}
+
+.block-with-icon--waiting {
+  @include block-with-icon($rs-geel-lichte-tint, image-url('loader.gif'));
+  margin-bottom: 20px;
+}
+
+.compact-paragraph {
+  margin-top: 0;
+}
+
+// main content (white background)
+.content {
+  background-color: $rs-wit;
+  margin: 25px auto;
+  position: relative;
+}
+
+.digid-logo {
+  float: left;
+  padding-left: 10px;
+  width: 100px;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    display: none;
+  }
+}
+
+.flash-notice {
+  @include block-with-icon($rs-geel-lichte-tint, image-url('message_info.png'));
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.footer-questions {
+  margin-top: 50px;
+}
+
+// Accessibility requires headers to be styled as <h1>, <h2>, ..., <h6>. When a
+// header is present in the page, at least one <h1> should be present. However
+// not all pages have a 'Titel' according to the 'Navigation Map'.
+// A <h2> element used for styling purposses in a page without a 'Titel' is not
+// valid according to the accessibility regulations.
+// Hence <h2> styling is applied to a <h1> element.
+// Multiple headers but with different styling don't conflict with the
+// accessibility regulations.
+.h2 {
+  font-family: $base-font-family;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.header {
+  border-bottom-color: $rs-oranje-lichte-tint;
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  text-align: center;
+}
+
+.header-inline-image {
+  padding-left: 5px;
+  vertical-align: middle;
+  width: 150px;
+}
+
+.header-menu {
+  background-color: $rs-oranje-volle-kleur;
+  height: 30px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.header-menu-link {
+  color: $rs-zwart;
+  float: left;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: bold;
+  height: 20px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    background-color: $rs-oranje-lichte-tint;
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: $rs-zwart;
+  }
+}
+
+.header-menu-link--active {
+  background-color: $rs-oranje-lichte-tint;
+}
+
+.header-navigation {
+  background-color: $rs-oranje-lichtste-tint;
+  font-family: Arial;
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: $base-line-height;
+  padding-left: 19px;
+  text-align: left;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    border-bottom-width: 25px;
+    font-size: 1.2em;
+  }
+}
+
+.header-navigation-logout-link {
+  color: $rs-zwart;
+  float: right;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: normal;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.hidden-for-javascript {
+  .javascript & {
+    display: none;
+  }
+}
+
+.letter {
+  display: block;
+  margin: 30px auto;
+}
+
+// Unordered list
+//
+// ul - default
+// .list-with-arrows - default
+.list-with-arrows {
+  form + & {
+    margin-top: 10px;
+  }
+}
+
+.list-with-blocks {
+  list-style-type: square;
+  margin-bottom: 2.2em;
+  margin-left: 2.4em;
+}
+
+.loader {
+  background: image-url('ajaxLoader.gif');
+  display: block;
+  height: 16px;
+  margin: 0 auto;
+  width: 16px;
+
+  .non-spinning & {
+    background: image-url('loader.png');
+  }
+}
+
+.main {
+  @include clearfix;
+  padding: 40px 10px;
+  position: relative;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    padding-top: 10px;
+  }
+}
+
+.main-content {
+  margin: 0 auto;
+  max-width: $main-width-maximum;
+}
+
+.pagination {
+  margin-bottom: 20px;
+}
+
+.password-rules {
+  margin-top: 10px;
+}
+
+%password-rule {
+  background-image: image-url('password.png');
+  background-repeat: no-repeat;
+  font-weight: bold;
+  height: 16px;
+  line-height: 16px;
+  padding-left: 20px;
+}
+
+.password-rule--invalid {
+  @extend %password-rule;
+  background-position: -16px 0;
+}
+
+.password-rule--valid {
+  @extend %password-rule;
+  background-position: 0 -16px;
+  color: $nrs-2e742e;
+}
+
+.questions {
+  border-color: $nrs-ddd;
+  border-style: solid;
+  border-top: 0;
+  border-width: 1px;
+  font-size: $base-font-size - 1;
+  margin-bottom: 20px;
+}
+
+.questions-answer {
+  padding: 10px 20px;
+
+  // when Javascript is enabled, answers are shown when the question is clicked
+  .javascript & {
+    display: none;
+  }
+}
+
+.questions-item {
+  border-top-color: $nrs-ddd;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.questions-question {
+  background-color: $nrs-f5f5f5;
+  background-image: image-url('arrows.png');
+  background-position: 5px 10px;
+  background-repeat: no-repeat;
+  color: $rs-zwart;
+  display: block;
+  font-weight: bold;
+  padding: 5px;
+  padding-left: 18px;
+  text-decoration: none;
+
+  &:hover,
+  &:visited {
+    color: $rs-zwart;
+    text-decoration: none;
+  }
+}
+
+.rijksoverheid-logo {
+  margin-bottom: 3px;
+}
+
+.screen-reader {
+  height: 1px;
+  left: -9999px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.service-menu {
+  position: absolute;
+  right: $shadow-width;
+  top: 5px;
+}
+
+.service-menu-items {
+  @include inline-block-list(10px);
+}
+
+.service-menu-link {
+  color: $rs-achtergrond-links;
+
+  // not sure why it uses pseudo-rule :link, but it needs to make it work
+  &:link {
+    text-decoration: none;
+  }
+}
+
+.setting-active {
+  color: $nrs-2e742e;
+  font-weight: bold;
+}
+
+.setting-inactive {
+  color: $nrs-bb4c4c;
+  font-weight: bold;
+}
+
+.steps {
+  display: table;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.step-current,
+.step-current-last,
+.step-finished,
+.step-previous,
+.step-unfinished,
+.step-unfinished-last {
+  background-color: $nrs-f8f8f9;
+  display: table-cell;
+  height: 22px;
+  line-height: 22px;
+  padding-left: 10px;
+  padding-right: 20px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step-current,
+.step-finished,
+.step-previous,
+.step-unfinished {
+  background-image: image-url('sprite-forms-staps.png');
+  background-repeat: no-repeat;
+}
+
+.step-current,
+.step-current-last {
+  background-color: $nrs-fada3c;
+  background-position: right -48px;
+  font-weight: bold;
+}
+
+.step-finished,
+.step-previous {
+  background-color: $nrs-fbf1cb;
+}
+
+.step-finished {
+  background-position: right 0;
+}
+
+.step-previous {
+  background-position: right -24px;
+}
+
+.step-unfinished,
+.step-unfinished-last {
+  background-position: right -72px;
+}
+
+@media (max-width: 450px) {
+  .step-title {
+    display: none;
+  }
+}
+
+.table {
+  @include clearfix;
+  display: table;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+  }
+}
+
+%table-cell {
+  background-color: $nrs-f5f5f5;
+  border-bottom: $table-border-width solid $rs-wit;
+  display: table-cell;
+  padding: 5px 10px;
+
+  + %table-cell {
+    border-left: $table-border-width solid $rs-wit;
+
+    @media screen and (max-width: $breakpoint0 - 1) {
+      border-left: 0;
+    }
+  }
+
+  .table-row--highlight & {
+    background-color: $rs-geel-lichte-tint;
+  }
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+
+    &:nth-last-child(n+2) {
+      border-bottom: 0;
+    }
+  }
+}
+
+.table-cell {
+  @extend %table-cell;
+}
+
+.table-cell--heading {
+  @extend %table-cell;
+  background-color: $nrs-dcdcdc;
+}
+
+.table-cell--history-date {
+  @extend %table-cell;
+  min-width: 160px;
+}
+
+.table-cell--setting-description {
+  @extend %table-cell;
+  font-weight: bold;
+  min-width: 160px;
+}
+
+.table-cell--setting-links {
+  @extend %table-cell;
+  background-color: $rs-wit;
+  min-width: 220px;
+
+  .table-row--highlight & {
+    background-color: $rs-wit;
+  }
+
+  .table-cell--setting-overview + & {
+    border-left: 0;
+  }
+}
+
+.table-cell--setting-overview {
+  @extend %table-cell;
+  min-width: 280px - $table-border-width;
+}
+
+%table-row {
+  display: table-row;
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+  }
+}
+
+.table-row {
+  @extend %table-row;
+}
+
+.table-row--highlight {
+  @extend %table-row;
+}
+
+.username-rule {
+  font-weight: bold;
+}
+
+.username-rules {
+  list-style: disc inside;
+  margin-top: 10px;
+}
+
+.ui-dialog-titlebar {
+  display: none;
+}
+
+.ui-widget-overlay {
+  // scss-lint:disable ImportantRule, VendorPrefix
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)' !important;
+  filter: alpha(Opacity=80);
+  opacity: .8 !important;
+  position: fixed;
+}
+
+// Centers all elements horizontally. The minimum viewport supported is 320px.
+// When we reserve room for left and right box shadows (each with 10px width),
+// the minimum width is 300px. The maximum width is 960px (fixed). The minimum
+// width is fixed (960px) for browsers without media query support (IE8). If
+// the viewport is less than this, a horizontal scrollbar is shown.
+.window {
+  margin: 0 auto;
+  max-width: $window-width-maximum;
+  // this seems odd, but browsers without media query support get a minimum
+  // width equal to the maximum width (a scrollbar is shown when the viewport
+  // is too small)
+  min-width: $window-width-maximum;
+  // reserve room for the box shadow of the content element
+  padding: $shadow-width;
+  position: relative;
+
+  // browsers with media query support, have a different minimum width
+  @media screen and (min-width: 1px) {
+    min-width: $window-width-minimum;
+  }
+}
+
+@media screen {
+  .print {
+    display: none;
+    font-family: "RijksSerif", "Times New Roman", Georgia, Serif;
+  }
+}
+
+.left {
+  float: left;
+}

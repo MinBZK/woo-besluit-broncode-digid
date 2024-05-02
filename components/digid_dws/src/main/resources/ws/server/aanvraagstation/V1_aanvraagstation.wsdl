@@ -1,0 +1,108 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+  targetNamespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+  <wsdl:types>
+    <xs:schema xmlns:digid="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+      elementFormDefault="qualified">
+      <xs:import namespace="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" schemaLocation="V1_aanvraagstation.xsd"></xs:import>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateAppActivationRequest">
+    <wsdl:part element="tns:ValidateAppActivationRequest" name="ValidateAppActivationRequest" />
+  </wsdl:message>
+  <wsdl:message name="ValidateAppActivationResponse">
+    <wsdl:part element="tns:ValidateAppActivationResponse" name="ValidateAppActivationResponse" />
+  </wsdl:message>
+  <wsdl:message name="AppActivationRequest">
+    <wsdl:part element="tns:AppActivationRequest" name="AppActivationRequest" />
+  </wsdl:message>
+  <wsdl:message name="AppActivationResponse">
+    <wsdl:part element="tns:AppActivationResponse" name="AppActivationResponse" />
+  </wsdl:message>
+  <wsdl:message name="TechnicalFault">
+    <wsdl:part name="TechnicalFaultMessage" element="tns:TechnicalFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="VersionMismatchFault">
+    <wsdl:part name="VersionMismatchFaultMessage" element="tns:VersionMismatchFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="OinMismatchFault">
+    <wsdl:part name="OinMismatchFaultMessage" element="tns:OinMismatchFaultDetail" />
+  </wsdl:message>
+  <wsdl:message name="ValidationErrorFault">
+    <wsdl:part name="ValidationErrorFaultMessage" element="tns:ValidationErrorFaultDetail" />
+  </wsdl:message>
+  <wsdl:portType name="AanvraagstationPort">
+    <wsdl:operation name="ValidateAppActivation">
+      <wsdl:input wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:ValidateAppActivationRequest" name="ValidateAppActivationRequest"></wsdl:input>
+      <wsdl:output wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:ValidateAppActivationResponse" name="ValidateAppActivationResponse"></wsdl:output>
+      <wsdl:fault message="tns:TechnicalFault" name="TechnicalFault" />
+      <wsdl:fault message="tns:VersionMismatchFault" name="VersionMismatchFault" />
+      <wsdl:fault message="tns:OinMismatchFault" name="OinMismatchFault" />
+      <wsdl:fault message="tns:ValidationErrorFault" name="ValidationErrorFault" />
+    </wsdl:operation>
+    <wsdl:operation name="AppActivation">
+      <wsdl:input wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:AppActivationRequest" name="AppActivationRequest"></wsdl:input>
+      <wsdl:output wsaw:Action="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" message="tns:AppActivationResponse" name="AppActivationResponse"></wsdl:output>
+      <wsdl:fault message="tns:TechnicalFault" name="TechnicalFault" />
+      <wsdl:fault message="tns:VersionMismatchFault" name="VersionMismatchFault" />
+      <wsdl:fault message="tns:OinMismatchFault" name="OinMismatchFault" />
+      <wsdl:fault message="tns:ValidationErrorFault" name="ValidationErrorFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AanvraagStationPort" type="tns:AanvraagstationPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsaw:UsingAddressing wsdl:required="true" />
+    <wsdl:operation name="ValidateAppActivation">
+      <soap:operation soapAction="" />
+      <wsdl:input name="ValidateAppActivationRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ValidateAppActivationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TechnicalFault">
+        <soap:fault name="TechnicalFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="VersionMismatchFault">
+        <soap:fault name="VersionMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="OinMismatchFault">
+        <soap:fault name="OinMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationErrorFault">
+        <soap:fault name="ValidationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppActivation">
+      <soap:operation soapAction="" />
+      <wsdl:input name="AppActivationRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AppActivationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TechnicalFault">
+        <soap:fault name="TechnicalFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="VersionMismatchFault">
+        <soap:fault name="VersionMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="OinMismatchFault">
+        <soap:fault name="OinMismatchFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationErrorFault">
+        <soap:fault name="ValidationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AanvraagstationPortService">
+    <wsdl:port binding="tns:AanvraagStationPort" name="AanvraagStationPort">
+      <soap:address location="http://localhost:8080/dws" />
+      <wsp:Policy xmlns:wsp="http://www.w3.org/ns/ws-policy">
+             <wsam:Addressing xmlns:wsam="http://www.w3.org/2007/02/addressing/metadata">
+                 <wsp:Policy/>
+              </wsam:Addressing>
+         </wsp:Policy>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

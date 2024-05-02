@@ -1,0 +1,111 @@
+#main,
+.ui-dialog {
+  .field_with_errors {
+    float: left;
+
+    label {
+      color: #f00;
+    }
+  }
+
+  .content .field_with_errors {
+    display: inline-block;
+    float: none;
+  }
+
+  .form_wrapper {
+    border: 1px solid #aeaeae;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .form_wrapper.filter {
+    input {
+      max-width: 100px;
+    }
+
+  }
+
+  .field {
+    .content {
+      margin-left: 150px;
+      word-wrap: break-word;
+    }
+  }
+
+  form {
+    .label label {
+      float: left;
+      font-weight: bold;
+      width: 150px;
+    }
+
+    label.bold {
+      font-weight: bold;
+    }
+
+    // Extra Input Field Styling
+    textarea,
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='submit']) {
+      border: 1px solid #cecece;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .1) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .1) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      outline: none;
+      padding: 3px;
+      -moz-transition: all .25 ease-in-out;
+      -o-transition: all .25s ease-in-out;
+      -webkit-transition: all .25s ease-in-out;
+    }
+
+    textarea:hover,
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='submit']):hover {
+      border: 1px solid #bdbdbd;
+      -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset, 0 1px 0 rgba(255, 255, 255, .2);
+    }
+
+    textarea:focus,
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='submit']):focus {
+      border: 1px solid #eea160;
+      -moz-box-shadow: 0 2px 3px rgba(238, 161, 96, .5) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      -webkit-box-shadow: 0 2px 3px rgba(238, 161, 96, .5) inset, 0 1px 0 rgba(255, 255, 255, .2);
+      box-shadow: 0 2px 3px rgba(238, 161, 96, .5) inset, 0 1px 0 rgba(255, 255, 255, .2);
+    }
+
+    textarea,
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='submit']):not([type='button']) {
+      width: 428px;
+    }
+
+    input[type=text].datepicker {
+      // scss-lint:disable ImportantRule
+      width: 70px !important;
+    }
+
+    input[disabled] + label {
+      color: silver;
+    }
+
+    textarea {
+      display: block;
+      height: 75px;
+      resize: none;
+    }
+  }
+
+  #alarm_notifications {
+    width: 300px;
+
+    div.alarm_notification {
+      padding: 3px 0;
+    }
+  }
+}

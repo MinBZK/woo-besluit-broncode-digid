@@ -1,0 +1,13 @@
+var _paq = _paq || [];
+/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+_paq.push(['setSecureCookie', true]);
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+  var u="//"+document.getElementById("analytics_host").value+"/";
+  _paq.push(['setTrackerUrl', u+'piwik.php']);
+  _paq.push(['setSiteId', document.getElementById("analytics_site_id").value]);
+  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+  g.type='text/javascript'; g.async=true; g.defer=true; g.src='<%= asset_path('piwik.js') %>'; s.parentNode.insertBefore(g,s);
+})();
+

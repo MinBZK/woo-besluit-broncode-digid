@@ -1,0 +1,35 @@
+nav#skiplink {
+  position: fixed;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+
+  ul {
+    list-style: none;
+
+    a {
+      position: absolute;
+      left: -99999px;
+      top: 30px;
+
+      &:focus, &:active {
+        background: white;
+        color: #005186;
+        font-size: 100% !important;
+        font-weight: normal;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        padding: 2px 0;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

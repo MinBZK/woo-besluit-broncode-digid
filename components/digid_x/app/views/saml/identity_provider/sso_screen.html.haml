@@ -1,0 +1,59 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+:ruby
+  @page_name = 'C4'
+  @page_title = t('titles.C4')
+
+= heading_with_icon(t('you_are_already_logged_in'))
+
+= render('shared/session_countdown', key: 'sso_screen')
+
+= block_with_icon do
+  %p= t('texts.saml_federations.message', webservice: @authn_request.provider.webservice.name).html_safe
+
+  %p= t('you_are_already_logged_in_at_following_services')
+  %ul.list-with-arrows
+    - @service_list.each do |service|
+      %li
+        %strong= service[:service]
+        = surround '(', ')' do
+          = t('since_x_hour', timestamp: l(service[:since], format: :time_text_tzone_after_comma))
+
+= actions do
+  = action_button(:continue, @confirmation_url, method: :get)
+
+- clickable_webservice = link_to(webservice_name(@webservice), @webservice.website_url)
+.timeout-dialog{ 'data-show-after' => @resolve_before - Time.zone.now, 'data-expire-warning-delay' => @expire_warning_delay, 'data-expire-warning-content' => t('session_expired_sso_screen', webservice: clickable_webservice).html_safe, hidden: true }
+  = block_with_icon do
+    %p= t('session_maximum_time_sso_screen', webservice: clickable_webservice).html_safe
+  = actions do
+    = action_link_with_role_button(:annie_are_you_okay, '#')

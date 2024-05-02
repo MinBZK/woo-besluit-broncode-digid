@@ -1,0 +1,505 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fff;
+  color: #000;
+  font-family: Tahoma, Helvetica, Arial;
+  font-size: 12px;
+  max-width: 1600px
+}
+
+.bold { font-weight: bold; }
+
+.clear {
+  clear: both;
+}
+
+.clear_filter {
+  margin: 3px 0;
+}
+
+// CLEARFIX start ----------------------------------------------------------
+
+.clearfix::after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+// CLEARFIX end ----------------------------------------------------------
+
+.green {
+  color: #008000;
+}
+
+.red {
+  color: #f00;
+}
+
+.orange {
+  color: #FF9900;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.f_left {
+  float: left;
+}
+
+.f_right {
+  float: right;
+}
+
+.f_size {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+nav.pagination {
+  display: block;
+  line-height: 22px;
+}
+
+#menu {
+  bottom: 0;
+  left: 0;
+  overflow-x: scroll;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 140px;
+
+  #env {
+    padding: 10px 0;
+    text-align: center;
+
+    h1 {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    span {
+      font-size: 12px;
+    }
+  }
+
+  h3 {
+    color: #fff;
+    margin: 5px 0;
+    padding-left: 10px;
+  }
+
+  a {
+    color: #000;
+    display: block;
+    padding: 3px 0 3px 15px;
+    text-decoration: none;
+  }
+
+  a.dashboard {
+    line-height: 31px;
+    padding: 0 10px;
+  }
+
+  a:hover,
+  a.selected {
+    color: #fff;
+  }
+
+  .section {
+    margin-bottom: 10px;
+  }
+
+  img {
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+}
+
+a {
+  color: #000;
+}
+
+.ui-datepicker a:hover {
+  background: transparent;
+}
+
+div#dc\/services table {
+  width: auto;
+}
+
+#header {
+  background-color: #fff;
+  border-bottom: 1px solid #000;
+  margin-left: 140px;
+  line-height: 30px;
+  padding-left: 10px;
+  top: 0;
+  width: auto;
+  z-index: 80;
+
+  a:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  #search_field {
+    border: 1px solid #eea160;
+    float: right;
+    line-height: 18px;
+    margin: 4px 5px;
+    padding: 0;
+
+    input[type=text] {
+      border: 0;
+      font-size: 12px;
+      margin: 0 5px;
+      outline: none;
+      padding: 0;
+      width: 200px;
+    }
+
+    input[type=submit] {
+      background-color: #e7792c;
+      border: 0;
+      border-left: 1px solid #eea160;
+      color: #fff;
+      font-size: 11px;
+      height: 20px;
+      line-height: 19px;
+      margin: 0;
+      padding: 0 4px;
+    }
+  }
+}
+
+#wrapper {
+  border-right: 1px solid #000;
+  margin-left: 140px;
+  margin-top: 0;
+  min-height: 100%;
+  padding: 0;
+  width: auto;
+
+  a:not(.ui-button):hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+#main,
+.ui-dialog {
+  padding: 15px 10px;
+
+  h1,
+  h2,
+  h3 {
+    color: #000;
+    font-weight: bold;
+  }
+
+  h1 {
+    float: left;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 13px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  ol,
+  ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  table {
+    border: 1px solid #aeaeae;
+    border-collapse: inherit;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+
+    td {
+      padding: 3px;
+      vertical-align: top;
+    }
+
+    td.label {
+      font-weight: bold;
+      padding: 3px;
+      vertical-align: top;
+    }
+
+    .word-break {
+      word-break: break-all;
+    }
+
+    th {
+      font-weight: bold;
+      padding: 3px;
+      border-bottom: 2px solid #e17000;
+    }
+
+    .action {
+      text-align: right;
+      width: 60px;
+    }
+
+    .download_report {
+      text-align: right;
+      width: 180px;
+    }
+
+    tr:nth-child(even), tr.even {
+      background-color: #e8e8e8;
+    }
+
+    tr.orange_background {
+      background-color: orange;
+    }
+
+    tfoot tr td {
+      border-top: 1px solid #aeaeae;
+      height: 22px;
+      text-align: right;
+    }
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  .actions,
+  .actions_top {
+    float: right;
+
+    a,
+    .ui-button {
+      margin-left: 10px;
+    }
+  }
+
+  .delete_button {
+    background-color: #f73d3d;
+    color: white;
+    font-size: 12px;
+    &:hover {
+      background-color: #f90e0e;
+      border-color: 1px solid black;
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  div.field,
+  div.actions_top {
+    margin-bottom: 10px;
+
+    .label {
+      float: left;
+      font-weight: bold;
+      width: 150px;
+    }
+  }
+
+  .icon_link {
+    padding-left: 18px;
+    position: relative;
+
+    .icon {
+      background: image-url('aristo/ui-icons_222222_256x240.png') no-repeat;
+      height: 16px;
+      left: 0;
+      margin-right: 3px;
+      position: absolute;
+      top: 0;
+      width: 16px;
+    }
+  }
+
+  .new_link .icon { background-position: 0 -192px; }
+  .edit_link .icon { background-position: -64px -112px; }
+  .show_link .icon { background-position: -160px -112px; }
+
+  a.icon_link:hover {
+    background-color: inherit;
+    color: #fff;
+
+    .text {
+      background-color: #000;
+    }
+  }
+
+  #notice {
+    background: #cfc;
+    border: 1px solid #008000;
+    color: #008000;
+    padding: 5px;
+  }
+
+  #alert {
+    background: #fcc;
+    border: 1px solid #c00;
+    color: #c00;
+    padding: 5px;
+  }
+
+  .cert_alert {
+    background: #fcc;
+    border: 1px solid #c00;
+    color: #c00;
+    padding: 5px;
+  }
+
+  .cert_alert a  {
+    color: 	#0000FF;
+  }
+
+  #error_explanation {
+    background-color: #f0f0f0;
+    border: 2px solid #f00;
+    margin-bottom: 20px;
+    padding: 7px;
+    padding-bottom: 0;
+    width: 580px;
+  }
+
+  #error_explanation h2 {
+    background-color: #c00;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    margin: -7px;
+    margin-bottom: 0;
+    padding: 5px 5px 5px 15px;
+    text-align: left;
+  }
+
+  #error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+
+  #tabmenu {
+    height: 25px;
+    padding: 10px 0;
+    width: 580px;
+  }
+}
+
+// SORTING ----------------------------
+th.sortable a.current {
+  padding-right: 18px;
+  position: relative;
+}
+
+th.sortable a.current {
+  padding-right: 18px;
+  position: relative;
+
+  div.icon {
+    background: image-url('aristo/ui-icons_222222_256x240.png') no-repeat;
+    display: block;
+    height: 16px;
+    margin-right: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+  }
+}
+
+th.sortable a.current.asc .icon {
+  background-position: 0 -16px;  // up triangle
+}
+
+th.sortable a.current.desc .icon {
+  background-position: -64px -16px; // down triangle
+}
+
+// ------------------------------------
+
+
+// FILTERS ----------------------------
+
+.search_attributes,
+.time_filters {
+  padding: 5px 0;
+}
+
+// ------------------------------------
+
+.dialog {
+  h2 {
+    border-bottom: 1px solid #d3d3d3;
+    border-top: 1px solid #808080;
+    margin-bottom: .5em;
+    margin-top: .5em;
+    padding-bottom: .5em;
+    padding-top: .5em;
+  }
+}
+
+// dev-timers -------------------------
+
+.dev-timer {
+  float: right;
+  padding-right: 20px;
+}
+
+// four eyes disabled button
+.disabled {
+  color: #CCC;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+span.orange-background {
+  background-color: orange !important;
+}
+
+span.red-background {
+  background-color: red !important;
+}

@@ -1,0 +1,30 @@
+<!--Dit AuthnRequest is invalid omdat er geen attributeConsumingServiceIndex en geen extensions aanwezig zijn -->
+
+<samlp:AuthnRequest xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+                    Destination="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                    ForceAuthn="false" ID="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+                    IsPassive="false" IssueInstant="2021-04-15T14:20:38Z" Version="2.0">
+    <saml:Issuer Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">urn:nl-eid-gdi:1.0:DV:00000009999999999001:entities:0000</saml:Issuer>
+    <ds:Signature Id="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:CanonicalizationMethod>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod>
+            <ds:Reference URI="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+                        <xc14n:InclusiveNamespaces xmlns:xc14n="http://www.w3.org/2001/10/xml-exc-c14n#" PrefixList="samlp saml ds"></xc14n:InclusiveNamespaces>
+                    </ds:Transform>
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod>
+                <ds:DigestValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</ds:SignatureValue>
+    </ds:Signature>
+    <samlp:NameIDPolicy AllowCreate="false" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"></samlp:NameIDPolicy>
+</samlp:AuthnRequest>
+
+

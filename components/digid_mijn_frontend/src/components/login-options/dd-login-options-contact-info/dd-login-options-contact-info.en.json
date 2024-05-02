@@ -1,0 +1,26 @@
+{
+  "contact": {
+    "summary": "Contact information",
+    "title": "Contact information",
+    "sub-title": "We will send you a message if there are important changes to your DigiD. For instance, when you have activated a new login method. For this reason, it is important that we can reach you by email and text message. Below are your contact details as they are known to us.",
+    "email": "Email address",
+    "email-link-change": "Change email address",
+    "email-link-add": "Add email address",
+    "email-link-remove": "Delete email address",
+    "email-link-insert": "Enter verification code",
+    "email-link-resend": "Send verification code again",
+    "email-not-verified-tooltip-a": "Your email address has not yet been verified. An email has been sent to: ",
+    "email-not-verified-tooltip-b": ". Select 'Enter verification code' and enter the code from the email to confirm your email address.",
+    "email-added-with-username-tooltip": "With your email address you can easily recover your password if you ever forget it.",
+    "email-added-without-username-tooltip": "With your email address you will receive verification emails when important changes are made to your DigiD account.",
+    "email-not-added-with-username-tooltip": "Add your email address to quickly set up a new password when needed. You will also receive verification emails when important changes are made to your DigiD account.",
+    "email-not-added-without-username-tooltip": "Add your email address. You will receive verification emails when important changes are made to your DigiD account.",
+    "tel": "Telephone number",
+    "tel-tooltip": "This is the telephone number you will receive an SMS code on to log in.",
+    "pref-lang": "Preferred language",
+    "pref-lang-link": "Change preferred language",
+    "pref-lang-tooltip": "You can set your preferred language for the emails, (spoken) text messages and letters that you receive from DigiD. Select Dutch or English.",
+    "not-yet-added": "Not added yet",
+    "not-yet-verified": " (not verified yet)"
+  }
+}

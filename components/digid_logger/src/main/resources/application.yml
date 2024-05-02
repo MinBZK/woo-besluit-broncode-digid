@@ -1,0 +1,74 @@
+spring:
+  profiles:
+    active: default, development
+
+---
+
+spring:
+  profiles: default
+
+server:
+  port: 8092
+
+management:
+  endpoints:
+    web:
+      base-path: /secure
+  health:
+    consul:
+      enabled: ${CONSUL_ENABLED:false}
+
+dot_environment: false
+
+subscribers:
+  my_digid: true
+  transaction_log: true
+
+---
+
+spring:
+  profiles: development, unit-test
+
+  datasource:
+    username: SSSSSSSS
+
+iapi.timeout: 60000
+
+logging:
+  level:
+    ROOT: WARN
+    org.springframework: INFO
+    nl.logius: INFO
+    nl.logius.digid.logger.controller: DEBUG
+
+dot_environment: true
+
+---
+
+spring:
+  profiles: development
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/digid_log_development?autoReconnect=true&useSSL=false&serverTimezone=UTC
+
+iapi:
+  token: development
+
+dot_environemnt: true
+
+---
+
+spring:
+  profiles: unit-test, integration-test
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE:digid_log_test}?autoReconnect=true&useSSL=false&serverTimezone=UTC
+    username: ${DB_USERNAME:SSSSSSS}
+    password: ${MYSQL_ROOT_PASSWORD:}
+
+---
+
+spring:
+  profiles: production
+
+iapi.timeout: 60000

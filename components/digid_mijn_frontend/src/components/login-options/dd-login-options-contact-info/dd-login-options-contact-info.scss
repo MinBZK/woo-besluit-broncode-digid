@@ -1,0 +1,140 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.responsive' as media;
+@use 'src/scss/tools/tools.general.mixins' as mixins;
+
+.dd-login-options-contact-info {
+  &--mobile {
+    display: block;
+  }
+
+  &--desktop {
+    display: none;
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__table {
+    display: grid;
+    min-width: 311px;
+    background-color: var(--solid0);
+    border-radius: 5px;
+    row-gap: 0.5rem;
+    &-item {
+      //display: flex;
+      //flex-direction: row;
+      //justify-content: space-between;
+      display: grid;
+      grid: min-content min-content min-content min-content/ 1fr min-content;
+      grid-template-areas:
+        'title icon'
+        'tt-content tt-content'
+        'content content'
+        'link link';
+      background-color: var(--solid2);
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      line-height: 1.5rem;
+
+      &-title {
+        text-align: start;
+        grid-area: title;
+        font-family: core.$bold;
+      }
+
+      &-content {
+        grid-area: content;
+      }
+
+      &-link {
+        grid-area: link;
+      }
+
+      &-name {
+        grid-area: title;
+        font-family: core.$bold;
+      }
+
+      &-tooltip {
+        height: 1.5rem;
+        grid-area: icon;
+      }
+    }
+  }
+  .tooltip-content__mobile {
+    display: none;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    grid-area: tt-content;
+    background-color: var(--solid-info);
+    border-radius: 5px;
+    div {
+      margin-left: 0.75rem;
+    }
+  }
+
+  @media screen and (min-width: media.$mobile) {
+    &__table {
+      grid: min-content / 1fr;
+      border-radius: 0;
+
+      &-grid {
+        display: grid;
+        grid: min-content min-content/ 1fr 1fr 1fr min-content;
+        grid-template-areas:
+          'name info link icon'
+          'tt-content tt-content tt-content tt-content';
+        align-items: start;
+        border-radius: 5px;
+        background-color: var(--solid2);
+        padding: 0.25rem 0;
+
+        div {
+          line-height: 1.5rem;
+        }
+
+        &-name {
+          @include mixins.vertical-table-align;
+          text-align: start;
+          grid-area: name;
+          font-family: core.$bold;
+          padding-left: 1.5rem;
+        }
+
+        &-info {
+          @include mixins.vertical-table-align;
+          grid-area: info;
+        }
+
+        &-link {
+          margin-top: -0.25rem;
+          grid-area: link;
+        }
+
+        &-tooltip {
+          @include mixins.vertical-table-align;
+          grid-area: icon;
+          padding-right: 1.5rem;
+        }
+
+        .tooltip-content__desktop {
+          display: none;
+          grid-area: tt-content;
+          margin: 0.5rem 1.5rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 650px) {
+    &--mobile {
+      display: none;
+    }
+
+    &--desktop {
+      display: block;
+    }
+  }
+}

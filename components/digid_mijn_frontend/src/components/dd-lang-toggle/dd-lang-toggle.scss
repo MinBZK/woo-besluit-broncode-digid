@@ -1,0 +1,16 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/tools/tools.general.mixins' as *;
+
+.dd-lang-toggle {
+  display: flex;
+  flex-direction: row;
+  @include menuLink;
+  &__link {
+    font-size: 1rem;
+    padding: 0 0.25rem;
+    margin: 0 0.25rem;
+  }
+  &__divider {
+    line-height: 1rem;
+  }
+}

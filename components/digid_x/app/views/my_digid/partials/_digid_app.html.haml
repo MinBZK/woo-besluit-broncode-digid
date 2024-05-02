@@ -1,0 +1,139 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+-# --------------------------
+-# -- DigiD app
+-# --------------------------
+- app_authenticators = current_account.app_authenticators.active_or_pending
+%h2.heading-with-separator#digid_app_heading= t("my_digid.login_methods.digid_app")
+.table--shades
+  .table-row
+    .table-cell--overview
+      %p= t("my_digid.digid_app.active").html_safe
+- if app_authenticators.empty?
+  .row
+    .wrap-main
+      - css_class = "highlight" + (digid_app_enabled? ? "" : " notice")
+      .col{class: css_class}
+        .col.col-name= t("digid_app_verification")
+        .col.col-val
+          %button.info-button.info{ "aria-label": t("my_digid.digid_app.aria_label") }
+          .setting-inactive= t(digid_app_enabled? ? "inactive" : "information_boxes.digid_app_temporarily_unavailable_no_activation")
+      .col.col-info.info-box
+        %p= t("my_digid.digid_app.inactive")
+        %p= digid_app_info_link
+        %p= digid_app_android_store_link
+        %p= digid_app_ios_store_link
+
+- app_authenticators.ordered.each do |app_authenticator|
+  .row.no-overflow
+    .app_authenticator.wrap-main{ class: app_authenticators.count > 1 ? "multiple" : "single" }
+      - if app_authenticator.active? || app_authenticator.pending?
+        .wrap-main.first{class: app_authenticator.pending? ? "yellow-highlight" : ""}
+          .col{class: app_authenticator.pending? ? "no-highlight" : "highlight"}
+            .col.col-name= app_authenticator.device_name || t("digid_app.unknown")
+            .col.col-val
+              - if !digid_app_enabled?
+                .setting-inactive= t(digid_app_enabled? ? "inactive" : "information_boxes.digid_app_temporarily_unavailable_no_activation")
+              - elsif app_authenticator.active?
+                .setting-active= t("active")
+              - elsif app_authenticator.pending?
+                %button.info-button.info{ "aria-label": t("my_digid.digid_app.aria_label") }
+                .setting-inactive= t("awaiting_activation")
+          .col.col-info.info-box
+            - if app_authenticator.pending?
+              = t("my_digid.digid_app.pending_activation_by_app")
+
+      - if digid_app_enabled?
+        .wrap-main{class: app_authenticator.pending? ? "yellow-highlight" : ""}
+          .col{class: app_authenticator.pending? ? "no-highlight" : "highlight"}
+            .col.col-name= t("my_digid.app_code.app_code")
+            .col.col-val
+              %button.info-button.info{ "aria-label": t("my_digid.app_code.aria_label") }
+              = app_authenticator&.app_code
+          .col.col-info.info-box
+            = t("my_digid.app_code.info")
+
+        - if app_authenticator.active?
+          .wrap-main
+            .col.highlight
+              .col.col-name= t("last_sign_in_at")
+              .col.col-val
+                %button.info-button.info{ "aria-label": t("my_digid.substantial.aria_label") }
+                = app_authenticator.last_sign_in_at ? l(app_authenticator.last_sign_in_at, format: :date_at_time_text_tzone_in_brackets) : t("never")
+            .col.col-info.info-box
+              = t("my_digid.last_sign_in_at_info")
+
+          .wrap-main
+            .col.highlight
+              .col.col-name= t("activated_at")
+              .col.col-val
+                %button.info-button.info{ "aria-label": t("my_digid.substantial.aria_label") }
+                = app_authenticator.activated_at ? l(app_authenticator.activated_at, format: :date) : t("never")
+            .col.col-info.info-box
+              = t("my_digid.activated_at_info")
+
+          .wrap-main
+            .col.highlight
+              .col.col-name= t("id_check")
+              .col.col-val
+                %strong= app_authenticator.substantieel? ? "✔" : "-"
+                %button.info-button.info{ "aria-label": t("my_digid.substantial.aria_label") }
+            .col.col-info.info-box
+              - if app_authenticator.substantieel?
+                = t("my_digid.substantial.substantial").html_safe
+              - else
+                %p= t("my_digid.substantial.middle").html_safe
+                %p= digid_app_id_check_link
+
+          - if app_authenticator.substantieel?
+            .wrap-main
+              .col.highlight
+                .col.col-name= t("document_type")
+                .col.col-val
+                  - type = app_authenticator.substantieel_document_type
+                  = type.present? ? t("document_human.#{type}") : t("digid_app.unknown")
+                  %button.info-button.info{ "aria-label": t("my_digid.substantial_document_type.aria_label") }
+              .col.col-info.info-box
+                %p= t("my_digid.substantial_document_type.info").html_safe
+    - if app_authenticator.active? || app_authenticator.pending?
+      .col.col-links
+        %ul.list-with-arrows
+          - unless current_account.deceased?
+            - if app_authenticator.pending? # just pending app
+              %li= link_to(t("my_digid.links.remove_app_authenticator"), my_digid_apps_remove_warning_url(id: app_authenticator))
+            - elsif current_account.login_level_two_factor?
+              -# Add class and data for G3 dialog
+              %li= link_to(t("my_digid.links.deactivate_app_authenticator"), my_digid_apps_deactivation_start_url(id: app_authenticator), class: "last_midden_app_deactivate", data: { cancel_url: my_digid_apps_deactivation_cancel_url(id: app_authenticator), app_is_last_two_factor: !current_account.multiple_two_factor_authenticators? })
+            - elsif app_authenticator.active? && !current_account.last_authenticator?
+              %li= link_to(t("my_digid.links.deactivate_app_authenticator"), my_digid_apps_deactivation_start_url(id: app_authenticator))
+
+= javascript_include_tag("inline/digid_app", nonce: content_security_policy_script_nonce)

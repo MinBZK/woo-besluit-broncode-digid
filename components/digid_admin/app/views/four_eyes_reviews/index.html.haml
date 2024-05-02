@@ -1,0 +1,115 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%h1 Te accorderen wijzigingen
+.clear
+%br
+
+- if can?(:read, Webservice)
+  %h2 Te accorderen webdiensten
+  - if @webservices_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @webservices_in_review, fields: %w(id name organization), headers: %w(id naam organisatie type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen webdiensten te accorderen.
+    %br
+  %br
+
+- if can?(:read, AppVersion)
+  %h2 Te accorderen DigiD app-versies
+  - if @app_versions_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @app_versions_in_review, fields: %w(id version operating_system), headers: %w(id versie platform type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen DigiD app-versies te accorderen.
+    %br
+  %br
+
+- if can?(:read, Manager)
+  %h2 Te accorderen beheeraccounts
+  - if @managers_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @managers_in_review, fields: %w(account_name name surname), headers: %w(account naam achternaam type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen beheeraccounts te accorderen.
+    %br
+  %br
+
+- if can?(:read, Role)
+  %h2 Te accorderen rollen
+  - if @roles_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @roles_in_review, fields: %w(name), headers: %w(naam type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen rollen te accorderen.
+    %br
+  %br
+
+- if can?(:read, Kiosk)
+  %h2 Te accorderen kiosken
+  - if @kiosks_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @kiosks_in_review, fields: %w(id naam woonplaats postcode human_status adres), headers: %w(id naam woonplaats postcode status adres type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen kiosken te accorderen.
+    %br
+  %br
+
+- if can?(:read, Dc::Organization)
+  %h2 Te accorderen organisaties
+  - if @dc_organizations_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @dc_organizations_review, fields: %w(id oin name description), headers: %w(services.id services.oin services.organizations.name services.description services.four_eyes.modification_type services.four_eyes.modification_time services.four_eyes.modification_by services.remarks)
+  - else
+    Er zijn momenteel geen organisaties te accorderen.
+    %br
+  %br
+
+- if can?(:read, Dc::Connection)
+  %h2 Te accorderen aansluitingen
+  - if @dc_connections_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @dc_connections_review, fields: %w(id uuid name organization), headers: %w(services.id services.connections.uuid services.connections.name services.organizations.name services.four_eyes.modification_type services.four_eyes.modification_time services.four_eyes.modification_by services.remarks)
+  - else
+    Er zijn momenteel geen organisaties te accorderen.
+    %br
+  %br
+
+- if can?(:read, Dc::Service)
+  %h2 Te accorderen diensten
+  - if @dc_services_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @dc_services_review, fields: %w(id service_uuid name), headers: %w(services.id services.services.service_id services.services.service_name services.four_eyes.modification_type services.four_eyes.modification_time services.four_eyes.modification_by services.remarks)
+  - else
+    Er zijn momenteel geen diensten te accorderen.
+    %br
+  %br
+
+- if can?(:read, WhitelistedPhoneNumber)
+  %h2 Te accorderen whitelist telefoonnummers
+  - if @whitelisted_phone_numbers_in_review.any?
+    = render 'shared/four_eyes_reviews', review_records: @whitelisted_phone_numbers_in_review, fields: %w(id phone_number description), headers: %w(id telefoonnummer omschrijving type_wijziging wijziging_aangemaakt_op door opmerkingen)
+  - else
+    Er zijn momenteel geen whitelist telefoonnummers te accorderen.
+    %br
+  %br

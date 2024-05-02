@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mu="https://digid.nl/schema/mu-pin-reset">
+  <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+    <wsa:To soapenv:mustUnderstand="1">http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:Action>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</wsa:Action>
+    <wsa:MessageID>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</wsa:MessageID>
+  </soapenv:Header>
+  <soapenv:Body>
+    <mu:RegisterPinResetRequest DateTime="2018-12-10T12:10:05Z" MsgVersion="2">
+      <mu:Requester>01234567890123456789</mu:Requester>
+      <mu:RequestDateTime>2018-12-10T12:10:05Z</mu:RequestDateTime>
+      <mu:BSN>PPPPPPPPP</mu:BSN>
+      <mu:DocType>NL-rijbewijs</mu:DocType>
+      <mu:SequenceNr>PPPPPPPPPPPP</mu:SequenceNr>
+    </mu:RegisterPinResetRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,92 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.fonts' as fonts;
+@use 'src/scss/tools/tools.login-method.mixins' as mixins;
+
+.dd-button {
+  border-radius: 0.25rem;
+  min-height: 32px;
+  min-width: 68px;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--color-white);
+  background-color: var(--color-pumpkin);
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &__text {
+    font-family: fonts.$bold;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    text-align: left;
+  }
+
+  &__link-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: initial;
+    text-decoration: underline;
+    text-decoration-color: var(--link);
+  }
+
+  &--secondary {
+    .dd-button {
+      background-color: var(--button-secondary);
+      border: none;
+      color: var(--solid5);
+    }
+  }
+
+  &--tertiary {
+    .dd-button {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      color: var(--solid5);
+
+      &__link-text {
+        color: var(--link);
+      }
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+
+  &__chevron-before {
+    margin-left: -0.5rem;
+    padding-right: 0.5rem;
+    align-self: center;
+  }
+
+  &__chevron-after {
+    margin-top: 0.3rem;
+    margin-left: 0.5rem;
+    align-self: center;
+  }
+
+  &__touchscreen {
+    .dd-button {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  &__link-chevron {
+    margin-top: 0.25rem;
+    align-self: auto;
+  }
+
+  &--no-hover {
+    .dd-button:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+  }
+}

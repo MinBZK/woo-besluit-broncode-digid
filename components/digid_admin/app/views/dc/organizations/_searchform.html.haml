@@ -1,0 +1,75 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= form_for Dc::Organization.new, url: search_dc_organizations_path do |f|
+  %table.half-width
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th
+      %th
+    %tr
+      %td= f.label :oin, t("services.oin")
+      %td= f.text_field :oin,  value: params.dig(:dc_organization, :oin)
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td= f.label :naam, t("services.organizations.name")
+      %td= f.text_field :name, value: params.dig(:dc_organization, :name)
+    %tr
+      %td= label_tag :active, t("services.active")
+      %td= select_tag "dc_organization[status][active]", options_for_select([['Ja', true], ['Nee', false]], params.dig(:dc_organization, :status, :active)), include_blank: true
+      %td= f.label :active_from, t("services.date_from")
+      %td
+        %span.datepicker= date_select("dc_organization[[status]", :active_from, include_blank: true, selected: params.dig(:dc_organization, :status, :active_from))
+      %td= f.label :active_until, t("services.date_until")
+      %td
+        %span.datepicker= date_select("dc_organization[[status]", :active_until, include_blank: true, selected: params.dig(:dc_organization, :status, :active_until))
+    %tr
+      %td= f.label :organization_role_type, t("services.organizations.organization_role_type")
+      %td= select_tag("dc_organization[organization_roles][][type]", options_for_select(Dc::OrganizationRole::TYPES.map {|i| [i.downcase.gsub("_", " ").capitalize, i]}, params.dig(:dc_organization, :organization_role, :type)), include_blank: true)
+      %td= f.label :active_from, t("services.date_from")
+      %td
+        %span.datepicker= date_select("dc_organization[organization_roles][][status]", :active_from, include_blank: true, selected: params.dig(:dc_organization, :organization_roles, 0, :status, :active_from))
+      %td= f.label :active_until, t("services.date_until")
+      %td
+        %span.datepicker= date_select("dc_organization[organization_roles][][status]", :active_until, include_blank: true, selected: params.dig(:dc_organization, :organization_roles, 0, :status, :active_until))
+    %tr.white
+      %td= submit_button 'Filter »'
+      %td
+      %td
+      %td
+      %td
+      %td

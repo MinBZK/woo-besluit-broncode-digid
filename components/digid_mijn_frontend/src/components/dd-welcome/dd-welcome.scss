@@ -1,0 +1,60 @@
+@use 'src/scss/settings/settings.responsive' as media;
+@use 'src/scss/settings/settings.colors' as core;
+
+.dd-welcome {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &__text {
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    p {
+      margin-top: -4px;
+    }
+  }
+
+  &__digid-text {
+    margin-top: -4px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__mobile {
+    font-family: core.$bold;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+}
+
+@media screen and (min-width: media.$mobile) {
+  .dd-welcome {
+    p {
+      margin-top: 0;
+    }
+
+    img {
+      width: 3.75rem;
+      height: 3.75rem;
+    }
+
+    &__text {
+      margin-left: 2rem;
+      margin-bottom: -5px;
+    }
+  }
+}
+
+@media screen and (min-width: media.$desktop) {
+  .dd-welcome {
+    margin-left: media.$margin-desktop;
+  }
+}

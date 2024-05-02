@@ -1,0 +1,1497 @@
+// IMPORTANT
+// =========
+// * Attempt to use as little nested CSS rules as possible.
+// * Use descriptive and unique class names that they can be defined at root level.
+// * The order of the CSS rules is:
+//   - variables
+//   - global mixins/placeholders
+//   - imports
+//   - elements
+//   - classes (don't use IDs)
+// * Mixins and placeholders can be defined close to the rules that use them.
+// * Order rules alphabetically for easier lookup.
+
+@import 'includes/shared';
+@import 'includes/defaults';
+@import 'jquery-ui/dialog';
+@import 'includes/my_digid';
+@import 'includes/authentication';
+@import 'includes/hamburger';
+@import 'includes/qr_code';
+@import 'form/header';
+@import 'includes/footer';
+@import 'includes/poller';
+@import 'remember_login';
+@import 'includes/skiplink';
+@import 'includes/ro_sans';
+@import 'includes/_icons-rails';
+@import 'includes/loading';
+@import 'includes/steps';
+@import 'includes/custom_radiobutton_and_checkbox';
+@import 'includes/pin_server_login';
+@import 'includes/inlines';
+
+// hide elements using the HTML5 hidden attribute
+*[hidden] {
+  display: none;
+}
+
+// Links
+//
+// a          - default
+// :hover     - hover
+// :visited   - visited
+//
+// Styleguide 1.1.
+a {
+  color: $nrs-004a9a;
+  text-decoration: none;
+  &:hover {
+    color: $nrs-0162cd;
+    text-decoration: underline;
+  }
+
+  &:visited {
+
+  }
+}
+
+body {
+  background-color: $nrs-fbfbfb;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $nrs-282828;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+// Headings
+//
+// Styleguide 1.2.
+
+// Heading 1
+//
+// Styleguide 1.2.1.
+
+@mixin arrow-bullet {
+  font-family: 'icons';
+  content: '\f105';
+  color: $rs-tekst-links;
+  font-size: 75%
+}
+
+@mixin h1-with-digid-logo {
+  background-image: image-url('digid_eo_rgb.svg');
+  background-position: left top;
+  background-repeat: no-repeat;
+  font-size: 112%;
+  min-height: 25px;
+  content: " ";
+  padding: 15px 0 0 39px;
+  margin-right: 8px;
+}
+
+h1 {
+  font-family: "RO Sans";
+  font-size: 111%;
+  line-height: 1.7em;
+  margin-bottom: 24px;
+  margin-top: 8px;
+
+  &:not(.h2):before {
+    // for resolutions < 768, the DigiD logo is added as background image
+    :not(.my-digid-index) & {
+        @include h1-with-digid-logo;
+    }
+
+    // for resolutions < 860, the DigiD logo is added as background image
+    .my-digid-index & {
+        @include h1-with-digid-logo;
+    }
+  }
+}
+
+// Heading 2
+//
+// Styleguide 1.2.2.
+h2 {
+  font-size: 137%;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="number"] {
+   -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Removes leftover margin */
+}
+
+.verdana, input[type="password"] {
+  font-family: Verdana, Arial, sans-serif
+}
+
+h4 {
+  font-family: "RO Sans";
+  font-size: 112%;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: $nrs-282828;
+}
+
+// Lists
+//
+// Styleguide 1.3.
+.decimal {
+  list-style: decimal;
+}
+
+li {
+  .header-menu & {
+    @media screen and (max-width: $breakpoint2 - 1) {
+      text-align: left;
+    }
+  }
+}
+
+.list-with-arrows li:before {
+
+}
+
+// Paragraphs
+//
+// p - default
+// .compact-paragraph - for compact paragraphs
+//
+// Styleguide 1.4
+
+p + h2 {
+  margin-top: 24px;
+}
+
+p.simple-step-counter + h2 {
+  margin-top: 0px;
+}
+
+p + .block-with-icon--information {
+  margin-top: 8px;
+}
+
+p {
+  form > & {
+    margin-bottom: 8px;
+  }
+
+  + p {
+    margin-top: 10px;
+  }
+
+  .setting-active + &,
+  .setting-inactive + & {
+    margin-top: 0;
+  }
+}
+
+small {
+  font-size: 11px;
+
+  h1 & {
+    font-size: 14px;
+
+    @media screen and (max-width: $breakpoint0 - 1) {
+      display: none;
+    }
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+ul {
+  margin-bottom: 20px;
+  margin-top: 10px;
+
+  + p {
+    margin-top: 10px;
+  }
+
+  .header-menu & {
+    @media screen and (max-width: $breakpoint2 - 1) {
+      @include clearfix;
+      clear: both;
+      display: none;
+      margin-bottom: 0px;
+    }
+  }
+
+  .header-menu & li {
+    text-align: right
+  }
+
+  .header-menu--active & {
+    display: block;
+  }
+}
+
+ul.disc {
+    list-style: disc;
+}
+
+ul.parent {
+    @extend ul.disc;
+    padding-left: 1em;
+}
+
+ul.nested {
+    @extend ul.parent;
+    margin-top: 0px;
+    padding-left: 1em;
+}
+
+ol.with_style {
+  @extend .decimal;
+  padding-left: 1em;
+
+  .actions {
+    margin: 0;
+  }
+}
+// Text to show when another element is not accessible.
+// For example screen readers can't access the hidden .form__item__information
+// because it is only displayed when the .form__item it belongs to has the focus.
+//
+// Warning: screen readers ignore elements with:
+//   display: none
+//   visibility: hidden
+//
+// Even if Javascript is used to show the elements. So text which should be
+// readable but not visible, should be hidden using other techniques.
+.accessibility__information {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+// Actions
+// The `actions` helper is used to generate the available actions.
+// This may contain one or more actions.
+//
+// Styleguide 4.1.
+.actions {
+  @include clearfix;
+
+  margin-bottom: 24px;
+
+  padding-bottom: 5px;
+  padding-top: 32px;
+
+  form & {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.main.background .actions {
+  margin-bottom: 16px;
+}
+
+%actions-primary {
+  font-weight: bold;
+  background-color: $nrs-e17000;
+  border-radius: $default-border-radius;
+  box-shadow: $button-shadow;
+  padding: 0.5em 1em 0.5em;
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 133%;
+  color: $rs-wit;
+
+  &:hover,
+  &:active {
+    color: $rs-wit;
+  }
+}
+
+%actions-left {
+  float: left;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  padding: 0.8em 1.3em 0.8em 8px;
+  font-size: 112%;
+  color: $nrs-282828;
+  transition: all 0.15s;
+
+  &:hover {
+      transform:translateY(-2px)
+    }
+  &:active {
+  }
+}
+
+.actions__right--link, .actions__left--link, .actions__left--button, .actions__right--button {
+  font-weight: bold;
+  font-family: inherit;
+  background-color: $rs-wit;
+  text-decoration: none;
+
+  &.secondary {
+    background: none;
+    color: black;
+    box-shadow: none;
+    float: right;
+    padding-right: 20px;
+    margin-top: 16px;
+    text-align: right;
+    min-width: 115px;
+    &:hover {
+      color: black;
+      text-decoration: none;
+      transform:translateY(-2px)
+    }
+  }
+
+  &.primary--button {
+    @extend %actions-primary;
+    transition: all 0.15s;
+    white-space: nowrap;
+    &:hover {
+      text-decoration: none;
+      transform:translateY(-2px)
+    }
+  }
+}
+
+.actions__left--button, .actions__right--button {
+  color: $nrs-282828;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover,
+  &:active {
+    color: $nrs-282828;
+    text-decoration: none;
+  }
+}
+
+.inverted_arrow {
+  text-align: left;
+}
+
+.primary--button.arrow:after, :not(.primary--button).arrow:before  {
+  font-family: 'icons';
+  font-size: 90%;
+}
+
+.primary--button.inverted_arrow:after, :not(.primary--button).inverted_arrow:before  {
+  font-family: 'icons';
+  font-size: 90%;
+}
+.primary--button.arrow:after {
+  content: '\f113';
+  color: $rs-wit;
+  margin-left: 25px;
+  margin-right: -25px;
+}
+
+:not(.primary--button).arrow:before {
+  content: '\f114';
+  margin-left: -10px;
+  margin-right: 10px;
+  background-color: $rs-wit;
+  color: $rs-zwart;
+}
+
+:not(.primary--button).inverted_arrow:before {
+  content: '\f113';
+  margin-right: -10px;
+  margin-left: 6px;
+  background-color: $rs-wit;
+  color: $rs-zwart;
+}
+
+%actions-middle {
+  background-color: $nrs-deebe3;
+  border: 1px solid $nrs-282828;
+  font-weight: bold;
+  padding: 0.8em 1.3em;
+
+  &:hover,
+  &:active {
+    background-color: $nrs-828282;
+    color: $nrs-fbfbfb;
+  }
+}
+
+.actions__middle--button {
+  @extend %actions-middle;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+// Action link (styled as a button without a float)
+.actions--link {
+  @extend %actions-left;
+  cursor: pointer;
+  float: none;
+  text-decoration: none;
+  color: $nrs-282828;
+  &:hover,
+  &:active {
+    color: $nrs-282828;
+    text-decoration: none;
+  }
+}
+
+// Left action button
+// Displays a left aligned action button.
+//
+// .actions__left--button - default
+// :active - active
+// :hover - hover
+// :visited - visited
+//
+// Styleguide 4.1.1
+.actions__left--button {
+  @extend %actions-left;
+  border: 0;
+  cursor: pointer;
+}
+
+// Left action link (.actions__left--link)
+// Displays a left aligned action link (styled as button).
+//
+// .actions__left--link - default
+// :active - active
+// :hover - hover
+// :visited - visited
+//
+// Styleguide 4.1.3
+.actions__left--link {
+  @extend %actions-left;
+  text-decoration: none;
+  color: $nrs-282828;
+  &:hover,
+  &:active {
+    color: $nrs-282828;
+    text-decoration: none;
+  }
+}
+
+%actions-right {
+  float: right;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  padding: 0.8em 1.3em;
+  font-size: 125%;
+}
+
+// Right action button
+// Displays a right aligned action button.
+//
+// .actions__right--button - default
+// :active - active
+// :hover - hover
+// :visited - visited
+//
+// Styleguide 4.1.2
+.actions__right--button {
+  @extend %actions-right;
+  background: $rs-wit;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+// Right action link
+// Displays a right aligned action link (styled as button).
+//
+// .actions__right--link - default
+// :active - active
+// :hover - hover
+// :visited - visited
+//
+// Styleguide 4.1.4
+.actions__right--link {
+  @extend %actions-right;
+
+  &:visited {
+
+  }
+}
+
+// button is a link? Hack for phone number
+.actions__right--link-button {
+  @extend %actions-right;
+
+  background-color: $nrs-deebe3;
+  border: 1px solid $nrs-282828;
+  font-weight: bold;
+  padding: .4em 1em;
+  text-decoration: none;
+
+  &:visited {
+
+  }
+
+  &:hover,
+  &:active {
+    background-color: $nrs-828282;
+    color: $nrs-fbfbfb;
+    text-decoration: none;
+  }
+}
+
+.block-with-icon--error {
+  @include block-with-icon($rs-rood-lichte-tint-alternative, image-url('error.svg'));
+  margin-bottom: 24px;
+}
+
+.block-with-icon--information {
+  @include block-with-icon($rs-oranje-lichtste-tint, image-url('info.svg'));
+  margin-bottom: 24px;
+
+  strong {
+    word-wrap: break-word;
+  }
+}
+
+.block-without-icon {
+  @include block-without-icon($rs-oranje-lichtste-tint);
+  margin-bottom: 24px;
+  padding-left: 20px;
+
+  strong {
+    word-wrap: break-word;
+  }
+}
+
+.block-with-icon--information {
+  h2 {
+    font-size: 100%;
+  }
+}
+
+.block-with-icon--waiting {
+  @include block-with-icon($rs-oranje-lichtste-tint, image-url('loader.gif'));
+  margin-bottom: 24px;
+}
+
+.compact-paragraph {
+  margin-top: 0;
+}
+
+.show_password_field + .block-with-icon--information{
+  margin-top: 16px;
+}
+
+h2.orange_heading {
+  color: $rs-oranje-volle-kleur;
+  font-size: 137%;
+  margin-bottom: 8px;
+}
+
+h3.black_heading {
+  font-size: 123%;
+  margin-bottom: 18px;
+}
+
+
+h3.black_heading {
+  font-size: 123%;
+  margin-top: 24px;
+  margin-bottom: 0px;
+}
+
+// main content (white background and box shadows)
+.content {
+  background-color: $rs-wit;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  margin: 0px auto;
+  position: relative;
+}
+
+
+// Accessibility requires headers to be styled as <h1>, <h2>, ..., <h6>. When a
+// header is present in the page, at least one <h1> should be present. However
+// not all pages have a 'Titel' according to the 'Navigation Map'.
+// A <h2> element used for styling purposses in a page without a 'Titel' is not
+// valid according to the accessibility regulations.
+// Hence <h2> styling is applied to a <h1> element.
+// Multiple headers but with different styling don't conflict with the
+// accessibility regulations.
+.h2 {
+  font-family: $base-font-family;
+  font-size: 137%;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.header {
+  text-align: center;
+  min-height: 102px;
+}
+
+.header-menu {
+  @include clearfix;
+  height: 33px;
+  min-height: 25px;
+  padding-top: 20px;
+  border-bottom: 1px solid $nrs-e17000;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 35px;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    z-index: 90;
+    border-bottom: none;
+    height: auto;
+    padding-top: 0;
+    margin-left: 0px;
+    margin-right: 20px;
+  }
+}
+
+.header-menu .header-menu--active {
+  @media screen and (max-width: $breakpoint2 - 1) {
+    border-bottom: 1px solid $nrs-e17000;
+  }
+}
+
+.header-menu-link {
+  color: $nrs-282828;
+  float: left;
+  font-family: $base-font-family;
+  font-size: $base-font-size + 10;
+  font-weight: normal;
+  line-height: 32px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: $nrs-282828;
+  }
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    float: none;
+    font-weight: normal;
+    padding: 0;
+
+    border-right: 2px solid transparent;
+    border-bottom: none;
+    padding-right: 4px;
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+      color: $nrs-282828;
+    }
+  }
+}
+
+.header-menu-link--active {
+  font-weight: bold;
+  border-bottom: 2px solid $nrs-e17000;
+  @media screen and (max-width: $breakpoint2 - 1) {
+    background-color: transparent;
+    font-weight: bold;
+    border-right: 2px solid $nrs-e17000;
+    border-bottom: none;
+    padding-right: 4px;
+  }
+}
+
+.header-menu-link--expand {
+  background-repeat: no-repeat;
+  display: none;
+  font-weight: initial;
+  height: 23px;
+  line-height: 23px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-left: 22px;
+  padding-right: 5px;
+  text-transform: capitalize;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    float: right;
+    color: $nrs-282828;
+    display: block;
+    padding-right: 0px;
+    padding-left: 0px;
+
+    &:hover,
+    &:active {
+
+    }
+
+    &:visited {
+      color: $nrs-282828;
+    }
+  }
+}
+
+.header-navigation {
+  position: absolute;
+  font-family: "RO Sans";
+  font-size: 100%;
+  font-weight: bold;
+  line-height: $base-line-height;
+  padding-left: 19px;
+  text-align: left;
+  right: 40px;
+  top: 12px;
+
+  @media screen and (max-width: $breakpoint1 - 1) {
+    right: 20px;
+  }
+}
+
+.header-title {
+  padding: 20px 40px 0px 40px;
+
+@media screen and (max-width: $breakpoint2 - 1) {
+    padding-top: 0px;
+    padding-left: 25px;
+    float: left;
+    min-width: 135px;
+
+  }
+
+  @media screen and (max-width: $breakpoint1 - 1) {
+    padding: 0px 0px 0px 20px;
+  }
+}
+
+.language-menu-item {
+  color: $nrs-282828;
+  float: left;
+  font-family: $base-font-family;
+  font-size: 100%;
+  font-weight: normal;
+  margin-right: 10px;
+  text-decoration: none;
+  border-bottom: 2px solid white;
+  text-align: center;
+  width: 20px;
+}
+
+.header-navigation-logout-link {
+  color: $nrs-282828;
+  font-family: $base-font-family;
+  font-size: 100%;
+  font-weight: normal;
+  margin-right: 0px;
+  text-decoration: none;
+}
+
+.header-navigation-logout-link.active, .language-menu-item.active {
+  border-bottom: 2px solid $nrs-e17000;
+  font-weight: bold;
+}
+
+.navigation {
+  margin-top: 0;
+}
+
+.heading-with-separator {
+  padding-bottom: 5px;
+  padding-top: 16px;
+}
+
+.hidden-for-javascript {
+  .javascript & {
+    display: none;
+  }
+}
+
+.letter {
+  display: block;
+  margin: 30px auto;
+}
+
+// Unordered list
+//
+// ul - default
+// .list-with-arrows - default
+//
+// Styleguide 1.3.1.
+.list-with-arrows {
+  form + & {
+    margin-top: 10px;
+  }
+}
+
+.list-with-blocks {
+  list-style-type: square;
+  margin-bottom: 2.2em;
+  margin-left: 2.4em;
+}
+
+.header-list-with-blocks {
+  list-style-type: square;
+  margin-left: 2.4em;
+}
+
+.test-betrouwbaarheidsniveau-list {
+  list-style-type: decimal;
+}
+
+.form__item {
+  // scss-lint:disable IdSelector
+  #authentication_type_account_test {
+    margin-top: 25px;
+  }
+
+  // scss-lint:disable QualifyingElement
+  label[for='authentication_type_account_test'] {
+    margin-top: 20px;
+  }
+}
+
+.loader {
+  background: image-url('ajaxLoader.gif');
+  display: block;
+  height: 16px;
+  margin: 0 auto;
+  width: 16px;
+
+  .non-spinning & {
+    background: image-url('loader.png');
+  }
+}
+
+.main {
+  @include clearfix; // Compass
+  padding: 0px 40px;
+  position: relative;
+  padding-bottom: 50px;
+  @media screen and (max-width: $breakpoint2 - 1) {
+    padding-top: 10px;
+    padding: 0px 16px;
+    padding-bottom: 35px;
+  }
+}
+
+.main.background{
+  background-position: bottom center;
+  padding-bottom: 263px;
+  background-size: 90%;
+  background-repeat: no-repeat;
+
+  @media screen and (max-width: 337px) {
+    padding-bottom: 162px;
+  }
+
+  @media screen and (min-width: 337px) and (max-width: $breakpoint0 - 1) {
+    padding-bottom: 220px;
+  }
+
+}
+
+.mydigid-logo {
+  float: left;
+  padding-left: 10px;
+  width: 100px;
+
+  :not(.my-digid-index) & {
+    @media screen and (max-width: $breakpoint2 - 1) {
+      display: none;
+    }
+  }
+
+  .window.small & {
+    display: none;
+  }
+
+  .my-digid-index & {
+    @media screen and (max-width: $breakpoint3 - 1) {
+      display: none
+    }
+  }
+}
+
+.bld-footer-ribbon {
+  background-attachment: scroll;
+  background-color: $rs-tekst-links;
+  background-position: 0 0;
+  background-repeat: repeat;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 30px;
+  left: 50%;
+  margin-left: -22px;
+  position: absolute;
+  width: 44px;
+}
+
+.main-content {
+  padding-top: 5px; // Needed for h1 with logo
+  margin: 0 auto;
+  max-width: $main-width-maximum;
+
+  .my-digid-index & {
+    @media screen and (min-width: $my-digid-breakpoint3) and (max-width: $my-digid-breakpoint5 - 1) {
+      margin-left: auto;
+      margin-right: 230px;
+    }
+
+    @media screen and (min-width: $my-digid-breakpoint2) and (max-width: $my-digid-breakpoint3 - 1) {
+      margin-left: auto;
+      margin-right: 170px;
+    }
+  }
+}
+
+.pagination {
+  margin-bottom: 20px;
+}
+
+.password-rules {
+  margin-top: 10px;
+}
+
+%password-rule {
+  background-image: image-url('password.png');
+  background-repeat: no-repeat;
+  font-weight: bold;
+  height: 16px;
+  line-height: 16px;
+  padding-left: 20px;
+}
+
+.password-rule--invalid {
+  @extend %password-rule;
+  background-position: -16px 0;
+}
+
+.password-rule--valid {
+  @extend %password-rule;
+  background-position: 0 -16px;
+  color: $nrs-2e742e;
+}
+
+.questions {
+  font-size: $base-font-size - 1;
+  margin-top: 0px;
+  margin-bottom: 32px;
+}
+
+.questions-answer {
+  padding: 10px 20px;
+
+  // when Javascript is enabled, answers are shown when the question is clicked
+  .javascript & {
+    display: none;
+  }
+}
+
+.questions-item {
+
+}
+
+.questions-question {
+  color: $nrs-282828;
+  display: block;
+  font-weight: bold;
+  padding: 5px;
+  text-decoration: none;
+
+  &:hover,
+  &:visited {
+    color: $nrs-282828;
+    text-decoration: none;
+  }
+
+  .icon-3941-delta-links-24px {
+    display: inline-block;
+    transition-duration: 0.1s;
+    transition-property: transform;
+  }
+
+  &.active {
+    .icon-3941-delta-links-24px {
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.footer {
+  .form__header__required-fields {
+    @media screen and (min-width: $breakpoint2) {
+      margin-right: -35px;
+    }
+  }
+  .form__header__required-fields + .footer-questions {
+    margin-top:40px;
+  }
+}
+
+.screen-reader {
+  height: 1px;
+  left: -9999px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.service-menu {
+  position: absolute;
+  left: 40px;
+  top: 12px;
+
+  @media screen and (max-width: $breakpoint2 - 1) {
+    left: 16px;
+  }
+
+}
+
+.service-menu-items {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+
+  li {
+    padding-left: 0px;
+    padding-right: 0px;
+
+    border-right: 1px solid $nrs-282828;
+    margin-left: 5px;
+
+        padding-left: 0px;
+      padding-right: 0px;
+      border-right: 1px solid #282828;
+
+    list-style-image: none;
+    list-style-type: none;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.service-menu-link {
+  color: $rs-achtergrond-links;
+
+  // not sure why it uses pseudo-rule :link, but it needs to make it work
+  &:link {
+    text-decoration: none;
+    background: red;
+  }
+}
+
+.setting-active {
+  color: $nrs-2e742e;
+  font-weight: bold;
+}
+
+.setting-inactive {
+  color: $nrs-bb4c4c;
+  font-weight: bold;
+}
+
+.secure-active {
+  margin-left: 0px;
+}
+
+.secure-level-lock {
+  float: left;
+  height: 20px;
+  width: 81px;
+}
+
+.icon-2057-online-veiligheid.level2:before { content: "\f10a\f10a"; }
+.icon-2057-online-veiligheid.level3:before { content: "\f10a\f10a\f10a"; }
+.icon-2057-online-veiligheid.level4:before { content: "\f10a\f10a\f10a\f10a"; }
+
+.secure-level-lock + p {
+  margin-top: 0px;
+}
+
+%table {
+  @include clearfix;
+  display: table;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+  }
+}
+
+.table {
+  @extend %table;
+
+  .caption {
+    display: none;
+  }
+}
+
+.table--shades {
+  @extend %table;
+
+  p + & {
+    margin-top: 20px;
+  }
+}
+
+%table-cell {
+  border-bottom: $table-border-width solid $rs-wit;
+  display: table-cell;
+  padding: 5px 10px;
+
+  + %table-cell {
+    border-left: $table-border-width solid $rs-wit;
+
+    @media screen and (max-width: $breakpoint4 - 1) {
+      border-left: 0;
+    }
+  }
+
+  .table-row--highlight & {
+    background-color: $rs-oranje-lichtste-tint;
+  }
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+
+    &:nth-last-child(n+2) {
+      border-bottom: 0;
+    }
+  }
+}
+
+.table-cell {
+  @extend %table-cell;
+}
+
+
+.table-row .table-cell {
+  background-color: $nrs-f5f5f5;
+}
+
+.table-cell--heading {
+  @extend %table-cell;
+  background-color: $nrs-dcdcdc;
+}
+
+.table-cell--history-date {
+  @extend %table-cell;
+  min-width: 180px;
+  background-color: $nrs-f5f5f5;
+  text-align: center;
+}
+
+.table-cell--setting-description {
+  @extend %table-cell;
+  min-width: 160px;
+
+  .table-row--highlight & {
+    background-color: $rs-geel-lichte-tint;
+  }
+
+  &.indent:before {
+    content: '\00a0\00a0\00a0\00a0- ';
+  }
+}
+
+.table-cell--setting-links {
+  @extend %table-cell;
+  background-color: $rs-wit;
+  min-width: 220px;
+
+  .table-row--highlight & {
+    background-color: $rs-wit;
+  }
+
+  .table-cell--setting-overview + & {
+    border-left: 0;
+  }
+
+  @media screen and (min-width: $my-digid-breakpoint2) and (max-width: $my-digid-breakpoint3 - 1) {
+    min-width: 160px;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint2 - 1) {
+    border-bottom: 0;
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+
+    .table-row:nth-last-child(n+2) & {
+      margin-bottom: 10px;
+    }
+  }
+
+  .list-with-arrows {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+.table-cell--overview-links {
+  @extend %table-cell;
+  background-color: $rs-wit;
+  min-width: 220px;
+  display: block;
+
+  .table-cell--overview + & {
+    border-left: 0;
+  }
+
+  .list-with-arrows {
+    margin-bottom: 0;
+  }
+}
+
+.table-cell--overview {
+  @extend %table-cell;
+  background-color: $rs-wit;
+  border: 0;
+  min-width: 480px;
+  padding: 0;
+
+  @media screen and (max-width: $breakpoint4 - 1) {
+    display: none;
+  }
+
+  @media screen and (max-width: $my-digid-breakpoint3 - 1) {
+    min-width: inherit;
+    min-width: unset;
+  }
+}
+
+.table-cell--setting-overview {
+  @extend %table-cell;
+  font-weight: bold;
+  min-width: 280px - $table-border-width;
+}
+
+%table-row {
+  display: table-row;
+
+  .my-digid-index & {
+    @media screen and (min-width: $my-digid-breakpoint1) and (max-width: $my-digid-breakpoint3 - 1) {
+      float: left;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint0 - 1) {
+    display: block;
+  }
+
+  &:hover {
+    background-color: $nrs-f5f5f5;
+  }
+}
+
+.table-row {
+  @extend %table-row;
+}
+
+.table-row--highlight {
+  @extend %table-row;
+}
+
+.table--shades .table-row:hover {
+  background-color: $rs-wit;
+}
+
+.username-rule {
+  font-weight: bold;
+}
+
+.username-rules {
+  list-style: disc inside;
+  margin-top: 10px;
+}
+
+.ui-dialog-titlebar {
+  display: none;
+}
+
+.ui-corner-all {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ui-dialog {
+  background-color: $rs-wit;
+  z-index: 101;
+}
+
+.ui-widget-overlay {
+  // scss-lint:disable ImportantRule, VendorPrefix
+  background: $nrs-aaa;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)' !important;
+  filter: alpha(Opacity=80);
+  height: 100%;
+  left: 0;
+  opacity: .8 !important;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+// Centers all elements horizontally. The minimum viewport supported is 320px.
+// When we reserve room for left and right box shadows (each with 10px width),
+// the minimum width is 300px. The maximum width is 960px (fixed). The minimum
+// width is fixed (960px) for browsers without media query support (IE8). If
+// the viewport is less than this, a horizontal scrollbar is shown.
+
+.window {
+  position: relative;
+  margin: 0 auto;
+  max-width: $window-width-maximum;
+  // this seems odd, but browsers without media query support get a minimum
+  // width equal to the maximum width (a scrollbar is shown when the viewport
+  // is too small)
+  min-width: $window-width-maximum;
+  // reserve room for the box shadow of the content element
+
+  // browsers with media query support, have a different minimum width
+  @media screen and (min-width: 1px) {
+    min-width: $window-width-minimum;
+  }
+}
+
+.window.small {
+  max-width: 432px;
+}
+
+.normal-to-front-desk-process-link {
+  float: right;
+  margin-top: 5px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.external_link {
+  font-size: 75%;
+  margin-right: 3px;
+  color: $nrs-004ca0;
+}
+
+.heading_with_icon {
+  @include clearfix;
+  margin-bottom: 32px;
+  text-align: left;
+
+  img {
+    width: 40px;
+    float: left;
+    margin-right: 8px
+  }
+
+  h1.h2 {
+    line-height: 125%;
+    font-size: 100%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: normal;
+  }
+
+  h1.single {
+    font-size: 111%;
+    margin-top: 12px;
+  }
+
+  h1.multiline {
+    margin-top: 0px;
+    margin-left: 48px;
+  }
+
+  .my-digid-index & {
+    @media screen and (min-width: $breakpoint3 - 1) {
+      display: none;
+    }
+  }
+
+}
+
+.table.collapsable td {
+  @media screen and (max-width: $breakpoint2 - 1) {
+    display: block;
+  }
+}
+
+.table.collapsable tr.table-row {
+  @media screen and (max-width: $breakpoint2 - 1) {
+    float: none;
+  }
+}
+
+.table.collapsable td.table-cell--history-date {
+  border-bottom: 0px;
+  @media screen and (max-width: $breakpoint2 - 1) {
+    padding-top: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+.table.collapsable th {
+  @media screen and (max-width: $breakpoint2 - 1) {
+    display: none
+  }
+}
+
+.form-header-seperator{
+  margin-top: 8px;
+}
+
+@import 'form/item';
+@import 'session_countdown';
+@import 'dark_mode';
+
+#show-password-button {
+  padding: 0;
+  background: transparent;
+  border: none;
+}

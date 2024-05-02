@@ -1,0 +1,65 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= field f.label(:identity, t("services.organizations.identity")) do
+  = field f.label(:id, t("services.id")), @connection.id unless @connection.new_record?
+  = field f.label(:organization_id, t("services.organizations.organization")) do
+    = f.select(:organization_id, dc_organization_options(@connection.organization_id || params[:organization_id]), { include_blank: true }, { required: true })
+  = field f.label(:organization_role_id, t("services.organizations.organization_role")) do
+    = f.select(:organization_role_id, dc_organization_roles_options(@connection.organization_id ||params[:organization_id], @connection.organization_role_id || params[:organization_role_id]), { include_blank: true }, { required: true })
+
+%hr
+= field f.label(:standaard, t("services.standard")) do
+  = field f.label(:name, t("services.name")), f.text_field(:name, required: true)
+  = field f.label(:website_url, t("services.website_url")), f.text_field(:website_url)
+
+%hr
+= field f.label(:protocol, t("services.protocol")) do
+  = field f.label(:protocol_type, t("services.protocol_type")), f.select(:protocol_type, [["SAML_ROUTERINGSDIENST", "SAML_ROUTERINGSDIENST"], ["SAML_COMBICONNECT", "SAML_COMBICONNECT"], ["OIDC_APP", "OIDC_APP"]])
+  = field f.label(:version, t("services.version")), f.text_field(:version, required: true)
+  .saml_specific_fields
+    = field f.label(:saml_metadata, t("services.saml_metadata")), f.file_field(:saml_metadata)
+    = field f.label(:entity_id, t("services.entity_id")), f.text_field(:entity_id)
+  = field f.label(:metadata_url, t("services.metadata_url")), f.text_field(:metadata_url)
+
+.saml_specific_fields
+  %hr
+  = field f.label(:sso, t("services.service.sso")) do
+    = field f.label(:sso_status, t("services.service.sso_status")), f.check_box(:sso_status, checked: @connection.sso_status)
+    = field f.label(:sso_domain, t("services.service.sso_domain")) do
+      = f.select(:sso_domain, Dc::SsoDomain.all, { include_blank: true }, { required: false })
+
+%hr
+= render 'dc/shared/status', f: f, status: @connection.status
+= render 'shared/form_actions', model: @connection
+
+.clear
+= javascript_include_tag("inline_connection_change", nonce: content_security_policy_script_nonce)

@@ -1,0 +1,7 @@
+De volgende wijziging is afgekeurd door <%= @rejected_by %> <%= l @rejected_at, format: :human %>:
+
+Type: Nieuw
+Component: eID AT-verzoek
+Naam of nummer: <%= @at_request.document_type %> <%= @at_request.sequence_no %>
+
+De wijziging was aangemaakt door <%= @at_request.created_by %> <%= l @at_request.created_at, format: :human%>.

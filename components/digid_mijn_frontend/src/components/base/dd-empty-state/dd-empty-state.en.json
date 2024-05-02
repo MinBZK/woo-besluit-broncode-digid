@@ -1,0 +1,19 @@
+{
+	"empty-state": {
+		"app-header": "You do not have an active DigiD app yet.",
+		"app-body": "The DigiD app is the easiest way to log in securely. You no longer have to remember a password. Only a PIN code of your choice.",
+		"app-footer": "More information about the DigiD app",
+		"app-footer-mobile": "Download the DigiD app",
+		"apps-disabled": "Logging in with the DigiD app has been temporarily disabled. You can not activate your DigiD app.",
+		"id-header": "You do not have a suitable document to log in with DigiD yet.",
+		"id-body-1": "With ",
+		"id-body-2-id": "an identity card (issued from 13 March 2021)",
+		"id-body-2-licence": "a driving licence (issued from 4 June 2018)",
+		"id-body-2-id-licence": "a driving licence (issued from 4 June 2018) or an identity card (issued from 13 March 2021)",
+		"id-body-3": " you can log in to websites of governments, healthcare or educational organisations and pension funds.",
+		"id-footer": "More information about logging in with an identity document.",
+		"no-connection-RVIG": "The status of your identity card could not be retrieved.",
+		"no-connection-RDW": "The status of your driving licence could not be retrieved.",
+		"try-again": " Try again later."
+	}
+}

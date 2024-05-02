@@ -1,0 +1,11 @@
+nl:
+  kiosk:
+    overview: Overzicht kiosken
+    overview_note: "Hier kunnen de gegevens van een specifieke kiosk worden aangepast. Initieel worden de gegevens eenmalig door de specifieke kiosk aangeleverd."
+    no_kiosks: 0 kiosken gevonden
+    status_pending_not_allowed: "Opslaan mislukt, het is niet toegestaan de status pending handmatig toe te wijzen."
+    updated_successfully: Kiosk succesvol gewijzigd
+    destroy: Verwijderen
+
+    headers:
+      edit: Wijzigen kiosk

@@ -1,0 +1,134 @@
+@use 'src/scss/tools/tools.general.mixins' as mixins;
+@use 'src/scss/settings/settings.fonts' as fonts;
+@use 'src/scss/settings/settings.colors' as colors;
+
+* {
+  font-family: fonts.$regular, Arial, sans-serif;
+}
+
+aside {
+  width: 0 !important;
+}
+
+section {
+  margin-top: 3rem;
+}
+
+a {
+  line-height: 1.5rem;
+
+  &:link {
+    color: var(--link);
+  }
+
+  &:visited {
+    color: var(--link-clicked);
+  }
+}
+
+.text {
+  color: var(--base);
+  font-family: fonts.$regular;
+}
+
+.digid {
+  color: var(--color-pumpkin) !important;
+}
+
+.hidden-element {
+	@include mixins.hidden-element
+}
+
+
+.text-header {
+  @extend .text;
+  letter-spacing: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.text-regular {
+  @extend .text;
+  letter-spacing: 0.2px;
+  line-height: 1.5rem;
+}
+
+h1 {
+  @extend .text-header;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: 2.375rem;
+}
+
+h2 {
+  @extend .text-header;
+  font-family: fonts.$bold;
+  font-size: 1.5rem;
+  line-height: 1.625rem;
+}
+
+//For H2's that are the same size as H1
+.h2-large {
+  font-weight: normal !important;
+  font-family: fonts.$regular !important;
+  font-size: 2rem !important;
+  line-height: 2.375rem !important;
+}
+
+h3 {
+  @extend .text-header;
+  font-family: fonts.$bold;
+  font-size: 1.5rem;
+  line-height: 1.625rem;
+}
+
+h4 {
+  @extend .text-header;
+  font-family: fonts.$bold;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+p {
+  @extend .text-regular;
+  margin-top: 1rem;
+}
+
+div {
+  @extend .text-regular;
+}
+
+.small {
+  font-size: 0.9375rem !important;
+  line-height: 1.25rem !important;
+}
+
+.tiny {
+  font-family: fonts.$regular;
+  font-weight: normal;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.container {
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  padding: 2.5rem;
+  background-color: var(--solid1);
+}
+
+.status-inactive {
+  font-family: fonts.$bold;
+  color: var(--error);
+  margin-top: 0 !important;
+}
+
+.status-active {
+  font-family: fonts.$bold;
+  color: var(--success);
+  margin-top: 0 !important;
+}
+
+body {
+  background-color: var(--solid2);
+}

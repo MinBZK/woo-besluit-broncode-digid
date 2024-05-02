@@ -1,0 +1,112 @@
+// Block with icon
+//
+// The `block_with_icon` helper method is used to display a generic message
+// with icon. When a block is given it yields the block.
+//
+// .block-with-icon--error       - Error message
+// .block-with-icon--information - Informational message
+// .block-with-icon--waiting     - Waiting message
+//
+// Styleguide 3.1.
+// for error and information blocks
+$base-font-family: "RO Sans",Verdana, Arial, sans-serif;
+$base-font-size: 100%;
+$base-line-height: 1.5em;
+
+$shadow-width: 10px;
+$reserved-width: 2 * $shadow-width + 20px;
+$window-width-minimum: 320px - $reserved-width;
+$window-width-maximum: 960px;
+$main-width-maximum: $window-width-maximum / 2;
+
+$breakpoint0: $main-width-maximum + $reserved-width;
+$breakpoint1: $main-width-maximum + $reserved-width + 110px;
+$breakpoint2: 768px;
+$breakpoint3: 980px;
+$breakpoint4: 504px;
+
+$my-digid-breakpoint1: $breakpoint0;
+$my-digid-breakpoint2: 690px;
+$my-digid-breakpoint3: 750px;
+$my-digid-breakpoint4: 860px;
+$my-digid-breakpoint5: $breakpoint3;
+
+$table-border-width: 3px;
+
+// Rijkshuisstijl - Online kleuren
+// http://www.rijkshuisstijl.nl/bouwstenen/kleur/online-kleuren
+
+$rs-achtergrond-links: #535353;
+$rs-geel-lichte-tint: #fdf6bb;
+$rs-links-visited: #696969;
+$rs-oranje-lichte-tint: #f6d4b2;
+$rs-oranje-lichtste-tint: #fbead9;
+$rs-oranje-volle-kleur: #e17000;
+$rs-rood-lichte-tint: #f2bfbb;
+$rs-tekst-links: #154273;
+$rs-wit: #fff;
+$rs-zwart: #000;
+
+// Niet rijkshuisstijl kleuren
+$nrs-0162cd: #0162cd;
+$nrs-2e742e: #2e742e;
+$nrs-5a5a5a: #5a5a5a;
+$nrs-828282: #828282;
+$nrs-960000: #960000;
+$nrs-aaa: #aaa;
+$nrs-bb4c4c: #bb4c4c;
+$nrs-dcdcdc: #dcdcdc;
+$nrs-ddd: #ddd;
+$nrs-deebe3: #deebe3;
+$nrs-ea9790: #ea9790;
+$nrs-f3f5f6: #f3f5f6;
+$nrs-f5f5f5: #f5f5f5;
+$nrs-f8f8f9: #f8f8f9;
+$nrs-fada3c: #fada3c;
+$nrs-fbf1cb: #fbf1cb;
+$nrs-fbfbfb: #fbfbfb;
+$nrs-fce559: #fce559;
+
+$nrs-f3f3f3: #f3f3f3;
+$nrs-c8c8c8: #c8c8c8;
+$nrs-282828: #282828;
+$nrs-004ca0: #004ca0;
+$nrs-004a9a: #004a9a; /* url */
+$nrs-e17000: #e17000; /* hard oranje */
+$nrs-d6d6d6: #d6d6d6; /* licht grijs */
+$nrs-fbfbfb: #fbfbfb;
+
+$button-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+
+$rs-rood-lichte-tint-alternative: #f9dfdd;
+$nrs-d9ebf7: #d9ebf7;
+
+$default-border-radius: 4px;
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+$default-border-radius: 4px;
+
+@mixin block-without-icon($background-color) {
+  background-color: $background-color;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 10px;
+  padding-left: 40px;
+  border-radius: $default-border-radius;
+
+  > h2 {
+    margin-bottom: 4px;
+  }
+}
+
+@mixin block-with-icon($background-color, $background-image) {
+  @include block-without-icon($background-color);
+  background-image: $background-image;
+  background-size: 22px 22px;
+}

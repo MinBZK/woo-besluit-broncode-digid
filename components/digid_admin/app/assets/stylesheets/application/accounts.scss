@@ -1,0 +1,124 @@
+#accounts {
+
+  & > span {
+    font-weight: bold;
+    color: red;
+  }
+
+  #search_accounts_field {
+    margin-bottom: 10px;
+  }
+
+  h1.username span{
+    font-size: 0.7rem;
+    font-weight: initial;
+  }
+  #brp_request {
+    width: 25em;
+    min-height: 2.5em;
+    #brp_request_link {
+      float: left;
+    }
+    #brp_request_link, #brp_error {
+      height: 2.5em;
+    }
+    #brp_error {
+      float: right;
+      padding: 0.5em;
+    }
+  }
+  .right {
+    float: right;
+  }
+  .personal_data {
+    display: inline-block;
+    width: 100%;
+    .personal_data_left {
+      float: left;
+      width: 49%;
+      p.hoog {
+        margin: 15px 0 10px;
+      }
+    }
+    .personal_data_right {
+      width: 49%;
+      float: right;
+    }
+  }
+  .relative {
+    position: relative;
+  }
+  .block_replace_account_button {
+    position: absolute;
+    float: right;
+    right: 1em;
+  }
+  .suspend_account_button, .eid_button {
+    position: absolute;
+    float: right;
+    right: 1em;
+  }
+  .minimum_level {
+    margin-bottom: 2em;
+    strong:nth-child(2) {
+      padding-left: 1em;
+    }
+  }
+  div.field {
+    .label {
+      width: 40%;
+    }
+
+    .content {
+      width: auto;
+      margin-left: 40%;
+
+      .mu-status-button {
+        margin-left: 150px;
+        margin-top: 5px;
+      }
+
+      & > span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  h2, .ui-dialog h2 {
+    margin: 15px 0;
+
+    & > span {
+      font-weight: bold;
+      color: red;
+    }
+  }
+
+  h3 {
+    margin: 15px 0 10px;
+    text-decoration: underline;
+  }
+
+  .content_blocked {
+  }
+
+  #letter_xml_container {
+    width: 400px;
+
+    .label {
+      width: 150px;
+    }
+
+    .content {
+      width: initial;
+    }
+
+    .letter_row {
+      display: block;
+      height: 20px;
+    }
+  }
+
+  .travel_document ~ .travel_document {
+    padding-top: 15px;
+  }
+}

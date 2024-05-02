@@ -1,0 +1,269 @@
+@import 'mixins/box-shadow';
+@import 'mixins/font-face';
+
+@include font-face("RijksSans", font-files("RijksoverheidSansText-Regular_2_0.otf", otf, "RijksoverheidSansText-Regular_2_0.ttf", ttf), false, false, false);
+@include font-face("RijksSans", font-files("RijksoverheidSansText-Bold_2_0.otf", otf, "RijksoverheidSansText-Bold_2_0.ttf", ttf), false, bold, false);
+@include font-face("RijksSans", font-files("RijksoverheidSansText-Italic_2_0.otf", otf, "RijksoverheidSansText-Italic_2_0.ttf", ttf), false, false, italic);
+@include font-face("RijksSans", font-files("RijksoverheidSansText-BoldItalic_2_0.otf", otf, "RijksoverheidSansText-BoldItalic_2_0.ttf", ttf), false, bold, italic);
+@include font-face("RijksSansHeading", font-files("RijksoverheidSansHeading-Regular_2_0.otf", otf, "RijksoverheidSansHeading-Regular_2_0.ttf", ttf), false, false, false);
+@include font-face("RijksSans", font-files("RijksoverheidSansHeading-Bold_2_0.otf", otf, "RijksoverheidSansHeading-Bold_2_0.ttf", ttf), false, bold, false);
+@include font-face("RijksSans", font-files("RijksoverheidSansHeading-Italic_2_0.otf", otf, "RijksoverheidSansHeading-Italic_2_0.ttf", ttf), false, false, italic);
+@include font-face("RijksSans", font-files("RijksoverheidSansHeading-BoldItalic_2_0.otf", otf, "RijksoverheidSansHeading-BoldItalic_2_0.ttf", ttf), false, bold, italic);
+
+$main-size: 9pt;
+$main-line-height: 12pt;
+$side-size: 6.5pt;
+$side-line-height: 9pt;
+$rijkssans: "RijksSans", Arial, Sans;
+$rijkssansheading: "RijksSansHeading", Arial, Sans;
+
+$rs-wit: #fff;
+$rs-zwart: #000;
+
+body {
+  background: none repeat scroll 0 0 $rs-wit;
+}
+
+html, body {
+  width: 595pt;
+}
+
+.print {
+  font-family: $rijkssans;
+  font-size: $main-size;
+  line-height: $main-line-height;
+}
+
+.non-print,
+.digid-logo,
+.header,
+.service-menu,
+.footer {
+  display: none;
+}
+
+.content {
+  @include box-shadow(0 0 0 rgba(0, 0, 0, 0)); // Compass
+  margin-top: 0;
+}
+
+.window {
+  margin: 0;
+  max-width: 595pt;
+  min-width: 0;
+  padding: 0;
+  width: 595pt;
+}
+
+.main {
+  margin: 0;
+  padding: 0;
+  width: 595pt;
+}
+
+.main-content {
+  float: left;
+  margin: 0;
+  max-width: none;
+  position: relative;
+  width: 595pt;
+}
+
+.actual-text {
+  overflow: auto;
+  padding-left: 79pt;
+}
+
+.letter-header {
+  height: 125pt;
+}
+
+.image-top-letter {
+  height: inherit;
+
+  img {
+    display: block;
+    height: 105pt;
+    margin: 0 auto;
+    width: auto;
+  }
+}
+
+.main-letter-content {
+  float: left;
+  position: relative;
+  width: 376pt;
+}
+
+em {
+  font-style: italic;
+}
+
+.return-address {
+  font-size: $side-size;
+  margin-bottom: 14pt;
+  margin-top: 11pt;
+}
+
+.address {
+  height: 125pt;
+
+  .title {
+    font-family: $rijkssansheading;
+    font-size: $side-size;
+    font-weight: bold;
+  }
+}
+
+.side-block {
+  float: right;
+  font-size: $side-size;
+  height: 100%;
+  line-height: $side-line-height;
+  margin-right: 28pt;
+  position: relative;
+  width: 101pt;
+
+  .title {
+    font-family: $rijkssansheading;
+    font-weight: bold;
+  }
+
+  .digid-address,
+  .opening-hours,
+  .contact {
+    margin-bottom: 4.5pt;
+  }
+}
+
+.date-subject {
+  float: left;
+  height: 37pt;
+  margin-bottom: 34pt;
+  position: relative;
+  width: 100%;
+
+  .stick-to-bottom {
+    bottom: 0;
+    position: absolute;
+  }
+
+  .date,
+  .subject {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+
+  .name {
+    display: inline-block;
+    float: left;
+    width: 56pt;
+  }
+
+  .value {
+    display: inline-block;
+    float: left;
+  }
+}
+
+.main-letter {
+  p {
+    margin: 0;
+    padding-bottom: $main-line-height;
+  }
+}
+
+.good-to-know {
+  padding-top: 105pt;
+  page-break-before: always;
+
+  h2,
+  h3 {
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    padding-bottom: .2em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    padding-bottom: .2em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  ul {
+    list-style-type: square;
+    margin-top: -1em;
+    padding-left: 3em;
+
+    li {
+      padding-left: 1em;
+    }
+  }
+}
+
+.activation-code-block {
+  border: thin solid $rs-zwart;
+  margin: 0;
+  margin-bottom: $main-line-height;
+  padding: 1em;
+
+  .code {
+    font-weight: bold;
+    padding-bottom: 1em;
+
+    .activation-code {
+      display: inline;
+      font-family: Verdana;
+      font-weight: normal;
+      padding-left: 1pt;
+    }
+  }
+}
+
+.print-letter-page {
+  page-break-after: always;
+  page-break-inside: avoid;
+
+  .bottom-block-container {
+    height: 150pt;
+    position: relative;
+
+    &.page2 {
+      height: 233pt;
+    }
+  }
+}
+
+.bottom-block {
+  bottom: 12pt;
+  display: block;
+  margin-left: 79pt;
+  margin-right: 28pt;
+  position: absolute;
+  width: 100%;
+
+  .notice {
+    padding-bottom: 2em;
+  }
+
+  .page-number {
+    display: inline-block;
+    width: 101pt;
+  }
+
+  .title {
+    display: inline-block;
+    font-family: $rijkssansheading;
+    font-size: $side-size;
+    font-weight: bold;
+    margin-right: 11pt;
+    width: 376pt;
+  }
+}

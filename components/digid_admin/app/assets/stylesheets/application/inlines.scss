@@ -1,0 +1,56 @@
+.white { background-color: white; }
+.hidden { display: none; }
+
+.hidden-absolute { visibility:hidden;position:absolute }
+.block { display: block; }
+.inline-block { display: inline-block !important}
+.display-table { display: table; }
+.padding-right-10 {padding-right: 10%;}
+#main table.half-width { width: 50%;}
+.min-width-400px{ min-width: 400px; }
+
+.theme {
+  &[class*="acc"] {
+    #menu{ background-color: #CCE0F1 }
+    #env{ background-color: #01689B}
+  }
+
+  &[class*="preprod"] {
+    #menu{ background-color: #C3DBB6 }
+    #env{ background-color: #39870C}
+  }
+
+  #menu{ background-color: #EEA160 }
+  #env{ background-color: #E7792C}
+}
+
+
+.margin-10-0 { margin: 10px 0px; }
+.margin-3-0 { margin: 3px 0px; }
+
+
+.border-0 {  border: 0 !important; }
+.transparent { background-color: transparent !important; }
+
+
+.width-173px { width: 173px !important; }
+.width-25 {
+  width: 25%;
+
+  .field div {
+    padding: 0 !important; width: 100%; margin-bottom: 10px !important;
+
+    #news_item { padding: 4px; width: 95% !important; height: 130px; margin-top: 4px; overflow: auto }
+  }
+}
+
+
+.config{padding: 4px; width: 165px; height: 130px; margin-top: 4px; overflow: auto }
+.padding-0 { padding: 0; }
+.width-100 { width: 100%; }
+
+
+.left { float: left !important; }
+.right { float: right !important; }
+
+.certificate { margin-top: 10px; margin-bottom: 25px; }

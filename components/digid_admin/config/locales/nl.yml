@@ -1,0 +1,660 @@
+# Dutch translations for Ruby on Rails, based on US English template
+#PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+#  - Sponsored by Kabisa ICT - http://kabisa.nl
+#PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+nl:
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%e %b"
+      long: "%e %B %Y"
+      only_day: "%e"
+      only_month: "%b"
+
+    day_names: [zondag, maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag]
+    abbr_day_names: [zon, maa, din, woe, don, vri, zat]
+
+    month_names: [~, januari, februari, maart, april, mei, juni, juli, augustus, september, oktober, november, december]
+    abbr_month_names: [~, jan, feb, mar, apr, mei, jun, jul, aug, sep, okt, nov, dec]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      # default: "%a %d %b %Y %H:%M:%S %Z"
+      human:  op %d-%m-%Y om %H:%M uur
+      default: "%d-%m-%Y %H:%M:%S"
+      slash: "%d-%m-%Y / %H:%M:%S"
+      short: "%d %b %H:%M"
+      short_numeric: "%d-%m-%y %H:%M"
+      short_custom: "%d-%m-%Y %H:%M"
+      long: "%d %B %Y %H:%M"
+      time: "%H:%M"
+      only_second: "%S"
+      only_date: "%d-%m-%Y"
+      date_time: "%e %B %Y %k:%M"
+    am: "'s ochtends"
+    pm: "'s middags"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " en "
+      last_word_connector: " en "
+
+    select:
+      prompt: "Selecteer"
+
+  number:
+    format:
+      separator: ","
+      delimiter: "."
+      precision: 2
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u%n"
+        unit: "€"
+        separator: ","
+        delimiter: "."
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: "duizend"
+          million: "miljoen"
+          billion: "miljard"
+          trillion: "biljoen"
+          quadrillion: "biljard"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "een halve minuut"
+      less_than_x_seconds:
+        one:   "minder dan één seconde"
+        other: "minder dan %{count} seconden"
+      x_seconds:
+        one:   "1 seconde"
+        other: "%{count} seconden"
+      less_than_x_minutes:
+        one:   "minder dan één minuut"
+        other: "minder dan %{count} minuten"
+      x_minutes:
+        one:   "1 minuut"
+        other: "%{count} minuten"
+      about_x_hours:
+        one:   "ongeveer één uur"
+        other: "ongeveer %{count} uur"
+      x_days:
+        one:   "1 dag"
+        other: "%{count} dagen"
+      about_x_months:
+        one: "ongeveer één maand"
+        other: "ongeveer %{count} maanden"
+      x_months:
+        one:   "1 maand"
+        other: "%{count} maanden"
+      about_x_years:
+        one: " één jaar"
+        other: " %{count} jaar"
+      over_x_years:
+        one: "meer dan één jaar"
+        other: "meer dan %{count} jaar"
+      almost_x_years:
+        one:   "bijna één jaar"
+        other: "bijna %{count} jaar"
+    prompts:
+      year:   "jaar"
+      month:  "maand"
+      day:    "dag"
+      hour:   "uur"
+      minute: "minuut"
+      second: "seconde"
+
+  helpers:
+    select:
+      prompt: "Selecteer"
+
+    submit:
+      create: '%{model} toevoegen'
+      update: '%{model} bewaren'
+      submit: '%{model} opslaan'
+
+  validates_timeliness:
+    error_value_formats:
+      date: '%Y-%m-%d'
+      time: '%H:%M:%S'
+      datetime: '%Y-%m-%d %H:%M:%S'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "is niet in de lijst opgenomen"
+      exclusion: "is niet beschikbaar"
+      invalid: "is ongeldig"
+      confirmation: "komt niet met de bevestiging overeen"
+      accepted: "moet worden geaccepteerd"
+      empty: "moet opgegeven zijn"
+      blank: "moet opgegeven zijn"
+      too_long: "is te lang (maximaal %{count} tekens)"
+      too_short: "is te kort (minimaal %{count} tekens)"
+      wrong_length: "heeft onjuiste lengte (moet %{count} tekens lang zijn)"
+      not_a_number: "is geen getal"
+      not_an_integer: "moet een geheel getal zijn"
+      greater_than: "moet groter zijn dan %{count}"
+      greater_than_or_equal_to: "moet groter dan of gelijk zijn aan %{count}"
+      equal_to: "moet gelijk zijn aan %{count}"
+      less_than: "moet minder zijn dan %{count}"
+      less_than_or_equal_to: "moet minder dan of gelijk zijn aan %{count}"
+      odd: "moet oneven zijn"
+      even: "moet even zijn"
+      invalid_date: "is geen geldige datum"
+      invalid_time: "is not a valid time"
+      invalid_datetime: "is not a valid datetime"
+      is_at: "must be at %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be on or before %{restriction}"
+      after: "must be after %{restriction}"
+      on_or_after: "must be on or after %{restriction}"
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "%{model} niet opgeslagen: 1 fout gevonden"
+          other:  "%{model} niet opgeslagen: %{count} fouten gevonden"
+        body: "Controleer de volgende velden:"
+
+      messages:
+        taken: "is al in gebruik"
+        record_invalid: "Validatie mislukt: %{errors}"
+        <<: *errors_messages
+
+      models:
+        subscriber:
+          attributes:
+            bsn:
+              blank: 'Toevoegen mislukt, het ingevoerde burgerservicenummer is niet geldig.'
+              wrong_length: 'Toevoegen mislukt, het ingevoerde burgerservicenummer is niet geldig.'
+              taken: 'Toevoegen mislukt, het ingevoerde burgerservicenummer is reeds aanwezig.'
+              elf_proef: 'Toevoegen mislukt, het ingevoerde burgerservicenummer is niet geldig.'
+              afmeldlijst: 'Toevoegen mislukt, het ingevoerde burgerservicenummer staat op de afmeldlijst.'
+        switch:
+          attributes:
+            status:
+              no_pilot_group: "Kan alleen op 'Ja, voor pilotdeelnemers' worden gezet indien gekoppeld aan pilotgroep"
+        webservice:
+          attributes:
+            website_url:
+              valid_url_prefix: 'moet beginnen met http:// of https://'
+            name:
+              contains_illegal_characters: "webdienst: de volgende karakters zijn toegestaan: a-z A-Z 0-9 ç@_!&()+,-./:;?'"
+        manager:
+          attributes:
+            mobile_number:
+              eight_digits: "moet bestaan uit 8 cijfers."
+            email:
+              invalid: 'te lang. Maximaal 254 karakters, waarvan maximaal 64 voor het @-teken, toegestaan.'
+            superuser:
+              at_least_one_superuser_assertion: "mag niet worden ingetrokken als er nog maar 1 superbeheerder bestaat."
+        bulk_order:
+          attributes:
+            csv_upload:
+              blank: ": er is geen bestand geselecteerd"
+              spoofed_media_type: ": het geselecteerde bestand is niet geldig"
+              invalid_header: ": het bestand bevat onbekende data, verwacht 'Burgerservicenummer'"
+              min_amount: ": upload mislukt, bestand bevat geen BSN's"
+              max_amount: ": upload mislukt, maximum aantal BSN's overschreden"
+            csv_upload_content_type:
+              invalid: ": het geselecteerde bestand is geen CSV file"
+            bulk_status_type_combination:
+              invalid: "Deze bulk opdracht kan niet uitgevoerd worden voor accounts met deze status"
+        app_version:
+          attributes:
+            base:
+              no_active_version: 'no_active_version'
+              last_active_version: "Er is geen nieuwere DigiD app-versie voor dit platform en releasetype beschikbaar om naar te updaten. Maak eerst een nieuwe versie beschikbaar of verwijder de 'Forced update vanaf' en/of 'Kill app vanaf' datum'."
+            version:
+              invalid: ongeldig formaat (<major version (pos.int)>.<minor version (pos.int)>.<patch version (pos.int)>)
+              taken: en releasetype bestaat al voor het betreffende platform
+            not_valid_before:
+              blank: 'datum moet opgegeven zijn'
+              on_or_after: 'datum mag niet in het verleden liggen'
+            not_valid_on_or_after:
+              on_or_after: "datum mag niet in het verleden liggen"
+              before: "datum moet tussen 'Beschikbaar vanaf' en 'Kill app vanaf' datum liggen"
+              after: "datum moet tussen 'Beschikbaar vanaf' en 'Kill app vanaf' datum liggen"
+            kill_app_on_or_after:
+              on_or_after: "datum mag niet in het verleden liggen"
+              before: "datum moet ná 'Beschikbaar vanaf' en 'Forced update vanaf' datum liggen"
+              after: "datum moet ná 'Beschikbaar vanaf' en 'Forced update vanaf' datum liggen"
+        blacklisted_phone_number:
+          attributes:
+            prefix:
+              starts_with_zero: "mag niet beginnen met een nul"
+        eid/at_request:
+          attributes:
+            sequence_no:
+              used: "moet gelijk of hoger zijn dan '%{initial}'."
+      full_messages:
+        format: "%{attribute} %{message}"
+    attributes:
+      log:
+        created_at: 'Tijdstip'
+        name: 'Omschrijving'
+      news_item:
+        news_locations: 'Zichtbare locatie(s)'
+      manager:
+        certificate: 'Certificaat (PEM)'
+        distinguished_name: 'Certificaat DN'
+        active: 'actief'
+        inactive: 'opgeschort'
+        role_ids: Beheerrollen
+      role:
+        manager_ids: Beheerders
+      pilot_group:
+        description: Omschrijving
+        name: Naam
+      eid/at_request:
+        document_type: Documenttype
+        authorization: Autorisatie
+        sequence_no: Opvolgnummer
+        reference: Referentie
+
+  activemodel:
+    errors:
+      models:
+        dc/connection:
+          attributes:
+            website_url:
+              valid_url_prefix: 'moet beginnen met http:// of https://'
+        dc/service:
+          attributes:
+            website_url:
+              valid_url_prefix: 'moet beginnen met http:// of https://'
+    attributes:
+      dc/base:
+        name: Naam
+        saml_metadata: SAML metadata
+        status: Geldigheid
+      dc/service:
+        uuid: Dienstidentificatie
+        certificates: TLS certificaat
+      dc/connection:
+        uuid: Aansluitingsidentificatie
+        certificates: TLS certificaat
+        version: Versie
+        organization_role_id: Organisatie/Rol
+      dc/organization:
+        oin: Organisatie-identificatie
+      dc/service:
+        uuid: Dienst-identificatie
+        certificates: Encryptie certificaten
+
+  at_least_one: 'Vul tenminste één App return url/uri in'
+  fraud_research: "Fraudeonderzoek"
+  fraud_admin_reports:    "Frauderapportages"
+  integrity_admin_reports:    "Integriteitsrapportages"
+  monthly_admin_reports:  "Maandrapportages"
+  std_admin_reports: "Standaardrapportages"
+  weekly_admin_reports:   "Weekrapportages"
+  sec_admin_reports:   "Securityrapportages"
+  overview: "Overzicht"
+  report:
+    new_fraud_research: "Nieuw fraudeonderzoek"
+    monthly: "Maand"
+    weekly: "Week"
+    std: "Standaard"
+    fraud: "Fraude"
+    integrity: "Integriteit"
+    sec: "Security"
+    adhoc_log: "Fraude - Loggegevens"
+    adhoc_gba: "Fraude - Accountgegevens"
+    adhoc_tx: "Fraude - Transactiegegevens"
+    adhoc_log_short: Fraude-log
+    adhoc_gba_short: Fraude-account
+    adhoc_tx_short: Fraude-transactie
+    overview: "Overzicht rapportages"
+    van: "Van"
+    tot: "Tot"
+    type: "Type"
+    show_only_non_processed_reports: "Verwerking ok"
+
+  update_success: "%{model} succesvol gewijzigd."
+  create_success: "%{model} succesvol aangemaakt."
+
+  sms_challenges:
+    action:
+      registration: "Registratie"
+      activation: "Activatie"
+      recover_account: "Herstel account"
+      mijn_digid: "Mijn DigiD"
+      sign_in: "Inloggen"
+  letter_files:
+    status:
+      ready: "te verzenden"
+      sent: "verzonden"
+      processed: "verwerkt"
+
+  flash:
+    logging_in_twice_denied: "U kunt geen tweede keer inloggen. U dient uw browser opnieuw op te starten."
+    access_denied: 'U mist het privilege om deze handeling te mogen uitvoeren.'
+    no_list: Geen afmeldlijst gevonden, contact DigiD beheer.
+    session_expired: U bent (automatisch) uitgelogd, om opnieuw in te loggen  dient u uw browser opnieuw op te starten
+    ssl_session_expired: U bent (automatisch) uitgelogd, om opnieuw in te loggen  dient u uw browser opnieuw op te starten
+    organization:
+      destroy_not_allowed: "De Organisatie mag niet worden verwijderd. Controleer dat er geen (te accorderen) Webdienst is gekoppeld"
+    saml_providers:
+      metadata:
+        upload: "Metadata uploaden mislukt, fout in de metadata of metadata-url"
+
+  log_query_timeout: Timeout tijdens het ophalen van logs. Gebruik minder zware zoekcriteria.
+  add: Toevoegen
+  app_to_app_validation_failed: naam en return URL moeten beide zijn ingevuld of leeggelaten
+  audit_release: Controle uitgifte
+  are_you_sure: Weet je het zeker?
+  are_you_sure_third_party_app: Weet u zeker dat u deze third-party app wilt verwijderen?
+  are_you_sure_nationality: Weet u zeker dat u deze nationaliteit wilt verwijderen?
+  are_you_sure_organization: Weet u zeker dat u deze organisatie wilt verwijderen?
+  are_you_sure_service: Weet u zeker dat u deze dienst wilt verwijderen?
+  are_you_sure_connection: Weet u zeker dat u deze aansluiting wilt verwijderen?
+  are_you_sure_service: Weet u zeker dat u deze dienst wilt verwijderen?
+  are_you_sure_to_block_confirmation: >
+                         Klik op OK om de inlogfunctie van %{document_type} te blokkeren.
+
+
+                         LET OP: De burger krijgt hiervan een bevestiging per e-mail / sms.
+  are_you_sure_to_block_no_confirmation: >
+                         Klik op OK om de inlogfunctie van %{document_type} te blokkeren.
+
+
+                         LET OP: De burger krijgt hiervan geen bevestiging per e-mail / sms.
+  are_you_sure_to_deblock_confirmation: >
+                         Klik op OK om een deblokkeringscode per brief te versturen voor het herstellen van de inlogfunctie van %{id_or_driving_licence}.
+
+
+                         LET OP: De brief wordt verstuurd via beveiligde postbezorging. De burger krijgt hiervan een bevestiging per e-mail / sms.
+  are_you_sure_to_deblock_no_confirmation: >
+                         Klik op OK om een deblokkeringscode per brief te versturen voor het herstellen van de inlogfunctie van %{id_or_driving_licence}.
+
+
+                         LET OP: De brief wordt verstuurd via beveiligde postbezorging. De burger krijgt hiervan geen bevestiging per e-mail / sms.
+  are_you_sure_to_pin: >
+                         Klik op OK om een PIN-brief te versturen voor %{the_id_or_driving_licence}.
+
+
+                         LET OP: De PIN-brief kan maximaal 6 weken na uitgeven van %{the_id_or_driving_licence} worden aangevraagd.
+
+  the_driving_licence: het rijbewijs
+  the_id_card: de identiteitskaart
+  this_driving_licence: dit rijbewijs
+  this_id_card: deze identiteitskaart
+  driving_licence: rijbewijs
+  id_card: identiteitskaart
+  back_to_overview: Terug naar overzicht
+  brp_data_of_bsn: "BRP gegevens van BSN: %{bsn}"
+  eid_data_of_bsn: "eID middelen van BSN: %{bsn}"
+  brp_history: BRP raadpleeg geschiedenis
+  bsn: Burgerservicenummer
+  bulk_order_overview: Overzicht bulkopdrachten
+  bulk_order_new_task: Nieuwe bulkopdracht
+  bulk_order_download_overview: Download overzicht
+  cancel: Annuleren
+  citizen_service_number_registration: BSN aanvrager
+  corrected: gecorrigeerd
+  created_at: Datum toegevoegd
+  description: Omschrijving
+  edit: Wijzig
+  edit_pilot_group: Wijzig pilotgroep
+  email: E-mail
+  filter_button: "Filter &raquo;"
+  fraud_correct: Fraudevermoeden terecht?
+  handle_audit: Behandelen fraudevermoeden
+  has_account_been_activated: Account geactiveerd?
+  id_document_number: Documentnummer
+  issuer_type:
+    rda: RDA
+    letter: Brief binnenland
+    password: Wachtwoord
+    letter_secure_delivery: Persoonlijke briefbezorging (IPKD)
+    letter_international: Brief buitenland (SVB)
+    front_desk: Brief uitgegeven via Balie
+    sms_controle: Sms-controle
+    digid_app: DigiD app
+    digid_app_sub: DigiD app met ID-check
+    derived: Afgeleid van ander middel
+    gemeentebalie: Gemeentebalie
+  motivation_correction: Motivatie correctie
+  name: Naam
+  niet_van_toepassing: niet van toepassing
+  'no': Nee
+  no_pilot_groups_found: Er zijn geen pilotgroepen gevonden.
+  no_participants_found: Er zijn geen deelnemers gevonden.
+  no_subscribers: Geen deelnemers
+  not_available: Niet aanwezig
+  not_found: Niet gevonden
+  rdw_unavailable: RDW niet bereikbaar
+  rdw_fault: Foutbericht RDW
+  rvig_fault: Foutbericht RvIG
+  rvig_unavailable: RvIG niet bereikbaar
+  number_of_participants: Aantal deelnemers
+  participant_overview: Overzicht deelnemers
+  pilots: Pilots
+  pilot_group: Pilotgroep
+  pilot_groups: Pilotgroepen
+  pilot_group_overview: Overzicht pilotgroepen
+  pilot_switches: Pilot switches
+  pilot_switches_overview: Overzicht pilot switches
+  pilot_switch_header: Pilot switch
+  pilot_switch:
+    active: Actief?
+    status:
+      inactive: Nee
+      all: 'Ja, voor alle accounts'
+      pilot_group: 'Ja, voor pilotdeelnemers'
+      partly: 'Gedeeltelijk'
+    status_driving_licence:
+      inactive: "<strong>Nee</strong>, Koppeling met RDW <strong>uit</strong>, inloggen met rijbewijs <strong>uit</strong>"
+      all: "<strong>Ja</strong>, koppeling met RDW <strong>aan</strong>, inloggen met rijbewijs <strong>aan</strong>"
+      partly: "<strong>Gedeeltelijk</strong>, koppeling met RDW <strong>aan</strong>, inloggen met rijbewijs <strong>uit</strong>"
+    status_identity_card:
+      inactive: "<strong>Nee</strong>, Koppeling met RvIG <strong>uit</strong>, inloggen met identiteitskaart <strong>uit</strong>"
+      all: "<strong>Ja</strong>, koppeling met RvIG <strong>aan</strong>, inloggen met identiteitskaart <strong>aan</strong>"
+      partly: "<strong>Gedeeltelijk</strong>, koppeling met RvIG <strong>aan</strong>, inloggen met identiteitskaart <strong>uit</strong>"
+    status_sms_app:
+      inactive: Automatisch
+      all: Wacht op verzoek van app
+    reset_driving_licence:
+      inactive: Nee
+      all: Ja, PIN-set en PIN-reset
+      partly: Ja, alleen PIN-set
+    reset_identity_card:
+      inactive: Nee
+      all: Ja, PIN-set
+    description: Omschrijving
+    edit: Wijzig pilot switch
+    name: Naam
+  pilot_group_updated_successfully: Pilotgroep succesvol gewijzigd
+  reason: Reden
+  registration_eids: Registratie eIDs
+  registration_finished_at: Tijdstip aanvraag afgerond
+  nationality: Nationaliteit
+  release: Uitgifte
+  released_by: Uitgegeven door
+  remove_all_subscribers: Alle deelnemers verwijderen
+  save: Opslaan
+  save_for_review: "Opslaan ter accordering"
+  sent_letters: Verstuurde brieven
+  show: Bekijk
+  state: Status
+  metadata: SAML Metadata
+  status_bron:
+    digid_zelfservice: Mijn DigiD
+    digid_servicecentrum: Servicecentrum
+    rdw: RDW
+    rvig: RvIG
+  pin_button: PIN-brief aanvragen
+  block_button: Blokkeren
+  deblock_button: Deblokkeringscode aanvragen
+  query_time_missing_message: Geef de tijdsperiode op en selecteer 'Filter >>
+
+  suspected_fraud_at_release: Fraude vermoeden bij uitgifte
+  time_release: Tijdstip uitgifte
+  under_investigation: In onderzoek
+  unknown: Onbekend
+  valid_until: Geldig tot
+  view: Bekijk
+  'yes': Ja
+  'no': Neen
+
+  at_request_mailer:
+    approve:
+      subject: '(%{environment}) Wijziging eID AT-verzoek "%{name}" geaccordeerd'
+    reject:
+      subject: '(%{environment}) Wijziging eID AT-verzoek "%{name}" afgekeurd'
+    sign:
+      subject: 'eID AT-verzoek "%{sequence_no}"'
+
+  unblock_letter:
+    deceased: "Fout bij het aanvragen van de deblokkeringscode per brief. In de Basisregistratie Personen staat de persoon behorende bij dit account aangemerkt als overleden"
+    emigrated: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    investigate: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    not_found: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    rni: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    suspended_error: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    suspended_unknown: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+    error: "Fout bij het aanvragen van de deblokkeringscode per brief. De adresgegevens in de Basisregistratie Personen behorende bij dit account zijn niet actueel of de bij het account behorende persoon is niet woonachtig in Nederland."
+
+  four_eyes:
+    manager_under_review: "Beheerder is voorgelegd ter accodering"
+    manager_frozen: "Opslaan ter accordering is niet gelukt. Het item is gerelateerd aan een beheerrol of beheeraccount dat intussen door een andere beheerder (ter accordering) is gewijzigd."
+    role_under_review: "Beheerrol is voorgelegd ter accodering"
+    role_frozen: "Opslaan ter accordering is niet gelukt. Het item is gerelateerd aan een beheerrol of beheeraccount dat intussen door een andere beheerder (ter accordering) is gewijzigd."
+    frozen: "zijn bevroren"
+    frozen_concurrency: Opslaan ter accordering is niet gelukt. Het item is gerelateerd aan een beheerrol of beheeraccount dat intussen door een andere beheerder (ter accordering) is gewijzigd.
+  four_eyes_reports:
+    create_account: "Account aangemaakt"
+    disable_account: "Account opgeschort"
+    add_role: "Rol '%{role}' toegekend"
+    remove_role: "Rol '%{role}' verwijderd"
+  four_eyes_reviews:
+    create: "Nieuw"
+    update: "Wijziging"
+    destroy: "Verwijdering"
+    withdraw_review: "ingetrokken"
+    reject_review: "afgekeurd"
+    accept_review: "geaccordeerd"
+    destroy_for_review: "Verwijder ter accordering"
+    dialog_title:
+      app_version: Verwijderen DigiD app-versie
+      third_party_app: Verwijderen Third-party app
+    role: "Rol"
+    flash:
+      success:
+        role: "beheerrol"
+        manager: "beheerder"
+        app_version: "app-versie"
+        third_party_app: "third-party app"
+        webservice: "webdienst"
+        kiosk: "kiosk"
+        dc/organization: organisatie
+        dc/service: dienst
+        dc/service: dienst
+        dc/connection: aansluiting
+        whitelisted_phone_number: whitelisted telefoonnummer
+    app_version: app-versie
+    third_party_app: third-party app
+    manager: "beheerder"
+    webservice: "webdienst"
+    already_exists: "Opslaan ter accordering is niet gelukt. Een andere beheerder heeft het item al (ter accordering) gewijzigd."
+    already_accepted_or_rejected: "De wijziging is intussen door een andere beheerder geaccordeerd of afgekeurd."
+    already_accepted_rejected_or_revoked: "De wijziging is intussen door een andere beheerder geaccordeerd, afgekeurd of ingetrokken."
+    rejected_anyone_else_already_accepted: "Het accorderen van deze wijziging is niet gelukt. Een andere beheerder heeft de wijziging inmiddels al geaccordeerd of afgekeurd."
+    unauthorized: "Je hebt niet de privileges om dit te doen"
+    dc/organization: organisatie
+    dc/connection: aansluiting
+    dc/service: dienst
+    dc/service: dienst
+    whitelisted_phone_number: Whitelisted telefoonnummer
+  four_eyes_review_mailer:
+    accepted: geaccordeerd
+    rejected: afgekeurd
+    models:
+      role: Beheerrol
+      manager: Beheeraccount
+      webservice: Webservice
+      app_version: DigiD app-versie
+      third_party_app: Third-party app
+      kiosk: Kiosk
+      dc/connection: Aansluiting
+      dc/organization: Organisatie
+      dc/service: Dienst
+      dc/service: Dienst
+      whitelisted_phone_number: Whitelisted telefoonnummer
+    subject_actions:
+      create: Nieuw(e)
+      update: Wijziging
+      destroy: Verwijdering
+    actions:
+      create: Nieuw
+      update: Wijziging
+      destroy: Verwijdering
+    notify_creator:
+      subject: '(%{environment}) %{action} %{model} "%{name}" %{result}'
+  certificates:
+    form:
+      label: "Toegevoegd certificaat"
+      new: Certificaat toevoegen
+      remove: Verwijder
+  shared_secrets:
+    form:
+      label: Gegenereerd Shared Secret
+      new: Nieuw Shared Secret
+      remove: Verwijder
+      select: Selecteren
+    to_many_secrets: 'aan een webdienst kunnen maximaal 2 shared secrets gekoppeld zijn.'
+  eid:
+    status:
+      created: Nieuw
+      approved: Geaccordeerd
+      rejected: Afgekeurd
+      sent: Verzonden
+      aborted: Afgebroken
+      finished: Afgerond
+    errors:
+      reviewed: Het nieuwe AT-verzoek is intussen door een andere beheerder geaccordeerd of afgekeurd.
+      aborted: Het geaccordeerde / verzonden AT-verzoek is intussen door een andere beheerder afgebroken.
+      no_email: Er is geen e-mailadres geconfigureerd voor dit document type
+      no_file: Er is geen bestand geselecteerd

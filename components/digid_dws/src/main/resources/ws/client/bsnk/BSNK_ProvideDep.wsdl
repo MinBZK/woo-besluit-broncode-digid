@@ -1,0 +1,353 @@
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:bsnk="urn:nl-gdi-eid:1.0:webservices"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
+                  name="BSNK_provideDEP"
+                  targetNamespace="urn:nl-gdi-eid:1.0:webservices">
+
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:nl-gdi-eid:1.0:webservices"
+                attributeFormDefault="unqualified"
+                elementFormDefault="qualified">
+
+      <xsd:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+                  schemaLocation="saml-schema-assertion-2.0.xsd"/>
+
+      <xsd:element name="ProvideDEPsRequest" type="bsnk:DirectEncryptedPseudonymsRequestType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Request message to provide one or more DEPs for a
+            specific user for usage at a specific relying party.
+            The 'BSNk' will generate direct encrypted pseudonym(s)
+            for the identified user at the given relying part(y)(ies).
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+
+      <xsd:complexType name="DirectEncryptedPseudonymsRequestType">
+        <xsd:complexContent>
+          <xsd:extension base="bsnk:BSNkProvideRequestBasetype">
+            <xsd:sequence>
+              <xsd:choice>
+                <xsd:element name="BSN" type="bsnk:BSNType"/>
+                <xsd:element name="EncryptedBSN" type="bsnk:EncryptedBSNType"/>
+                <xsd:element name="EncryptedIdentity" type="bsnk:EncryptedIdentityType"/>
+                <xsd:element name="eIDAS-UniquenessID" type="bsnk:eIDAS-UniquenessIDType"/>
+              </xsd:choice>
+              <xsd:element name="GivenNames" type="bsnk:GivenNamesType" minOccurs="0"/>
+              <xsd:element name="SurName" type="bsnk:SurNameType" minOccurs="0"/>
+              <xsd:element name="DateOfBirth" type="bsnk:BirthDateType" minOccurs="0"/>
+              <xsd:element name="PlaceOfBirth" type="bsnk:PlaceOfBirthType" minOccurs="0"/>
+              <xsd:element name="RelyingParty" type="bsnk:RelyingPartyType" minOccurs="1" maxOccurs="unbounded" />
+              <xsd:element name="RemarkForUser" type="bsnk:RemarkType" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+
+
+      <xsd:complexType name="BSNkProvideRequestBasetype" abstract="true">
+        <xsd:sequence>
+          <xsd:element name="Requester" type="bsnk:OINType"/>
+        </xsd:sequence>
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"/>
+        <xsd:attribute name="RequestID" type="xsd:ID" use="required"/>
+      </xsd:complexType>
+
+      <xsd:complexType name="RelyingPartyType">
+        <xsd:sequence>
+          <xsd:element name="EntityID" type="bsnk:OINType"/>
+          <xsd:element name="KeySetVersion" type="bsnk:KeyVersionType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="KeyVersionType">
+        <xsd:annotation>
+          <xsd:documentation>Key(set) version type.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:positiveInteger"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="BSNType">
+        <xsd:annotation>
+          <xsd:documentation>
+            In case a BSN consists of a number of
+            only 8 digits, the BSN shall be padded with a preceding
+            '0' (digit zero).
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{9}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="EncryptedIdentityType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Identity encrypted as an EncryptedIdentity
+            according to Polymorphic Pseudonimization.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:base64Binary"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="eIDAS-UniquenessIDType">
+        <xsd:annotation>
+          <xsd:documentation>
+            To be used only in eIDAS context.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+      <xsd:complexType name="EncryptedBSNType">
+        <xsd:annotation>
+          <xsd:documentation>
+            BSN encrypted in the form of a
+            SAML2 EncryptedID.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element ref="saml2:EncryptedID"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="OINType">
+        <xsd:annotation>
+          <xsd:documentation>
+            OIN type.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{20}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="GivenNamesType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Given names of the user. If given names
+            are not fully known than must contain all known
+            initials.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="200"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SurNameType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Surname of the user.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="210"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="BirthDateType">
+        <xsd:union>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:date"/>
+          </xsd:simpleType>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:gYearMonth"/>
+          </xsd:simpleType>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:gYear"/>
+          </xsd:simpleType>
+        </xsd:union>
+      </xsd:simpleType>
+      <xsd:simpleType name="PlaceOfBirthType">
+        <xsd:annotation>
+          <xsd:documentation>
+            For Dutch places of birth this value
+            must correspond to the exact value as listed in table
+            33 of the logic design of the BRP. MUST NOT be used for
+            foreign places of birth.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="RemarkType">
+        <xsd:annotation>
+          <xsd:documentation>
+            A remark (with a maximum length).
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="255"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:element name="ProvideDEPsResponse" type="bsnk:ProvideDEPsResponseType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response to a ProvideDEPsRequest.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:complexType name="ProvideDEPsResponseType">
+        <xsd:complexContent>
+          <xsd:extension base="bsnk:BSNkProvideResponseBasetype">
+            <xsd:sequence>
+              <xsd:element name="DirectEncryptedPseudonym" type="bsnk:DirectEncryptedPseudonymType" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="BSNkProvideResponseBasetype" abstract="true">
+        <xsd:attribute name="DateTime" type="xsd:dateTime" use="required"/>
+        <xsd:attribute name="ResponseID" type="xsd:ID" use="required"/>
+        <xsd:attribute name="InResponseTo" type="xsd:NCName" use="required"/>
+      </xsd:complexType>
+      <xsd:complexType name="DirectEncryptedPseudonymType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:base64Binary">
+            <xsd:attribute name="EntityID" type="bsnk:OINType"/>
+            <xsd:attribute name="KeySetVersion" type="bsnk:KeyVersionType"/>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:element name="ProvideDEPFault" type="bsnk:ProvideDEPFaultType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Fault response to a ProvideDEPRequest.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:complexType name="ProvideDEPFaultType">
+        <xsd:sequence>
+          <xsd:element name="FaultReason" type="bsnk:ProvideDEPFaultReasonType"/>
+          <xsd:element name="FaultDescription" type="bsnk:FaultDescriptionType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="ProvideDEPFaultReasonType">
+        <xsd:union memberTypes="bsnk:FaultReasons bsnk:ProvideDEPFaultReasons"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="FaultReasons">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="NotFound">
+            <xsd:annotation>
+              <xsd:documentation>
+                Provided information results in
+                zero matches.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="AuthorizationError">
+            <xsd:annotation>
+              <xsd:documentation>
+                Authentication invalid or access denied.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="SyntaxError">
+            <xsd:annotation>
+              <xsd:documentation>
+                Request invalid.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="TemporarilyUnavailable">
+            <xsd:annotation>
+              <xsd:documentation>
+                Request could temporarily not be
+                processed. A new request for activation MAY be send
+                at a later moment by the requesting party.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ProvideDEPFaultReasons">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="NotEnoughInfo">
+            <xsd:annotation>
+              <xsd:documentation>
+                Provided information may resolve
+                to a unique match, but not enough assurance
+                (e.g. against typos) can be established.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="NotUnique">
+            <xsd:annotation>
+              <xsd:documentation>
+                Provided information results in
+                more than one match.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="DocumentRejected">
+            <xsd:annotation>
+              <xsd:documentation>
+                Document not accepted.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="ProvisioningRefused">
+            <xsd:annotation>
+              <xsd:documentation>
+                Activation refused for other
+                (non-disclosed) reason.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="FaultDescriptionType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute name="lang" type="xsd:language"/>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="BSNK_ProvideDEPsRequest">
+    <wsdl:part name="in" element="bsnk:ProvideDEPsRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="BSNK_ProvideDEPsResponse">
+    <wsdl:part name="out" element="bsnk:ProvideDEPsResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="BSNK_ProvideDEPFault">
+    <wsdl:part name="fault" element="bsnk:ProvideDEPFault"/>
+  </wsdl:message>
+
+  <wsdl:portType name="BSNK_DEP_Port">
+    <wsdl:operation name="BSNK_ProvideDEPs">
+      <wsdl:input message="bsnk:BSNK_ProvideDEPsRequest" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvideDEPsRequest"/>
+      <wsdl:output message="bsnk:BSNK_ProvideDEPsResponse" wsam:Action="urn:nl-gdi-eid:1.0:webservices:ProvideDEPsResponse"/>
+      <wsdl:fault message="bsnk:BSNK_ProvideDEPFault" name="BSNK_ProvideDEP_Fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="BSNK_DEP_SOAP" type="bsnk:BSNK_DEP_Port">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="BSNK_ProvideDEPs">
+      <soap:operation soapAction="urn:nl-gdi-eid:1.0:webservices:ProvideDEPsRequest"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BSNK_ProvideDEP_Fault">
+        <soap:fault name="BSNK_ProvideDEP_Fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="BSNK_DEP_Service">
+    <wsdl:port binding="bsnk:BSNK_DEP_SOAP" name="BSNK_DEP">
+      <soap:address location="SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,30 @@
+- id: 1
+  message_type: 'PSH01'
+  title_english: 'Your DigiD app has been activated with ID-check'
+  content_english: 'Your DigiD app <naam van apparaat> has just been activated with a once-only ID check. \nPlease contact the DigiD helpdesk if you did not do this yourself. Telephonenumber: 088 123 65 55.'
+  title_dutch: 'Uw DigiD app is geactiveerd met ID-check'
+  content_dutch: 'Uw DigiD app <naam van apparaat> is zojuist geactiveerd met een eenmalige ID-check. \nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.'
+- id: 2
+  message_type: 'PSH02'
+  title_english: 'Your DigiD app has been activated'
+  content_english: 'Your DigiD app <naam van apparaat> has just been activated. \nPlease contact the DigiD helpdesk if you did not do this yourself. Telephonenumber: 088 123 65 55.'
+  title_dutch: 'Uw DigiD app is geactiveerd'
+  content_dutch: 'Uw DigiD app <naam van apparaat> is zojuist geactiveerd. \nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.'
+- id: 3
+  message_type: 'PSH03'
+  title_english: 'Your SMS verification has been activated'
+  content_english: 'Your SMS verification has just been activated. \nPlease contact the DigiD helpdesk if you did not do this yourself. Telephonenumber: 088 123 65 55.'
+  title_dutch: 'Uw sms-controle is geactiveerd'
+  content_dutch: 'Uw sms-controle is zojuist geactiveerd. \nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.'
+- id: 4
+  message_type: 'PSH04'
+  title_english: 'Your email address has been added'
+  content_english: 'Your email address has just been added in My DigiD. \nPlease contact the DigiD helpdesk if you did not do this yourself. Telephonenumber: 088 123 65 55.'
+  title_dutch: 'Uw e-mailadres is toegevoegd'
+  content_dutch: 'Uw e-mailadres is zojuist toegevoegd in Mijn DigiD. \nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.'
+- id: 5
+  message_type: 'PSH05'
+  title_english: 'Your email address has been changed'
+  content_english: 'Your email address has just been changed in My DigiD. \nPlease contact the DigiD helpdesk if you did not do this yourself. Telephonenumber: 088 123 65 55.'
+  title_dutch: 'Uw e-mailadres is gewijzigd'
+  content_dutch: 'Uw e-mailadres is zojuist gewijzigd in Mijn DigiD. \nNeem contact op met de DigiD helpdesk als u dit niet zelf heeft gedaan. Telefoonnummer: 088 123 65 55.'

@@ -1,0 +1,49 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper
+  %h1 Webdienst #{@webservice.name}
+  = render 'shared/header_actions', model: @webservice
+  = field 'ID', @webservice.id
+  = field 'Naam', @webservice.name
+  = field 'Organisatie', link_to(@webservice.organization.try(:name), organization_path(@webservice.organization))
+  -# quickfix should be moved to model (validate on url format)
+  = field 'Website URL', link_to(@webservice.website_url.to_s, @webservice.website_url, target: '_blank')
+  = field 'Status', render_status(@webservice)
+  = field 'Status substantieel', @webservice.substantieel_active? ? "Actief" : "Inactief"
+  = render 'webservices/app_to_app', webservice: @webservice
+  = field 'Controle redirect URL', web_service_redirect_url(@webservice)
+  = field 'Omschrijving', @webservice.description
+  = render 'webservices/show_assurance', webservice: @webservice
+  = render 'webservices/show_sector_authentications', webservice: @webservice
+  = render 'webservices/show_authentication', webservice: @webservice
+%br= show_webservice_actions(@webservice.id)
+%br= show_manager_actions_for(Log::SubjectTypes::WEBSERVICE, @webservice.id)

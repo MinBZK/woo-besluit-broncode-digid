@@ -1,0 +1,127 @@
+#managers.show {
+  .left_column {
+    float: left;
+    padding: 0;
+    width: 315px;
+
+    div {
+      padding: 0 4px 4px;
+      // overflow: auto;
+    }
+
+    div.content {
+      padding-left: 8px;
+    }
+  }
+
+  .right_column {
+    float: right;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 258px;
+
+    div {
+      // scss-lint:disable NestingDepth
+      overflow: auto;
+      padding: 4px;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: block;
+          list-style: none;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+#managers {
+  form {
+    .left_column {
+      // scss-lint:disable NestingDepth
+      float: left;
+      padding: 0;
+      width: 315px;
+
+      .field {
+        padding: 0 4px 4px;
+        // overflow: auto;
+      }
+
+      .field .label {
+        width: 110px;
+
+        label {
+          width: 110px;
+        }
+      }
+
+      .field .content {
+        margin-left: 110px;
+        width: 200px;
+
+        input {
+          width: 170px;
+        }
+      }
+
+      #remove_cert {
+        display: block;
+        margin: 20px 0 0 115px;
+        width: 35%;
+      }
+    }
+
+    .right_column {
+      // scss-lint:disable NestingDepth
+      float: right;
+      margin-bottom: 10px;
+      padding: 0;
+      width: 258px;
+
+      .form_wrapper {
+        overflow: auto;
+        padding: 4px;
+      }
+    }
+  }
+}
+
+#main #managers form textarea,
+#main #managers form input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='submit']) {
+  width: 190px;
+}
+
+#main #managers form .field .content input[type='checkbox'],
+#main #managers form .field .content input[type='radio'] {
+  width: auto;
+}
+
+#main #managers form .field .content input[type='checkbox'] + label,
+#main #managers form .field .content input[type='radio'] + label {
+  display: inline-block;
+  min-width: 35px;
+}
+
+#main #managers span#mobile_prefix {
+  display: inline-block;
+  width: 30px;
+}
+
+#main #managers input#manager_mobile_number {
+  width: 160px;
+}
+
+#manager_cert_input_wrapper {
+  position: relative;
+}
+
+#manager_cert_input {
+  left: 0;
+  position: absolute;
+  top: 0;
+}

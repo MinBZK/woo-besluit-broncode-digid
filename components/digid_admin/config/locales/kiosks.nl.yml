@@ -1,0 +1,6 @@
+nl:
+  kiosks:
+    states:
+      pending: 'Pending'
+      active: 'Actief'
+      inactive: 'Inactief'

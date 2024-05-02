@@ -1,0 +1,117 @@
+nl:
+  activerecord:
+    attributes:
+      bulk_order:
+        bulk_order_bsns: 'BSN nummers'
+        uncached_bulk_order_bsns_count: 'Aantal BSN nummers'
+
+  bulk_order:
+    # General
+    id: Id
+    overview: Overzicht bulkopdrachten
+    download_overview: Download overzicht
+    new_job: Nieuwe opdracht
+    no_jobs: 0 opdrachten gevonden
+    system: Systeem
+
+    # BulkOrder
+    name: Naam
+    status: Status
+    accounts_status_scope: Accounts met status
+    bulk_type: Type opdracht
+    order_started_at: Start aanpassen accounts
+    order_finished_at: Eind aanpassen accounts
+    brp_started_at: Start opvragen adressen
+    brp_last_run_at: Eind opvragen adressen (verwacht)
+    finalized_at: Opdracht uitgevoerd
+    status_csv_invalid: Account status CSV is niet beschikbaar voor ongeldige bulkopdracht
+    status_csv_unavailable: Account status CSV is niet beschikbaar voor deze opdracht
+    overview_unavailable: Overzicht bulkopdrachten CSV is niet beschikbaar
+
+    # Counters
+    bsn_count: Aantal BSN's opgegeven
+    invalid_count: Aantal ongeldige BSN's
+    no_account_count: Aantal BSN's zonder account
+    not_found_count: Aantal niet gevonden BSN's
+    other_scope_count: Aantal gevonden accounts in andere status
+    approved_count: Aantal aan te passen accounts
+
+    # Download buttons
+    download_invalid_bsn_list: Download ongeldige BSN's
+    download_account_status: Download account status
+    download_address_list: Download adreslijst
+
+    # Action buttons
+    approve_job: Accordeer opdracht
+    reject_job: Keur opdracht af
+    remove_job: Verwijder opdracht
+
+    statuses:
+      invalid: &invalid Ongeldig
+      created: &created Aangemaakt
+      approved: &approved Geaccordeerd
+      rejected: &rejected Afgekeurd
+      removal_finished: &removal_finished
+      # Aliases
+      invalid_status: Ongeldig
+      created_status: Aangemaakt
+      approved_status: Geaccordeerd
+      rejected_status: Afgekeurd
+      order_started_status: Accounts worden verwijderd
+      order_finished_status: Verwijdering afgerond
+      brp_started_status: Adressen worden opgevraagd
+      finalized_status: Opdracht uitgevoerd
+      exceptional_status: Error
+
+    account_scopes:
+      active: 'Actief'
+      suspended: Opgeschort
+      initial_or_requested: Initiële of aangevraagde account(s)
+
+    bsn_states:
+      "verwijderen":
+        finished: 'Account verwijderd'
+        approved: 'Account wordt verwijderd'
+        suspended: 'Account is opgeschort'
+        other_scope: 'Account heeft andere status dan actief'
+        other_scope_not_suspended: 'Account heeft andere status dan opgeschort'
+        other_scope_not_initial_or_requested: 'Account heeft andere status dan initieel/aangevraagd'
+        no_account: 'BSN zonder account'
+        not_found: 'BSN niet gevonden'
+        unknown: 'Onbekende status'
+      "opschorten":
+        finished: 'Account opgeschort'
+        approved: 'Account wordt opgeschort'
+        suspended: 'Account is opgeschort'
+        other_scope: 'Account heeft andere status dan actief'
+        other_scope_not_suspended: 'Account heeft andere status dan opgeschort'
+        no_account: 'BSN zonder account'
+        not_found: 'BSN niet gevonden'
+        unknown: 'Onbekende status'
+      "opschorten ongedaan maken":
+        finished: 'Account opschorten ongedaan gemaakt'
+        approved: 'Account opschorten wordt ongedaan gemaakt'
+        suspended: 'Account is opgeschort'
+        other_scope: 'Account heeft andere status dan actief'
+        other_scope_not_suspended: 'Account heeft andere status dan opgeschort'
+        no_account: 'BSN zonder account'
+        not_found: 'BSN niet gevonden'
+        unknown: 'Onbekende status'
+
+    brp_states:
+      valid: Actueel
+      emigrated: Emigratie
+      rni: RNI
+      investigate: 'PL in onderzoek'
+      decease: Overleden
+      not_found: Onbekend
+      suspended_error: 'Inschrijving opgeschort wegens fout'
+      suspended_unknown: 'Inschrijving opgeschort, reden onbekend'
+      error: Error
+
+    bsn:
+      error:
+        invalid_length: 'geen 9 karakters'
+        invalid_chars: 'andere karakters dan cijfers'
+        invalid_length_chars: 'geen 9 karakters & andere karakters dan cijfers'
+        not_eleven_proof: 'voldoet niet aan 11-proef'

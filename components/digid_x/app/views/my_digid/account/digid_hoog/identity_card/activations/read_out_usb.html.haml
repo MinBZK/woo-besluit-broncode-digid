@@ -1,0 +1,55 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= heading_with_icon(@page_header)
+
+= render('shared/session_countdown', key: 'read_wid', key_options: {wid_type: t('document.id_card')})
+
+= steps(2, 3)
+
+%h2.orange_heading= t("read_wid_with_usb_reader", wid_type: t('document.id_card'))
+
+%p.usb_reader
+  = image_tag("hoog_card_reader.png", alt: t("image.hoog_card_reader"))
+= actions do
+  = cancel_button(my_digid_id_card_activation_cancel_url)
+
+- url = digid_app_provisioning_uri("wid", @app_session_id, format: :desktop)
+
+= link_to "open DigiD Desktop app", url, id: 'open_link_magically', hidden: true
+
+- if Rails.env.development?
+  %textarea.qr_url{ readonly: true }= url
+
+.poller{ data: { url: my_digid_controleer_wid_poll_url, timeout: 3000, suspended: Rails.env.test? } }
+
+- if !Rails.env.test? # W3c Webdriver spec does not support open DigiD app (desktop) dialog dismissal/confirmation
+  = javascript_include_tag("inline/open_magic_link", nonce: content_security_policy_script_nonce)

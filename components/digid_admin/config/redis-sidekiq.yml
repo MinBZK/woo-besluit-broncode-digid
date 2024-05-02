@@ -1,0 +1,7 @@
+production:
+  url: redis://<%= ENV['REDIS_SENTINEL_NAME'] %>:6379/0
+  password: "<%= APP_CONFIG.dig('redis', 'password') %>"
+  role: master
+  sentinels:
+    - host: "<%=ENV['REDIS_SENTINEL_HOST']%>"
+      port: "26379"

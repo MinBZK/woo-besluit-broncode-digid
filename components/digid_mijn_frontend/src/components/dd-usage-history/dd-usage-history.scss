@@ -1,0 +1,93 @@
+@use 'src/scss/settings/settings.colors' as core;
+@use 'src/scss/settings/settings.responsive' as media;
+
+.dd-usage-history {
+  padding: 0.675rem;
+
+  &__results-status {
+    @include hidden-element;
+  }
+
+  &__header {
+    margin-top: 1.5rem;
+    &-mobile {
+      margin-top: 1.25rem;
+      font-family: core.$bold;
+      font-size: 1.5rem;
+      line-height: 1.625rem;
+    }
+
+    &__p {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__search {
+    min-width: 312px;
+    margin-bottom: 1rem;
+  }
+
+  &__grid {
+    &__item {
+      display: flex;
+      flex-direction: column;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+      background-color: var(--solid2);
+
+      &--date {
+        margin: 0;
+      }
+
+      &--activity {
+        font-family: core.$bold;
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
+  &__table {
+    width: 100%;
+
+    &--hidden-header {
+      @include hidden-element;
+    }
+
+    &-footer {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: media.$mobile) {
+  .dd-usage-history {
+    &__search {
+      margin-bottom: 1.5rem;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: minmax(auto, 8.5rem) minmax(auto, 7rem) 1fr;
+      margin-bottom: 0.5rem;
+
+      td {
+        padding: 10px;
+        margin: 0;
+        background-color: var(--solid2);
+      }
+
+      &--date {
+        border-radius: 5px 0 0 5px;
+      }
+
+      &--activity {
+        font-family: core.$bold;
+        border-radius: 0 5px 5px 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+
+<!--
+  Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+  gericht is op transparantie en niet op hergebruik. Hergebruik van 
+  de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+  van broncode waarvoor een andere licentie is aangegeven.
+  
+  Het archief waar dit bestand deel van uitmaakt is te vinden op:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+  
+  Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+  
+  This code has been disclosed in response to a request under the Dutch
+  Open Government Act ("Wet open Overheid"). This implies that publication 
+  is primarily driven by the need for transparence, not re-use.
+  Re-use is permitted under the EUPL-license, with the exception 
+  of source files that contain a different license.
+  
+  The archive that this file originates from can be found at:
+    https://github.com/MinBZK/woo-besluit-broncode-digid
+  
+  Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+    https://www.ncsc.nl/contact/kwetsbaarheid-melden
+  using the reference "Logius, publicly disclosed source code DigiD" 
+  
+  Other questions regarding this Open Goverment Act decision may be
+  directed via email to open@logius.nl
+-->
+
+<!DOCTYPE html>
+<html
+	dir="ltr"
+	lang="nl"
+>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Mijn DigiD</title>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+	/>
+	<meta
+		name="theme-color"
+		content="#16161d"
+	/>
+	<meta
+		name="apple-mobile-web-app-capable"
+		content="yes"
+	/>
+	<meta
+		http-equiv="x-ua-compatible"
+		content="IE=Edge"
+	/>
+
+	<script
+		type="text/javascript"
+		src='assets/scripts/enforce-no-styles-in-head.js'
+	></script>
+	<script
+		type="module"
+		src="/build/app.esm.js"
+	></script>
+	<script
+		type="text/javascript"
+		async
+		defer
+		src='assets/scripts/matomo.js'
+	></script>
+
+	<script
+		nomodule
+		src="/build/app.js"
+	></script>
+	<link
+		href="/assets/logo/digid.svg"
+		rel="icon"
+	/>
+	<link
+		href="/build/app.css"
+		rel="stylesheet"
+	/>
+</head>
+
+<body>
+	<svg
+		id='app-loader'
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox='0 0 16 16'
+		aria-busy="true"
+		aria-hidden="true"
+	>
+		<path
+			fill='white'
+			d="M8,0 C10.2703151,0 12.3197479,0.945710247 13.7758481,2.46468077 L12.3322304,3.84886981 C11.240134,2.70943179 9.70291533,2 8,2 C4.6862915,2 2,4.6862915 2,8 C2,11.3137085 4.6862915,14 8,14 L8,16 L8.05094287,16 C8.0339744,16 8.0169934,16 8,16 C3.581722,16 1.81810123e-12,12.418278 1.81810123e-12,8 C1.81810123e-12,3.581722 3.581722,0 8,0 Z"
+			id="Path"
+		/>
+	</svg>
+
+	<app-root></app-root>
+	<noscript>
+		<h1>Mijn DigiD is niet beschikbaar zonder JavaScript. Zet JavaScript aan of gebruik een andere browser.</h1>
+		<h1>My DigiD is not available without JavaScript. Turn JavaScript on or use a different browser.</h1>
+	</noscript>
+</body>
+
+</html>

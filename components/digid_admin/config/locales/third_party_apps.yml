@@ -1,0 +1,19 @@
+nl:
+  third_party_app:
+    overview: Overzicht third-party app(s)
+    new: Toevoegen third-party app
+    no_versions: Er konden geen third-party app(s) gevonden worden.
+    created_successfully: Third-party app succesvol aangemaakt
+    updated_successfully: Third-party app succesvol gewijzigd
+    destroy: Verwijder
+    destroy_button: Verwijder ter accordering
+    update_warning: Er is geen nieuwere third-party app beschikbaar om naar te updaten. Weet u zeker dat u door wilt gaan?
+    destroy_warning: U mag de laatste geldige third-party app voor dit platform en releasetype niet verwijderen. Weet u zeker dat u door wilt gaan?
+    headers:
+      new: Nieuwe third-party app
+      show: Third-party app
+      edit: Wijzigen third-party app
+
+    created_successfully: Third-party is toegevoegd
+    updated_successfully: Third-party is gewijzigd.
+    destroy_successfully: Third-party app is verwijderd.

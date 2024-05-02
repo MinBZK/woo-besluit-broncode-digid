@@ -1,0 +1,108 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+- if @bulk_order
+  .form_wrapper.clear
+    %h1 Opdracht #{@bulk_order.name}
+    .actions_top
+      = link_to 'Terug naar overzicht', bulk_orders_path
+    .clear
+
+    .downloads
+      = download_invalid_bsn_list_button
+      = download_account_status_csv_button
+      = download_address_list_button
+
+    / General
+    = field I18n.t('bulk_order.id'), @bulk_order.id
+    = field I18n.t('bulk_order.name'), @bulk_order.name
+    - if @bulk_order.invalid_status?
+      = field I18n.t('bulk_order.status'), (content_tag :strong, red(I18n.t('bulk_order.statuses.invalid')))
+    - else
+      = field I18n.t('bulk_order.status'), I18n.translate(@bulk_order.status, scope: 'bulk_order.statuses')
+    = field I18n.t('bulk_order.accounts_status_scope'), I18n.translate(@bulk_order.account_status_scope, scope: 'bulk_order.account_scopes')
+    = field I18n.t('bulk_order.bulk_type'), @bulk_order.bulk_type.camelcase if @bulk_order.bulk_type.present?
+
+    / Statuses
+    - if @bulk_order.invalid_status?
+      = field I18n.t('bulk_order.statuses.invalid'), @bulk_order.manager.full_name
+      = field nil, I18n.localize(@bulk_order.created_at, format: :date_time)
+    - else
+      = field I18n.t('bulk_order.statuses.invalid')
+
+    - if !@bulk_order.invalid_status?
+      = field I18n.t('bulk_order.statuses.created'), @bulk_order.manager.full_name
+      = field nil, I18n.localize(@bulk_order.created_at, format: :date_time)
+    - else
+      = field I18n.t('bulk_order.statuses.created')
+
+    - if @bulk_order.approval_manager
+      = field I18n.t('bulk_order.statuses.approved'), @bulk_order.approval_manager.full_name
+      = field nil, I18n.localize(@bulk_order.approved_at, format: :date_time)
+    - else
+      = field I18n.t('bulk_order.statuses.approved')
+
+    - if @bulk_order.rejection_manager
+      = field I18n.t('bulk_order.statuses.rejected'), @bulk_order.rejection_manager.full_name
+      = field nil, I18n.localize(@bulk_order.rejected_at, format: :date_time)
+    - else
+      = field I18n.t('bulk_order.statuses.rejected')
+
+    / Execution timestamps
+    = field I18n.t('bulk_order.order_started_at'), localize(@bulk_order.order_started_at)
+    = field I18n.t('bulk_order.order_finished_at'), localize(@bulk_order.order_finished_at)
+    = field I18n.t('bulk_order.brp_started_at'), localize(@bulk_order.brp_started_at)
+    = field I18n.t('bulk_order.brp_last_run_at'), localize(@bulk_order.brp_last_run_at)
+    = field I18n.t('bulk_order.finalized_at'), localize(@bulk_order.finalized_at)
+
+    / Counters
+    = field I18n.t('bulk_order.bsn_count'), @bulk_order.bulk_order_bsns_count
+    = field I18n.t('bulk_order.invalid_count'), @bulk_order.invalid_bsn_count
+    = field I18n.t('bulk_order.no_account_count'), @bulk_order.no_account_count
+    = field I18n.t('bulk_order.not_found_count'), @bulk_order.not_found_count
+    = field I18n.t('bulk_order.other_scope_count'), @bulk_order.other_scope_count
+    = field I18n.t('bulk_order.approved_count'), @bulk_order.approved_count
+
+    / Action buttons
+    .actions
+      - if can?(:approve, @bulk_order)
+        = link_to(I18n.t('bulk_order.approve_job'), approve_bulk_order_path(@bulk_order), method: :patch, class: 'check_button')
+      - if can?(:reject, @bulk_order)
+        = link_to(I18n.t('bulk_order.reject_job'), reject_bulk_order_path(@bulk_order), method: :patch, class: 'close_button')
+      - if can?(:destroy, @bulk_order)
+        = link_to(I18n.t('bulk_order.remove_job'), bulk_order_path(@bulk_order), method: :delete, class: 'delete_button', data: { confirm: t('are_you_sure') })
+    .clear
+- else
+  .form_wrapper
+    %h1 Bulkopdracht met ID #{params[:id]} niet gevonden.
+    .actions_top
+      = link_to 'Terug naar bulkopdrachten', bulk_orders_path
+    .clear

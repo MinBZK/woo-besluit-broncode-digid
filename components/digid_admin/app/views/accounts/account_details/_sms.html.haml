@@ -1,0 +1,58 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%table
+  %thead
+    %tr
+      %th= t('accounts.fields.labels.status')
+      %th= t('accounts.fields.labels.mobile_number')
+      %th= t('accounts.fields.labels.last_usage')
+      %th= t('accounts.fields.labels.aangevraagd')
+      %th= t('accounts.fields.labels.geactiveerd_op')
+      %th= t('accounts.fields.labels.geactiveerd_met')
+      %th= t('accounts.fields.labels.spoken_sms_messages')
+  %tbody
+    - i = 0
+    - @account.valid_sms_tools.each do |sms_tool|
+      - present sms_tool do |sms_tool_presenter|
+        - if sms_tool_presenter.active? || sms_tool_presenter.pending?
+          - i += 1
+          %tr
+            %td= sms_tool_presenter.colored_status.html_safe
+            %td= sms_tool.user_friendly_phone_number
+            %td= sms_tool_presenter.last_usage
+            %td= sms_tool_presenter.created_at
+            %td= sms_tool_presenter.activated_at
+            %td= sms_tool_presenter.issuer_type
+            %td= sms_tool_presenter.spoken_sms
+    - if i == 0
+      %tr
+        %td= strong red t("accounts.messages.inactive")

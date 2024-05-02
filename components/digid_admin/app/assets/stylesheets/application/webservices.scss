@@ -1,0 +1,37 @@
+#authentication_aselect,
+#authentication_saml {
+  display: none;
+}
+
+#main ol.sectors {
+  list-style-type: decimal;
+
+  li {
+    background: #ddd;
+    margin: 3px 0;
+    padding: 3px 5px;
+
+    .authorizations {
+      float: right;
+      width: 100px;
+    }
+  }
+}
+
+#main form ol.sectors {
+  cursor: move;
+
+  input,
+  label {
+    cursor: default;
+  }
+}
+
+input#webservice_redirect_url_domain {
+  // scss-lint:disable ImportantRule
+  width: 328px !important;
+}
+
+form.webservice .content > select {
+  margin: 2px 0;
+}

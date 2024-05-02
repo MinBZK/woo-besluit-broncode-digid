@@ -1,0 +1,43 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+= form_for @front_desk, html: { class: 'balie' } do |f|
+  = render 'shared/errors', model: @front_desk
+  = field f.label(I18n.t('activemodel.attributes.front_desk.code')), f.text_field(:code, required: true)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.name')), f.text_field(:name, required: true)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.kvk_number')), f.text_field(:kvk_number, required: true)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.establishment_number')), f.text_field(:establishment_number)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.location')), f.text_field(:location, required: true)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.time_zone')), f.time_zone_select(:time_zone, nil, model: FrontDeskTimeZone, default: 'Europe/Amsterdam')
+  = field f.label(I18n.t('activemodel.attributes.front_desk.alarm_unchecked_accounts')), f.text_field(:alarm_unchecked_accounts)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.alarm_fraud_suspension')), f.text_field(:alarm_fraud_suspension)
+  = field f.label(I18n.t('activemodel.attributes.front_desk.max_issues')) + " (#{I18n.t('front_desks.per_day')})", f.text_field(:max_issues)
+  = render 'shared/form_actions', model: @front_desk

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang='nl'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Returkey</title>
+    <style type="text/css">
+      html * { margin:0; }
+      body { width: 800px; margin: 40px auto; font:small sans-serif; }
+      body * { padding:10px 20px; text-align: center }
+    </style>
+  </head>
+  <body onload="document.forms[0].submit()">
+    <form action="<%= return_url %>" method="post">
+      <input type="hidden" name="SAMLRequest" value="<%= saml_request %>" />
+      <noscript>
+        <input type="submit" value="Click here">
+      </noscript>
+    </form>
+  </body>
+</html>

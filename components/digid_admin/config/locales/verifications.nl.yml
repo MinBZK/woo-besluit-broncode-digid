@@ -1,0 +1,12 @@
+nl:
+  verification:
+    state:
+      completed: gecontroleerd
+      initial: initieel
+      rejected: afgewezen
+      verified: niet gecontroleerd
+      handled: afgehandeld
+      changed_to_completed: De niet gecontroleerde balie registratie of fraude vermoeden is behandeld
+    suspected_fraud: vermoeden van fraude
+    suspicion_yes: Ja
+    suspicion_no: Nee

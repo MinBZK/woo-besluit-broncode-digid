@@ -1,0 +1,84 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+.form_wrapper
+  %h1= t("services.connections.connection") + " #{@connection.name}"
+  .actions_top
+    = link_to(t("services.back_to_overview"), dc_connections_path)
+    = link_to(t("services.connections.edit"), edit_dc_connection_path(@connection), class: 'edit_button') if can? :update, Dc::Connection
+  .clear
+
+  = field t("services.organizations.identity") do
+    = field t("services.id"), @connection.id
+    = field t("services.organizations.organization"), @connection&.organization&.name
+    = field t("services.organizations.organization_role"), @connection&.role
+  %hr
+  = field t("services.connections.standard") do
+    = field t("services.connections.name"), @connection.name
+    = field t("services.connections.website_url"), @connection.website_url
+
+  %hr
+  = field t("services.protocol") do
+    = field t("services.protocol_type"), @connection.protocol_type
+    = field t("services.version"), @connection.version
+    = field t("services.metadata_url"), @connection.metadata_url
+    - if @connection.protocol_type != "OIDC_APP"
+      = field t("services.entity_id"), @connection.entity_id
+
+  - if @connection.protocol_type != "OIDC_APP"
+    %hr
+    = field t("services.service.sso") do
+      = field t("services.service.sso_active"), @connection.sso_status ? t("services._yes") : t("services._no")
+      = field t("services.domain"), @connection.formatted_domain_name
+
+  %hr
+  = field t("services.validity") do
+    = render_status(@connection)
+
+  - if @connection.protocol_type != "OIDC_APP"
+    %hr
+    = field "Metadata" do
+      =link_to("Update", fetch_metadata_dc_connection_path, class: "ui-button ui-corner-all ui-widget", remote: true)
+
+  .actions
+    = link_to(t("services.connections.delete"), dc_connection_path(@connection), class: 'delete_button', data: { confirm: t('are_you_sure_connection') }, method: :delete) if can? :destroy, Dc::Connection
+  .clear
+
+.form_wrapper
+  %h2= "Diensten"
+  %br= render 'dc/services/overview'
+  = link_to("Nieuwe dienst", new_dc_connection_service_url(@connection), class: "new_button")
+
+.form_wrapper
+  %h2= "Verwerkingsresultaten"
+  %br= render 'dc/local_metadata_process_results/overview'
+%br= show_connection_actions(@legacy_service_ids)
+%br= show_manager_actions_for(Log::SubjectTypes::DC_CONNECTION, @connection.id)

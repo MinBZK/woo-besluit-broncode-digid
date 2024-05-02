@@ -1,0 +1,12 @@
+CREATE TABLE tasks (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  cron VARCHAR(255) NOT NULL,
+  application VARCHAR(255),
+  active BOOLEAN NOT NULL DEFAULT 0,
+  created_at DATETIME,
+  updated_at DATETIME
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE UNIQUE INDEX ix_task_name ON tasks (name);
+

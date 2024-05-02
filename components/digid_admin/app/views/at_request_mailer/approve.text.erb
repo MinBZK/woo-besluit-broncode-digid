@@ -1,0 +1,7 @@
+De volgende wijziging is geaccordeerd door <%= @at_request.approved_by %> <%= l @at_request.approved_at, format: :human %>:
+
+Type: Nieuw
+Component: eID AT-verzoek
+Naam of nummer: <%= @at_request.document_type %> <%= @at_request.sequence_no %>
+
+De wijziging was aangemaakt door <%= @at_request.created_by %> <%= l @at_request.created_at, format: :human%>.

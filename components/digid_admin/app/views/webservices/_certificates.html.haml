@@ -1,0 +1,50 @@
+
+-# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze
+-# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+-# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+-# van broncode waarvoor een andere licentie is aangegeven.
+-# 
+-# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# onder vermelding van "Logius, openbaar gemaakte broncode DigiD" 
+-# 
+-# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+-# 
+-# This code has been disclosed in response to a request under the Dutch
+-# Open Government Act ("Wet open Overheid"). This implies that publication 
+-# is primarily driven by the need for transparence, not re-use.
+-# Re-use is permitted under the EUPL-license, with the exception 
+-# of source files that contain a different license.
+-# 
+-# The archive that this file originates from can be found at:
+-#   https://github.com/MinBZK/woo-besluit-broncode-digid
+-# 
+-# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+-#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+-# using the reference "Logius, publicly disclosed source code DigiD" 
+-# 
+-# Other questions regarding this Open Goverment Act decision may be
+-# directed via email to open@logius.nl
+
+%ul
+  = f.fields_for :certificates do |certificate|
+    %li
+      ~ certificate.text_area :cached_certificate, class: "hidden-absolute"
+      = certificate.hidden_field :distinguished_name
+      = link_to certificate.object.distinguished_name, "#", id: "certificate_dialog_#{certificate.index}"
+      - @certificate = certificate.object
+      - @dn = '/' + certificate.object.distinguished_name_from_cert.to_a.map { |e| "#{e[0]}=#{e[1].force_encoding('UTF-8')}" }.join('/')
+      .hidden.dialog-wrapper
+        .title= "Bekijk certificaat"
+        .body= render('certificates/show')
+      %br
+      = certificate.check_box :_destroy
+      = certificate.label :_destroy, t('certificates.form.remove')
+%br
+= new_link(t('certificates.form.new'), "#", id: "new_certificate")
+
+= javascript_include_tag("inline_certificate", nonce: content_security_policy_script_nonce)
+= javascript_include_tag("inline_certificate_dialog", nonce: content_security_policy_script_nonce)
